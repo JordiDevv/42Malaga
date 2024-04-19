@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 13:32:59 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/04/19 17:59:20 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:00:39 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		return (0);
 	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }
-
-jijiji
