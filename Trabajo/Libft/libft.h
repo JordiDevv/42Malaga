@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:30:03 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/04/26 16:13:15 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:15:55 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+# include <unistd.h>>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
