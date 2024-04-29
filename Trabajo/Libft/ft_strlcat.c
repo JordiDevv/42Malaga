@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 20:49:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/04/26 17:33:42 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/04/29 10:31:16 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	dlen = ft_strlen(dst);
 	if (dstsize <= dlen)
 		return (dstsize + slen);
-	while (src[i] != '\0' && dlen + i < dstsize - 1)
+	while (src[i] && dlen + i < dstsize - 1)
 	{
 		dst[dlen + i] = src[i];
 		i++;
