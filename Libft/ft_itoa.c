@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:29:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/04/29 17:08:33 by jordi            ###   ########.fr       */
+/*   Updated: 2024/04/29 13:04:07 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_numlen(int n)
 		return (1);
 	if (n < 0)
 		len = 1;
-	while (n)
+	while (n != 0)
 	{
 		n /= 10;
 		len++;
