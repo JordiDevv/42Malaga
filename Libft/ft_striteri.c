@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 10:18:13 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/04/29 10:18:15 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/05/02 10:33:54 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 	unsigned int	i;
 
 	i = 0;
-	while (&s[i])
+	while (s[i])
 	{
 		f(i, &s[i]);
 		i++;
