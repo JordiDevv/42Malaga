@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 18:11:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/05/08 14:38:50 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/05/08 18:42:02 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,16 @@ static size_t	ft_strparr(char const *s, char c)
 	return (count);
 }
 
+static void	ft_free_split(char **a)
+{
+	size_t	i;
+
+	i = 0;
+	while (a[i])
+		free(a[i++]);
+	free(a);
+}
+
 static char	**ft_do_split(char **a, char const *s, char c)
 {
 	char	**arr;
@@ -62,10 +72,7 @@ static char	**ft_do_split(char **a, char const *s, char c)
 			arr[i++] = ft_strndup(s + start, end - start);
 			if (!arr[i - 1])
 			{
-				i = 0;
-				while (arr[i])
-					free (arr[i++]);
-				free(arr);
+				ft_free_split(arr);
 				return (NULL);
 			}
 			start = end;
