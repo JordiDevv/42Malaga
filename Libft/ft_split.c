@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 18:11:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/05/06 00:46:07 by jordi            ###   ########.fr       */
+/*   Updated: 2024/05/08 14:38:50 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ static char	**ft_do_split(char **a, char const *s, char c)
 			while (s[end] && s[end] != c)
 				end++;
 			arr[i++] = ft_strndup(s + start, end - start);
+			if (!arr[i - 1])
+			{
+				i = 0;
+				while (arr[i])
+					free (arr[i++]);
+				free(arr);
+				return (NULL);
+			}
 			start = end;
 		}
 		if (s[start])
@@ -80,6 +88,6 @@ char	**ft_split(char const *s, char c)
 	arr = malloc((count + 1) * sizeof(char *));
 	if (!arr)
 		return (NULL);
-	ft_do_split(arr, s, c);
+	arr = ft_do_split(arr, s, c);
 	return (arr);
 }
