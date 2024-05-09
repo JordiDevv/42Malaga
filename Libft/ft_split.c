@@ -6,22 +6,11 @@
 /*   By: jsanz-bo <jsanz-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 18:11:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/05/08 18:42:02 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:13:32 by jordi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static char	*ft_strndup(const char *s, size_t n)
-{
-	void	*ptr;
-
-	ptr = malloc(n + 1);
-	if (!ptr)
-		return (NULL);
-	ft_strlcpy(ptr, s, n + 1);
-	return (ptr);
-}
 
 static size_t	ft_strparr(char const *s, char c)
 {
@@ -52,15 +41,11 @@ static void	ft_free_split(char **a)
 	free(a);
 }
 
-static char	**ft_do_split(char **a, char const *s, char c)
+static char	**ft_do_split(char **arr, char const *s, char c, size_t i)
 {
-	char	**arr;
-	size_t	i;
 	size_t	start;
 	size_t	end;
 
-	arr = a;
-	i = 0;
 	start = 0;
 	while (s[start])
 	{
@@ -69,7 +54,7 @@ static char	**ft_do_split(char **a, char const *s, char c)
 			end = start;
 			while (s[end] && s[end] != c)
 				end++;
-			arr[i++] = ft_strndup(s + start, end - start);
+			arr[i++] = ft_substr(s, start, end - start);
 			if (!arr[i - 1])
 			{
 				ft_free_split(arr);
@@ -88,13 +73,15 @@ char	**ft_split(char const *s, char c)
 {
 	char	**arr;
 	size_t	count;
+	size_t	i;
 
+	i = 0;
 	if (!s)
 		return (NULL);
 	count = ft_strparr(s, c);
 	arr = malloc((count + 1) * sizeof(char *));
 	if (!arr)
 		return (NULL);
-	arr = ft_do_split(arr, s, c);
+	arr = ft_do_split(arr, s, c, i);
 	return (arr);
 }
