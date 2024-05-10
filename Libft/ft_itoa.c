@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:29:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/04/29 13:04:07 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/05/10 10:42:26 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	*ft_itoa(int n)
 
 	len = ft_numlen(n);
 	str = (malloc(len + 1));
+	if (!str)
+		return (NULL);
 	if (n == -2147483648)
 		n = ft_mitoa(n, str);
 	if (!str)
