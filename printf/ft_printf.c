@@ -20,21 +20,42 @@ static void	ft_get_input(int t_return, char *str, va_list args)
 		if (t_return == 1)
 			return (1);
 		return (*str);
+	}
+}
 	
+static int	ft_get_size(char *str_cpy, va_list args_s)
+{
+	str_cpy++;
+	if (*str_cpy == c)
+	{
+		va_arg(args_s, int);
+		r = 1;
+	}
+	else if (*str_cpy == s)
+		r = ft_strlen(va_arg(args_s, char *));
+	else if (*str_cpy == p)
+	{
+		va_arg(args_s, void *);
+		r = += 2 + sizeof(void *) * 2;
+	}
+	else if (*str_cpy == d)
+		r = ft_numlen(va_arg(args_s, int));
+}
 
 static int	ft_size_of_print(char *str, va_list args_s)
 {
-	char 	*start_lo;
+	char 	*str_cpy;
 	int	size;
 
-	str_lo = str;
+	str_cpy = str;
 	size = 0;
-	while (*str_lo)
+	while (*str_cpy)
 	{
-		if (*str_lo == '%')
-			size += ft_get_input(1, str_lo, args_s);
-		size++;
-		str_lo++;
+		if (*str_cpy == '%')
+			size += ft_get_size(str_cpy, args_s);
+		else
+			size++;
+		str_cpy++;
 	}
 	return (size);
 }
@@ -60,4 +81,5 @@ int	ft_printf(char const *str, ...)
 			*p = ft_get_input(0, p, args);
 		p++;
 	}
+}
 	
