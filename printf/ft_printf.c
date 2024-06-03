@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include "libft.h"
 
 static void	ft_get_input(int t_return, char *str, va_list args)
 {
@@ -22,6 +23,11 @@ static void	ft_get_input(int t_return, char *str, va_list args)
 		return (*str);
 	}
 }
+
+static int	ft_get_size_2(char *str_cpy, va_list args_s)
+{
+	if (*str_cpy == i)
+
 	
 static int	ft_get_size(char *str_cpy, va_list args_s)
 {
@@ -29,17 +35,24 @@ static int	ft_get_size(char *str_cpy, va_list args_s)
 	if (*str_cpy == c)
 	{
 		va_arg(args_s, int);
-		r = 1;
+		return (1);
 	}
 	else if (*str_cpy == s)
-		r = ft_strlen(va_arg(args_s, char *));
+		return (ft_strlen(va_arg(args_s, char *)));
 	else if (*str_cpy == p)
 	{
 		va_arg(args_s, void *);
-		r = += 2 + sizeof(void *) * 2;
+		return (2 + sizeof(void *) * 2);
 	}
 	else if (*str_cpy == d)
-		r = ft_numlen(va_arg(args_s, int));
+		return (ft_numlen(va_arg(args_s, int)));
+	else if (*str_cpy == u)
+		return (ft_numlen(va_arg(args_s, unsigned int)));
+	else if (*str_cpy == %)
+		return (1);
+	else
+		ft_get_size_2(str_cpy, args_s);
+	return (0);
 }
 
 static int	ft_size_of_print(char *str, va_list args_s)
