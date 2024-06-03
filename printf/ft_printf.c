@@ -26,7 +26,7 @@ static void	ft_get_input(int t_return, char *str, va_list args)
 
 static int	ft_get_size_2(char *str_cpy, va_list args_s)
 {
-	if (*str_cpy == i)
+	
 
 	
 static int	ft_get_size(char *str_cpy, va_list args_s)
@@ -44,7 +44,7 @@ static int	ft_get_size(char *str_cpy, va_list args_s)
 		va_arg(args_s, void *);
 		return (2 + sizeof(void *) * 2);
 	}
-	else if (*str_cpy == d)
+	else if (*str_cpy == d || *str_cpy == i)
 		return (ft_numlen(va_arg(args_s, int)));
 	else if (*str_cpy == u)
 		return (ft_numlen(va_arg(args_s, unsigned int)));
