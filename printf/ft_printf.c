@@ -11,47 +11,44 @@
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft.h"
+#include "jslib.h"
 
-static void	ft_get_input(int t_return, char *str, va_list args)
+static void	ft_get_input(char *str, char *print, va_list args)
 {
+	char	*s;
+
 	str++;
-	if (*str == c)
+	if (*str == 'c')
+		*print++ = va_arg(args, int);
+	else if (*str == 's')
 	{
-		if (t_return == 1)
-			return (1);
-		return (*str);
+		s = va_arg(args, char *);
+		print += ft_strlcpy(print, s, ft_strlen(s));
 	}
 }
-
-static int	ft_get_size_2(char *str_cpy, va_list args_s)
-{
 	
-
-	
-static int	ft_get_size(char *str_cpy, va_list args_s)
+static int	ft_get_size(va_list args_s)
 {
-	str_cpy++;
-	if (*str_cpy == c)
+	if (*str_cpy == 'c')
 	{
 		va_arg(args_s, int);
 		return (1);
 	}
-	else if (*str_cpy == s)
+	else if (*str_cpy == 's')
 		return (ft_strlen(va_arg(args_s, char *)));
-	else if (*str_cpy == p)
+	else if (*str_cpy == 'p')
 	{
 		va_arg(args_s, void *);
 		return (2 + sizeof(void *) * 2);
 	}
-	else if (*str_cpy == d || *str_cpy == i)
+	else if (*str_cpy == 'd' || *str_cpy == 'i')
 		return (ft_numlen(va_arg(args_s, int)));
-	else if (*str_cpy == u)
+	else if (*str_cpy == 'u')
 		return (ft_numlen(va_arg(args_s, unsigned int)));
-	else if (*str_cpy == %)
+	else if (*str_cpy == '%')
 		return (1);
-	else
-		ft_get_size_2(str_cpy, args_s);
+	else if (*str_cpy == 'X' || *str_cpy == 'x')
+		return (ft_hexlen(va_arg(args_s, unsigned int)));
 	return (0);
 }
 
@@ -65,7 +62,10 @@ static int	ft_size_of_print(char *str, va_list args_s)
 	while (*str_cpy)
 	{
 		if (*str_cpy == '%')
-			size += ft_get_size(str_cpy, args_s);
+		{
+			str_cpy++;
+			size += ft_get_size(args_s);
+		}
 		else
 			size++;
 		str_cpy++;
@@ -76,23 +76,28 @@ static int	ft_size_of_print(char *str, va_list args_s)
 int	ft_printf(char const *str, ...)
 {
 	if (!str)
-		return (NULL);
-	char	*p;
+		return (-1);
 	char	*print;
 	va_list	args;
 	va_list	args_s;
+	int	size;
 
-	p = str;
 	va_start(args, p);
 	va_copy(args_s, args);
-	print = malloc(ft_size_of_print(str, args_s));
+	size = ft_size_of_print(str, args_s);
+	print = malloc(size + 1);
+	va_end(args_s);
 	if (!print)
-		return (NULL);
-	while (*p)
 	{
-		if(*p == '%')
-			*p = ft_get_input(0, p, args);
-		p++;
+		va_end(args);
+		return (-1);
 	}
+	while (*str)
+	{
+		if(*str == '%')
+			ft_get_input(str, print, args);
+		*print++ = *str++;
+	}
+	return (size);
 }
 	
