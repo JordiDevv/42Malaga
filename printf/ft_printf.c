@@ -19,11 +19,16 @@ static void	ft_get_input(char *str, char *print, va_list args)
 
 	str++;
 	if (*str == 'c')
-		*print++ = va_arg(args, int);
+		*print++ = (char)va_arg(args, int);
 	else if (*str == 's')
 	{
 		s = va_arg(args, char *);
-		print += ft_strlcpy(print, s, ft_strlen(s));
+		print += ft_strlcpy(print, s, ft_strlen(s) + 1) + 1;
+	}
+	else if (*str == 'p')
+	{
+		s = ft_ptrtohex(va_arg(args, void *));
+		print += ft_strlcpy(print, s, ft_strlen(s) + 1) + 1;
 	}
 }
 	
