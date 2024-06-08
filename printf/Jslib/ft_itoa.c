@@ -28,7 +28,7 @@ char	*ft_itoa(int n)
 	char	*str;
 	int		len;
 
-	len = ft_numlen(n);
+	len = ft_intlen(n);
 	str = (malloc(len + 1));
 	if (!str)
 		return (NULL);

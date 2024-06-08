@@ -26,10 +26,10 @@ static int	ft_mitoa(int n, char *s)
 char	*ft_itoa(int n)
 {
 	char	*str;
-	int		len;
+	int	len;
 
-	len = ft_numlen(n);
-	str = (malloc(len + 1));
+	len = ft_intlen(n);
+	str = malloc(len + 1);
 	if (!str)
 		return (NULL);
 	if (n == -2147483648)

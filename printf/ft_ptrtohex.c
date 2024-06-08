@@ -1,6 +1,6 @@
 #include "libftprint.h"
 
-char *ft_ptrtohex(void *p)
+char	*ft_ptrtohex(void *p)
 {
 	uintptr_t 	value;
 	const char	*hex_digits;

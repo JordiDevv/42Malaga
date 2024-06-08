@@ -1,4 +1,4 @@
-int	ft_numlen(int n)
+int	ft_intlen(int n)
 {
 	int	len;
 

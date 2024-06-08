@@ -13,26 +13,55 @@
 #include "libftprintf.h"
 #include "jslib.h"
 
-static void	ft_get_input(char *str, char *print, va_list args)
+static void	ft_get_input2(char *str, char *print, va_list args)
 {
 	char	*s;
 
-	str++;
-	if (*str == 'c')
-		*print++ = (char)va_arg(args, int);
-	else if (*str == 's')
+	if (*str == 'u')
+	{
+		s = ft_utoa(va_arg(args, unsigned int));
+		*print += ft_strlcpy(*print, s, ft_strlen(s) + 1) + 1;
+		free(s);
+	}
+	else if (*str == 'X' || *str == 'x')
+	{
+		s = ft_utohex(va_arg(args, unsigned int));
+		*print += ft_strlcpy(*print, s, ft_strlen(s) + 1) + 1;
+		free(s);
+	}
+	else if (*str == '%')
+		*(*print)++ = '%';
+}
+
+
+static void	ft_get_input(char **str, char **print, va_list args)
+{
+	char	*s;
+
+	(*str)++;
+	if (**str == 'c')
+		*(*print)++ = (char)va_arg(args, int);
+	else if (**str == 's')
 	{
 		s = va_arg(args, char *);
-		print += ft_strlcpy(print, s, ft_strlen(s) + 1) + 1;
+		*print += ft_strlcpy(*print, s, ft_strlen(s) + 1) + 1;
 	}
-	else if (*str == 'p')
+	else if (**str == 'p')
 	{
 		s = ft_ptrtohex(va_arg(args, void *));
-		print += ft_strlcpy(print, s, ft_strlen(s) + 1) + 1;
+		*print += ft_strlcpy(*print, s, ft_strlen(s) + 1) + 1;
 	}
+	else if (**str == 'd' || **str == 'i')
+	{
+		s = ft_itoa(va_arg(args, int);
+		*print += ft_strlcpy(*print, s, ft_strlen(s) + 1) + 1;
+		free(s);
+	}
+	else
+		ft_get_input2(*str, print, args);
 }
 	
-static int	ft_get_size(va_list args_s)
+static int	ft_get_size(char *str_cpy, va_list args_s)
 {
 	if (*str_cpy == 'c')
 	{
@@ -59,21 +88,19 @@ static int	ft_get_size(va_list args_s)
 
 static int	ft_size_of_print(char *str, va_list args_s)
 {
-	char 	*str_cpy;
 	int	size;
 
-	str_cpy = str;
 	size = 0;
-	while (*str_cpy)
+	while (*str)
 	{
-		if (*str_cpy == '%')
+		if (*str == '%')
 		{
-			str_cpy++;
-			size += ft_get_size(args_s);
+			str++;
+			size += ft_get_size(str, args_s);
 		}
 		else
 			size++;
-		str_cpy++;
+		str++;
 	}
 	return (size);
 }
@@ -100,7 +127,7 @@ int	ft_printf(char const *str, ...)
 	while (*str)
 	{
 		if(*str == '%')
-			ft_get_input(str, print, args);
+			ft_get_input(&str, &print, args);
 		*print++ = *str++;
 	}
 	return (size);
