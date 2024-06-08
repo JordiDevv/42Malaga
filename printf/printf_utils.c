@@ -1,5 +1,4 @@
 #include "libftprintf.h"
-#include "jslib.h"
 
 static void	ft_get_input2(char **str, char **print, va_list args)
 {
@@ -9,14 +8,14 @@ static void	ft_get_input2(char **str, char **print, va_list args)
 	{
 		s = ft_utoa(va_arg(args, unsigned int));
 		ft_stradd(*print, s, ft_strlen(s));
-		*print += ft_strlen(s);
+		(*print) += ft_strlen(s);
                 free(s);
 	}
 	else if (*str == 'X' || *str == 'x')
         {
                 s = ft_utohex(va_arg(args, unsigned int));
                 ft_stradd(*print, s, ft_strlen(s));
-		*print += ft_strlen(s);
+		(*print) += ft_strlen(s);
                 free(s);
         }
         else if (*str == '%')
@@ -33,24 +32,24 @@ void	ft_get_input(char **str, char **print, va_list args)
 	{
 		s = va_arg(args, char *);
 		ft_stradd(*print, s, ft_strlen(s));
-		*print += ft_strlen(s);
+		(*print) += ft_strlen(s);
 	}
 	else if (**str == 'p')
 	{
 		s = ft_ptrtohex(va_arg(args, void *));
 		ft_stradd(*print, s, ft_strlen(s));
-		*print += ft_strlen(s);
+		(*print) += ft_strlen(s);
 	}
 	else if (**str == 'd' || **str == 'i')
 	{
 		s = ft_itoa(va_arg(args, int);
 		ft_stradd(*print, s, ft_strlen(s));
-		*print += ft_strlen(s);
+		(*print) += ft_strlen(s);
 		free(s);
 	}
 	else
-		ft_get_input2(&str, &print, args);
-	*str++;
+		ft_get_input2(*str, *print, args);
+	(*str)++;
 }
 
 static int      ft_get_size(char *str_cpy, va_list args_s)

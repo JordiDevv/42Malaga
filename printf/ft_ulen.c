@@ -4,7 +4,7 @@ int	ft_ulen(unsigned int n)
 
 	len = 0;
 	if (n == 0)
-		return (1);i
+		return (1);
 	while (n)
 	{
 		n /= 10;

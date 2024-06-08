@@ -1,4 +1,3 @@
 ft_intlen
 ft_strlen
-ft_strlcpy
 ft_itoa

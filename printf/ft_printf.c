@@ -11,15 +11,14 @@
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "jslib.h"
 
-void	ft_get_input_root(char **str, char **print, va_list args)
+static void	ft_get_input_root(char **str, char **print, va_list args)
 {
 	while (**str)
 	{
 		if (**str == '%')
 		{
-			*str++;
+			(*str)++;
 			ft_get_input(str, print, args);
 		}
 		else
@@ -37,7 +36,7 @@ int	ft_printf(char const *str, ...)
 	va_list	args_s;
 	int	size;
 
-	va_start(args, p);
+	va_start(args, str);
 	va_copy(args_s, args);
 	size = ft_size_of_print(str, args_s);
 	print = malloc(size + 1);
@@ -49,7 +48,8 @@ int	ft_printf(char const *str, ...)
 		return (-1);
 	}
 	ft_get_input_root(&str, &print, args);
-	write(1, print_origin, size);
+	*print = '\0';
+	write(1, print_origin, size - 1);
 	free(print_origin);
 	va_end(args);
 	return (size);

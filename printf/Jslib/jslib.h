@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef JSLIB_H
+# define JSLIB_H
 
 # include <stdlib.h>
 # include <unistd.h>

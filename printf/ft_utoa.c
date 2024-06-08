@@ -1,5 +1,4 @@
 #include "libftprintf.h"
-#include "jslib.h"
 
 char	*ft_utoa(unsigned int n)
 {

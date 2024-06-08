@@ -1,3 +1,5 @@
+#include "libftprintf.h"
+
 char	*ft_utohex(unsigned int n)
 {
 	char	*str;
