@@ -14,9 +14,9 @@
 
 static void	ft_get_input_root(char **str, char **print, va_list args, int size)
 {
-	char	**print_origin;
+	char	*print_origin;
 
-	print_origin = print;
+	print_origin = *print;
 	while (**str)
 	{
 		if (**str == '%')
@@ -28,7 +28,7 @@ static void	ft_get_input_root(char **str, char **print, va_list args, int size)
 			*(*print)++ = *(*str)++;
 	}
 	*(*print) = '\0';
-	write(1, print_origin, size - 1);
+	write(1, print_origin, *print - print_origin);
 	free(print_origin);
 }
 

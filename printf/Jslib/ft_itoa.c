@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "jslib.h"
 
 static int	ft_mitoa(int n, char *s)
 {
