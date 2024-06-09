@@ -9,7 +9,7 @@ char	*ft_utoa(unsigned int n)
 	str = malloc(len + 1);
 	if (!str)
 		return (NULL);
-	if (if n == 0)
+	if (!n)
 		str[0] = '0';
 	str[len] = '\0';
 	while (--len >= 0 && n != 0)

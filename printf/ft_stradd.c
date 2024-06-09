@@ -3,7 +3,7 @@
 void	ft_stradd(char *dst, char *src, int len)
 {
 	if (!src && !dst)
-		return (NULL);
+		return ;
 	while (len)
 	{
 		*dst++ = *src++;

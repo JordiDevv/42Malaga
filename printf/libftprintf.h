@@ -8,7 +8,7 @@
 int	ft_hexlen(unsigned int n);
 char	*ft_ptrtohex(void *p);
 int	ft_ulen(unsigned int);
-char	*ft_utohex(unsigned int n);
+char	*ft_utohex(unsigned int n, int uppercase);
 int	ft_printf(char const *str, ...);
 void	ft_stradd(char *dst, char *src, int len);
 char	*ft_utoa(unsigned int n);

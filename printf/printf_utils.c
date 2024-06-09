@@ -4,21 +4,21 @@ static void	ft_get_input2(char **str, char **print, va_list args)
 {
 	char	*s;
 
-	if (*str == 'u')
+	if (**str == 'u')
 	{
 		s = ft_utoa(va_arg(args, unsigned int));
 		ft_stradd(*print, s, ft_strlen(s));
 		(*print) += ft_strlen(s);
                 free(s);
 	}
-	else if (*str == 'X' || *str == 'x')
+	else if (**str == 'X' || **str == 'x')
         {
-                s = ft_utohex(va_arg(args, unsigned int));
+                s = ft_utohex(va_arg(args, unsigned int), **str == 'X');
                 ft_stradd(*print, s, ft_strlen(s));
 		(*print) += ft_strlen(s);
                 free(s);
         }
-        else if (*str == '%')
+        else if (**str == '%')
                 *(*print)++ = '%';
 }
 
@@ -42,13 +42,13 @@ void	ft_get_input(char **str, char **print, va_list args)
 	}
 	else if (**str == 'd' || **str == 'i')
 	{
-		s = ft_itoa(va_arg(args, int);
+		s = ft_itoa(va_arg(args, int));
 		ft_stradd(*print, s, ft_strlen(s));
 		(*print) += ft_strlen(s);
 		free(s);
 	}
 	else
-		ft_get_input2(*str, *print, args);
+		ft_get_input2(str, print, args);
 	(*str)++;
 }
 
