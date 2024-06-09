@@ -2,6 +2,6 @@
 
 int main(int argc, char *argv[])
 {
-	ft_printf("Hola, %s. Tienes %d años.", "Jordi", 30);
+	ft_printf("Hola, %s. Tienes %X años.", "Jordi", 30);
 	return 0;
 }
