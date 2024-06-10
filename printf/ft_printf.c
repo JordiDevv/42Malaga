@@ -12,7 +12,7 @@
 
 #include "libftprintf.h"
 
-static void	ft_get_input_root(char **str, char **print, va_list args, int size)
+static void	ft_get_input_root(char **str, char **print, va_list args)
 {
 	char	*print_origin;
 
@@ -53,7 +53,7 @@ int	ft_printf(char const *str, ...)
 		va_end(args);
 		return (-1);
 	}
-	ft_get_input_root(&p, &print, args, size);
+	ft_get_input_root(&p, &print, args);
 	va_end(args);
 	return (size);
 }	
