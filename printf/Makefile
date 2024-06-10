@@ -1,34 +1,30 @@
 NAME = libftprintf.a
-# INCLUDE =
+INCLUDE = jslib.h libftprintf.h
+SUBD = jslib/
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS = $(wildcard *.c)
-
-# BSRCS =
+SRCS = $(SUBD)ft_intlen.c $(SUBD)ft_itoa.c $(SUBD)ft_strlen.c \
+       ft_ptrtohex.c ft_ulen.c ft_utohex.c printf_utils ft_printf.c ft_stradd.c \
+       ft_utoa.c
 
 OBJS = $(SRCS:.c=.o)
 
-# BOBJS = $(BSRCS:.c=.o)
-
 all: $(NAME)
 
-$(NAME):$(OBJS) # $(INCLUDE)
-	ar rcs $@ $^
+$(NAME):$(OBJS) $(INCLUDE)
+	-IJslib ar rcs $@ $^
 
 %o:%c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) # $(BOBJS)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-# bonus: $(OBJS) $(BOBJS) $(INCLUDE)
-	# ar rcs $(NAME) $^
-
-.PHONY: all clean fclean re # bonus
+.PHONY: all clean fclean re

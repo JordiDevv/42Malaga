@@ -3,7 +3,7 @@
 
 # include <stdint.h>
 # include <stdarg.h>
-# include "jslib.h"
+# include "jslib/jslib.h"
 
 int	ft_hexlen(unsigned int n);
 char	*ft_ptrtohex(void *p);
