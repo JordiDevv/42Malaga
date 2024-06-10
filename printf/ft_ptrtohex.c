@@ -2,7 +2,7 @@
 
 char	*ft_ptrtohex(void *p)
 {
-	uintptr_t 	value;
+	uintptr_t	value;
 	const char	*hex_digits;
 	static char	buffer[2 + sizeof(void *) * 2 + 1];
 	int		i;

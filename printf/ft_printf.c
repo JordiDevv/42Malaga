@@ -34,14 +34,14 @@ static void	ft_get_input_root(char **str, char **print, va_list args)
 
 int	ft_printf(char const *str, ...)
 {
-	if (!str)
-		return (-1);
 	char	*print;
 	char	*p;
 	va_list	args;
 	va_list	args_s;
 	int	size;
 
+	if (!str)
+		return (-1);
 	p = (char *)str;
 	va_start(args, str);
 	va_copy(args_s, args);
@@ -56,4 +56,4 @@ int	ft_printf(char const *str, ...)
 	ft_get_input_root(&p, &print, args);
 	va_end(args);
 	return (size);
-}	
+}
