@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_utohex.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/11 19:05:40 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2024/06/11 19:31:17 by jsanz-bo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libftprintf.h"
 
 char	*ft_utohex(unsigned int n, int uppercase)
 {
 	char	*str;
-	int	len;
+	int		len;
 	char	*hex_digits;
 
 	if (uppercase)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ptrtohex.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/11 19:05:13 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2024/06/11 19:08:02 by jsanz-bo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libftprintf.h"
 
 char	*ft_ptrtohex(void *p)
@@ -5,7 +17,7 @@ char	*ft_ptrtohex(void *p)
 	uintptr_t	value;
 	const char	*hex_digits;
 	static char	buffer[2 + sizeof(void *) * 2 + 1];
-	int		i;
+	int			i;
 
 	value = (uintptr_t)p;
 	i = 2 + sizeof(void *) * 2 - 1;

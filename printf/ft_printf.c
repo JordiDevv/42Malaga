@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:26:06 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/05/31 18:43:16 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/06/11 19:07:48 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_printf(char const *str, ...)
 	char	*p;
 	va_list	args;
 	va_list	args_s;
-	int	size;
+	int		size;
 
 	if (!str)
 		return (-1);
