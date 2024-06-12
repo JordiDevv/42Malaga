@@ -19,7 +19,7 @@ static int	get_input(char c, va_list args)
 	if (c == 's')
 		return (ft_putstr(va_arg(args, char *)));
 	if (c == 'p')
-		return (ft_punt_hexa(va_arg(args, void *)));
+		return (ft_ptrtohex(va_arg(args, void *)));
 	if (c == 'd' || c == 'i')
 		return (ft_putint(va_arg(args, int)));
 	if (c == 'u')
@@ -78,10 +78,10 @@ static int	w_print(const char *str, va_list args, int len)
 
 int	ft_printf(char const *str, ...)
 {
-	va_list	element;
+	va_list	args;
 	int		len;
 
-	let = 0;
+	len = 0;
 	va_start(args, str);
 	len = w_print(str, args, len);
 	va_end(args);
