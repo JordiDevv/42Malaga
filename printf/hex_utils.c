@@ -19,9 +19,9 @@ int	ft_puthex(unsigned long long n, int a, int u)
 	char	hex_up[] = "0123456789ABCDEF";
 
 	if (u)
-		ft_strlcpy(bstr, hex_low, 17);
-	else
 		ft_strlcpy(bstr, hex_up, 17);
+	else
+		ft_strlcpy(bstr, hex_low, 17);
 	if (n >= 16)
 	{
 		a = ft_puthex(n / 16, a, u);
