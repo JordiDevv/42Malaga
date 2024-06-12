@@ -4,7 +4,7 @@ INCLUDE = ft_printf.h
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS = ft_strlen.c ft_printf.c hex_utils.c put_input.c
+SRCS = ft_strlen.c ft_strlcpy.c ft_printf.c hex_utils.c put_input.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -42,7 +42,7 @@ int	ft_putint(int n)
 	}
 	if (n > 9)
 	{
-		let += ft_putnbr(n / 10);
+		let += ft_putint(n / 10);
 		if (let == -1)
 			return (-1);
 		n = n % 10;

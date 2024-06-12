@@ -12,12 +12,11 @@
 
 #include "ft_printf.h"
 
-static char	hex_low[] = "0123456789abcdef";
-static char	hex_up[] = "0123456789ABCDEF";
-
 int	ft_puthex(unsigned long long n, int a, int u)
 {
 	char	bstr[17];
+	char	hex_low[] = "0123456789abcdef";
+	char	hex_up[] = "0123456789ABCDEF";
 
 	if (u)
 		ft_strlcpy(bstr, hex_low, 17);
