@@ -6,12 +6,12 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:05:45 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/06/11 19:43:32 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:33:27 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include <stdint.h>
 # include <stdarg.h>

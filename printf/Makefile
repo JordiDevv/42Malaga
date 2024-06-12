@@ -1,5 +1,5 @@
 NAME = libftprintf.a
-INCLUDE = $(SUBD)jslib.h libftprintf.h
+INCLUDE = $(SUBD)jslib.h ft_printf.h
 SUBD = jslib/
 
 CC = cc

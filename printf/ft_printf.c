@@ -6,54 +6,84 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:26:06 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/06/11 19:07:48 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:29:03 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-static void	ft_get_input_root(char **str, char **print, va_list args)
+static int	get_input(char c, va_list args)
 {
-	char	*print_origin;
+	if (c == 'c')
+		return (ft_putchar(va_arg(args, int)));
+	if (c == 's')
+		return (ft_putstr(va_arg(args, char *)));
+	if (c == 'p')
+		return (ft_punt_hexa(va_arg(args, void *)));
+	if (c == 'd' || c == 'i')
+		return (ft_putint(va_arg(args, int)));
+	if (c == 'u')
+		return (ft_putun(va_arg(args, unsigned int)));
+	if (c == 'x')
+		return (ft_hexa_min(va_arg(args, int)));
+	if (c == 'X')
+		return (ft_hexa_mayus(va_arg(args, int)));
+	return (0);
+}
 
-	print_origin = *print;
-	while (**str)
+static int	get_format(char c, va_list args)
+{
+	int	len;
+
+	len = 0;
+	if (c != '%')
 	{
-		if (**str == '%')
+		len = get_input(c, args);
+		if (len == -1)
+			return (-1);
+		return (len);
+	}
+	else
+	{
+		if (write (1, &c, 1) != 1)
+			return (-1);
+		return (1);
+	}
+}
+
+static int	w_print(const char *str, va_list args, int len)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '%')
 		{
-			(*str)++;
-			ft_get_input(str, print, args);
+			len += get_format(str[i + 1], args);
+			if (len == -1)
+				return (-1);
+			i++;
 		}
 		else
-			*(*print)++ = *(*str)++;
+		{
+			if (write (1, &str[i], 1) != 1)
+				return (-1);
+			len++;
+		}
+		i++;
 	}
-	*(*print) = '\0';
-	write(1, print_origin, *print - print_origin);
-	free(print_origin);
+	return (len);
 }
 
 int	ft_printf(char const *str, ...)
 {
-	char	*print;
-	char	*p;
-	va_list	args;
-	va_list	args_s;
-	int		size;
+	va_list	element;
+	int		len;
 
-	if (!str)
-		return (-1);
-	p = (char *)str;
+	let = 0;
 	va_start(args, str);
-	va_copy(args_s, args);
-	size = ft_size_of_print(p, args_s);
-	print = malloc(size + 1);
-	va_end(args_s);
-	if (!print)
-	{
-		va_end(args);
-		return (-1);
-	}
-	ft_get_input_root(&p, &print, args);
+	len = w_print(str, args, len);
 	va_end(args);
-	return (size);
+	return (len);
 }
