@@ -13,18 +13,19 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdint.h>
+# include <stdio.h>
 # include <stdarg.h>
-# include "jslib/jslib.h"
+# include <stdlib.h>
+# include <unistd.h>
 
-int		ft_hexlen(unsigned int n);
-char	*ft_ptrtohex(void *p);
-int		ft_ulen(unsigned int n);
-char	*ft_utohex(unsigned int n, int uppercase);
+size_t	ft_strlen(const char *s);
 int		ft_printf(char const *str, ...);
-void	ft_stradd(char *dst, char *src, int len);
-char	*ft_utoa(unsigned int n);
-void	ft_get_input(char **str, char **print, va_list args);
-int		ft_size_of_print(char *str, va_list args_s);
+int     ft_casthex(int n, int u);
+int	    ft_ptrtohex(void *p);
+int     ft_puthex(unsigned long long n, int a, int u);
+int     ft_putun(unsigned int n);
+int     ft_putstr(char *s);
+int     ft_putint(int n);
+int     ft_putchar(int c);
 
 #endif

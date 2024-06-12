@@ -1,13 +1,10 @@
 NAME = libftprintf.a
-INCLUDE = $(SUBD)jslib.h ft_printf.h
-SUBD = jslib/
+INCLUDE = ft_printf.h
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS = $(SUBD)ft_intlen.c $(SUBD)ft_itoa.c $(SUBD)ft_strlen.c \
-       ft_ptrtohex.c ft_ulen.c ft_utohex.c printf_utils.c ft_printf.c \
-       ft_stradd.c ft_utoa.c ft_hexlen.c
+SRCS = ft_strlen.c ft_printf.c hex_utils.c put_input.c
 
 OBJS = $(SRCS:.c=.o)
 

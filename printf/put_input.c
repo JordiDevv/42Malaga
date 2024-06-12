@@ -83,7 +83,7 @@ int	ft_putun(unsigned int n)
 	len = 0;
 	if (n > 9)
 	{
-		len = ft_ulen(n / 10);
+		len = ft_putun(n / 10);
 		if (len == -1)
 			return (-1);
 		n = n % 10;
