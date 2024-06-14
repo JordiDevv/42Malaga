@@ -40,22 +40,26 @@ int	ft_puthex(unsigned long long n, int a, int u)
 
 int	ft_ptrtohex(void *p)
 {
-	unsigned long long	ptr;
+	uintptr_t		ptr;
 	int					len;
 
-	if ((uintptr_t)p == 0)
-	{
-		if (write(1, "(nil) (nil)", 11) != 11)
-		return (-1);
-	}
 	len = 0;
-	ptr = (unsigned long long)p;
-	if (write(1, "0x", 2) != 2)
-		return (-1);
-	len = ft_puthex(ptr, len, 0);
-	if (len == -1)
-		return (-1);
-	len += 2;
+	ptr = (uintptr_t)p;
+	if (ptr == 0)
+	{
+		if (write(1, "(nil)", 5) != 5)
+			return (-1);
+		return (5);
+	}
+	else
+	{
+		if (write(1, "0x", 2) != 2)
+			return (-1);
+		len = ft_puthex(ptr, len, 0);
+		if (len == -1)
+			return (-1);
+		len += 2;
+	}
 	return (len);
 }
 
