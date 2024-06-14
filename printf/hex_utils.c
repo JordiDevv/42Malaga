@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ptrtohex.c                                      :+:      :+:    :+:   */
+/*   hex_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:05:13 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/06/12 18:08:32 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/06/14 20:04:25 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 int	ft_puthex(unsigned long long n, int a, int u)
 {
 	char	bstr[17];
-	char	hex_low[] = "0123456789abcdef";
-	char	hex_up[] = "0123456789ABCDEF";
 
 	if (u)
-		ft_strlcpy(bstr, hex_up, 17);
+		ft_strlcpy(bstr, "0123456789ABCDEF", 17);
 	else
-		ft_strlcpy(bstr, hex_low, 17);
+		ft_strlcpy(bstr, "0123456789abcdef", 17);
 	if (n >= 16)
 	{
 		a = ft_puthex(n / 16, a, u);
@@ -45,18 +43,23 @@ int	ft_ptrtohex(void *p)
 	unsigned long long	ptr;
 	int					len;
 
+	if ((uintptr_t)p == 0)
+	{
+		if (write(1, "(nil) (nil)", 11) != 11)
+		return (-1);
+	}
 	len = 0;
 	ptr = (unsigned long long)p;
 	if (write(1, "0x", 2) != 2)
 		return (-1);
-	len = ft_puthex(ptr, len, 1);
+	len = ft_puthex(ptr, len, 0);
 	if (len == -1)
 		return (-1);
 	len += 2;
 	return (len);
 }
 
-int	ft_casthex(int n, int u)
+int	ft_casthex(unsigned int n, int u)
 {
 	unsigned long long	c_n;
 	int					len;

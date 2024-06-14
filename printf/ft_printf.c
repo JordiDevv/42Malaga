@@ -25,9 +25,9 @@ static int	get_input(char c, va_list args)
 	if (c == 'u')
 		return (ft_putun(va_arg(args, unsigned int)));
 	if (c == 'x')
-		return (ft_casthex(va_arg(args, int), 0));
+		return (ft_casthex(va_arg(args, unsigned int), 0));
 	if (c == 'X')
-		return (ft_casthex(va_arg(args, int), 1));
+		return (ft_casthex(va_arg(args, unsigned int), 1));
 	return (0);
 }
 
