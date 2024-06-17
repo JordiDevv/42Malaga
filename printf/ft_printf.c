@@ -6,13 +6,13 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:26:06 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/06/12 19:29:03 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:04:24 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	get_input(char c, va_list args)
+static int	ft_get_input(char c, va_list args)
 {
 	if (c == 'c')
 		return (ft_putchar(va_arg(args, int)));
@@ -31,14 +31,14 @@ static int	get_input(char c, va_list args)
 	return (0);
 }
 
-static int	get_format(char c, va_list args)
+static int	ft_get_format(char c, va_list args)
 {
 	int	len;
 
 	len = 0;
 	if (c != '%')
 	{
-		len = get_input(c, args);
+		len = ft_get_input(c, args);
 		if (len == -1)
 			return (-1);
 		return (len);
@@ -51,7 +51,7 @@ static int	get_format(char c, va_list args)
 	}
 }
 
-static int	w_print(const char *str, va_list args, int len)
+static int	ft_w_print(const char *str, va_list args, int len)
 {
 	int	i;
 
@@ -60,7 +60,7 @@ static int	w_print(const char *str, va_list args, int len)
 	{
 		if (str[i] == '%')
 		{
-			len += get_format(str[i + 1], args);
+			len += ft_get_format(str[i + 1], args);
 			if (len == -1)
 				return (-1);
 			i++;
@@ -83,7 +83,7 @@ int	ft_printf(char const *str, ...)
 
 	len = 0;
 	va_start(args, str);
-	len = w_print(str, args, len);
+	len = ft_w_print(str, args, len);
 	va_end(args);
 	return (len);
 }

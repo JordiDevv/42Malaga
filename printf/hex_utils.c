@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:05:13 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/06/14 20:04:25 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/06/17 15:44:56 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_puthex(unsigned long long n, int a, int u)
 int	ft_ptrtohex(void *p)
 {
 	uintptr_t		ptr;
-	int					len;
+	int				len;
 
 	len = 0;
 	ptr = (uintptr_t)p;

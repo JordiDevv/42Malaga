@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 19:12:26 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/06/14 17:46:01 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:05:10 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_putchar(int c)
 	return (1);
 }
 
-static int	int_min(int n)
+static int	ft_int_min(int n)
 {
 	(void)n;
 	if (write(1, "-2147483648", 11) != 11)
@@ -33,7 +33,7 @@ int	ft_putint(int n)
 
 	let = 0;
 	if (n == -2147483648)
-		return (int_min(n));
+		return (ft_int_min(n));
 	if (n < 0 && ++let)
 	{
 		if (write(1, "-", 1) != 1)
