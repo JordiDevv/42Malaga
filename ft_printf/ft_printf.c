@@ -28,27 +28,18 @@ static int	ft_get_input(char c, va_list args)
 		return (ft_casthex(va_arg(args, unsigned int), 0));
 	if (c == 'X')
 		return (ft_casthex(va_arg(args, unsigned int), 1));
-	return (0);
+	return (-1);
 }
 
 static int	ft_get_format(char c, va_list args)
 {
-	int	len;
-
-	len = 0;
-	if (c != '%')
+	if (c == '%')
 	{
-		len = ft_get_input(c, args);
-		if (len == -1)
-			return (-1);
-		return (len);
-	}
-	else
-	{
-		if (write (1, &c, 1) != 1)
+		if (write(1, &c, 1) != 1)
 			return (-1);
 		return (1);
 	}
+	return ft_get_input(c, args);
 }
 
 static int	ft_w_print(const char *str, va_list args, int len)

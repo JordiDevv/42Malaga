@@ -25,17 +25,10 @@ int	ft_puthex(unsigned long long n, int a, int u)
 		a = ft_puthex(n / 16, a, u);
 		if (a == -1)
 			return (-1);
-		if (write (1, &bstr[n & 0xf], 1) == -1)
-			return (-1);
-		a++;
 	}
-	else if (n < 16)
-	{
-		if (write (1, &bstr[n], 1) == -1)
-			return (-1);
-		a++;
-	}
-	return (a);
+	if (write(1, &bstr[n % 16], 1) == -1)
+		return (-1);
+	return (a + 1);
 }
 
 int	ft_ptrtohex(void *p)
@@ -43,7 +36,6 @@ int	ft_ptrtohex(void *p)
 	uintptr_t		ptr;
 	int				len;
 
-	len = 0;
 	ptr = (uintptr_t)p;
 	if (ptr == 0)
 	{
@@ -51,26 +43,19 @@ int	ft_ptrtohex(void *p)
 			return (-1);
 		return (5);
 	}
-	else
-	{
-		if (write(1, "0x", 2) != 2)
-			return (-1);
-		len = ft_puthex(ptr, len, 0);
-		if (len == -1)
-			return (-1);
-		len += 2;
-	}
-	return (len);
+	if (write(1, "0x", 2) != 2)
+		return (-1);
+	len = ft_puthex(ptr, 0, 0);
+	if (len == -1)
+		return (-1);
+	return (len + 2);
 }
 
 int	ft_casthex(unsigned int n, int u)
 {
-	unsigned long long	c_n;
-	int					len;
+	int	len;
 
-	len = 0;
-	c_n = (unsigned long long)n;
-	len = ft_puthex(c_n, len, u);
+	len = ft_puthex((unsigned long long)n, 0, u);
 	if (len == -1)
 		return (-1);
 	return (len);
