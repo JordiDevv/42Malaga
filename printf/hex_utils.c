@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:05:13 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/06/17 15:44:56 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:35:03 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	ft_puthex(unsigned long long n, int a, int u)
 {
-	char	bstr[17];
+	char	bstr[16];
 
 	if (u)
-		ft_strlcpy(bstr, "0123456789ABCDEF", 17);
+		ft_strlcpy(bstr, "0123456789ABCDEF", 16);
 	else
-		ft_strlcpy(bstr, "0123456789abcdef", 17);
+		ft_strlcpy(bstr, "0123456789abcdef", 16);
 	if (n >= 16)
 	{
 		a = ft_puthex(n / 16, a, u);
