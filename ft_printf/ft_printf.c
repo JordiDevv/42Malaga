@@ -12,37 +12,31 @@
 
 #include "ft_printf.h"
 
-static int	ft_get_input(char c, va_list args)
+static int	ft_get_input(char c, va_list args/*, char *i*/)
 {
 	if (c == 'c')
 		return (ft_putchar(va_arg(args, int)));
-	if (c == 's')
+	else if (c == 's')
 		return (ft_putstr(va_arg(args, char *)));
-	if (c == 'p')
+	else if (c == 'p')
 		return (ft_ptrtohex(va_arg(args, void *)));
-	if (c == 'd' || c == 'i')
+	else if (c == 'd' || c == 'i')
 		return (ft_putint(va_arg(args, int)));
-	if (c == 'u')
+	else if (c == 'u')
 		return (ft_putun(va_arg(args, unsigned int)));
-	if (c == 'x')
+	else if (c == 'x')
 		return (ft_casthex(va_arg(args, unsigned int), 0));
-	if (c == 'X')
+	else if (c == 'X')
 		return (ft_casthex(va_arg(args, unsigned int), 1));
+	/*else
+	{
+		(*i)++;
+		ft_get_input(c, args, i);
+	}*/
 	return (-1);
 }
 
-static int	ft_get_format(char c, va_list args)
-{
-	if (c == '%')
-	{
-		if (write(1, &c, 1) != 1)
-			return (-1);
-		return (1);
-	}
-	return ft_get_input(c, args);
-}
-
-static int	ft_w_print(const char *str, va_list args, int len)
+static int	ft_iterate(const char *str, va_list args, int len)
 {
 	int	i;
 
@@ -51,15 +45,16 @@ static int	ft_w_print(const char *str, va_list args, int len)
 	{
 		if (str[i] == '%')
 		{
-			len += ft_get_format(str[i + 1], args);
+			if (str[++i] == '%')
+				len += ft_putchar('%');
+			else
+				len += ft_get_input(str[i], args/*, &i*/);
 			if (len == -1)
 				return (-1);
-			i++;
 		}
 		else
 		{
-			if (write (1, &str[i], 1) != 1)
-				return (-1);
+			ft_putchar(str[i]);
 			len++;
 		}
 		i++;
@@ -74,7 +69,7 @@ int	ft_printf(char const *str, ...)
 
 	len = 0;
 	va_start(args, str);
-	len = ft_w_print(str, args, len);
+	len = ft_iterate(str, args, len);
 	va_end(args);
 	return (len);
 }

@@ -14,20 +14,19 @@
 
 int	ft_puthex(unsigned long long n, int a, int u)
 {
-	char	bstr[16];
+	char	bstr[17];
 
 	if (u)
-		ft_strlcpy(bstr, "0123456789ABCDEF", 16);
+		ft_strlcpy(bstr, "0123456789ABCDEF", 17);
 	else
-		ft_strlcpy(bstr, "0123456789abcdef", 16);
+		ft_strlcpy(bstr, "0123456789abcdef", 17);
 	if (n >= 16)
 	{
 		a = ft_puthex(n / 16, a, u);
 		if (a == -1)
 			return (-1);
 	}
-	if (write(1, &bstr[n % 16], 1) == -1)
-		return (-1);
+	ft_putchar(bstr[n & 0xf]);
 	return (a + 1);
 }
 
@@ -36,19 +35,15 @@ int	ft_ptrtohex(void *p)
 	uintptr_t		ptr;
 	int				len;
 
+	len = 0;
 	ptr = (uintptr_t)p;
-	if (ptr == 0)
-	{
-		if (write(1, "(nil)", 5) != 5)
-			return (-1);
-		return (5);
-	}
-	if (write(1, "0x", 2) != 2)
-		return (-1);
-	len = ft_puthex(ptr, 0, 0);
+	if (!ptr)
+		return (ft_putstr("(nil)"));
+	len += ft_putstr("0x");
+	len += ft_puthex(ptr, 0, 0);
 	if (len == -1)
 		return (-1);
-	return (len + 2);
+	return (len);
 }
 
 int	ft_casthex(unsigned int n, int u)

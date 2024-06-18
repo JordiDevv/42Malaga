@@ -21,7 +21,7 @@ int	ft_putchar(int c)
 
 int	ft_putint(int n)
 {
-	int	let;
+	int	len;
 
 	if (n == -2147483648)
 	{
@@ -29,41 +29,34 @@ int	ft_putint(int n)
 			return (-1);
 		return (11);
 	}
-	let = 0;
-	if (n < 0 && ++let)
+	len = 0;
+	if (n < 0 && ++len)
 	{
-		if (write(1, "-", 1) != 1)
-			return (-1);
+		ft_putchar('-');
 		n = -n;
 	}
 	if (n > 9)
 	{
-		let += ft_putint(n / 10);
-		if (let == -1)
+		len += ft_putint(n / 10);
+		if (len == -1)
 			return (-1);
 	}
-	if (ft_putchar ('0' + (n % 10)) == -1)
-		return (-1);
-	return (let + 1);
+	ft_putchar ('0' + (n % 10));
+	return (len + 1);
 }
 
 int	ft_putstr(char *s)
 {
-	size_t	i;
+	int	i;
 
 	if (!s)
 	{
-		if (write (1, "(null)", 6) != 6)
-			return (-1);
+		ft_putstr("(null)");
 		return (6);
 	}
 	i = 0;
 	while (s[i])
-	{
-		if (write(1, &s[i], 1) != 1)
-			return (-1);
-		i++;
-	}
+		ft_putchar(s[i++]);
 	return (i);
 }
 
@@ -78,7 +71,6 @@ int	ft_putun(unsigned int n)
 		if (len == -1)
 			return (-1);
 	}
-	if (ft_putchar ('0' + (n % 10)) == -1)
-		return (-1);
+	ft_putchar ('0' + (n % 10));
 	return (len + 1);
 }
