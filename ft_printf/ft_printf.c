@@ -28,12 +28,12 @@ static int	ft_get_input(char c, va_list args/*, char *i*/)
 		return (ft_casthex(va_arg(args, unsigned int), 0));
 	else if (c == 'X')
 		return (ft_casthex(va_arg(args, unsigned int), 1));
-	/*else
+	else
 	{
-		(*i)++;
-		ft_get_input(c, args, i);
-	}*/
-	return (-1);
+		ft_putchar('%');
+		return (ft_putchar(c) + 1);
+	}
+	return (0);
 }
 
 static int	ft_iterate(const char *str, va_list args, int len)
@@ -49,8 +49,8 @@ static int	ft_iterate(const char *str, va_list args, int len)
 				len += ft_putchar('%');
 			else
 				len += ft_get_input(str[i], args/*, &i*/);
-			if (len == -1)
-				return (-1);
+			/*if (len == -1)
+				return (-1);*/
 		}
 		else
 		{
