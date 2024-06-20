@@ -43,14 +43,14 @@ static int	ft_iterate(const char *str, va_list args, int len)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '%')
+		if (str[i] == '%' && str[i + 1] != '\0')
 		{
 			if (str[++i] == '%')
 				len += ft_putchar('%');
 			else
-				len += ft_get_input(str[i], args/*, &i*/);
-			/*if (len == -1)
-				return (-1);*/
+				len += ft_get_input(str[i], args);
+			if (len == -1)
+				return (-1);
 		}
 		else
 		{
