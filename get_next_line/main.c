@@ -3,10 +3,18 @@
 
 int main()
 {
+    int count = 7;
+
     int fd = open("prueba.txt", O_RDONLY);
     char *line = get_next_line(fd);
-    int size = sizeof(line);
+    int size = ft_strlen(line);
     write(1, line, size);
 
+    while (--count > 0)
+    {
+        line = get_next_line(fd);
+        size = ft_strlen(line);
+        write(1, line, size);
+    }
     return (0);
 }

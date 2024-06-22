@@ -63,7 +63,9 @@ char	*get_storage(int fd, char *storage)
 
     buff = malloc(BUFFER_SIZE + 1);
     if (!buff)
+	{
         return (ft_free(&storage));
+	}
 	buff_size = read(fd, buff, BUFFER_SIZE);
     if (buff_size > 0)
     {
@@ -82,12 +84,18 @@ char	*get_next_line(int fd)
     if (fd < 0)
         return (NULL);
     if (!storage)
+	{
         storage = get_storage(fd, storage);
+	}
     if (!storage)
+	{
         return (NULL);
+	}
 	line = get_line(storage);
 	if (!line)
+	{
 		return (NULL);
+	}
 	storage = clean_storage(storage);
 	return (line);
 }
