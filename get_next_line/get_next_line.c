@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*ft_free(char *str)
+char	*ft_free(char **str)
 {
 	free(*str);
 	*str = NULL;
@@ -67,10 +67,10 @@ char	*get_storage(int fd, char *storage)
 	buff_size = read(fd, buff, BUFFER_SIZE);
     if (buff_size > 0)
     {
-        storage[buff_size] = '\0';
+        buff[buff_size] = '\0';
         storage = ft_strjoin(storage, buff);
     }
-    free(buff_size);
+    free(buff);
     return (storage);
 }
 
