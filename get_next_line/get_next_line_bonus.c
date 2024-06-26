@@ -58,13 +58,13 @@ char	*get_line(char *storage)
 
 char	*get_storage(int fd, char *storage)
 {
-    char	*buff;
-    int		buff_size;
+	char	*buff;
+	int		buff_size;
 
 	buff_size = 1;
-    buff = malloc(BUFFER_SIZE + 1);
-    if (!buff)
-        return (ft_free(&storage));
+	buff = malloc(BUFFER_SIZE + 1);
+	if (!buff)
+		return (ft_free(&storage));
 	buff[0] = 0;
 	while (buff_size > 0 && !ft_strchr(buff, '\n'))
 	{
@@ -75,23 +75,23 @@ char	*get_storage(int fd, char *storage)
 			storage = ft_strjoin(storage, buff);
 		}
 	}
-    free(buff);
+	free(buff);
 	if (buff_size < 0)
 		return (ft_free(&storage));
-    return (storage);
+	return (storage);
 }
 
 char	*get_next_line(int fd)
 {
-    static char	*storage[1024];
-    char		*line;
+	static char	*storage[1024];
+	char		*line;
 
-    if (fd < 0)
-        return (NULL);
-    if (!storage[fd] || (storage[fd] && !ft_strchr(storage[fd], '\n')))
-        storage[fd] = get_storage(fd, storage[fd]);
-    if (!storage[fd])
-        return (NULL);
+	if (fd < 0)
+		return (NULL);
+	if (!storage[fd] || (storage[fd] && !ft_strchr(storage[fd], '\n')))
+		storage[fd] = get_storage(fd, storage[fd]);
+	if (!storage[fd])
+		return (NULL);
 	line = get_line(storage[fd]);
 	if (!line)
 		return (NULL);

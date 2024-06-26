@@ -16,10 +16,11 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
-    if (!s)
-    	return (0);
+	if (!s)
+		return (0);
 	i = 0;
-	while (s[i++]);
+	while (s[i])
+		i++;
 	return (i - 1);
 }
 
@@ -27,8 +28,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 
-    if (!dst || !src)
-        return (0);
+	if (!dst || !src)
+		return (0);
 	i = 0;
 	if (dstsize > 0)
 	{
@@ -45,10 +46,10 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
-    int     cat;
-    int     i;
+	int		cat;
+	int		i;
 
-    if (!s1)
+	if (!s1)
 	{
 		s1 = malloc(1);
 		if (!s1)
@@ -63,25 +64,25 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s1[++i])
 		str[i] = s1[i];
 	while (s2[++cat])
-        str[i + cat] = s2[cat];
-    str[i + cat] = 0;
+		str[i + cat] = s2[cat];
+	str[i + cat] = 0;
 	free(s1);
 	return (str);
 }
 
 char	*ft_strchr(char *s, int c)
 {
-    int i;
+	int	i;
 
-    i = 0;
+	i = 0;
 	while (s[i])
-    {
+	{
 		if (s[i] == (char)c)
 			return (&((char *)s)[i]);
 		i++;
 	}
-    if (c == 0)
-        return (&((char *)s)[i]);
+	if (c == 0)
+		return (&((char *)s)[i]);
 	return (0);
 }
 
@@ -90,16 +91,16 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	char	*sub;
 	size_t	i;
 
-    if (!s)
-        return (0);
+	if (!s)
+		return (0);
 	if (ft_strlen(s) < start)
-    {
-        sub = malloc(1);
-        if (!sub)
-            return (NULL);
-        sub[0] = 0;
-        return (sub);
-    }
+	{
+		sub = malloc(1);
+		if (!sub)
+			return (NULL);
+		sub[0] = 0;
+		return (sub);
+	}
 	if (ft_strlen(s) - start < len)
 		len = ft_strlen(s) - start;
 	sub = malloc(len + 1);

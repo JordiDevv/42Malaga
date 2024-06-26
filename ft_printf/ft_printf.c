@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int	ft_get_input(char c, va_list args/*, char *i*/)
+static int	ft_get_input(char c, va_list args)
 {
 	if (c == 'c')
 		return (ft_putchar(va_arg(args, int)));
