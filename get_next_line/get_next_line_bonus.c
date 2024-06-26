@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/21 17:21:19 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/06/21 17:21:19 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2024/06/26 01:12:53 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2024/06/26 01:12:53 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_free(char **str)
 {
@@ -83,18 +83,18 @@ char	*get_storage(int fd, char *storage)
 
 char	*get_next_line(int fd)
 {
-    static char	*storage = {0};
+    static char	*storage[1024];
     char		*line;
 
     if (fd < 0)
         return (NULL);
-    if (!storage || (storage && !ft_strchr(storage, '\n')))
-        storage = get_storage(fd, storage);
-    if (!storage)
+    if (!storage[fd] || (storage[fd] && !ft_strchr(storage[fd], '\n')))
+        storage[fd] = get_storage(fd, storage[fd]);
+    if (!storage[fd])
         return (NULL);
-	line = get_line(storage);
+	line = get_line(storage[fd]);
 	if (!line)
 		return (NULL);
-	storage = clean_storage(storage);
+	storage[fd] = clean_storage(storage[fd]);
 	return (line);
 }
