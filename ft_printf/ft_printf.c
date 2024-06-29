@@ -28,6 +28,8 @@ static int	ft_get_input(char c, va_list args)
 		return (ft_casthex(va_arg(args, unsigned int), 0));
 	else if (c == 'X')
 		return (ft_casthex(va_arg(args, unsigned int), 1));
+	else if (c == '%')
+		return (ft_putchar('%'));
 	else
 	{
 		ft_putchar('%');
@@ -45,10 +47,8 @@ static int	ft_iterate(const char *str, va_list args, int len)
 	{
 		if (str[i] == '%' && str[i + 1] != '\0')
 		{
-			if (str[++i] == '%')
-				len += ft_putchar('%');
-			else
-				len += ft_get_input(str[i], args);
+			i++;
+			len += ft_get_input(str[i], args);
 			if (len == -1)
 				return (-1);
 		}

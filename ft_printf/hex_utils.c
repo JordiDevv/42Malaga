@@ -12,24 +12,6 @@
 
 #include "ft_printf.h"
 
-int	ft_puthex(unsigned long long n, int a, int u)
-{
-	char	bstr[17];
-
-	if (u)
-		ft_strlcpy(bstr, "0123456789ABCDEF", 17);
-	else
-		ft_strlcpy(bstr, "0123456789abcdef", 17);
-	if (n >= 16)
-	{
-		a = ft_puthex(n / 16, a, u);
-		if (a == -1)
-			return (-1);
-	}
-	ft_putchar(bstr[n & 0xf]);
-	return (a + 1);
-}
-
 int	ft_ptrtohex(void *p)
 {
 	uintptr_t		ptr;
