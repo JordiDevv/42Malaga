@@ -94,7 +94,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = get_line(storage);
 	if (!line)
-		return (NULL);
+		return (ft_free(&storage));
 	storage = clean_storage(storage);
 	return (line);
 }

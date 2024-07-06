@@ -21,7 +21,7 @@ size_t	ft_strlen(const char *s)
 	i = 0;
 	while (s[i])
 		i++;
-	return (i - 1);
+	return (i);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
@@ -94,13 +94,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	if (!s)
 		return (0);
 	if (ft_strlen(s) < start)
-	{
-		sub = malloc(1);
-		if (!sub)
-			return (NULL);
-		sub[0] = 0;
-		return (sub);
-	}
+		return (0);
 	if (ft_strlen(s) - start < len)
 		len = ft_strlen(s) - start;
 	sub = malloc(len + 1);

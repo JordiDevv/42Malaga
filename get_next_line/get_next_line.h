@@ -24,7 +24,6 @@
 char	*get_next_line(int fd);
 char	*ft_free(char **str);
 size_t	ft_strlen(const char *s);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(char *s, int c);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
