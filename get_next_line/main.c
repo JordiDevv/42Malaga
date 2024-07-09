@@ -1,5 +1,6 @@
 #include "get_next_line.h"
 #include <fcntl.h>
+#include <string.h>
 
 int main(int argc, char *argv[])
 {
@@ -9,7 +10,7 @@ int main(int argc, char *argv[])
     int fdb2 = open("prueba2_bonus.txt", O_RDONLY);
     char *line;
     int size;
-    if (argc > 1)
+    if (argc > 1 && !strcmp("bonus", argv[1]))
     {
         int file = 1;
 

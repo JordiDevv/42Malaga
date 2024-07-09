@@ -1,4 +1,4 @@
-NAME = push_swap.out
+NAME = push_swap
 INCLUDE = libft.h push_swap.h
 
 CC = cc
@@ -10,17 +10,17 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME):$(OBJS) $(INCLUDE)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDE)
+$(NAME): $(OBJS) $(INCLUDE)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
-%o:%c
+%o: %c $(INCLUDE)
 	$(CC) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) *.gch
 
 re: fclean all
 
