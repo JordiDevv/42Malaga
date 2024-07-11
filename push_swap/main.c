@@ -13,26 +13,20 @@
 #include "push_swap.h"
 #include "libft.h"
 
-void static	get_stack_a(int argc, char *argv[])
+static void	get_stack_a(int argc, char *argv[])
 {
 	t_stack	*node;
-	t_stack	*next_node;
 	int		i;
 	
-	i = 0;
+	i = 1;
+	node = ft_new_node(ft_atoi(argv[i]), i);
     while (++i < argc)
-	{
-		node = ft_new_node(ft_atoi(argv[i]), i);
-		if (++i < argc)
-		{
-			next_node = ft_new_node(ft_atoi(argv[i]), i);
-			node->next = next_node;
-		}
-	}
+		node = ft_next_node(node, ft_new_node(ft_atoi(argv[i]), i));
 }
 
 int	main(int argc, char *argv[])
 {
-	get_stack_a(argc, argv);
+	if (argc > 1)
+		get_stack_a(argc, argv);
 	return (0);
 }

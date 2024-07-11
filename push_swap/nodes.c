@@ -22,5 +22,31 @@ t_stack	*ft_new_node(int value, int index)
 	new_node->value = value;
 	new_node->index = index;
 	new_node->next = NULL;
+	new_node->prev = NULL;
 	return (new_node);
+}
+
+t_stack	*ft_next_node(t_stack *node, t_stack *next_node)
+{
+	t_stack	*last;
+
+	if (!node)
+		node = next_node;
+	else
+	{
+		last = ft_last_node(node);
+		last->next = next_node;
+		next_node->prev = last;
+	}
+	return(next_node);
+}
+
+t_stack	*ft_last_node(t_stack *node)
+{
+	if (node)
+	{
+		while (node->next)
+			node = node->next;
+	}
+	return (node);
 }
