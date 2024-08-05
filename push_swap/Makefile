@@ -4,7 +4,7 @@ INCLUDE = libft.h push_swap.h
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS = main.c ft_atoi.c nodes.c
+SRCS = main.c ft_atoi.c nodes.c swap_push.c
 
 OBJS = $(SRCS:.c=.o)
 
