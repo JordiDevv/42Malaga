@@ -1,5 +1,6 @@
 NAME = push_swap
 INCLUDE = push_swap.h
+ARCHIVE = push_swap.a
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
@@ -13,8 +14,11 @@ INPUT = 0
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(INCLUDE)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+$(NAME): $(ARCHIVE) $(INCLUDE)
+	$(CC) $(CFLAGS) -o $@ $^
+
+$(ARCHIVE): $(OBJS)
+	ar -rcs $@ $^
 
 %o: %c $(INCLUDE)
 	$(CC) -c $< -o $@
@@ -22,17 +26,22 @@ $(NAME): $(OBJS) $(INCLUDE)
 deb:
 	gcc -g -o $(NAME) $(SRCS)
 
+deb_bonus:
+	gcc -g -o checker $(BSRCS)
+
 gemartin_tester: $(NAME)
 	@git clone https://github.com/gemartin99/Push-Swap-Tester.git
 	@mv Push-Swap-Tester/push_swap_test_linux.sh .
 	@mv Push-Swap-Tester/checker_linux .
+
+ex_gemartin_tester: gemartin_tester
 	@bash push_swap_test_linux.sh
 
 delete_gemartin_tester:
-	@rm -f push_swap_test_linux.sh checker_linux 0 traces.txt
+	@rm -f push_swap_test_linux.sh 0 traces.txt
 	@rm -rf Push-Swap-Tester
 
-basic_check: $(NAME)
+basic_check: $(NAME) gemartin_tester delete_gemartin_tester
 	@./$(NAME) $(INPUT) | ./checker_linux $(INPUT)
 
 visualizer: $(NAME)
@@ -49,11 +58,16 @@ delete_visualizer:
 	@rm -f imgui.ini
 	@rm -rf push_swap_visualizer
 
+bonus:
+	cd checker_fld && make
+
+
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) main_bonus.o
 
 fclean: clean delete_gemartin_tester delete_visualizer
-	rm -f $(NAME) *.gch
+	rm -f $(NAME) *.gch checker $(ARCHIVE) checker_linux
+	cd checker_fld && make fclean
 
 re: fclean all
 
