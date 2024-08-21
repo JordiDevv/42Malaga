@@ -14,8 +14,8 @@
 
 static void	reverse_rotate(t_stack **stack)
 {
-	t_stack *last;
-	int     len;
+	t_stack	*last;
+	int		len;
 
 	len = stack_len(*stack);
 	if (*stack == NULL || stack == NULL || len == 1)

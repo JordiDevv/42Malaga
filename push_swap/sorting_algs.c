@@ -14,7 +14,7 @@
 
 static int	init_push_filter(t_stack **a, t_stack **b, int len_a, int i)
 {
-	t_stack **middle_checker;
+	t_stack	**middle_checker;
 
 	while (i > 3)
 	{
@@ -22,7 +22,7 @@ static int	init_push_filter(t_stack **a, t_stack **b, int len_a, int i)
 		if (middle_checker && *middle_checker)
 		{
 			while (*middle_checker && !((*middle_checker)->index <= len_a / 2))
-					middle_checker = &(*middle_checker)->next;
+				middle_checker = &(*middle_checker)->next;
 		}
 		if (!(*middle_checker))
 			break ;

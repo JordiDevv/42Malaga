@@ -28,7 +28,7 @@ static void	swap(t_stack **head)
 	(*head)->prev = NULL;
 }
 
-void    sa(t_stack **a)
+void	sa(t_stack **a)
 {
 	swap(a);
 	write(1, "sa\n", 3);

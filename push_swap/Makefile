@@ -14,13 +14,13 @@ INPUT = 0
 
 all: $(NAME)
 
-$(NAME): $(ARCHIVE) $(INCLUDE)
+$(NAME): $(ARCHIVE)
 	$(CC) $(CFLAGS) -o $@ $^
 
 $(ARCHIVE): $(OBJS)
 	ar -rcs $@ $^
 
-%o: %c $(INCLUDE)
+%.o: %.c $(INCLUDE)
 	$(CC) -c $< -o $@
 
 deb:
@@ -34,7 +34,7 @@ gemartin_tester: $(NAME)
 	@mv Push-Swap-Tester/push_swap_test_linux.sh .
 	@mv Push-Swap-Tester/checker_linux .
 
-ex_gemartin_tester: gemartin_tester
+ex_gemartin_tester:
 	@bash push_swap_test_linux.sh
 
 delete_gemartin_tester:

@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void    free_matrix(char **argv)
+void	free_matrix(char **argv)
 {
 	int	i;
 
@@ -26,8 +26,8 @@ void    free_matrix(char **argv)
 
 void	free_stack(t_stack **stack)
 {
-	t_stack *tmp;
-	t_stack *current;
+	t_stack	*tmp;
+	t_stack	*current;
 
 	if (stack == NULL)
 		return ;
@@ -41,7 +41,7 @@ void	free_stack(t_stack **stack)
 	*stack = NULL;
 }
 
-void    error_free(t_stack **a, char **argv, bool flag_2_arg)
+void	error_free(t_stack **a, char **argv, bool flag_2_arg)
 {
 	free_stack(a);
 	if (flag_2_arg)
@@ -50,7 +50,7 @@ void    error_free(t_stack **a, char **argv, bool flag_2_arg)
 	exit(1);
 }
 
-int error_syntax(char *str_nbr)
+int	error_syntax(char *str_nbr)
 {
 	if (!(*str_nbr == '+'
 			|| *str_nbr == '-'
@@ -68,7 +68,7 @@ int error_syntax(char *str_nbr)
 	return (0);
 }
 
-int error_repetition(t_stack *a, int nbr)
+int	error_repetition(t_stack *a, int nbr)
 {
 	if (a == NULL)
 		return (0);

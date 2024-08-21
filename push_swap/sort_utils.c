@@ -58,7 +58,7 @@ void	finish_rotation(t_stack **stack, t_stack *top_node, char stack_name)
 				rb(stack);
 			else
 				rrb(stack);
-		}	
+		}
 	}
 }
 
@@ -70,7 +70,7 @@ void	move_nodes(t_stack **a, t_stack **b)
 	if (cheapest->above_median && cheapest->target_node->above_median)
 		rotate_both(a, b, cheapest);
 	else if (!(cheapest->above_median)
-        && !(cheapest->target_node->above_median))
+		&& !(cheapest->target_node->above_median))
 		reverse_rotate_both(a, b, cheapest);
 	finish_rotation(b, cheapest, 'b');
 	finish_rotation(a, cheapest->target_node, 'a');

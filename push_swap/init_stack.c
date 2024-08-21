@@ -15,19 +15,19 @@
 void	init_node(t_stack *node)
 {
 	node->value = 0;
-    node->current_position = 0;
-    node->push_price = 0;
-    node->index = 0;
-    node->above_median = false;
-    node->cheapest = false;
-    node->target_node = NULL;
-    node->next = NULL;
-    node->prev = NULL;
+	node->current_position = 0;
+	node->push_price = 0;
+	node->index = 0;
+	node->above_median = false;
+	node->cheapest = false;
+	node->target_node = NULL;
+	node->next = NULL;
+	node->prev = NULL;
 }
 
 static long	ft_atol(const char *str)
 {
-	long    n;
+	long	n;
 	int		is_neg;
 	int		i;
 
@@ -39,7 +39,6 @@ static long	ft_atol(const char *str)
 			|| str[i] == '\v' || str[i] == '\f'))
 		i++;
 	if (str[i] == '+')
-
 		i++;
 	else if (str[i] == '-')
 	{

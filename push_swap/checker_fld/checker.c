@@ -95,9 +95,6 @@ int	main(int argc, char **argv)
 		parse_command(&a, &b, next_line);
 		next_line = get_next_line(0);
 	}
-	if (stack_sorted(a) && stack_len(a) == len)
-		write(1, "OK\n", 3);
-	else
-		write(1, "KO\n", 3);
+	write_res(a);
 	free(a);
 }
