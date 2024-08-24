@@ -10,20 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
-
-static bool	stack_sorted(t_stack *stack)
-{
-	if (stack == NULL)
-		return (1);
-	while (stack->next)
-	{
-		if (stack->value > stack->next->value)
-			return (false);
-		stack = stack->next;
-	}
-	return (true);
-}
+#include "checker_bonus.h"
 
 static int	ft_strcmp(char *str_1, char *str_2)
 {
@@ -77,7 +64,6 @@ int	main(int argc, char **argv)
 	t_stack	*a;
 	t_stack	*b;
 	char	*next_line;
-	int		len;
 
 	if (argc == 1)
 		return (1);
@@ -88,7 +74,6 @@ int	main(int argc, char **argv)
 	a = NULL;
 	b = NULL;
 	stack_init(&a, argv + 1, argc == 2);
-	len = stack_len(a);
 	next_line = get_next_line(0);
 	while (next_line)
 	{

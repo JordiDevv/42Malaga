@@ -3,7 +3,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 PUSH_SWAP_ARCHIVE = ../push_swap.a
 
-SRCS = checker.c get_next_line.c get_next_line_utils.c write_res.c
+SRCS = checker_bonus.c get_next_line_bonus.c get_next_line_utils_bonus.c write_res_bonus.c
 OBJS = $(SRCS:.c=.o)
 
 %.o: %.c 
