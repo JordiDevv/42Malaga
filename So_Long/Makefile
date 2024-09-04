@@ -1,0 +1,1 @@
+FLAGS_MLX = -Iinclude -ldl -lglfw -pthread -lm
