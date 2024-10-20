@@ -5,11 +5,17 @@ errmap3: Tiene duplicada la salida (Comprobar que solo haya una P y una E)
 errmap4: Tiene duplicado el comienzo (")
 errmap5: Mapa no rectangular/cuadrilátero (Mismo len en todas las líneas)
 errmap6: Mapa no cerrado/rodeado de muros (Primera línes de 1's; siguientes empiezan y terminan en 1; Última 1's)
-errmap7: Sin camino válido (FloodFill)
+errmap7: Mapa no cerrado por arriba
+errmap8: Mapa no cerrado por debajo
+errmap9: Sin camino válido (FloodFill)
+errmap10: Solo 2 líneas
+errmap11: Solo 1 líneas
+errmap12: Mapa vacío
+errmap13: Mapa en otro formato
 
 Los mensajes de error de mapa pueden ser personalizados; Los mensajes de error internos no.
 
-Error1: "El mapa no contiene /iexactamentei/ los elementos necesatios"
+Error1: "El mapa no contiene /iexactamentei/ los elementos necesarios"
 Error2: "Solo puedes empezar y salir por un único sitio"
 Error3: "El mapa no tiene las dimensiones correctas"
 Error4: "El mapa no está completamente rodeado por muros"
