@@ -22,7 +22,7 @@ BOBJS = $(BSRCS:.c=.o)
 all: $(NAME)
 
 $(NAME):$(OBJS) $(INCLUDE) $(LIBS)
-	cc $(FLAGS_42) $(OBJS) $(INCLUDE) $(LIBS) $(FLAGS_MLX) -o $(NAME)
+	cc $(FLAGS_42) $(OBJS) $(LIBS) $(FLAGS_MLX) -o $(NAME)
 
 ft_printf/libftprintf.a:
 	@$(MAKE) -C ft_printf
@@ -46,11 +46,10 @@ fclean: clean
 	rm -f $(NAME)
 	@$(MAKE) -C ft_printf fclean
 	@$(MAKE) -C get_next_line fclean
-	@$(MAKE) -C MLX42 fclean
 
 re: fclean all
 
 bonus:$(BOBJS) $(INCLUDE) $(LIBS)
-	cc $(FLAGS_42) $(BOBJS) $(INCLUDE) $(LIBS) $(FLAGS_MLX) -o $(NAME)
+	cc $(FLAGS_42) $(BOBJS) $(LIBS) $(FLAGS_MLX) -o $(NAME)
 
 .PHONY: all clean fclean re bonus
