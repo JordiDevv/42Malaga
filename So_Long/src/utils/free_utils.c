@@ -12,23 +12,23 @@
 
 #include "../../so_long.h"
 
-void    ft_free_mat(char ***mat, int i)
+void	ft_free_mat(char ***mat, int i)
 {
-    if (*mat)
-    {
-        while (i > 0)
-            free ((*mat)[--i]);
-        free (*mat);
-        *mat = NULL;
-    }
+	if (*mat)
+	{
+		while (i > 0)
+			free ((*mat)[--i]);
+		free (*mat);
+		*mat = NULL;
+	}
 }
 
-void    free_exit(data_struct *data_game, char **matrix, char **matrix2, 
-    char *line)
+void	free_exit(t_data_struct *data_game, char **matrix, char **matrix2,
+	char *line)
 {
-    if (matrix)
-        ft_free_mat(&matrix, data_game->aux_i);
-    if (matrix2)
-        ft_free_mat(&matrix2, data_game->aux_i);
-    exit_error(data_game, data_game->error_code, line);
+	if (matrix)
+		ft_free_mat(&matrix, data_game->aux_i);
+	if (matrix2)
+		ft_free_mat(&matrix2, data_game->aux_i);
+	exit_error(data_game, data_game->error_code, line);
 }

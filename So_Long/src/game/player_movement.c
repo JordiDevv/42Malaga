@@ -12,7 +12,7 @@
 
 #include "../../so_long.h"
 
-static void move_right(data_struct *data_game)
+static void	move_right(t_data_struct *data_game)
 {
 	int	i;
 	int	j;
@@ -33,7 +33,7 @@ static void move_right(data_struct *data_game)
 	}
 }
 
-static void move_left(data_struct *data_game)
+static void	move_left(t_data_struct *data_game)
 {
 	int	i;
 	int	j;
@@ -54,7 +54,7 @@ static void move_left(data_struct *data_game)
 	}
 }
 
-static void move_up(data_struct *data_game)
+static void	move_up(t_data_struct *data_game)
 {
 	int	i;
 	int	j;
@@ -75,7 +75,7 @@ static void move_up(data_struct *data_game)
 	}
 }
 
-static void move_down(data_struct *data_game)
+static void	move_down(t_data_struct *data_game)
 {
 	int	i;
 	int	j;
@@ -96,9 +96,9 @@ static void move_down(data_struct *data_game)
 	}
 }
 
-void    key_controller(struct mlx_key_data key_data, void *param)
+void	key_controller(struct mlx_key_data key_data, void *param)
 {
-	data_struct		*data_game;
+	t_data_struct		*data_game;
 
 	data_game = param;
 	if (key_data.key == MLX_KEY_ESCAPE)

@@ -22,7 +22,6 @@ int	ft_strcmp(char *s1, char *s2)
 	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }
 
-
 char	*ft_strrchr(char *s, int c)
 {
 	char	*r;
@@ -38,7 +37,6 @@ char	*ft_strrchr(char *s, int c)
 	}
 	return (NULL);
 }
-
 
 char	*ft_strchr(char *s, int c)
 {

@@ -12,79 +12,79 @@
 
 #include "../../so_long.h"
 
-void    kind_realloc(data_struct *data_game, char ***matrix, char ***matrix2,
-    char *line)
+void	kind_realloc(t_data_struct *data_game, char ***matrix, char ***matrix2,
+	char *line)
 {
-    int i;
+	int	i;
 
-    if (*matrix)
-        ft_free_mat(matrix, data_game->mapheight - 1);
-    *matrix = malloc(data_game->mapheight * sizeof(char *));
-    if (*matrix == NULL)
-    {
-        data_game->error_code = 0;
-        free_exit(data_game, *matrix, *matrix2, line);
-    }
-    i = 0;
-    while (i < data_game->mapheight)
-    {
-        (*matrix)[i] = malloc(ft_strlen(line) + 1);
-        if (!(*matrix)[i])
-        {
-            data_game->error_code = 0;
-            data_game->aux_i = i;
-            free_exit(data_game, *matrix, *matrix2, line);
-        }
-        i++;
-    }
+	if (*matrix)
+		ft_free_mat(matrix, data_game->mapheight - 1);
+	*matrix = malloc(data_game->mapheight * sizeof(char *));
+	if (*matrix == NULL)
+	{
+		data_game->error_code = 0;
+		free_exit(data_game, *matrix, *matrix2, line);
+	}
+	i = 0;
+	while (i < data_game->mapheight)
+	{
+		(*matrix)[i] = malloc(ft_strlen(line) + 1);
+		if (!(*matrix)[i])
+		{
+			data_game->error_code = 0;
+			data_game->aux_i = i;
+			free_exit(data_game, *matrix, *matrix2, line);
+		}
+		i++;
+	}
 }
 
-void    aux_copy(data_struct *data_game, char ***temp_aux, char ***temp, 
-    char *line)
+void	aux_copy(t_data_struct *data_game, char ***temp_aux, char ***temp,
+	char *line)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (i < data_game->mapheight - 1)
-    {
-        ft_strlcpy((*temp)[i], (*temp_aux)[i], ft_strlen((*temp_aux)[i]) + 1);
-        i++;
-    }
-    ft_free_mat(&(*temp_aux), data_game->mapheight - 1);
-    ft_strlcpy((*temp)[i], line, ft_strlen(line) + 1);
+	i = 0;
+	while (i < data_game->mapheight - 1)
+	{
+		ft_strlcpy((*temp)[i], (*temp_aux)[i], ft_strlen((*temp_aux)[i]) + 1);
+		i++;
+	}
+	ft_free_mat(&(*temp_aux), data_game->mapheight - 1);
+	ft_strlcpy((*temp)[i], line, ft_strlen(line) + 1);
 }
 
-void    add_line(data_struct *data_game, char **line)
+void	add_line(t_data_struct *data_game, char **line)
 {
-    free (*line);
-    *line = get_next_line(data_game->fd);
-    if (!(*line))
-        return ;
-    if (ft_strchr(*line, '\n') || ft_strchr(*line, '\r'))
-    {
-        *line = clean_line(*line);
-    }
-    if (*line)
-        data_game->mapheight++;
+	free (*line);
+	*line = get_next_line(data_game->fd);
+	if (!(*line))
+		return ;
+	if (ft_strchr(*line, '\n') || ft_strchr(*line, '\r'))
+	{
+		*line = clean_line(*line);
+	}
+	if (*line)
+		data_game->mapheight++;
 }
 
-void    finish_parseo(data_struct *data_game, char **temp)
+void	finish_parseo(t_data_struct *data_game, char **temp)
 {
-    int i;
-    int height;
+	int	i;
+	int	height;
 
-    i = 0;
-    height = data_game->mapheight;
-    data_game->map = malloc(data_game->mapheight * sizeof(char *));
-    while (--height >= 0)
-        data_game->map[i++] = malloc(data_game->mapwidth + 1);
-    i = 0;
-    while (i < data_game->mapheight)
-    {
-        ft_strlcpy(data_game->map[i], temp[i], ft_strlen(temp[i]) + 1);
-        i++;
-    }
-    while (i-- > 0)
-        free (temp[i]);
-    free (temp);
+	i = 0;
+	height = data_game->mapheight;
+	data_game->map = malloc(data_game->mapheight * sizeof(char *));
+	while (--height >= 0)
+		data_game->map[i++] = malloc(data_game->mapwidth + 1);
+	i = 0;
+	while (i < data_game->mapheight)
+	{
+		ft_strlcpy(data_game->map[i], temp[i], ft_strlen(temp[i]) + 1);
+		i++;
+	}
+	while (i-- > 0)
+		free (temp[i]);
+	free (temp);
 }
