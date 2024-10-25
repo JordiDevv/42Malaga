@@ -29,7 +29,7 @@ void	exit_error(t_data_struct *data_game, int error_code, char *line)
 	if (error_code == 6)
 		ft_printf("Error\nNo se puede salir de este mapa!\n");
 	if (data_game->fd > 0)
-	    close(data_game->fd);
+		close(data_game->fd);
 	if (data_game->map)
 		ft_free_mat(&data_game->map, data_game->mapheight);
 	exit (-1);
@@ -116,9 +116,9 @@ void	path_error(t_data_struct *data_game)
 		free_exit(data_game, NULL, NULL, NULL);
 	flood_fill(fill_map, p, data_game->mapwidth, data_game->mapheight);
 	if (fill_checker(fill_map, data_game->mapheight))
-    {
-        ft_free_mat(&fill_map, data_game->mapheight);
+	{
+		ft_free_mat(&fill_map, data_game->mapheight);
 		exit_error(data_game, 6, NULL);
-    }
-    ft_free_mat(&fill_map, data_game->mapheight);
+	}
+	ft_free_mat(&fill_map, data_game->mapheight);
 }
