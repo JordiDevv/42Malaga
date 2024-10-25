@@ -51,7 +51,7 @@ char	**copy_map(char **ori_map, int n_lines, int l_line)
 	i = 0;
 	while (i < n_lines)
 	{
-		new_map[i] = malloc(l_line * sizeof(char));
+		new_map[i] = malloc(l_line + 1 * sizeof(char));
 		if (!new_map[i])
 		{
 			ft_free_mat(&new_map, i);
