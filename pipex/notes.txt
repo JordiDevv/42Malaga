@@ -1,0 +1,47 @@
+Deben ser 5 argumentos (el programa y otros cuatro)
+El primero y el últimos son ficheros cualesquiera y el segundo y el tercero comandos de shell
+Si no encuentra el primer fichero, escribe: -bash: "nombredelfichero": No such file or directory\n
+Si no encuentra algún comando, escribe: "nombredelcomando": command not found\n
+Si no encuentra el segundo fichero, lo genera
+
+Con la función access gestionamos los ficheros (existencia y permisos), mi duda es:
+Cómo gestionamos si un comando es válido, y no solo el comando, según el comando que sea
+puede venir acompañado de, opciones; patrones de búsqueda; ...
+
+Con dup guardamos las referencias a la entrada, y la salida, estándar, para reasignarlas
+al finalizar la ejecución del programa, y con dup2 redirigimos sus fd hacia los ficheros
+pasados.
+
+Con el flag O_CREAT de la función open, esta crea el fichero en caso de no encontrarlo (
+importante para el segundo fichero), y con S_IRUSR y S_IWUSR, da permisos de escritura
+y lectura al usuario. Ejemplo de sintáxis:
+    open("nuevo_archivo.txt", O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
+Es decir: Con el fichero uno comprobamos su existencia con "access", y, en caso de no existir,
+lo gestionamos como un error; Con el segundo fichero, en caso de no existir, ejecutamos open
+con dichos flags.
+
+Solo comprueba el primer comando si el primer fichero existe.
+
+En la variable de entorno PATH están almacenadas (separadas por ':' o ';') todas las rutas
+posibles para los comandos de terminal del sistema.
+Si simplemente se escribe un comando y no lo encuentra, escribe el error de comando no encontrado;
+Si, sin embargo, lo que se escribe es una ruta (relativa o absoluta), al comando, el error
+es: "No such file or directory". Para diferenciar entre comando, y ruta a comando, podemos
+aprovechar el caracter '/'; Si este está incluida, debe tratarse como ruta.
+
+Si pasa opciones a un comando, las trata por igual así: "-l -a"; que así: "-la"; pero debe
+haber siempre un guion al principio. Si está tratando de leer opciones y encuentra alguna
+que no esté unida a otra, o que empiece por guion, dará error por no encontrar fichero o
+directorio. Si resultara que ese fichero, o directorio, existen, el comando debería ejecutarse.
+
+PUEDE que el proceso para comprobar un comando sea: crear un proceso hijo con fork(); sustituir
+este proceso por otro que ejecute execve() con dicho comando, creando un archivo auxiliar con
+la salida redirigida del comando; recoger la información de este comando, actuar en consecuencia, 
+y borrar el fichero con unlink().
+- Parece el buen camino, pero puede ser más recomendable utilizar pipe() para devolver al
+    proceso padre el resultado de la ejecución del comando.
+
+
+Si intentamos redirigir la entrada a un fichero inexistente, se cancela el flujo, y el
+    segundo comando lee sobre una entrada vacía. En caso de que exista, pero el primer
+    comando no, sucede lo mismo.
