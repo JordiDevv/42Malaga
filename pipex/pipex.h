@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:21:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/05 16:14:23 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/06 23:27:00 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,17 @@ extern char	**environ;
 
 typedef struct  s_data
 {
-    int     *fds;
-    int     *pipe;
+    int     fds[2];
+    int     pipe[2];
     int     file1;
     int     cmd1;
+    int     cmd2;
+    int     step;
 
     char    **path_mat;
-}       t_data;
+    char    *full_rute;
+    char    **split_cmd;
+}           t_data;
 
 void	check_args(char **args);
 
@@ -50,6 +54,7 @@ void	*ft_memset(void *b, int c, size_t len);
 
 char	**ft_split(char const *s, char c);
 
-int		ex_frstblock();
+void	ex_cmd1(t_data *program_data);
+void	ex_cmd2(t_data *program_data);
 
 #endif

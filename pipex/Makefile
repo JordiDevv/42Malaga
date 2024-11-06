@@ -3,7 +3,7 @@ INCLUDE = pipex.h
 
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS = main.c start_check.c ex_flow.c
+SRCS = main.c executors.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -13,7 +13,7 @@ $(NAME):$(OBJS) $(INCLUDE)
 	cc $(OBJS) $(INCLUDE) -o $(NAME)
 
 %o:%c
-	$(CC) $(CFLAGS) -c $< -o $@
+	cc -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

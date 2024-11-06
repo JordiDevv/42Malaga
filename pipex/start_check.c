@@ -6,39 +6,11 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:39:28 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/05 16:04:51 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:38:36 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-
-
-static int	valid_cmd(char *cmd, char **path_mat, int *pipe_fd, int block)
-{
-	int		i;
-	char	*full_rute;
-	char	**split_cmd;
-
-	i = 0;
-	split_cmd = ft_split(cmd, ' ');
-	while (path_mat[i])
-	{
-		full_rute = strmcat(3, path_mat[i], "/", split_cmd[0]);
-		if (!access(full_rute, X_OK))
-		{
-			if (ex_frstblock(full_rute, split_cmd, environ) == -1)
-				//Salir liberando full_rute, split_cmd y path_mat
-			return (1);
-		}
-		free(full_rute);
-		i++;
-	}
-	//Hay que liberar split_cmd
-	ft_printf("%s: command not found\n", split_cmd[0]);
-	err_flag++;
-	return (0);
-}
 
 static int check_sndblock(char *, char **path_mat, int err_flag, int in_fd)
 {
