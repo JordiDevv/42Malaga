@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ex_flow.c                                          :+:      :+:    :+:   */
+/*   executors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 15:32:39 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/06 23:26:02 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:08:48 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ void	ex_cmd2(t_data *program_data)
 		//Error creando el segundo proceso hijo
 	if (pid == 0)
 	{
-			execve(program_data->full_rute, program_data->split_cmd, environ);
-			//if (execve(program_data->full_rute, program_data->split_cmd, environ) == -1)
-				//Salimos liberando
+		dup2(program_data->fds[1], STDOUT_FILENO);
+		execve(program_data->full_rute, program_data->split_cmd, environ);
+		//if (execve(program_data->full_rute, program_data->split_cmd, environ) == -1)
+			//Salimos liberando
 	}
 	else
 	{
@@ -57,7 +58,6 @@ void	ex_cmd1(t_data *program_data)
 	{
 		close(program_data->pipe[1]);
 		dup2(program_data->pipe[0], STDIN_FILENO);
-		dup2(program_data->fds[1], STDOUT_FILENO);
 		waitpid(pid, NULL, 0);
 	}
 }

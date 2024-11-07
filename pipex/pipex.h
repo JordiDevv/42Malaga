@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:21:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/06 23:27:00 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:37:54 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ typedef struct  s_data
     char    **split_cmd;
 }           t_data;
 
-void	check_args(char **args);
-
 char	*ft_strchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *s);
@@ -56,5 +54,7 @@ char	**ft_split(char const *s, char c);
 
 void	ex_cmd1(t_data *program_data);
 void	ex_cmd2(t_data *program_data);
+
+void	free_exit(t_data *program_data)
 
 #endif

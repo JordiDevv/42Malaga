@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:20:47 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/06 23:30:47 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/07 11:41:05 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ static void	valid_cmd(char *cmd, t_data *program_data)
 
 	i = 0;
 	program_data->split_cmd = ft_split(cmd, ' ');
+	if(!program_data->split_cmd)
+	{
+		ft_printf("Error spliting the comand");
+		free_exit(program_data);
+	}
 	while (program_data->path_mat[i])
 	{
 		program_data->full_rute = strmcat(3, program_data->path_mat[i], "/",
@@ -50,11 +55,16 @@ static void	get_path(t_data *program_data)
 			if (!path)
 			{
 				perror("Error allocating path");
-				exit (EXIT_FAILURE);
+				free_exit(program_data);
 			}
 			ft_strlcpy(path, environ[i] + 5, ft_strlen(environ[i]) - 4);
 		}
 		i++;
+	}
+	if (!path)
+	{
+		ft_printf("Error: Path wasn't found.");
+		free_exit(program_data);
 	}
 	program_data->path_mat = ft_split(path, ':');
 	free(path);
@@ -65,7 +75,7 @@ static void	create_pipe(t_data *program_data)
 	if (pipe(program_data->pipe) < 0)
 	{
 		perror("Error creating the pipe");
-		exit (EXIT_FAILURE);
+		free_exit(program_data);
 	}
 }
 
@@ -87,8 +97,7 @@ static void	open_files(char **args, t_data *program_data)
 	if (program_data->fds[1] < 0)
 	{
 		perror("Error opening or creating the second file");
-		if (program_data->fds[0] > 0)
-			close(program_data->fds[0]);
+		free_exit(program_data);
 		exit (EXIT_FAILURE);
 	}
 }
@@ -107,9 +116,17 @@ int	main(int argc, char **argv)
 	open_files(argv, &program_data);
 	create_pipe(&program_data);
 	get_path(&program_data);
+	if (!program_data.path_mat)
+	{
+		ft_printf("Error spliting the path");
+		free_exit(&program_data);
+	}
 	program_data.step = 1;
 	if (program_data.file1)
 		valid_cmd(argv[2], &program_data);
+	//En algún punto deberíamos liberar "split_cmd", antes de reasignarlo.
+	//"strmcat" no hace comprobación de malloc, y, por el mismo motivo, "valid_cmd" \
+		tampoco: Las malditas 25 líneas
 	ex_cmd1(&program_data);
 	program_data.step = 2;
 	valid_cmd(argv[3], &program_data);
