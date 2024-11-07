@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:21:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/07 10:37:54 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/07 23:08:49 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
 
 char	**ft_split(char const *s, char c);
+
+void	valid_cmd(char *cmd, t_data *program_data);
 
 void	ex_cmd1(t_data *program_data);
 void	ex_cmd2(t_data *program_data);

@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:39:28 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/07 11:29:29 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/07 22:50:53 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void	free_exit(t_data *program_data)
 	if (program_data->pipe[1])
 		close(program_data->pipe[1]);
 	if (program_data->path_mat)
+		//Liberar matriz.
+	if (program_data->full_rute)
+		free(program_data->full_rute);
+	if (program_data->split_cmd)
 		//Liberar matriz.
 	exit (EXIT_FAILURE);
 }
