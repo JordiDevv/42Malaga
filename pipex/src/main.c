@@ -6,11 +6,11 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:20:47 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/07 23:08:22 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/09 00:13:45 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 static void	get_path(t_data *program_data)
 {
@@ -73,6 +73,19 @@ static void	open_files(char **args, t_data *program_data)
 	}
 }
 
+static void	ex_flow(t_data *program_data, char **argv)
+{
+	program_data->step = 1;
+	if (program_data->file1)
+		valid_cmd(argv[2], program_data);
+	ex_cmd1(program_data);
+	program_data->step = 2;
+	valid_cmd(argv[3], program_data);
+	if (program_data->cmd2)
+		ex_cmd2(program_data);
+	free_exit(program_data);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	program_data;
@@ -92,15 +105,6 @@ int	main(int argc, char **argv)
 		ft_printf("Error spliting the path");
 		free_exit(&program_data);
 	}
-	program_data.step = 1;
-	if (program_data.file1)
-		valid_cmd(argv[2], &program_data);
-	//"strmcat" no hace comprobación de malloc.
-	ex_cmd1(&program_data);
-	program_data.step = 2;
-	valid_cmd(argv[3], &program_data);
-	if (program_data.cmd2)
-		ex_cmd2(&program_data);
-	free_exit(&program_data);
+	ex_flow(&program_data, argv);
 	return (0);
 }

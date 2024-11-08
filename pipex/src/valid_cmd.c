@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prepare_cmd.c                                      :+:      :+:    :+:   */
+/*   valid_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:55:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/07 23:23:56 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/09 00:13:37 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 static void	prepare_aux(t_data *program_data, char *cmd)
 {
     if (program_data->full_rute)
         free(program_data->full_rute);
     if (program_data->split_cmd)
-        //Libera matriz.
+        free_mat(program_data->split_cmd);
     program_data->split_cmd = ft_split(cmd, ' ');
 	if(!program_data->split_cmd)
 	{
@@ -34,7 +34,7 @@ void	valid_cmd(char *cmd, t_data *program_data)
 	prepare_aux(program_data, cmd);
 	while (program_data->path_mat[i])
 	{
-		program_data->full_rute = strmcat(3, program_data->path_mat[i], "/",
+		program_data->full_rute = strmcat(3, 0, program_data->path_mat[i], "/",
 			program_data->split_cmd[0]);
 		if(!program_data->full_rute)
 		{

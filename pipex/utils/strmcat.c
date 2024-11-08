@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:15:23 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/10/29 18:16:55 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/09 00:20:55 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,25 @@ static void	ft_strcat(char *dst, const char *src)
 	dst[i] = '\0';
 }
 
-char	*strmcat(int n, ...)
+char	*strmcat(int n, int i, ...)
 {
 	va_list	args;
 	int		len;
-	int		i;
 	char	*str;
 	char	*str_aux;
 
-	va_start(args, n);
+	va_start(args, i);
 	len = 0;
-	i = 0;
 	while (i++ < n)
 	{
 		str_aux = va_arg(args, char *);
 		len += ft_strlen(str_aux);
 	}
-	va_start(args, n);
+	va_start(args, i);
 	i = 0;
 	str = malloc(len + 1);
+	if(!str)
+		return (NULL);
 	str[0] = 0;
 	while (i++ < n)
 	{

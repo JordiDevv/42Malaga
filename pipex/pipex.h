@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:21:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/07 23:08:49 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/09 00:12:08 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_strchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *s);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
-char    *strmcat(int n, ...);
+char    *strmcat(int n, int i, ...);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 void	*ft_calloc(size_t count, size_t size);
@@ -57,6 +57,7 @@ void	valid_cmd(char *cmd, t_data *program_data);
 void	ex_cmd1(t_data *program_data);
 void	ex_cmd2(t_data *program_data);
 
-void	free_exit(t_data *program_data)
+void	free_mat(char **mat);
+void	free_exit(t_data *program_data);
 
 #endif
