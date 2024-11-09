@@ -15,7 +15,7 @@ $(NAME):$(OBJS) $(INCLUDE) $(LIBS)
 	cc $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
 %o:%c
-	cc $(CFLAGS) -c $< -o $@
+	cc $(CFLAGS) -g -c $< -o $@
 
 ft_printf/libftprintf.a:
 	@$(MAKE) -C ft_printf

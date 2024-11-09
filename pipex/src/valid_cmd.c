@@ -6,11 +6,17 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:55:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/09 00:13:37 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/10 00:16:11 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+static void	aux_free(t_data *program_data)
+{
+	free(program_data->full_rute);
+	program_data->full_rute = NULL;
+}
 
 static void	prepare_aux(t_data *program_data, char *cmd)
 {
@@ -49,7 +55,7 @@ void	valid_cmd(char *cmd, t_data *program_data)
 				program_data->cmd2 = 1;
 			return ;
 		}
-		free(program_data->full_rute);
+		aux_free(program_data);
 		i++;
 	}
 	ft_printf("%s: command not found\n", program_data->split_cmd[0]);
