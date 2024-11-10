@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 15:20:47 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/10 21:48:20 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2024/11/10 21:44:25 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2024/11/10 23:09:14 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+void	ex_nextcmd(t_data *program_data);
+void	ex_finalcmd(t_data *program_data);
 
 static void	get_path(t_data *program_data)
 {
@@ -50,7 +53,7 @@ static void	create_pipe(t_data *program_data)
 	}
 }
 
-static void	open_files(char **args, t_data *program_data)
+static void	open_files(int argc, char **args, t_data *program_data)
 {
 	if (access(args[1], F_OK))
 		ft_printf("-bash: %s: %s\n", args[1], strerror(errno));
@@ -64,7 +67,8 @@ static void	open_files(char **args, t_data *program_data)
 		}
 		program_data->file1 = 1;
 	}
-	program_data->fds[1] = open(args[4], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	program_data->fds[1] = open(args[argc - 1], O_WRONLY | O_CREAT | O_TRUNC,
+		S_IRUSR | S_IWUSR);
 	if (program_data->fds[1] < 0)
 	{
 		perror("Error opening or creating the second file");
@@ -73,16 +77,29 @@ static void	open_files(char **args, t_data *program_data)
 	}
 }
 
-static void	ex_flow(t_data *program_data, char **argv)
+static void	ex_flow(t_data *program_data, int argc, char **argv)
 {
+    int i;
+
+    i = 3;
 	program_data->step = 1;
 	if (program_data->file1)
 		valid_cmd(argv[2], program_data);
 	ex_cmd1(program_data);
 	program_data->step = 2;
-	valid_cmd(argv[3], program_data);
+    while (i < argc - 2)
+	{
+        valid_cmd(argv[i], program_data);
+        if (program_data->cmd2)
+		{
+            ex_nextcmd(program_data);
+			create_pipe(program_data);
+		}
+        i++;
+    }
+    valid_cmd(argv[i], program_data);
 	if (program_data->cmd2)
-		ex_cmd2(program_data);
+		ex_finalcmd(program_data);
 	free_exit(program_data);
 }
 
@@ -90,14 +107,14 @@ int	main(int argc, char **argv)
 {
 	t_data	program_data;
 
-	if (argc != 5)
+	if (argc < 5)
 	{
-		ft_printf("The program expects \033[3mexactly\033[0m 4 arguments");
+		ft_printf("Error: Not enough arguments");
 		ft_printf("\n");
 		return (1);
 	}
 	ft_bzero(&program_data, sizeof(t_data));
-	open_files(argv, &program_data);
+	open_files(argc, argv, &program_data);
 	create_pipe(&program_data);
 	get_path(&program_data);
 	if (!program_data.path_mat)
@@ -105,6 +122,7 @@ int	main(int argc, char **argv)
 		ft_printf("Error spliting the path");
 		free_exit(&program_data);
 	}
-	ex_flow(&program_data, argv);
+	ex_flow(&program_data, argc, argv);
+    close(program_data.pipe[1]);
 	return (0);
 }

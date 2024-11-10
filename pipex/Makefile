@@ -7,7 +7,12 @@ CFLAGS = -Wall -Werror -Wextra
 SRCS = src/main.c src/executors.c src/free_exit.c src/valid_cmd.c \
 utils/ft_split.c utils/mem_utils.c utils/str_utils.c utils/strmcat.c
 
+BNS = bonus/main_bonus.c bonus/executors_bonus.c src/free_exit.c \
+src/valid_cmd.c utils/ft_split.c utils/mem_utils.c utils/str_utils.c \
+utils/strmcat.c
+
 OBJS = $(SRCS:.c=.o)
+BOBJS = $(BNS:.c=.o)
 
 all: $(NAME)
 
@@ -20,8 +25,11 @@ $(NAME):$(OBJS) $(INCLUDE) $(LIBS)
 ft_printf/libftprintf.a:
 	@$(MAKE) -C ft_printf
 
+bonus: $(NAME) $(BOBJS) $(INCLUDE) $(LIBS)
+	cc -g $(CFLAGS) $(BOBJS) $(LIBS) -o $(NAME)
+
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BOBJS)
 	@$(MAKE) -C ft_printf clean
 
 fclean: clean
