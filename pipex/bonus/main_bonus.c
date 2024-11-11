@@ -6,14 +6,14 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:44:25 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/10 23:09:14 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/11 13:27:08 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	ex_nextcmd(t_data *program_data);
-void	ex_finalcmd(t_data *program_data);
+void	ex_nextcmd(t_data *program_data, int *aux_pipe, int odd);
+void	ex_finalcmd(t_data *program_data, int *aux_pipe, int odd);
 
 static void	get_path(t_data *program_data)
 {
@@ -44,9 +44,9 @@ static void	get_path(t_data *program_data)
 	free(path);
 }
 
-static void	create_pipe(t_data *program_data)
+static void	create_pipe(t_data *program_data, int *pipex)
 {
-	if (pipe(program_data->pipe) < 0)
+	if (pipe(pipex) < 0)
 	{
 		perror("Error creating the pipe");
 		free_exit(program_data);
@@ -80,26 +80,32 @@ static void	open_files(int argc, char **args, t_data *program_data)
 static void	ex_flow(t_data *program_data, int argc, char **argv)
 {
     int i;
+	int	odd;
+	int aux_pipe[2];
 
     i = 3;
+	odd = 1;
 	program_data->step = 1;
 	if (program_data->file1)
 		valid_cmd(argv[2], program_data);
 	ex_cmd1(program_data);
 	program_data->step = 2;
-    while (i < argc - 2)
+	create_pipe(program_data, aux_pipe);
+    while (i < argc - 3)
 	{
         valid_cmd(argv[i], program_data);
         if (program_data->cmd2)
-		{
-            ex_nextcmd(program_data);
-			create_pipe(program_data);
-		}
+            ex_nextcmd(program_data, aux_pipe, odd);
+		if (odd)
+			odd = 0;
+		else
+			odd = 1;
+		program_data->cmd2 = 0;
         i++;
     }
     valid_cmd(argv[i], program_data);
 	if (program_data->cmd2)
-		ex_finalcmd(program_data);
+		ex_finalcmd(program_data, aux_pipe, odd);
 	free_exit(program_data);
 }
 
@@ -115,7 +121,7 @@ int	main(int argc, char **argv)
 	}
 	ft_bzero(&program_data, sizeof(t_data));
 	open_files(argc, argv, &program_data);
-	create_pipe(&program_data);
+	create_pipe(&program_data, program_data.pipe);
 	get_path(&program_data);
 	if (!program_data.path_mat)
 	{
