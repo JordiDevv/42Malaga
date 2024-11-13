@@ -6,11 +6,26 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:39:28 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/10 00:08:26 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:25:19 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+static void	close_pipes(t_data *program_data)
+{
+	int	i;
+
+	i = 0;
+	while (program_data->pipe[i])
+	{
+		if (program_data->pipe[i][0])
+			close(program_data->pipe[i][0]);
+		if (program_data->pipe[i][1])
+			close(program_data->pipe[i][1]);
+		i++;
+	}
+}
 
 void	free_mat(char **mat)
 {
@@ -34,10 +49,12 @@ void	free_exit(t_data *program_data)
 		close(program_data->fds[0]);
 	if (program_data->fds[1])
 		close(program_data->fds[1]);
-	if (program_data->pipe[0])
-		close(program_data->pipe[0]);
-	if (program_data->pipe[1])
-		close(program_data->pipe[1]);
+	if (program_data->pipe)
+	{
+		close_pipes(program_data);
+		free_mat((char **)program_data->pipe);
+		program_data->pipe = NULL;
+	}
 	if (program_data->path_mat)
 		free_mat(program_data->path_mat);
 	if (program_data->full_rute)

@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:20:47 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/10 21:48:20 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/13 22:37:39 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,31 @@ static void	get_path(t_data *program_data)
 	free(path);
 }
 
-static void	create_pipe(t_data *program_data)
+static void	create_pipes(t_data *program_data, int n, int i)
 {
-	if (pipe(program_data->pipe) < 0)
+	program_data->pipe = malloc(sizeof(int *) * (n + 1));
+	if (!program_data->pipe)
 	{
-		perror("Error creating the pipe");
+		perror("Error allocating the pipe");
 		free_exit(program_data);
+	}
+	program_data->pipe[n] = NULL;
+	while(i--)
+	{
+		program_data->pipe[i] = malloc(sizeof(int) * 2);
+		if (!program_data->pipe[i])
+		{
+			perror("Error allocating the pipe");
+			free_exit(program_data);
+		}
+	}
+	while (++i < n)
+	{
+		if (pipe(program_data->pipe[i]) < 0)
+		{
+			perror("Error creating the pipe");
+			free_exit(program_data);
+		}
 	}
 }
 
@@ -98,7 +117,7 @@ int	main(int argc, char **argv)
 	}
 	ft_bzero(&program_data, sizeof(t_data));
 	open_files(argv, &program_data);
-	create_pipe(&program_data);
+	create_pipes(&program_data, argc - 4, argc - 4);
 	get_path(&program_data);
 	if (!program_data.path_mat)
 	{

@@ -6,14 +6,14 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:44:25 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/11 13:27:08 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/14 00:15:22 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	ex_nextcmd(t_data *program_data, int *aux_pipe, int odd);
-void	ex_finalcmd(t_data *program_data, int *aux_pipe, int odd);
+void	ex_nextcmd(t_data *program_data, int i);
+void	ex_finalcmd(t_data *program_data, int i);
 
 static void	get_path(t_data *program_data)
 {
@@ -44,12 +44,31 @@ static void	get_path(t_data *program_data)
 	free(path);
 }
 
-static void	create_pipe(t_data *program_data, int *pipex)
+static void	create_pipes(t_data *program_data, int n, int i)
 {
-	if (pipe(pipex) < 0)
+	program_data->pipe = malloc(sizeof(int *) * (n + 1));
+	if (!program_data->pipe)
 	{
-		perror("Error creating the pipe");
+		perror("Error allocating the pipe");
 		free_exit(program_data);
+	}
+	program_data->pipe[n] = NULL;
+	while(i--)
+	{
+		program_data->pipe[i] = malloc(sizeof(int) * 2);
+		if (!program_data->pipe[i])
+		{
+			perror("Error allocating the pipe");
+			free_exit(program_data);
+		}
+	}
+	while (++i < n)
+	{
+		if (pipe(program_data->pipe[i]) < 0)
+		{
+			perror("Error creating the pipe");
+			free_exit(program_data);
+		}
 	}
 }
 
@@ -77,37 +96,30 @@ static void	open_files(int argc, char **args, t_data *program_data)
 	}
 }
 
-static void	ex_flow(t_data *program_data, int argc, char **argv)
+static void	ex_flow(t_data *program_data, char **argv)
 {
     int i;
-	int	odd;
-	int aux_pipe[2];
 
-    i = 3;
-	odd = 1;
+    i = 1;
 	program_data->step = 1;
 	if (program_data->file1)
 		valid_cmd(argv[2], program_data);
 	ex_cmd1(program_data);
 	program_data->step = 2;
-	create_pipe(program_data, aux_pipe);
-    while (i < argc - 3)
+    while (program_data->pipe[i])
 	{
-        valid_cmd(argv[i], program_data);
+        valid_cmd(argv[i + 2], program_data);
         if (program_data->cmd2)
-            ex_nextcmd(program_data, aux_pipe, odd);
-		if (odd)
-			odd = 0;
-		else
-			odd = 1;
+            ex_nextcmd(program_data, i);
 		program_data->cmd2 = 0;
         i++;
     }
-    valid_cmd(argv[i], program_data);
+    valid_cmd(argv[i + 2], program_data);
 	if (program_data->cmd2)
-		ex_finalcmd(program_data, aux_pipe, odd);
+		ex_finalcmd(program_data, i);
 	free_exit(program_data);
 }
+
 
 int	main(int argc, char **argv)
 {
@@ -121,14 +133,13 @@ int	main(int argc, char **argv)
 	}
 	ft_bzero(&program_data, sizeof(t_data));
 	open_files(argc, argv, &program_data);
-	create_pipe(&program_data, program_data.pipe);
+	create_pipes(&program_data, argc - 4, argc - 4);
 	get_path(&program_data);
 	if (!program_data.path_mat)
 	{
 		ft_printf("Error spliting the path");
 		free_exit(&program_data);
 	}
-	ex_flow(&program_data, argc, argv);
-    close(program_data.pipe[1]);
+	ex_flow(&program_data, argv);
 	return (0);
 }

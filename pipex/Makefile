@@ -25,7 +25,7 @@ $(NAME):$(OBJS) $(INCLUDE) $(LIBS)
 ft_printf/libftprintf.a:
 	@$(MAKE) -C ft_printf
 
-bonus: $(NAME) $(BOBJS) $(INCLUDE) $(LIBS)
+bonus: $(BOBJS) $(INCLUDE) $(LIBS)
 	cc -g $(CFLAGS) $(BOBJS) $(LIBS) -o $(NAME)
 
 clean:

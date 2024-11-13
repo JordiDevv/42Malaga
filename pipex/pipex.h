@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:21:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/09 00:12:08 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/14 00:14:30 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,19 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <stdarg.h>
+# include <stdbool.h>
 
 extern char	**environ;
 
 typedef struct  s_data
 {
     int     fds[2];
-    int     pipe[2];
+    int     **pipe;
     int     file1;
     int     cmd1;
     int     cmd2;
     int     step;
+    bool    here_doc;
 
     char    **path_mat;
     char    *full_rute;
