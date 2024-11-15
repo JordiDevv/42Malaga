@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:44:25 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/15 12:23:25 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/15 17:38:57 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static void	open_files(int argc, char **args, t_data *program_data)
 	}
 }
 
-static void	ex_flow(t_data *program_data, char **argv)
+static void	ex_flow(t_data *program_data, char **argv, int argc)
 {
     int i;
 
@@ -114,7 +114,7 @@ static void	ex_flow(t_data *program_data, char **argv)
 		ex_cmd1(program_data);
 	close(program_data->pipe[0][1]);
 	program_data->step = 2;
-	if (program_data->here_doc)
+	if (program_data->here_doc && argc > 5)
 		i++;
     while (program_data->pipe[i])
 	{
@@ -151,6 +151,6 @@ int	main(int argc, char **argv)
 		ft_printf("Error spliting the path");
 		free_exit(&program_data);
 	}
-	ex_flow(&program_data, argv);
+	ex_flow(&program_data, argv, argc);
 	return (0);
 }

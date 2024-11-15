@@ -1,6 +1,7 @@
 NAME = pipex
 INCLUDE = pipex.h
 LIBS = ft_printf/libftprintf.a
+BLIBS = bonus/get_next_line/gnl.a
 
 CFLAGS = -Wall -Werror -Wextra
 
@@ -25,16 +26,21 @@ $(NAME):$(OBJS) $(INCLUDE) $(LIBS)
 ft_printf/libftprintf.a:
 	@$(MAKE) -C ft_printf
 
-bonus: $(BOBJS) $(INCLUDE) $(LIBS)
-	cc -g $(CFLAGS) $(BOBJS) $(LIBS) -o $(NAME)
+bonus/get_next_line/gnl.a:
+	@$(MAKE) -C bonus/get_next_line
+
+bonus: $(BOBJS) $(INCLUDE) $(LIBS) $(BLIBS)
+	cc $(CFLAGS) $(BOBJS) $(LIBS) $(BLIBS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS) $(BOBJS)
 	@$(MAKE) -C ft_printf clean
+	@$(MAKE) -C bonus/get_next_line clean
 
 fclean: clean
 	rm -f $(NAME)
 	@$(MAKE) -C ft_printf fclean
+	@$(MAKE) -C bonus/get_next_line fclean
 
 re: fclean all
 

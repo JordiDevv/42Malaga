@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:15:32 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/15 12:30:41 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/15 18:05:41 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,17 @@ static void input_heredoc(t_data *program_data)
 
     while (1)
     {
-		//Parece que se ha logrado una implementación adecuada para here_doc. Se ha \
-			creado un puntero char en la estructura t_data llamado limiter que se \
-			encarga de almacenar el delimitador que se ha pasado como argumento. \
-			Se ha creado un bucle while que se ejecuta mientras se cumpla la condición \
-			de que la variable line no sea igual a la variable limiter. Se ha adecuado el \
-			resto del código para que funcione correctamente con esta implementación.
-		//Hay que cambiar la función readline algo que podamos usar: la función \
-			"get_next_line" podría ser una buena opción. Habría que comprobar también si \
-			funciona correctamente con el flujo actual o si es necesario habría que \
-			adaptarlo.
-		//Además también se ha arreglado un pequeño error que había al pasar un primer \
-			fichero inválido.
-        line = readline("heredoc> ");
-        if (!ft_strncmp(line, program_data->limiter, 
+        write(1, "> ", 2);
+        line = get_next_line(0);
+        if (!ft_strncmp(line, program_data->limiter,
             ft_strlen(program_data->limiter)))
             break ;
         write(program_data->pipe[0][1], line, ft_strlen(line));
-        write(program_data->pipe[0][1], "\n", 1);
         free(line);
     }
+    //Parece que el programa funciona bien con todas las implementaciones del bonus pero \
+        cuando pasamos como primer comando "cat" se mantiene en el bucle de entrada: hay \
+        que ver cómo solucionar esto. Quizás cerrando el pipe[0][1] después de escribir.
     close(program_data->fds[1]);
     close(program_data->fds[0]);
     dup2(program_data->pipe[0][0], STDIN_FILENO);

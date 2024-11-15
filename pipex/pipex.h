@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:21:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/15 12:06:43 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/15 17:20:17 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_H
 
 # include "ft_printf/ft_printf.h"
+# include "bonus/get_next_line/get_next_line.h"
 # include <stdio.h>
 # include <errno.h>
 # include <string.h>
