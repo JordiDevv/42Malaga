@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:21:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/14 00:14:30 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:06:43 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct  s_data
     int     step;
     bool    here_doc;
 
+    char    *limiter;
     char    **path_mat;
     char    *full_rute;
     char    **split_cmd;

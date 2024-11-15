@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:44:25 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/14 00:15:22 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:23:25 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ex_nextcmd(t_data *program_data, int i);
 void	ex_finalcmd(t_data *program_data, int i);
+void    init_limiter(t_data *program_data, char **argv);
 
 static void	get_path(t_data *program_data)
 {
@@ -74,17 +75,20 @@ static void	create_pipes(t_data *program_data, int n, int i)
 
 static void	open_files(int argc, char **args, t_data *program_data)
 {
-	if (access(args[1], F_OK))
-		ft_printf("-bash: %s: %s\n", args[1], strerror(errno));
-	else
+	if (!program_data->here_doc)
 	{
-		program_data->fds[0] = open(args[1], O_RDONLY);
-		if (program_data->fds[0] < 0)
+		if (access(args[1], F_OK))
+			ft_printf("-bash: %s: %s\n", args[1], strerror(errno));
+		else
 		{
-			perror("Error opening the first file despite was found");
-			exit (EXIT_FAILURE);
+			program_data->fds[0] = open(args[1], O_RDONLY);
+			if (program_data->fds[0] < 0)
+			{
+				perror("Error opening the first file despite was found");
+				exit (EXIT_FAILURE);
+			}
+			program_data->file1 = 1;
 		}
-		program_data->file1 = 1;
 	}
 	program_data->fds[1] = open(args[argc - 1], O_WRONLY | O_CREAT | O_TRUNC,
 		S_IRUSR | S_IWUSR);
@@ -104,8 +108,14 @@ static void	ex_flow(t_data *program_data, char **argv)
 	program_data->step = 1;
 	if (program_data->file1)
 		valid_cmd(argv[2], program_data);
-	ex_cmd1(program_data);
+	else if (program_data->here_doc)
+		valid_cmd(argv[3], program_data);
+	if (program_data->file1 || program_data->here_doc)
+		ex_cmd1(program_data);
+	close(program_data->pipe[0][1]);
 	program_data->step = 2;
+	if (program_data->here_doc)
+		i++;
     while (program_data->pipe[i])
 	{
         valid_cmd(argv[i + 2], program_data);
@@ -120,7 +130,6 @@ static void	ex_flow(t_data *program_data, char **argv)
 	free_exit(program_data);
 }
 
-
 int	main(int argc, char **argv)
 {
 	t_data	program_data;
@@ -132,6 +141,8 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_bzero(&program_data, sizeof(t_data));
+	if (!ft_strncmp(argv[1], "here_doc", 8))
+		init_limiter(&program_data, argv);
 	open_files(argc, argv, &program_data);
 	create_pipes(&program_data, argc - 4, argc - 4);
 	get_path(&program_data);

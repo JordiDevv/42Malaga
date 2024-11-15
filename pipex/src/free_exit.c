@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:39:28 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/13 19:25:19 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:15:36 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,10 @@ void	free_exit(t_data *program_data)
 	}
 	if (program_data->split_cmd)
 		free_mat(program_data->split_cmd);
+	if (program_data->limiter)
+	{
+		free(program_data->limiter);
+		program_data->limiter = NULL;
+	}
 	exit (EXIT_SUCCESS);
 }
