@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:15:32 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/15 18:05:41 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/18 22:45:49 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ static void input_heredoc(t_data *program_data)
         write(program_data->pipe[0][1], line, ft_strlen(line));
         free(line);
     }
-    //Parece que el programa funciona bien con todas las implementaciones del bonus pero \
-        cuando pasamos como primer comando "cat" se mantiene en el bucle de entrada: hay \
-        que ver cómo solucionar esto. Quizás cerrando el pipe[0][1] después de escribir.
-    close(program_data->fds[1]);
-    close(program_data->fds[0]);
+    if (line)
+        free(line);
+    close(program_data->pipe[0][1]);
     dup2(program_data->pipe[0][0], STDIN_FILENO);
-    dup2(program_data->pipe[1][1], STDOUT_FILENO);
+    close(program_data->pipe[0][0]);
 }
 
 void ex_nextcmd(t_data *program_data, int i)
@@ -44,7 +42,6 @@ void ex_nextcmd(t_data *program_data, int i)
         free_exit(program_data);
     if (pid == 0)
     {
-        close(program_data->pipe[i][0]);
         close(program_data->pipe[i - 1][1]);
         close(program_data->fds[1]);
         dup2(program_data->pipe[i - 1][0], STDIN_FILENO);
@@ -54,6 +51,7 @@ void ex_nextcmd(t_data *program_data, int i)
     }
     else
     {
+        close(program_data->pipe[i - 1][1]);
         waitpid(pid, NULL, 0);
         close(program_data->pipe[i - 1][0]);
 		close(program_data->pipe[i][1]);
@@ -69,6 +67,7 @@ void ex_finalcmd(t_data *program_data, int i)
         free_exit(program_data);
     if (pid == 0)
     {
+        close(program_data->pipe[i - 1][1]);
         dup2(program_data->pipe[i - 1][0], STDIN_FILENO);
         dup2(program_data->fds[1], STDOUT_FILENO);
         if (execve(program_data->full_rute, program_data->split_cmd, environ) == -1)
@@ -76,12 +75,13 @@ void ex_finalcmd(t_data *program_data, int i)
     }
     else
     {
+        close(program_data->pipe[i - 1][1]);
         waitpid(pid, NULL, 0);
         close(program_data->pipe[i - 1][0]);
     }
 }
 
-void	ex_cmd1(t_data *program_data)
+void	ex_cmd1(t_data *program_data, int argc)
 {
 	pid_t	pid;
 
@@ -90,12 +90,22 @@ void	ex_cmd1(t_data *program_data)
 		free_exit(program_data);
 	if (pid == 0)
 	{
-        if(program_data->here_doc)
+        if (program_data->here_doc)
+        {
             input_heredoc(program_data);
+            if (argc == 5)
+            {
+                dup2(program_data->fds[1], STDOUT_FILENO);
+                close(program_data->pipe[0][1]);
+            }
+            else
+            {
+                dup2(program_data->pipe[1][1], STDOUT_FILENO);
+                close(program_data->fds[1]);
+            }
+        }
         else
         {
-            close(program_data->fds[1]);
-            close(program_data->pipe[0][0]);
             dup2(program_data->fds[0], STDIN_FILENO);
             dup2(program_data->pipe[0][1], STDOUT_FILENO);
         }
@@ -106,5 +116,8 @@ void	ex_cmd1(t_data *program_data)
 		}
 	}
 	else
+    {
+        close(program_data->pipe[0][1]);
 		waitpid(pid, NULL, 0);
+    }
 }

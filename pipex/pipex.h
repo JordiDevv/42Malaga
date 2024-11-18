@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:21:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/15 17:20:17 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:32:17 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**ft_split(char const *s, char c);
 
 void	valid_cmd(char *cmd, t_data *program_data);
 
-void	ex_cmd1(t_data *program_data);
+void	ex_cmd1(t_data *program_data, int argc);
 void	ex_cmd2(t_data *program_data);
 
 void	free_mat(char **mat);

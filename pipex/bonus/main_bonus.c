@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:44:25 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/15 17:38:57 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/18 22:41:00 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,17 +110,19 @@ static void	ex_flow(t_data *program_data, char **argv, int argc)
 		valid_cmd(argv[2], program_data);
 	else if (program_data->here_doc)
 		valid_cmd(argv[3], program_data);
-	if (program_data->file1 || program_data->here_doc)
-		ex_cmd1(program_data);
-	close(program_data->pipe[0][1]);
+	if ((program_data->file1 || program_data->here_doc) && program_data->cmd1)
+		ex_cmd1(program_data, argc);
+	if (program_data->here_doc && argc == 5)
+		return ;
 	program_data->step = 2;
-	if (program_data->here_doc && argc > 5)
+	if (program_data->here_doc)
 		i++;
     while (program_data->pipe[i])
 	{
         valid_cmd(argv[i + 2], program_data);
         if (program_data->cmd2)
             ex_nextcmd(program_data, i);
+		close(program_data->pipe[i][1]);
 		program_data->cmd2 = 0;
         i++;
     }

@@ -8,7 +8,7 @@ CFLAGS = -Wall -Werror -Wextra
 SRCS = src/main.c src/executors.c src/free_exit.c src/valid_cmd.c \
 utils/ft_split.c utils/mem_utils.c utils/str_utils.c utils/strmcat.c
 
-BNS = bonus/main_bonus.c bonus/executors_bonus.c bonus/utils_bonus.c \
+BNS = bonus/main_bonus.c bonus/executors_bonus.c bonus/heredoc_utils_bonus.c \
 src/free_exit.c src/valid_cmd.c utils/ft_split.c utils/mem_utils.c \
 utils/str_utils.c utils/strmcat.c
 
