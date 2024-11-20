@@ -6,32 +6,11 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:15:32 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/18 22:45:49 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/21 00:22:13 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
-
-static void input_heredoc(t_data *program_data)
-{
-    char *line;
-
-    while (1)
-    {
-        write(1, "> ", 2);
-        line = get_next_line(0);
-        if (!ft_strncmp(line, program_data->limiter,
-            ft_strlen(program_data->limiter)))
-            break ;
-        write(program_data->pipe[0][1], line, ft_strlen(line));
-        free(line);
-    }
-    if (line)
-        free(line);
-    close(program_data->pipe[0][1]);
-    dup2(program_data->pipe[0][0], STDIN_FILENO);
-    close(program_data->pipe[0][0]);
-}
 
 void ex_nextcmd(t_data *program_data, int i)
 {
@@ -92,7 +71,6 @@ void	ex_cmd1(t_data *program_data, int argc)
 	{
         if (program_data->here_doc)
         {
-            input_heredoc(program_data);
             if (argc == 5)
             {
                 dup2(program_data->fds[1], STDOUT_FILENO);

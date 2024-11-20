@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:44:25 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/18 22:41:00 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/21 00:23:43 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ex_nextcmd(t_data *program_data, int i);
 void	ex_finalcmd(t_data *program_data, int i);
 void    init_limiter(t_data *program_data, char **argv);
+void	input_heredoc(t_data *program_data);
 
 static void	get_path(t_data *program_data)
 {
@@ -90,8 +91,16 @@ static void	open_files(int argc, char **args, t_data *program_data)
 			program_data->file1 = 1;
 		}
 	}
-	program_data->fds[1] = open(args[argc - 1], O_WRONLY | O_CREAT | O_TRUNC,
-		S_IRUSR | S_IWUSR);
+	if (!program_data->here_doc)
+	{
+		program_data->fds[1] = open(args[argc - 1], O_WRONLY | O_CREAT | O_TRUNC,
+			S_IRUSR | S_IWUSR);
+	}
+	else
+	{
+		program_data->fds[1] = open(args[argc - 1], O_WRONLY | O_CREAT | O_APPEND,
+			S_IRUSR | S_IWUSR);
+	}
 	if (program_data->fds[1] < 0)
 	{
 		perror("Error opening or creating the second file");
@@ -106,6 +115,8 @@ static void	ex_flow(t_data *program_data, char **argv, int argc)
 
     i = 1;
 	program_data->step = 1;
+	if (program_data->here_doc)
+		input_heredoc(program_data);
 	if (program_data->file1)
 		valid_cmd(argv[2], program_data);
 	else if (program_data->here_doc)
