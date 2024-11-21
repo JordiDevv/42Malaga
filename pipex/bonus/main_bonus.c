@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:44:25 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/21 13:20:16 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:43:38 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,9 @@ static void	open_files(int argc, char **args, t_data *program_data)
 	}
 }
 
-static void	ex_flow(t_data *program_data, char **argv, int argc)
+static void	ex_flow(t_data *program_data, char **argv, int argc, int i)
 {
-    int i;
-
-    i = 1;
 	program_data->step = 1;
-	if (program_data->here_doc)
-		input_heredoc(program_data);
 	if (program_data->file1)
 		valid_cmd(argv[2], program_data);
 	else if (program_data->here_doc)
@@ -137,17 +132,17 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_bzero(&program_data, sizeof(t_data));
+	create_pipes(&program_data, argc - 4, argc - 4);
 	if (!ft_strncmp(argv[1], "here_doc", 8))
 		init_heredoc(&program_data, argv, argc);
 	else
 		open_files(argc, argv, &program_data);
-	create_pipes(&program_data, argc - 4, argc - 4);
 	get_path(&program_data);
 	if (!program_data.path_mat)
 	{
 		ft_printf("Error spliting the path");
 		free_exit(&program_data);
 	}
-	ex_flow(&program_data, argv, argc);
+	ex_flow(&program_data, argv, argc, 1);
 	return (0);
 }
