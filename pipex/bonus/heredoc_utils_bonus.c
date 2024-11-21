@@ -6,11 +6,23 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:09:04 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/21 15:49:34 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:22:44 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+void    aux_ex_cmd1(t_data *program_data, int argc)
+{
+    close(program_data->pipe[0][1]);
+    if (argc == 5)
+        dup2(program_data->fds[1], STDOUT_FILENO);
+    else
+    {
+        close(program_data->fds[1]);
+        dup2(program_data->pipe[1][1], STDOUT_FILENO);
+    }
+}
 
 static void	input_heredoc(t_data *program_data)
 {

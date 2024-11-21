@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:21:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/21 15:42:44 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:48:30 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,9 @@ void	ex_cmd2(t_data *program_data);
 void	free_mat(char **mat);
 void	free_exit(t_data *program_data);
 
+void    init_heredoc(t_data *program_data, char **argv, int argc);
+void    aux_ex_cmd1(t_data *program_data, int argc);
 void	ex_nextcmd(t_data *program_data, int i);
 void	ex_finalcmd(t_data *program_data, int i);
-void    init_heredoc(t_data *program_data, char **argv, int argc);
 
 #endif

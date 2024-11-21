@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:15:32 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/21 00:22:13 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:23:10 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,7 @@ void	ex_cmd1(t_data *program_data, int argc)
 	if (pid == 0)
 	{
         if (program_data->here_doc)
-        {
-            if (argc == 5)
-            {
-                dup2(program_data->fds[1], STDOUT_FILENO);
-                close(program_data->pipe[0][1]);
-            }
-            else
-            {
-                dup2(program_data->pipe[1][1], STDOUT_FILENO);
-                close(program_data->fds[1]);
-            }
-        }
+            aux_ex_cmd1(program_data, argc);
         else
         {
             dup2(program_data->fds[0], STDIN_FILENO);
