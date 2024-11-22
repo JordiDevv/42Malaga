@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 15:32:39 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/15 11:28:04 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:40:02 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ void	ex_cmd2(t_data *program_data)
 	}
 }
 
-void	ex_cmd1(t_data *program_data)
+void	ex_cmd1(t_data *program_data, int argc)
 {
 	pid_t	pid;
 
+	argc++;
 	pid = fork();
 	if (pid < 0)
 		free_exit(program_data);

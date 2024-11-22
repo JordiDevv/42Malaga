@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:44:25 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/21 15:43:38 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:59:23 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ static void	ex_flow(t_data *program_data, char **argv, int argc, int i)
     valid_cmd(argv[i + 2], program_data);
 	if (program_data->cmd2)
 		ex_finalcmd(program_data, i);
-	free_exit(program_data);
 }
 
 int	main(int argc, char **argv)
@@ -144,5 +143,6 @@ int	main(int argc, char **argv)
 		free_exit(&program_data);
 	}
 	ex_flow(&program_data, argv, argc, 1);
+	free_exit(&program_data);
 	return (0);
 }
