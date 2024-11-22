@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 15:32:39 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/22 13:40:02 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:48:37 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	ex_cmd2(t_data *program_data)
 	{
 		dup2(program_data->pipe[0][0], STDIN_FILENO);
 		dup2(program_data->fds[1], STDOUT_FILENO);
-		if (execve(program_data->full_rute, program_data->split_cmd, environ) == -1)
+		if (execve(program_data->full_rute, program_data->split_cmd, program_data->environ)
+            == -1)
 			free_exit(program_data);
 	}
 	else
@@ -48,7 +49,8 @@ void	ex_cmd1(t_data *program_data, int argc)
 		dup2(program_data->pipe[0][1], STDOUT_FILENO);
 		if (program_data->cmd1)
 		{
-			if (execve(program_data->full_rute, program_data->split_cmd, environ) == -1)
+			if (execve(program_data->full_rute, program_data->split_cmd,
+                program_data->environ) == -1)
 				free_exit(program_data);
 		}
 	}

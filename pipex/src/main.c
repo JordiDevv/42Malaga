@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:20:47 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/22 13:38:43 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:40:14 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,18 @@ static void	get_path(t_data *program_data)
 	char	*path;
 
 	i = 0;
-	while (environ[i])
+	while (program_data->environ[i])
 	{
-		if (!ft_strncmp(environ[i], "PATH=", 5))
+		if (!ft_strncmp(program_data->environ[i], "PATH=", 5))
 		{
-			path = malloc(ft_strlen(environ[i]) - 4);
+			path = malloc(ft_strlen(program_data->environ[i]) - 4);
 			if (!path)
 			{
 				perror("Error allocating path");
 				free_exit(program_data);
 			}
-			ft_strlcpy(path, environ[i] + 5, ft_strlen(environ[i]) - 4);
+			ft_strlcpy(path, program_data->environ[i] + 5,
+                ft_strlen(program_data->environ[i]) - 4);
 		}
 		i++;
 	}
@@ -108,16 +109,16 @@ static void	ex_flow(t_data *program_data, char **argv)
 	free_exit(program_data);
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **env)
 {
 	t_data	program_data;
 
-	if (argc != 5)
-	{
-		ft_printf("The program expects \033[3mexactly\033[0m 4 arguments");
-		ft_printf("\n");
-		return (1);
-	}
+    if (!env[0] || argc < 5)
+    {
+        ft_printf("Error with enviroment or arguments\n");
+        return (1);
+    }
+    program_data.environ = env;
 	ft_bzero(&program_data, sizeof(t_data));
 	open_files(argv, &program_data);
 	create_pipes(&program_data, argc - 4, argc - 4);

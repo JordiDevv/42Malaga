@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:21:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/21 16:48:30 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:56:16 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,28 @@
 # include <stdarg.h>
 # include <stdbool.h>
 
-extern char	**environ;
-
-typedef struct  s_data
+typedef struct s_data
 {
-    int     fds[2];
-    int     **pipe;
-    int     file1;
-    int     cmd1;
-    int     cmd2;
-    int     step;
-    bool    here_doc;
+	int		fds[2];
+	int		**pipe;
+	int		file1;
+	int		cmd1;
+	int		cmd2;
+	int		step;
+	bool	here_doc;
+	char	**environ;
 
-    char    *limiter;
-    char    **path_mat;
-    char    *full_rute;
-    char    **split_cmd;
-}           t_data;
+	char	*limiter;
+	char	**path_mat;
+	char	*full_rute;
+	char	**split_cmd;
+}			t_data;
 
 char	*ft_strchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *s);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
-char    *strmcat(int n, int i, ...);
+char	*strmcat(int n, int i, ...);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 void	*ft_calloc(size_t count, size_t size);
@@ -64,8 +63,8 @@ void	ex_cmd2(t_data *program_data);
 void	free_mat(char **mat);
 void	free_exit(t_data *program_data);
 
-void    init_heredoc(t_data *program_data, char **argv, int argc);
-void    aux_ex_cmd1(t_data *program_data, int argc);
+void	init_heredoc(t_data *program_data, char **argv, int argc);
+void	aux_ex_cmd1(t_data *program_data, int argc);
 void	ex_nextcmd(t_data *program_data, int i);
 void	ex_finalcmd(t_data *program_data, int i);
 
