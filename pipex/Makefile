@@ -113,4 +113,12 @@ bonus_test:
 	@./pipex here_doc END c outfile
 	@echo "$(GREEN)outfile content:\n$$(cat outfile)$(RESET)"
 
+final_test:
+	@echo "$(CYAN)./pipex /dev/urandom cat head outfile$(RESET)"
+	@./pipex /dev/random cat head outfile
+	@echo "$(GREEN)outfile content:\n$$(cat outfile)$(RESET)"
+	@echo "$(CYAN)env -i ./pipex /dev/urandom cat head outfile$(RESET)"
+	@env -i ./pipex /dev/random cat head outfile
+	@echo "$(GREEN)outfile content:\n$$(cat outfile)$(RESET)"
+
 .PHONY: all clean fclean re bonus
