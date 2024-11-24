@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:21:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/22 17:56:16 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/23 22:26:18 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 # include <sys/wait.h>
 # include <stdarg.h>
 # include <stdbool.h>
+
+# define G "\033[32m"
+# define R "\033[31m"
+# define Y "\033[33m"
+# define RE "\033[0m"
 
 typedef struct s_data
 {

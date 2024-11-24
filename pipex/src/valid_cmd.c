@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 22:55:35 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/10 00:16:11 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/24 01:41:53 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ static void	aux_free(t_data *program_data)
 
 static void	prepare_aux(t_data *program_data, char *cmd)
 {
-    if (program_data->full_rute)
-        free(program_data->full_rute);
-    if (program_data->split_cmd)
-        free_mat(program_data->split_cmd);
-    program_data->split_cmd = ft_split(cmd, ' ');
-	if(!program_data->split_cmd)
+	if (program_data->full_rute)
+		free(program_data->full_rute);
+	if (program_data->split_cmd)
+		free_mat(program_data->split_cmd);
+	program_data->split_cmd = ft_split(cmd, ' ');
+	if (!program_data->split_cmd)
 	{
-		ft_printf("Error spliting the comand");
+		ft_printf(R "Error spliting the comand" RE);
 		free_exit(program_data);
 	}
 }
@@ -41,10 +41,10 @@ void	valid_cmd(char *cmd, t_data *program_data)
 	while (program_data->path_mat[i])
 	{
 		program_data->full_rute = strmcat(3, 0, program_data->path_mat[i], "/",
-			program_data->split_cmd[0]);
-		if(!program_data->full_rute)
+				program_data->split_cmd[0]);
+		if (!program_data->full_rute)
 		{
-			ft_printf("Error concatenating the full rute");
+			ft_printf(R "Error concatenating the full rute" RE);
 			free_exit(program_data);
 		}
 		if (!access(program_data->full_rute, X_OK))
@@ -58,5 +58,5 @@ void	valid_cmd(char *cmd, t_data *program_data)
 		aux_free(program_data);
 		i++;
 	}
-	ft_printf("%s: command not found\n", program_data->split_cmd[0]);
+	ft_printf(Y "%s: command not found\n" RE, program_data->split_cmd[0]);
 }

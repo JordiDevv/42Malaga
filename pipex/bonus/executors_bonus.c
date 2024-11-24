@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:15:32 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/22 18:05:43 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/24 01:34:54 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	ex_nextcmd(t_data *program_data, int i)
 		close(program_data->fds[1]);
 		dup2(program_data->pipe[i - 1][0], STDIN_FILENO);
 		dup2(program_data->pipe[i][1], STDOUT_FILENO);
-		if (execve(program_data->full_rute, program_data->split_cmd, environ)
-			== -1)
+		if (execve(program_data->full_rute, program_data->split_cmd,
+				program_data->environ) == -1)
 			free_exit(program_data);
 	}
 	else
@@ -50,8 +50,8 @@ void	ex_finalcmd(t_data *program_data, int i)
 		close(program_data->pipe[i - 1][1]);
 		dup2(program_data->pipe[i - 1][0], STDIN_FILENO);
 		dup2(program_data->fds[1], STDOUT_FILENO);
-		if (execve(program_data->full_rute, program_data->split_cmd, environ)
-			== -1)
+		if (execve(program_data->full_rute, program_data->split_cmd,
+				program_data->environ) == -1)
 			free_exit(program_data);
 	}
 	else
@@ -75,7 +75,7 @@ void	ex_cmd1(t_data *program_data, int argc)
 		if (program_data->cmd1)
 		{
 			if (execve(program_data->full_rute, program_data->split_cmd,
-					environ) == -1)
+					program_data->environ) == -1)
 				free_exit(program_data);
 		}
 	}

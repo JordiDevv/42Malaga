@@ -22,7 +22,6 @@
 # include <stdlib.h>
 # include "../../pipex.h"
 
-
 char	*get_next_line(int fd);
 char	*ft_free(char **str);
 char	*ft_strjoin(char *s1, char *s2);

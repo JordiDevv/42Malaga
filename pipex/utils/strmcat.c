@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:15:23 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/09 00:20:55 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/24 01:42:13 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*strmcat(int n, int i, ...)
 	va_start(args, i);
 	i = 0;
 	str = malloc(len + 1);
-	if(!str)
+	if (!str)
 		return (NULL);
 	str[0] = 0;
 	while (i++ < n)

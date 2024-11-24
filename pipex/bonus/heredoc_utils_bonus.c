@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:09:04 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/22 17:58:39 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/23 22:54:40 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	input_heredoc(t_data *program_data)
 
 	while (1)
 	{
-		write(1, "> ", 2);
+		ft_printf("> ");
 		line = get_next_line(0);
 		if (!ft_strncmp(line, program_data->limiter,
 				ft_strlen(program_data->limiter)))
@@ -59,7 +59,7 @@ void	init_heredoc(t_data *program_data, char **argv, int argc)
 	program_data->limiter = malloc(ft_strlen(argv[2]) + 1);
 	if (!program_data->limiter)
 	{
-		perror("Error allocating limiter");
+		perror(R "Error allocating limiter" RE);
 		free_exit(program_data);
 	}
 	ft_strlcpy(program_data->limiter, argv[2], ft_strlen(argv[2]) + 1);
@@ -67,7 +67,7 @@ void	init_heredoc(t_data *program_data, char **argv, int argc)
 			| O_APPEND, S_IRUSR | S_IWUSR);
 	if (program_data->fds[1] < 0)
 	{
-		perror("Error opening or creating the second file");
+		perror(R "Error opening or creating the second file" RE);
 		free_exit(program_data);
 	}
 	input_heredoc(program_data);
