@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:15:32 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/24 01:34:54 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/24 19:30:11 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	ex_nextcmd(t_data *program_data, int i)
 	else
 	{
 		close(program_data->pipe[i - 1][1]);
-		waitpid(pid, NULL, 0);
 		close(program_data->pipe[i - 1][0]);
 		close(program_data->pipe[i][1]);
 	}
@@ -57,7 +56,6 @@ void	ex_finalcmd(t_data *program_data, int i)
 	else
 	{
 		close(program_data->pipe[i - 1][1]);
-		waitpid(pid, NULL, 0);
 		close(program_data->pipe[i - 1][0]);
 	}
 }
@@ -80,8 +78,5 @@ void	ex_cmd1(t_data *program_data, int argc)
 		}
 	}
 	else
-	{
 		close(program_data->pipe[0][1]);
-		waitpid(pid, NULL, 0);
-	}
 }

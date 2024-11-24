@@ -6,18 +6,17 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:44:25 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/23 23:09:42 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/24 20:59:10 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-static void	get_path(t_data *program_data)
+static void	get_path(t_data *program_data, int i)
 {
-	int		i;
 	char	*path;
 
-	i = -1;
+	path = NULL;
 	while (program_data->environ[++i])
 	{
 		if (!ft_strncmp(program_data->environ[i], "PATH=", 5))
@@ -25,7 +24,7 @@ static void	get_path(t_data *program_data)
 			path = malloc(ft_strlen(program_data->environ[i]) - 4);
 			if (!path)
 			{
-				perror(R "Error allocating path" RE);
+				perror(R "Error allocating path\n" RE);
 				free_exit(program_data);
 			}
 			ft_strlcpy(path, program_data->environ[i] + 5,
@@ -34,7 +33,7 @@ static void	get_path(t_data *program_data)
 	}
 	if (!path)
 	{
-		ft_printf(R "Error: Path wasn't found." RE);
+		ft_printf(R "Error: Path wasn't found\n" RE);
 		free_exit(program_data);
 	}
 	program_data->path_mat = ft_split(path, ':');
@@ -46,7 +45,7 @@ static void	create_pipes(t_data *program_data, int n, int i)
 	program_data->pipe = malloc(sizeof(int *) * (n + 1));
 	if (!program_data->pipe)
 	{
-		perror(R "Error allocating the pipe" RE);
+		perror(R "Error allocating the pipe\n" RE);
 		free_exit(program_data);
 	}
 	program_data->pipe[n] = NULL;
@@ -55,7 +54,7 @@ static void	create_pipes(t_data *program_data, int n, int i)
 		program_data->pipe[i] = malloc(sizeof(int) * 2);
 		if (!program_data->pipe[i])
 		{
-			perror(R "Error allocating the pipe" RE);
+			perror(R "Error allocating the pipe\n" RE);
 			free_exit(program_data);
 		}
 	}
@@ -63,7 +62,7 @@ static void	create_pipes(t_data *program_data, int n, int i)
 	{
 		if (pipe(program_data->pipe[i]) < 0)
 		{
-			perror(R "Error creating the pipe" RE);
+			perror(R "Error creating the pipe\n" RE);
 			free_exit(program_data);
 		}
 	}
@@ -78,7 +77,7 @@ static void	open_files(int argc, char **args, t_data *program_data)
 		program_data->fds[0] = open(args[1], O_RDONLY);
 		if (program_data->fds[0] < 0)
 		{
-			perror(R "Error opening the first file despite was found" RE);
+			perror(R "Error opening the first file despite was found\n" RE);
 			free_exit(program_data);
 		}
 		program_data->file1 = 1;
@@ -87,7 +86,7 @@ static void	open_files(int argc, char **args, t_data *program_data)
 			| O_TRUNC, S_IRUSR | S_IWUSR);
 	if (program_data->fds[1] < 0)
 	{
-		perror(R "Error opening or creating the second file" RE);
+		perror(R "Error opening or creating the second file\n" RE);
 		free_exit(program_data);
 	}
 }
@@ -136,13 +135,14 @@ int	main(int argc, char **argv, char **env)
 		init_heredoc(&program_data, argv, argc);
 	else
 		open_files(argc, argv, &program_data);
-	get_path(&program_data);
+	get_path(&program_data, -1);
 	if (!program_data.path_mat)
 	{
-		ft_printf(R "Error spliting the path" RE);
+		ft_printf(R "Error spliting the path\n" RE);
 		free_exit(&program_data);
 	}
 	ex_flow(&program_data, argv, argc, 1);
+	wait(NULL);
 	free_exit(&program_data);
 	return (0);
 }
