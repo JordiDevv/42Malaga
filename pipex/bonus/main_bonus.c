@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 21:44:25 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/24 20:59:10 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:57:39 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc < 5)
 	{
-		ft_printf(Y "Not enough arguments\n" RE);
+		ft_printf(R "Not enough arguments\n" RE);
 		return (0);
 	}
 	ft_bzero(&program_data, sizeof(t_data));
