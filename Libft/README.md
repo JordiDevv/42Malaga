@@ -12,5 +12,5 @@ The main objective of the **Libft** project is to help students gain a deep unde
 
 ---
 
-**👨‍💻 Author:** Your Name  
-**🌍 GitHub:** [yourusername](https://github.com/yourusername)
+**👨‍💻 Author:** Jorge Sanz  
+**🌍 GitHub:** [JordiDevv](https://github.com/JordiDevv)
