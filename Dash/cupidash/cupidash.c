@@ -46,9 +46,6 @@ void construct_lane(int first_lanes, int total_space, int j)
     i = 2 * j;
     while(i--)
         write(1, "*", 1);
-    i = first_lanes;
-    while (i--)
-        write(1, " ", 1);
 }
 
 void construct_first_half(int n)
@@ -60,6 +57,11 @@ void construct_first_half(int n)
     first_lanes = n - 1;
     total_space = 1 + 2 * (n - 2);
     lane_multiplier = 1;
+    if (n == 1)
+    {
+        write(1, " ** **\n", 7);
+        return ;
+    }
     while (first_lanes)
     {
         construct_lane(first_lanes, total_space, lane_multiplier);
@@ -67,6 +69,34 @@ void construct_first_half(int n)
         lane_multiplier++;
         total_space -= 2;
         write(1, "\n", 1);
+    }
+}
+
+void construct_second_half(int n)
+{
+    int width;
+    int space;
+    int act_space;
+    int act_width;
+
+    width = n * 4 - 1;
+    space = 0;
+    if (n == 1)
+    {
+        write(1, " *****\n  ***\n   *\n", 18);
+        return ;
+    }
+    while (width > 0)
+    {
+        act_space = space;
+        while (act_space--)
+            write(1, " ", 1);
+        act_width = width;
+        while (act_width--)
+            write(1, "*", 1);
+        write(1, "\n", 1);
+        width -= 2;
+        space++;
     }
 }
 
@@ -92,6 +122,6 @@ int main(int argc, char **argv)
     if (ft_atoi(argv[1]) <= 0)
         return (0);
     construct_first_half(ft_atoi(argv[1]));
-    //construct_second_half();
+    construct_second_half(ft_atoi(argv[1]));
     return (0);
 }
