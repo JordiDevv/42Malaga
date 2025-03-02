@@ -24,4 +24,14 @@ Cupidash is a small ⚡ challenge that requires drawing a heart-like shape using
 4. **Second Half Construction**:  
    - Writes a row of `*` characters, with a width of `n * 4 - 1`.  
    - Iterates, reducing `n` by 2 per step.  
-   - Increases left spaces by 1 on each iteration until `n <= 0`.
+   - Increases left spaces by 1 on each iteration until `n <= 0`.  
+
+## 📏 Norme  
+To maintain structure and encourage good practices, the following rules must be followed:  
+- **Allowed external functions:** Only `write`, `malloc`, and `free` are permitted (Unix-based systems). If using Windows, apply equivalent restrictions.  
+- **Number of scripts:** A maximum of **two scripts**.  
+- **Functions per script:** A maximum of **5 functions** per script.  
+- **Lines per function:** Each function can have up to **25 lines**.  
+- **Variable declaration:** It is not allowed to declare a variable and assign its value in the same line.  
+
+These rules ensure the challenge remains structured while encouraging creativity within constraints. 🚀
