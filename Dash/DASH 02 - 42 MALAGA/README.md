@@ -17,19 +17,22 @@ This is a ⚡ challenge that consists of **four exercises**, progressively incre
 
 ### **Final Challenge: Letter Counting**  
 
-- **Input Handling:** The program takes a string as input and processes each character.  
-- **Character Counting:** It tracks the number of times each letter (a-z, A-Z) appears.  
-- **Output Format:** The result is displayed in a structured format, maintaining **norme** compliance.  
+- **Input Handling:** The program verifies that it receives exactly **one argument**, and that it is **not empty**. If these conditions are not met, it prints a newline and exits.  
+- **Normalization:** The input string is converted to **lowercase** to ensure that uppercase and lowercase letters are counted as the same character.  
+- **Iteration & Counting:** The program iterates through the string:  
+  - If a letter is found, it checks whether it has already been processed.  
+  - If it is the **first occurrence**, it counts all its instances in the string and prints the count followed by the letter.  
+  - If there are more "first letters" to process, it prints ", " as a separator.  
+- **Final Output:** The program prints a newline at the end.  
 
 ## 📏 Norme  
 
 To ensure structured coding and best practices, the following rules must be followed:  
 
-- **Allowed external functions:** Only `write`, `malloc`, and `free` are permitted.  
-- **Number of scripts:** A maximum of **two** scripts.  
+- **Allowed external functions:** Only `write`, and `printf` are permitted.
 - **Functions per script:** A maximum of **five** functions per script.  
 - **Lines per function:** Each function can have up to **25** lines.  
-- **Variable declaration:** Declaring and assigning a value in the same line is not allowed.  
+- **Variable declaration:** Declaring and assigning a value in the same line is not allowed.
+- **Global variables** are not allowed.
 
 These constraints ensure clean, efficient, and well-structured code while fostering creativity. 🚀
-
