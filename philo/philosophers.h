@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/09 17:53:04 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/09 23:49:29 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define EXIT_ERROR 1
 # define EXIT_SUCCES 0
+# define I_MAX "2147483647"
 
 # include <stdio.h>
 # include <limits.h>
@@ -33,7 +34,12 @@ typedef struct s_conditions
 	int n_eats;
 }   t_conditions;
 
-long long	ft_atoi(const char *str);
-int			ft_isdigit(char *arg);
+int	ft_atoi(const char *str);
+int	ft_isdigit(char *arg);
+
+size_t	ft_strlen(const char *s);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+
+int	parse_args(int argc, char **args, t_conditions *conditions);
 
 #endif

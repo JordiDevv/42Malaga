@@ -1,4 +1,4 @@
-NAME = philosophers
+NAME = philo
 INCLUDE = philosophers.h
 
 GREEN = \033[32m
@@ -7,12 +7,9 @@ RESET = \033[0m
 
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS = 
-
-BNS = 
+SRCS = main.c checker.c utils.c str_utils.c
 
 OBJS = $(SRCS:.c=.o)
-BOBJS = $(BNS:.c=.o)
 
 all: $(NAME)
 
@@ -22,11 +19,8 @@ $(NAME):$(OBJS) $(INCLUDE)
 %o:%c
 	cc $(CFLAGS) -g -c $< -o $@
 
-bonus: $(BOBJS) $(INCLUDE)
-	cc $(CFLAGS) $(BOBJS) -o $(NAME)
-
 clean:
-	rm -f $(OBJS) $(BOBJS)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)

@@ -6,13 +6,13 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:51:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/09 17:41:46 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/09 22:59:32 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-long long ft_atoi(const char *str)
+int ft_atoi(const char *str)
 {
 	char    sign;
 	int		r;
