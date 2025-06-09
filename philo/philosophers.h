@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/09 00:08:14 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:53:04 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,18 @@
 # define EXIT_SUCCES 0
 
 # include <stdio.h>
+# include <limits.h>
 
 typedef struct s_conditions
 {
-    int n_philo;
-    int t_die;
-    int t_eat;
-    int t_sleep;
-    int n_eats;
+	int n_philo;
+	int t_die;
+	int t_eat;
+	int t_sleep;
+	int n_eats;
 }   t_conditions;
 
-int ft_atoi(const char *str);
+long long	ft_atoi(const char *str);
+int			ft_isdigit(char *arg);
 
 #endif

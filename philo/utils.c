@@ -6,13 +6,13 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:51:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/08 23:52:21 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:41:46 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int ft_atoi(const char *str)
+long long ft_atoi(const char *str)
 {
 	char    sign;
 	int		r;
@@ -33,4 +33,18 @@ int ft_atoi(const char *str)
 		str++;
 	}
 	return (r * sign);
+}
+
+int ft_isdigit(char *arg)
+{
+    int i;
+
+    i = 0;
+    while(arg[i])
+    {
+        if (arg[i] > '9' || arg[i] < '0')
+            return (1);
+        i++;
+    }
+    return (0);
 }
