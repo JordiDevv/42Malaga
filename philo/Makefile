@@ -7,7 +7,7 @@ RESET = \033[0m
 
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS = main.c checker.c utils.c str_utils.c
+SRCS = main.c parser.c utils.c str_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
