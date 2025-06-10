@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/09 23:49:29 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/11 00:38:33 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 # include <stdio.h>
 # include <limits.h>
+# include <pthread.h>
+# include <sys/time.h>
 
 typedef struct s_conditions
 {
@@ -33,6 +35,28 @@ typedef struct s_conditions
 	int t_sleep;
 	int n_eats;
 }   t_conditions;
+
+typedef struct s_philo
+{
+	int				id;
+    pthread_t		thread;
+	pthread_mutex_t *left_fork;
+    pthread_mutex_t *right_fork;
+	long			time_on_action;
+    t_table			*table;
+    int				times_eaten;
+}   t_philo;
+
+typedef struct s_table
+{
+	t_conditions	conditions;
+	pthread_mutex_t	*forks;
+	t_philo			*philos;
+	pthread_mutex_t	print_mutex;
+    long			start_time;
+    int				someone_died;
+    pthread_mutex_t	death_mutex;
+}   t_table;
 
 int	ft_atoi(const char *str);
 int	ft_isdigit(char *arg);
