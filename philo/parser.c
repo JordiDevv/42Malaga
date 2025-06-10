@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 22:13:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/09 23:56:19 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/10 09:30:23 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ static int	out_of_range(char *n, char *range)
 {
 	if (ft_strlen(n) > ft_strlen(range))
 		return (EXIT_ERROR);
-	if (ft_strncmp(n, range, ft_strlen(range)) > 0)
-		return (EXIT_ERROR);
+	if (ft_strlen(n) == ft_strlen(range))
+	{
+		if (ft_strncmp(n, range, ft_strlen(range)) > 0)
+			return (EXIT_ERROR);
+	}
 	return (0);
 }
 
@@ -26,14 +29,14 @@ static int	valid_args(char **args)
 	int	i;
 	int	args_flag;
 
-	i = 0;
+	i = 1;
 	args_flag = 0;
 	while (args[i] && i < 6)
 	{
 		if (!args[i][0] || ft_isdigit(args[i]))
 		{
-			printf(R "Some conditions are missing or wrong\n" RE);
-			return (EXIT_ERROR);
+			printf(R "ARG %d: How am I supposed to work with this?\n" RE, i);
+			args_flag++;
 		}
 		if (args[i][0] == '-')
 		{
@@ -52,27 +55,30 @@ static int	valid_args(char **args)
 
 static int  valid_conditions(t_conditions *conditions)
 {
-    if (conditions->n_philo < 1 || conditions->n_eats > INT_MAX)
+	int	con_flag;
+
+	con_flag = 0;
+    if (conditions->n_philo == 0)
     {
         printf(R "This is not a good amount of philosophers\n" RE);
-        return (EXIT_ERROR);
+        con_flag++;
     }
-    if (conditions->t_die < 1 || conditions->t_die > INT_MAX)
+    if (conditions->t_die == 0)
     {
         printf(R "We all gotta die\n" RE);
-        return (EXIT_ERROR);
+        con_flag++;
     }
-    if (conditions->t_eat < 1 || conditions->t_eat > INT_MAX)
+    if (conditions->t_eat == 0)
     {
         printf(R "It's good to feed your brain, but either the stomach\n" RE);
-        return (EXIT_ERROR);
+        con_flag++;
     }
-    if (conditions->t_sleep < 1 || conditions->t_sleep > INT_MAX)
+    if (conditions->t_sleep == 0)
     {
         printf(R "404 - Sleep not found\n" RE);
-        return (EXIT_ERROR);
+        con_flag++;
     }
-    return (0);
+    return (con_flag);
 }
 
 int	parse_args(int argc, char **args, t_conditions *conditions)
@@ -96,7 +102,7 @@ int	parse_args(int argc, char **args, t_conditions *conditions)
 		conditions->n_eats = INT_MAX;
 	if (conditions->n_eats == 0)
 	{
-		printf(R "Congratulations: Your philo have unlock the inmortality" RE);
+		printf(R "Congratulations: Philo have unlock the inmortality\n" RE);
 		return (EXIT_ERROR);
 	}
 	return (0);

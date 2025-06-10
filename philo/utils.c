@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:51:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/09 22:59:32 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/10 09:19:54 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int ft_isdigit(char *arg)
     int i;
 
     i = 0;
+	if (arg[0] == '-')
+		i++;
     while(arg[i])
     {
         if (arg[i] > '9' || arg[i] < '0')
