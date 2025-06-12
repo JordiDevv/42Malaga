@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/11 00:51:01 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/12 19:07:05 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <limits.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <stdbool.h>
 
 typedef struct s_conditions
 {
@@ -53,17 +54,20 @@ typedef struct s_table
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
 	pthread_mutex_t	print_mutex;
+	struct	timeval	tv;
     long			start_time;
-    int				someone_died;
+    bool			someone_died;
     pthread_mutex_t	death_mutex;
 }   t_table;
 
-int	ft_atoi(const char *str);
-int	ft_isdigit(char *arg);
+int		ft_atoi(const char *str);
+int		ft_isdigit(char *arg);
 
 size_t	ft_strlen(const char *s);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
-int	parse_args(int argc, char **args, t_conditions *conditions);
+int		parse_args(int argc, char **args, t_conditions *conditions);
+
+void	destroy_mutex(t_table *table, char *error_mssg);
 
 #endif
