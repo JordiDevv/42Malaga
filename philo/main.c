@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 16:55:28 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/12 19:05:38 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/13 19:33:08 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	init_table(t_table *table)
 		//destroy_mutex(table, MSSG);
 		return (EXIT_ERROR);
 	}
-	if (gettimeofday(&table->tv, NULL))
+	if (gettimeofday(&table->tv, NULL)) //int init para inicializar todos los filósofos a la vez, a -1. -> while (1) lock mutex init if (init 0) unlock mutex init break. Se comprueba una variable inicializadora dentro de un mutex, y el hilo checker es el que la inicializa, después de inicializar todos los filósofos. AHÍ es donde hay que coger el tiempo, para que esté bien sincronizado con el inicio de los hilos.
 	{
 		//destroy_mutex(table, MSSG);
 		return (EXIT_ERROR);
