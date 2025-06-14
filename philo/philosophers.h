@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/14 18:34:24 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/14 20:27:44 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define RE "\033[0m"
 
 # define EXIT_ERROR 1
-# define EXIT_SUCCES 0
+# define EXIT_SUCCESS 0
 # define I_MAX "2147483647"
 
 # include <stdio.h>
@@ -27,8 +27,10 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include <stdbool.h>
+# include <unistd.h>
+# include <stdlib.h>
 
-struct  t_table;
+struct  s_table;
 
 typedef struct s_conditions
 {
@@ -46,7 +48,7 @@ typedef struct s_philo
 	pthread_mutex_t *left_fork;
     pthread_mutex_t *right_fork;
 	long			time_on_action;
-    struct t_table	*table;
+    struct s_table	*table;
     int				times_eaten;
 }   t_philo;
 

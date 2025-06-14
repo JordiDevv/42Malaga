@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 18:03:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/14 18:34:19 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:59:43 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static int  coor_init(t_philo *philo)
 		if (pthread_mutex_unlock(&philo->table->init_mutex))
 			return (EXIT_ERROR)/*destroy_mutex(table, MSSG);*/;
 	}
-} 
+    return (0);
+}
 
 void	*philo_life(void *arg)
 {
@@ -36,5 +37,6 @@ void	*philo_life(void *arg)
 
 	philo = (t_philo *)arg;
 	if (coor_init(philo))
-		return ;//(EXIT_ERROR)/*destroy_mutex(table, MSSG);*/;
+		return (NULL);//(EXIT_ERROR)/*destroy_mutex(table, MSSG);*/;
+    return (NULL);
 }

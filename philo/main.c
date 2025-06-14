@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 16:55:28 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/14 18:33:55 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/14 20:29:10 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,18 @@ int	init_forks(t_table *table)
 	int	i;
 
 	i = 0;
-	while(i < table->conditions.n_philo)
+    table->forks = malloc(sizeof(pthread_mutex_t) * table->conditions.n_philo);
+    if (!table->forks)
+    {
+        return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+    }
+	while (i < table->conditions.n_philo)
 	{
 		if (pthread_mutex_init(&table->forks[i], NULL))
             return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
         i++;
 	}
-    return (EXIT_SUCCES);
+    return (EXIT_SUCCESS);
 }
 
 int	init_philos(t_table *table)
@@ -31,22 +36,27 @@ int	init_philos(t_table *table)
 	int	i;
 
 	i = 0;
+    table->philos = malloc(sizeof(t_philo) * table->conditions.n_philo);
+    if (!table->philos)
+    {
+        return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+    }
 	while(i < table->conditions.n_philo)
 	{
 		table->philos[i].id = i + 1;
         if (pthread_create(&table->philos[i].thread, NULL,
-                &philo_life, &table->philos[i]))
+                philo_life, &table->philos[i]))
             return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
 		i++;
 	}
-    return (EXIT_SUCCES);
+    return (EXIT_SUCCESS);
 }
 
 static int	init_table(t_table *table)
 {
     table->init = false;
     if (pthread_mutex_init(&table->init_mutex, NULL))
-		return (EXIT_ERROR)/*destroy_mutex(table, MSSG);*/;
+        return (EXIT_ERROR)/*destroy_mutex(table, MSSG);*/;
     table->someone_dead = false;
     if (pthread_mutex_init(&table->death_mutex, NULL))
 		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
@@ -59,7 +69,7 @@ static int	init_table(t_table *table)
 	// if (gettimeofday(&table->tv, NULL)) //int init para inicializar todos los filósofos a la vez, a -1. -> while (1) lock mutex init if (init 0) unlock mutex init break. Se comprueba una variable inicializadora dentro de un mutex, y el hilo checker es el que la inicializa, después de inicializar todos los filósofos. AHÍ es donde hay que coger el tiempo, para que esté bien sincronizado con el inicio de los hilos.
 	// 	return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
 	// table->start_time = //Aquí el tiempo parseado
-    return (EXIT_ERROR);
+    return (EXIT_SUCCESS);
 }
 
 int	main(int argc, char *argv[])
@@ -80,5 +90,5 @@ int	main(int argc, char *argv[])
 	//en table para que se verifique si alguien ha muerto. Habrá que investigar ese hilo extra
 	//que checkea la muerte. Por último una función que se encargue de gestionar el mutex para
 	//printear que está en el table. Por lo demás creo que es toda la idea general del programa.
-	return (EXIT_SUCCES);
+	return (EXIT_SUCCESS);
 }
