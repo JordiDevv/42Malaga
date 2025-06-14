@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/12 19:07:05 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/14 18:34:24 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
+struct  t_table;
+
 typedef struct s_conditions
 {
 	int n_philo;
@@ -44,7 +46,7 @@ typedef struct s_philo
 	pthread_mutex_t *left_fork;
     pthread_mutex_t *right_fork;
 	long			time_on_action;
-    t_table			*table;
+    struct t_table	*table;
     int				times_eaten;
 }   t_philo;
 
@@ -56,8 +58,10 @@ typedef struct s_table
 	pthread_mutex_t	print_mutex;
 	struct	timeval	tv;
     long			start_time;
-    bool			someone_died;
+    pthread_mutex_t	init_mutex;
+    bool            init;
     pthread_mutex_t	death_mutex;
+    bool			someone_dead;
 }   t_table;
 
 int		ft_atoi(const char *str);
@@ -69,5 +73,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		parse_args(int argc, char **args, t_conditions *conditions);
 
 void	destroy_mutex(t_table *table, char *error_mssg);
+
+void    *philo_life(void *arg);
 
 #endif

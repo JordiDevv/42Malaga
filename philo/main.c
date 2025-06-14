@@ -6,44 +6,60 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 16:55:28 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/13 19:33:08 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/14 18:33:55 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	philo_life(void *arg)
-{
-
-}
-
-void	init_philos(t_table *table)
+int	init_forks(t_table *table)
 {
 	int	i;
 
 	i = 0;
 	while(i < table->conditions.n_philo)
 	{
-		table->philos[i].id = pthread_create(&table->philos[i].thread,
-				NULL, philo_life, &table->philos[i]);
-		
+		if (pthread_mutex_init(&table->forks[i], NULL))
+            return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+        i++;
 	}
+    return (EXIT_SUCCES);
+}
+
+int	init_philos(t_table *table)
+{
+	int	i;
+
+	i = 0;
+	while(i < table->conditions.n_philo)
+	{
+		table->philos[i].id = i + 1;
+        if (pthread_create(&table->philos[i].thread, NULL,
+                &philo_life, &table->philos[i]))
+            return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+		i++;
+	}
+    return (EXIT_SUCCES);
 }
 
 static int	init_table(t_table *table)
 {
+    table->init = false;
+    if (pthread_mutex_init(&table->init_mutex, NULL))
+		return (EXIT_ERROR)/*destroy_mutex(table, MSSG);*/;
+    table->someone_dead = false;
+    if (pthread_mutex_init(&table->death_mutex, NULL))
+		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
 	if (pthread_mutex_init(&table->print_mutex, NULL))
-	{
-		//destroy_mutex(table, MSSG);
-		return (EXIT_ERROR);
-	}
-	if (gettimeofday(&table->tv, NULL)) //int init para inicializar todos los filósofos a la vez, a -1. -> while (1) lock mutex init if (init 0) unlock mutex init break. Se comprueba una variable inicializadora dentro de un mutex, y el hilo checker es el que la inicializa, después de inicializar todos los filósofos. AHÍ es donde hay que coger el tiempo, para que esté bien sincronizado con el inicio de los hilos.
-	{
-		//destroy_mutex(table, MSSG);
-		return (EXIT_ERROR);
-	}
-	table->start_time = //Aquí el tiempo parseado
-	init_philos(table);
+		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+    if (init_forks(table))
+        return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+    if (init_philos(table))
+        return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+	// if (gettimeofday(&table->tv, NULL)) //int init para inicializar todos los filósofos a la vez, a -1. -> while (1) lock mutex init if (init 0) unlock mutex init break. Se comprueba una variable inicializadora dentro de un mutex, y el hilo checker es el que la inicializa, después de inicializar todos los filósofos. AHÍ es donde hay que coger el tiempo, para que esté bien sincronizado con el inicio de los hilos.
+	// 	return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+	// table->start_time = //Aquí el tiempo parseado
+    return (EXIT_ERROR);
 }
 
 int	main(int argc, char *argv[])
