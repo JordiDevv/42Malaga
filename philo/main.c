@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 16:55:28 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/14 20:29:10 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/15 00:19:42 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ int	init_philos(t_table *table)
 	while(i < table->conditions.n_philo)
 	{
 		table->philos[i].id = i + 1;
+		table->philos[i].table = table;
+		table->philos[i].time_on_action = 0;
+		table->philos[i].times_eaten = 0;
+		table->philos[i].left_fork = &table->forks[0]; //Hay que cambiar esto
+		table->philos[i].left_fork = &table->forks[i];
         if (pthread_create(&table->philos[i].thread, NULL,
                 philo_life, &table->philos[i]))
             return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
@@ -90,5 +95,10 @@ int	main(int argc, char *argv[])
 	//en table para que se verifique si alguien ha muerto. Habrá que investigar ese hilo extra
 	//que checkea la muerte. Por último una función que se encargue de gestionar el mutex para
 	//printear que está en el table. Por lo demás creo que es toda la idea general del programa.
+	pthread_mutex_lock(&table.init_mutex);
+	table.init = true;
+	pthread_mutex_unlock(&table.init_mutex);
+	for (int i = 0; i < table.conditions.n_philo; i++)
+    	pthread_join(table.philos[i].thread, NULL);
 	return (EXIT_SUCCESS);
 }
