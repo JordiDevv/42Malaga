@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/14 20:27:44 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:53:19 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_table
     bool            init;
     pthread_mutex_t	death_mutex;
     bool			someone_dead;
+    pthread_t		checker;
 }   t_table;
 
 int		ft_atoi(const char *str);
@@ -76,6 +77,9 @@ int		parse_args(int argc, char **args, t_conditions *conditions);
 
 void	destroy_mutex(t_table *table, char *error_mssg);
 
+int	    init_table(t_table *table);
+
 void    *philo_life(void *arg);
+void	*checker_checks(void *arg);
 
 #endif

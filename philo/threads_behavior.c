@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_life.c                                       :+:      :+:    :+:   */
+/*   threads_behavior.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 18:03:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/14 20:49:21 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:54:30 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int  coor_init(t_philo *philo)
 		if (pthread_mutex_unlock(&philo->table->init_mutex))
 			return (EXIT_ERROR)/*destroy_mutex(table, MSSG);*/;
 	}
-    return (0);
+	return (0);
 }
 
 void	*philo_life(void *arg)
@@ -38,5 +38,17 @@ void	*philo_life(void *arg)
 	philo = (t_philo *)arg;
 	if (coor_init(philo))
 		return (NULL);//(EXIT_ERROR)/*destroy_mutex(table, MSSG);*/;
-    return (NULL);
+	return (NULL);
+}
+
+void	*checker_checks(void *arg)
+{
+	t_table *table;
+	table = (t_table *)arg;
+	if (pthread_mutex_lock(&table->init_mutex))
+		return (NULL);//(EXIT_ERROR)/*destroy_mutex(table, MSSG);*/;
+	table->init = true;
+	if (pthread_mutex_unlock(&table->init_mutex))
+		return (NULL);//(EXIT_ERROR)/*destroy_mutex(table, MSSG);*/;
+	return (NULL);
 }
