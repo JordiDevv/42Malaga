@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 13:00:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/15 14:18:15 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/15 17:32:44 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ int	init_table(t_table *table)
 	// table->start_time = //Aquí el tiempo parseado
 	return (EXIT_SUCCESS);
 }
-// Falta averiguar cómo se manejan los errores dentro de los hilos(una variable igual que para la muerte). El comportamiento del checker está incompleto, y entiendo que le falta
-// un bucle (1) que compruebe constantemente si algún filósofo ha muerto y, e n consecuencia, que bloquee a los demás hilos y printee él la muerte. Faltan las variables que se
+// El comportamiento del checker está incompleto, y entiendo que le falta
+// un bucle (1) que compruebe constantemente si algún filósofo ha muerto y, en consecuencia, que bloquee a los demás hilos y printee él la muerte. Faltan las variables que se
 // encargan de guardar el tiempo global(creo que deberían iniciarse en el checker); y por lo demás la función que se encarga de limpiar todo antes de salir.
