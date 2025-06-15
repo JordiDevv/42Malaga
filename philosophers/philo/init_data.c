@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 13:00:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/15 17:32:44 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/15 23:33:38 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,10 @@ int	init_table(t_table *table)
 		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
 	if (init_checker(table))
 		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
-	// if (gettimeofday(&table->tv, NULL)) //int init para inicializar todos los filósofos a la vez, a -1. -> while (1) lock mutex init if (init 0) unlock mutex init break. Se comprueba una variable inicializadora dentro de un mutex, y el hilo checker es el que la inicializa, después de inicializar todos los filósofos. AHÍ es donde hay que coger el tiempo, para que esté bien sincronizado con el inicio de los hilos.
-	// 	return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
-	// table->start_time = //Aquí el tiempo parseado
 	return (EXIT_SUCCESS);
 }
 // El comportamiento del checker está incompleto, y entiendo que le falta
-// un bucle (1) que compruebe constantemente si algún filósofo ha muerto y, en consecuencia, que bloquee a los demás hilos y printee él la muerte. Faltan las variables que se
-// encargan de guardar el tiempo global(creo que deberían iniciarse en el checker); y por lo demás la función que se encarga de limpiar todo antes de salir.
+// un bucle (1) que compruebe constantemente si algún filósofo ha muerto y, en consecuencia, que
+// bloquee a los demás hilos y printee él la muerte. Faltan las variables que se encargan de 
+// guardar el tiempo global(creo que deberían iniciarse en el checker); y por lo demás la función
+//  que se encarga de limpiar todo antes de salir.
