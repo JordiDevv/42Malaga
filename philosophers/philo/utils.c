@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:51:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/10 09:19:54 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/17 20:19:25 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,33 @@ int ft_atoi(const char *str)
 
 int ft_isdigit(char *arg)
 {
-    int i;
+	int i;
 
-    i = 0;
+	i = 0;
 	if (arg[0] == '-')
 		i++;
-    while(arg[i])
-    {
-        if (arg[i] > '9' || arg[i] < '0')
-            return (1);
-        i++;
-    }
-    return (0);
+	while(arg[i])
+	{
+		if (arg[i] > '9' || arg[i] < '0')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void    ft_usleep()
+{
+	
+}
+
+long    get_time(t_philo *philo)
+{
+	long	actual_time;
+	long	time;
+	
+	if (gettimeofday(&philo->table->tv, NULL))
+		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+	actual_time = philo->table->tv.tv_sec * 1000 + philo->table->tv.tv_usec / 1000;
+	time = actual_time - philo->table->start_time;
+	return (time);
 }

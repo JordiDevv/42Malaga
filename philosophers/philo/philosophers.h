@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/15 13:53:19 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:56:41 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ typedef struct s_conditions
 typedef struct s_philo
 {
 	int				id;
-    pthread_t		thread;
+	pthread_t		thread;
 	pthread_mutex_t *left_fork;
-    pthread_mutex_t *right_fork;
+	pthread_mutex_t *right_fork;
 	long			time_on_action;
-    struct s_table	*table;
-    int				times_eaten;
+	struct s_table	*table;
+	int				times_eaten;
 }   t_philo;
 
 typedef struct s_table
@@ -59,16 +59,18 @@ typedef struct s_table
 	t_philo			*philos;
 	pthread_mutex_t	print_mutex;
 	struct	timeval	tv;
-    long			start_time;
-    pthread_mutex_t	init_mutex;
-    bool            init;
-    pthread_mutex_t	death_mutex;
-    bool			someone_dead;
-    pthread_t		checker;
+	long			start_time;
+	pthread_mutex_t	init_mutex;
+	bool            init;
+	pthread_mutex_t	death_mutex;
+	bool			someone_dead;
+	pthread_t		checker;
 }   t_table;
 
 int		ft_atoi(const char *str);
 int		ft_isdigit(char *arg);
+void    ft_usleep();
+long	get_time(t_philo *philo);
 
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
