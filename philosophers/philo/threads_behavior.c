@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 18:03:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/27 19:21:39 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:42:42 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	*philo_life(void *arg)
 		ft_usleep(100);
 	pthread_mutex_lock(philo->left_fork);
 	pthread_mutex_lock(philo->right_fork);
-	printf(G "%ld: philo %d is eating\n" RE, get_time(0, "ACTUAL"), philo->id);
+	printf(G "%ld: philo %d is eating\n" RE, get_time(philo->table->start_time, "DIF"), philo->id);
 	ft_usleep(philo->table->conditions.t_eat);
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
