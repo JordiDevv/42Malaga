@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 18:03:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/27 21:05:47 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/27 21:31:16 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ void	*philo_life(void *arg)
 	ft_usleep(philo, philo->table->conditions.t_eat);
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
-	//Metemos un condicional para que los filósofos impares empiecen por el tenedor de la derecha y los pares por su izquierda e.g. Hay que investigar si no da problemas con el primero y el último en caso de ser impares y pares.
-	//printf(G "%d se inició correctamente en %ld\n" RE, philo->id, philo->time_on_action);//Hay que borrar esto
+	//Ahora deberíamos meter esta lógica en un bucle y que lo compare con algún factor variante para escalarlo después
 	return (NULL);
 }
 
