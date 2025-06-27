@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:51:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/19 13:43:59 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:22:13 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,28 @@ int ft_isdigit(char *arg)
 	return (0);
 }
 
-void    ft_usleep()
+void    ft_usleep(t_philo *philo)
 {
+	long	beg;
+
+	beg = get_time(0, "ACTUAL");
 	
 }
 
-long    get_time(t_philo *philo, char *condition)
+long    get_time(long start_time, char *condition)
 {
-	long	actual_time;
-	long	time;
+	long			actual_time;
+	long			time;
+	struct timeval	tv;
 	
-	if (gettimeofday(&philo->table->tv, NULL))
+	if (gettimeofday(&tv, NULL))
 		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
-	actual_time = philo->table->tv.tv_sec * 1000 + philo->table->tv.tv_usec / 1000;
+	actual_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
     if (ft_strncmp(condition, "ACTUAL", 6))
         return (actual_time);
     else if (ft_strncmp(condition, "DIF", 6))
     {
-        time = actual_time - philo->table->start_time;
+        time = actual_time - start_time;
         return (time);
     }
     else

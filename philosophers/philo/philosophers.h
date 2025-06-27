@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/19 13:45:01 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/27 19:20:55 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_table
 int		ft_atoi(const char *str);
 int		ft_isdigit(char *arg);
 void    ft_usleep();
-long	get_time(t_philo *philo, char *condition);
+long	get_time(long start_time, char *condition);
 
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
