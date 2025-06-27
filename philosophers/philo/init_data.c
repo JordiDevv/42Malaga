@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 13:00:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/15 23:33:38 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/27 20:51:26 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	init_philos(t_table *table)
 		table->philos[i].table = table;
 		table->philos[i].time_on_action = 0;
 		table->philos[i].times_eaten = 0;
-		ref_forks(table, i, table->conditions.n_eats);
+		ref_forks(table, i, table->conditions.n_philo);
 		if (pthread_create(&table->philos[i].thread, NULL,
 				philo_life, &table->philos[i]))
 			return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
@@ -67,6 +67,7 @@ static int	init_philos(t_table *table)
 	}
 	return (EXIT_SUCCESS);
 }
+
 static int	init_checker(t_table *table)
 {
 	if (pthread_create(&table->checker, NULL, checker_checks, table))
