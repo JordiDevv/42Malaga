@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:51:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/27 21:02:21 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/29 22:23:51 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,13 @@ long    get_time(long start_time, char *condition)
     }
     else
         return (-1);
+}
+
+void	mutex_print(t_philo *philo, char *msg)
+{
+	pthread_mutex_lock(&philo->table->print_mutex);
+	printf("%s", G);
+	printf(msg, get_time(philo->table->start_time, "DIF"), philo->id);
+	printf("%s", RE);
+	pthread_mutex_unlock(&philo->table->print_mutex);
 }

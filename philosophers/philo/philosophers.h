@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/27 21:01:39 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/29 22:33:58 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 # define EXIT_ERROR 1
 # define EXIT_SUCCESS 0
 # define I_MAX "2147483647"
+
+# define FORK_MSG "%ld: philo %d has taken a fork\n"
+# define EAT_MSG "%ld: philo %d is eating\n"
+# define SLEEP_MSG "%ld: philo %d is sleeping\n"
+# define THINK_MSG "%ld: philo %d is thinking\n"
+# define DEATH_MSG "%ld: philo %d has died\n"
 
 # include <stdio.h>
 # include <limits.h>
@@ -71,6 +77,7 @@ int		ft_atoi(const char *str);
 int		ft_isdigit(char *arg);
 void    ft_usleep(t_philo *philo, long time);
 long	get_time(long start_time, char *condition);
+void	mutex_print(t_philo *philo, char *msg);
 
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
