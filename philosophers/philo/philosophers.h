@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/29 22:33:58 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/30 01:58:21 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	pthread_mutex_t *left_fork;
 	pthread_mutex_t *right_fork;
-	long			time_on_action;
+	long			last_eating;
 	struct s_table	*table;
 	int				times_eaten;
 }   t_philo;
