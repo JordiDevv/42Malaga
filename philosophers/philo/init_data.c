@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 13:00:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/30 01:58:38 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/06/30 02:37:35 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	init_philos(t_table *table)
 	{
 		table->philos[i].id = i + 1;
 		table->philos[i].table = table;
-		table->philos[i].last_eating = 0;
+		table->philos[i].last_eating = get_time(0, "ACTUAL");
 		table->philos[i].times_eaten = 0;
 		ref_forks(table, i, table->conditions.n_philo);
 		if (pthread_create(&table->philos[i].thread, NULL,
