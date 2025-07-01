@@ -7,7 +7,7 @@ RESET = \033[0m
 
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS = init_data.c main.c parser.c str_utils.c philo_behavior.c checker_behavior.c utils.c
+SRCS = init_data.c main.c parser.c str_utils.c philo_behavior.c checker_behavior.c utils.c close.c
 
 OBJS = $(SRCS:.c=.o)
 

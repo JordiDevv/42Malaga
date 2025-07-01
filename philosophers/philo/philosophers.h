@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/30 01:58:21 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/01 18:56:39 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 int		parse_args(int argc, char **args, t_conditions *conditions);
 
-void	destroy_mutex(t_table *table, char *error_mssg);
+void	destroy_mutex(t_table *table, char *error_msg);
 
 int	    init_table(t_table *table);
 

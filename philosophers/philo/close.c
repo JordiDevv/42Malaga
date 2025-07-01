@@ -6,13 +6,18 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 18:42:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/12 18:58:51 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/01 18:56:31 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	destroy_mutex(t_table *table, char *error_mssg)
+void	destroy_mutex(t_table *table, char *error_msg)
 {
-	
+	//array de t_philo
+    //array de mutex forks
+    //mutex forks [i]
+    //mutex init
+    //mutex death
+    //mutex print
 }
