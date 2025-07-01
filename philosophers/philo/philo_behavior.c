@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads_behavior.c                                 :+:      :+:    :+:   */
+/*   philo_behavior.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 18:03:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/30 02:52:47 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/01 18:34:10 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ void	*philo_life(void *arg)
 	philo = (t_philo *)arg;
 	coor_init(philo);
 	philo->last_eating = get_time(0, "ACTUAL");
+    if (philo->table->conditions.n_philo < 2)
+    {
+        mutex_print(philo, FORK_MSG);
+        return (NULL);
+    }
 	if (philo->id % 2 == 0)
 		ft_usleep(philo, 10);
 	philo_routine(philo);

@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 13:00:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/30 02:37:35 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/01 18:42:48 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	ref_forks(t_table *table, int i, int n_forks)
 	{
 		table->philos[i].left_fork = &table->forks[n_forks - 1];
 		if (i == n_forks - 1)
-			table->philos[i].left_fork = NULL;//Aquí se debería gestionar el comportamiento que toque para que el único filósofo en la mesa muera de inanición por falta de tenedores
+			table->philos[i].left_fork = NULL;
 	}
 	else
 		table->philos[i].left_fork = &table->forks[i - 1];

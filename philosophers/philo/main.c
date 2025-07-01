@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 16:55:28 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/30 02:51:06 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/01 18:37:49 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	main(int argc, char *argv[])
 	//comidas opcional y el flujo para cerrar en limpio el programa.
 	for (int i = 0; i < table.conditions.n_philo; i++)
 		pthread_join(table.philos[i].thread, NULL);
+    pthread_join(table.checker, NULL);
 	return (EXIT_SUCCESS);
 }
