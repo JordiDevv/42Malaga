@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/01 18:56:39 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/01 20:18:38 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # define SLEEP_MSG "%ld: philo %d is sleeping\n"
 # define THINK_MSG "%ld: philo %d is thinking\n"
 # define DEATH_MSG "%ld: philo %d has died\n"
+
+# define INIT_ERR "Error initializing a mutex\n"
+# define FORKS_ERR "Error initializing the forks\n"
+# define PHILO_ERR "Error initializing the philosophers threads\n"
 
 # include <stdio.h>
 # include <limits.h>
@@ -84,7 +88,9 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 int		parse_args(int argc, char **args, t_conditions *conditions);
 
-void	destroy_mutex(t_table *table, char *error_msg);
+int		free_forks(t_table *table, char *error_msg, int n, int flag);
+int		free_philos(t_table *table, char *error_msg, int n, int flag);
+int 	free_rsrcs(t_table *table, char *error_msg, int flag);
 
 int	    init_table(t_table *table);
 

@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 13:00:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/01 18:50:23 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/01 20:17:44 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,11 @@ static int	init_forks(t_table *table)
 	i = 0;
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->conditions.n_philo);
 	if (!table->forks)
-	{
-		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
-	}
+		return (free_rsrcs(table, INIT_ERR, 3));
 	while (i < table->conditions.n_philo)
 	{
 		if (pthread_mutex_init(&table->forks[i], NULL))
-			return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+			return (free_forks(table, FORKS_ERR, i + 1, 4));
 		i++;
 	}
 	return (EXIT_SUCCESS);
@@ -51,9 +49,7 @@ static int	init_philos(t_table *table)
 	i = 0;
 	table->philos = malloc(sizeof(t_philo) * table->conditions.n_philo);
 	if (!table->philos)
-	{
-		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
-	}
+		return (free_forks(table, PHILO_ERR, table->conditions.n_philo, 4));
 	while(i < table->conditions.n_philo)
 	{
 		table->philos[i].id = i + 1;
@@ -63,7 +59,7 @@ static int	init_philos(t_table *table)
 		ref_forks(table, i, table->conditions.n_philo);
 		if (pthread_create(&table->philos[i].thread, NULL,
 				philo_life, &table->philos[i]))
-			return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+			return (free_philos(table, PHILO_ERR, i + 1, 5));
 		i++;
 	}
 	return (EXIT_SUCCESS);
@@ -80,16 +76,16 @@ int	init_table(t_table *table)
 {
 	table->init = false;
 	if (pthread_mutex_init(&table->init_mutex, NULL))
-		return (EXIT_ERROR)/*destroy_mutex(table, MSSG);*/;
+		return (EXIT_ERROR);
 	table->someone_dead = false;
 	if (pthread_mutex_init(&table->death_mutex, NULL))
-		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+		return (free_rsrcs(table, INIT_ERR, 1));
 	if (pthread_mutex_init(&table->print_mutex, NULL))
-		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+		return (free_rsrcs(table, INIT_ERR, 2));
 	if (init_forks(table))
-		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+		return (EXIT_ERROR);
 	if (init_philos(table))
-		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+		return (EXIT_ERROR);
 	if (init_checker(table))
 		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
 	return (EXIT_SUCCESS);
