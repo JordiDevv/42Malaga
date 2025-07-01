@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 13:00:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/01 20:17:44 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/02 01:20:54 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,11 @@ static int	init_philos(t_table *table)
 
 static int	init_checker(t_table *table)
 {
+	int	n_philo;
+
+	n_philo = table->conditions.n_philo;
 	if (pthread_create(&table->checker, NULL, checker_checks, table))
-			return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+			return (free_philos(table, PHILO_ERR, n_philo, 5));
 	return (0);
 }
 
@@ -87,6 +90,6 @@ int	init_table(t_table *table)
 	if (init_philos(table))
 		return (EXIT_ERROR);
 	if (init_checker(table))
-		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+		return (EXIT_ERROR);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/01 20:18:38 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/02 01:37:31 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define INIT_ERR "Error initializing a mutex\n"
 # define FORKS_ERR "Error initializing the forks\n"
 # define PHILO_ERR "Error initializing the philosophers threads\n"
+# define TIME_ERR "Error getting time of day\n"
 
 # include <stdio.h>
 # include <limits.h>
@@ -88,6 +89,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 int		parse_args(int argc, char **args, t_conditions *conditions);
 
+int 	free_all(t_table *table);
 int		free_forks(t_table *table, char *error_msg, int n, int flag);
 int		free_philos(t_table *table, char *error_msg, int n, int flag);
 int 	free_rsrcs(t_table *table, char *error_msg, int flag);

@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 02:51:52 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/01 18:37:25 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/02 01:30:23 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ void	*checker_checks(void *arg)
 	pthread_mutex_lock(&table->init_mutex);
 	table->init = true;
 	if (gettimeofday(&table->tv, NULL))
-		return (NULL/*destroy_mutex(table, MSSG);*/);
+	{
+		pthread_mutex_unlock(&table->init_mutex);
+		free_all(table);
+		return (NULL);
+	}
 	table->start_time = table->tv.tv_sec * 1000 + table->tv.tv_usec / 1000;
 	pthread_mutex_unlock(&table->init_mutex);
 	while (1)

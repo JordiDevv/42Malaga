@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:51:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/30 02:51:18 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/02 01:33:50 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ long    get_time(long start_time, char *condition)
 	struct timeval	tv;
 	
 	if (gettimeofday(&tv, NULL))
-		return (EXIT_ERROR/*destroy_mutex(table, MSSG);*/);
+		return (-1);
 	actual_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
     if (!ft_strncmp(condition, "ACTUAL", 6))
         return (actual_time);
