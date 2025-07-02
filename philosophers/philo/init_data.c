@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 13:00:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/02 01:20:54 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/02 11:31:04 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	init_table(t_table *table)
 	if (pthread_mutex_init(&table->init_mutex, NULL))
 		return (EXIT_ERROR);
 	table->someone_dead = false;
-	if (pthread_mutex_init(&table->death_mutex, NULL))
+	if (pthread_mutex_init(&table->check_mutex, NULL))
 		return (free_rsrcs(table, INIT_ERR, 1));
 	if (pthread_mutex_init(&table->print_mutex, NULL))
 		return (free_rsrcs(table, INIT_ERR, 2));

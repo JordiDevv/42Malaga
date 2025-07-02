@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/02 01:37:31 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/02 11:31:23 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_table
 	long			start_time;
 	pthread_mutex_t	init_mutex;
 	bool            init;
-	pthread_mutex_t	death_mutex;
+	pthread_mutex_t	check_mutex;
 	bool			someone_dead;
 	pthread_t		checker;
 }   t_table;

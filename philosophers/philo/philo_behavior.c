@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 18:03:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/01 18:34:10 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/02 11:31:14 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static void  coor_init(t_philo *philo)
 
 static int	someone_died(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->table->death_mutex);
+	pthread_mutex_lock(&philo->table->check_mutex);
 	if (philo->table->someone_dead)
 	{
-		pthread_mutex_unlock(&philo->table->death_mutex);
+		pthread_mutex_unlock(&philo->table->check_mutex);
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->table->death_mutex);
+	pthread_mutex_unlock(&philo->table->check_mutex);
 	return (0);
 }
 
@@ -53,6 +53,7 @@ static void	philo_routine(t_philo *philo)
 		if (someone_died(philo))
 			break ;
 		mutex_print(philo, EAT_MSG);
+		philo->times_eaten++;
 		philo->last_eating = get_time(0, "ACTUAL");
 		ft_usleep(philo, philo->table->conditions.t_eat);
 		pthread_mutex_unlock(philo->left_fork);

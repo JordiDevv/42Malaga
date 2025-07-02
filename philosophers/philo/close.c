@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 18:42:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/02 01:43:23 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/02 11:31:26 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	free_rsrcs(t_table *table, char *error_msg, int flag)
     if (flag > 0)
         pthread_mutex_destroy(&table->init_mutex);
     if (flag > 1)
-        pthread_mutex_destroy(&table->death_mutex);
+        pthread_mutex_destroy(&table->check_mutex);
     if (flag > 2)
         pthread_mutex_destroy(&table->print_mutex);
     if (flag > 3)
