@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 18:03:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/02 12:45:14 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/02 19:11:26 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ static void	philo_routine(t_philo *philo)
 		if (someone_died(philo))
 			break ;
 		mutex_print(philo, EAT_MSG);
+		pthread_mutex_lock(&philo->table->check_mutex);
 		philo->times_eaten++;
+		pthread_mutex_unlock(&philo->table->check_mutex);
+		//Nos pasamos de líneas
 		philo->last_eating = get_time(0, "ACTUAL");
 		ft_usleep(philo, philo->table->conditions.t_eat);
 		pthread_mutex_unlock(philo->left_fork);

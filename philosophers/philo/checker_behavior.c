@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 02:51:52 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/02 12:46:04 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/02 19:25:32 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ static int	check_death(t_table *table)
 {
 	int		i;
 	long	last_eating;
+	int		filo_saciados;
 
 	i = 0;
-	pthread_mutex_lock(&table->check_mutex);
+	filo_saciados = 0;
 	while (i < table->conditions.n_philo)
 	{
 		last_eating = table->philos[i].last_eating;
@@ -28,10 +29,15 @@ static int	check_death(t_table *table)
 			mutex_print(&table->philos[i], DEATH_MSG);
 			return (1);
 		}
+		if (table->philos[i].times_eaten >= table->conditions.n_eats)
+			filo_saciados++;
+		if (filo_saciados >= table->conditions.n_philo)
+		{
+			table->someone_dead = true;
+			return (1);
+		}
 		i++;
-		//Comprobar n_eats de todos los philos
 	}
-	pthread_mutex_unlock(&table->check_mutex);
 	return (0);
 }
 
@@ -51,8 +57,13 @@ void	*checker_checks(void *arg)
 	pthread_mutex_unlock(&table->init_mutex);
 	while (1)
 	{
+		pthread_mutex_lock(&table->check_mutex);
 		if (check_death(table))
+		{
+			pthread_mutex_unlock(&table->check_mutex);
 			break ;
+		}
+		pthread_mutex_unlock(&table->check_mutex);
 	}
 	return (NULL);
 }
