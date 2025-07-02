@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 18:03:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/02 11:31:14 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/02 12:45:14 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,13 @@ void	*philo_life(void *arg)
 	philo = (t_philo *)arg;
 	coor_init(philo);
 	philo->last_eating = get_time(0, "ACTUAL");
+	pthread_mutex_lock(&philo->table->check_mutex);
     if (philo->table->conditions.n_philo < 2)
     {
         mutex_print(philo, FORK_MSG);
         return (NULL);
     }
+	pthread_mutex_unlock(&philo->table->check_mutex);
 	if (philo->id % 2 == 0)
 		ft_usleep(philo, 10);
 	philo_routine(philo);

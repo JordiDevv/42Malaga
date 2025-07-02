@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 02:51:52 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/02 11:31:28 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/02 12:46:04 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static int	check_death(t_table *table)
 	long	last_eating;
 
 	i = 0;
+	pthread_mutex_lock(&table->check_mutex);
 	while (i < table->conditions.n_philo)
 	{
 		last_eating = table->philos[i].last_eating;
-		//Aquí van a faltar 1 o 2 mutex
 		if (get_time(0, "ACTUAL") - last_eating >= table->conditions.t_die)
 		{
 			table->someone_dead = true;
@@ -29,7 +29,9 @@ static int	check_death(t_table *table)
 			return (1);
 		}
 		i++;
+		//Comprobar n_eats de todos los philos
 	}
+	pthread_mutex_unlock(&table->check_mutex);
 	return (0);
 }
 
