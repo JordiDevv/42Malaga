@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/03 11:47:25 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/03 13:17:02 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@
 # define FORKS_ERR "Error initializing the forks\n"
 # define PHILO_ERR "Error initializing the philosophers threads\n"
 # define TIME_ERR "Error getting time of day\n"
+
 # define SATI_END "Congratulations: All the philosophers are satiated. Yummy!\n"
+# define BAD_END "Not all philos could survive :'(\n"
 
 # include <stdio.h>
 # include <limits.h>

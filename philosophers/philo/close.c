@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 18:42:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/03 11:50:59 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/03 13:07:31 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int free_philos(t_table *table, char *error_msg, int n, int flag)
         pthread_join(table->philos[i].thread, NULL);
         i++;
     }
-    return (free_forks(table, error_msg, table->conditions.n_eats, flag));
+    return (free_forks(table, error_msg, table->conditions.n_philo, flag));
 }
 
 int	free_rsrcs(t_table *table, char *error_msg, int flag)
@@ -60,6 +60,8 @@ int	free_rsrcs(t_table *table, char *error_msg, int flag)
         free(table->philos);
     if (table->sati)
         printf(G "%s" RE, error_msg);
+    else if (table->someone_dead)
+        printf(Y "%s" RE, error_msg);
     else
         printf(R "%s" RE, error_msg);
     return (1);

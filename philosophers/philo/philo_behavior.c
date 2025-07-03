@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 18:03:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/02 19:11:26 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/03 13:13:39 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static void  coor_init(t_philo *philo)
 	}
 }
 
-static int	someone_died(t_philo *philo)
+static int	end_program(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->check_mutex);
-	if (philo->table->someone_dead)
+	if (philo->table->someone_dead || philo->table->sati)
 	{
-		pthread_mutex_unlock(&philo->table->check_mutex);
+        pthread_mutex_unlock(&philo->table->check_mutex);
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->table->check_mutex);
@@ -43,14 +43,14 @@ static void	philo_routine(t_philo *philo)
 	while (1)
 	{
 		pthread_mutex_lock(philo->left_fork);
-		if (someone_died(philo))
+		if (end_program(philo))
 			break ;
 		mutex_print(philo, FORK_MSG);
 		pthread_mutex_lock(philo->right_fork);
-		if (someone_died(philo))
+		if (end_program(philo))
 			break ;
 		mutex_print(philo, FORK_MSG);
-		if (someone_died(philo))
+		if (end_program(philo))
 			break ;
 		mutex_print(philo, EAT_MSG);
 		pthread_mutex_lock(&philo->table->check_mutex);
@@ -61,11 +61,11 @@ static void	philo_routine(t_philo *philo)
 		ft_usleep(philo, philo->table->conditions.t_eat);
 		pthread_mutex_unlock(philo->left_fork);
 		pthread_mutex_unlock(philo->right_fork);
-		if (someone_died(philo))
+		if (end_program(philo))
 			break ;
 		mutex_print(philo, SLEEP_MSG);
 		ft_usleep(philo, philo->table->conditions.t_sleep);
-		if (someone_died(philo))
+		if (end_program(philo))
 			break ;
 		mutex_print(philo, THINK_MSG);
 	}

@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 02:51:52 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/03 11:48:29 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/03 13:13:56 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	check_death(t_table *table)
 		last_eating = table->philos[i].last_eating;
 		if (get_time(0, "ACTUAL") - last_eating >= table->conditions.t_die)
 		{
-			table->someone_dead = true;
+            table->someone_dead = true;
 			mutex_print(&table->philos[i], DEATH_MSG);
 			return (1);
 		}
@@ -33,7 +33,6 @@ static int	check_death(t_table *table)
 			sati_philo++;
 		if (sati_philo >= table->conditions.n_philo)
 		{
-			table->someone_dead = true;
             table->sati = true;
 			return (1);
 		}
@@ -61,7 +60,7 @@ void	*checker_checks(void *arg)
 		pthread_mutex_lock(&table->check_mutex);
 		if (check_death(table))
 		{
-			pthread_mutex_unlock(&table->check_mutex);
+            pthread_mutex_unlock(&table->check_mutex);
 			break ;
 		}
 		pthread_mutex_unlock(&table->check_mutex);

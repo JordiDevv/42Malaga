@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:51:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/02 01:33:50 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/03 13:15:28 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void    ft_usleep(t_philo *philo, long time)
 	long	beg;
 
 	beg = get_time(0, "ACTUAL");
-	while (!philo->table->someone_dead)
+	while (!philo->table->someone_dead && !philo->table->sati)
 	{
 		if (get_time(beg, "DIF") > time)
 			return ;
