@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 13:00:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/02 11:31:04 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/03 11:49:18 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static int	init_checker(t_table *table)
 int	init_table(t_table *table)
 {
 	table->init = false;
+    table->sati = false;
 	if (pthread_mutex_init(&table->init_mutex, NULL))
 		return (EXIT_ERROR);
 	table->someone_dead = false;

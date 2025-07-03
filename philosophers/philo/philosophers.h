@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/02 11:31:23 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/03 11:47:25 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define FORKS_ERR "Error initializing the forks\n"
 # define PHILO_ERR "Error initializing the philosophers threads\n"
 # define TIME_ERR "Error getting time of day\n"
+# define SATI_END "Congratulations: All the philosophers are satiated. Yummy!\n"
 
 # include <stdio.h>
 # include <limits.h>
@@ -75,6 +76,7 @@ typedef struct s_table
 	bool            init;
 	pthread_mutex_t	check_mutex;
 	bool			someone_dead;
+	bool			sati;
 	pthread_t		checker;
 }   t_table;
 
@@ -89,7 +91,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 int		parse_args(int argc, char **args, t_conditions *conditions);
 
-int 	free_all(t_table *table);
+int     free_all(t_table *table, char *error_msg);
 int		free_forks(t_table *table, char *error_msg, int n, int flag);
 int		free_philos(t_table *table, char *error_msg, int n, int flag);
 int 	free_rsrcs(t_table *table, char *error_msg, int flag);

@@ -6,16 +6,16 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 18:42:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/02 11:31:26 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/03 11:50:59 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int free_all(t_table *table)
+int free_all(t_table *table, char *error_msg)
 {
     pthread_join(table->checker, NULL);
-    return (free_philos(table, TIME_ERR, table->conditions.n_philo, 5));
+    return (free_philos(table, error_msg, table->conditions.n_philo, 5));
 }
 
 int free_forks(t_table *table, char *error_msg, int n, int flag)
@@ -58,6 +58,9 @@ int	free_rsrcs(t_table *table, char *error_msg, int flag)
     }
 	if (flag > 4)
         free(table->philos);
-    printf(R "%s" RE, error_msg);
+    if (table->sati)
+        printf(G "%s" RE, error_msg);
+    else
+        printf(R "%s" RE, error_msg);
     return (1);
 }

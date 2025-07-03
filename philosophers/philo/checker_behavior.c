@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 02:51:52 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/02 19:25:32 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/03 11:48:29 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static int	check_death(t_table *table)
 {
 	int		i;
 	long	last_eating;
-	int		filo_saciados;
+	int		sati_philo;
 
 	i = 0;
-	filo_saciados = 0;
+	sati_philo = 0;
 	while (i < table->conditions.n_philo)
 	{
 		last_eating = table->philos[i].last_eating;
@@ -30,10 +30,11 @@ static int	check_death(t_table *table)
 			return (1);
 		}
 		if (table->philos[i].times_eaten >= table->conditions.n_eats)
-			filo_saciados++;
-		if (filo_saciados >= table->conditions.n_philo)
+			sati_philo++;
+		if (sati_philo >= table->conditions.n_philo)
 		{
 			table->someone_dead = true;
+            table->sati = true;
 			return (1);
 		}
 		i++;
@@ -50,7 +51,7 @@ void	*checker_checks(void *arg)
 	if (gettimeofday(&table->tv, NULL))
 	{
 		pthread_mutex_unlock(&table->init_mutex);
-		free_all(table);
+		free_all(table, TIME_ERR);
 		return (NULL);
 	}
 	table->start_time = table->tv.tv_sec * 1000 + table->tv.tv_usec / 1000;

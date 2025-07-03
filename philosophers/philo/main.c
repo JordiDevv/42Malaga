@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 16:55:28 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/02 19:29:55 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/03 11:31:37 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	main(int argc, char *argv[])
 		return (EXIT_ERROR);
 	if (init_table(&table))
 		return (EXIT_ERROR);
-	for (int i = 0; i < table.conditions.n_philo; i++)
-		pthread_join(table.philos[i].thread, NULL);
-    pthread_join(table.checker, NULL);
+	// for (int i = 0; i < table.conditions.n_philo; i++)
+	// 	pthread_join(table.philos[i].thread, NULL);
+    // pthread_join(table.checker, NULL);
 	//Aquí hay que rastrear un segfault o buscar una alternativa para limpiar antes de cerrar con éxito.
-	//free_all(&table);
+	free_all(&table, SATI_END);
 	return (EXIT_SUCCESS);
 }
