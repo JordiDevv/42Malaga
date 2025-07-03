@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 18:42:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/03 13:07:31 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/03 18:50:59 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ int	free_rsrcs(t_table *table, char *error_msg, int flag)
     if (table->sati)
         printf(G "%s" RE, error_msg);
     else if (table->someone_dead)
+    {
+        error_msg = BAD_END;
         printf(Y "%s" RE, error_msg);
+    }
     else
         printf(R "%s" RE, error_msg);
     return (1);
