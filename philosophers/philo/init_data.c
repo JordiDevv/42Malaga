@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 13:00:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/03 18:49:38 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/06 14:35:56 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	init_philos(t_table *table)
 	table->philos = malloc(sizeof(t_philo) * table->conditions.n_philo);
 	if (!table->philos)
 		return (free_forks(table, PHILO_ERR, table->conditions.n_philo, 4));
-	while(i < table->conditions.n_philo)
+	while (i < table->conditions.n_philo)
 	{
 		table->philos[i].id = i + 1;
 		table->philos[i].table = table;
@@ -71,14 +71,14 @@ static int	init_checker(t_table *table)
 
 	n_philo = table->conditions.n_philo;
 	if (pthread_create(&table->checker, NULL, checker_checks, table))
-			return (free_philos(table, PHILO_ERR, n_philo, 5));
+		return (free_philos(table, PHILO_ERR, n_philo, 5));
 	return (0);
 }
 
 int	init_table(t_table *table)
 {
 	table->init = false;
-    table->sati = false;
+	table->sati = false;
 	if (pthread_mutex_init(&table->init_mutex, NULL))
 		return (EXIT_ERROR);
 	table->someone_dead = false;

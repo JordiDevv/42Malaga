@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:04:30 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/03 18:12:09 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/06 14:44:54 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,34 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-struct  s_table;
+struct	s_table;
 
 typedef struct s_conditions
 {
-	int n_philo;
-	int t_die;
-	int t_eat;
-	int t_sleep;
-	int n_eats;
-}   t_conditions;
+	int	n_philo;
+	int	t_die;
+	int	t_eat;
+	int	t_sleep;
+	int	n_eats;
+}	t_conditions;
+
+typedef struct s_checker_utils
+{
+	long	last_eating;
+	int		sati_philo;
+	long	act_time;
+}	t_checker_utils;
 
 typedef struct s_philo
 {
 	int				id;
 	pthread_t		thread;
-	pthread_mutex_t *left_fork;
-	pthread_mutex_t *right_fork;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
 	long			last_eating;
 	struct s_table	*table;
 	int				times_eaten;
-}   t_philo;
+}	t_philo;
 
 typedef struct s_table
 {
@@ -72,19 +79,19 @@ typedef struct s_table
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
 	pthread_mutex_t	print_mutex;
-	struct	timeval	tv;
+	struct timeval	tv;
 	long			start_time;
 	pthread_mutex_t	init_mutex;
-	bool            init;
+	bool			init;
 	pthread_mutex_t	check_mutex;
 	bool			someone_dead;
 	bool			sati;
 	pthread_t		checker;
-}   t_table;
+}	t_table;
 
 int		ft_atoi(const char *str);
 int		ft_isdigit(char *arg);
-void    ft_usleep(t_philo *philo, long time);
+void	ft_usleep(t_philo *philo, long time);
 long	get_time(long start_time, char *condition);
 void	mutex_print(t_philo *philo, char *msg);
 
@@ -93,14 +100,14 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 int		parse_args(int argc, char **args, t_conditions *conditions);
 
-int     free_all(t_table *table, char *error_msg);
+int		free_all(t_table *table, char *error_msg);
 int		free_forks(t_table *table, char *error_msg, int n, int flag);
 int		free_philos(t_table *table, char *error_msg, int n, int flag);
-int 	free_rsrcs(t_table *table, char *error_msg, int flag);
+int		free_rsrcs(t_table *table, char *error_msg, int flag);
 
-int	    init_table(t_table *table);
+int		init_table(t_table *table);
 
-void    *philo_life(void *arg);
+void	*philo_life(void *arg);
 void	*checker_checks(void *arg);
 
 #endif

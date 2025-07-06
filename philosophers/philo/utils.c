@@ -6,15 +6,15 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:51:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/03 19:04:30 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/06 14:48:14 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	char    sign;
+	char	sign;
 	int		r;
 
 	sign = 1;
@@ -35,14 +35,14 @@ int ft_atoi(const char *str)
 	return (r * sign);
 }
 
-int ft_isdigit(char *arg)
+int	ft_isdigit(char *arg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (arg[0] == '-')
 		i++;
-	while(arg[i])
+	while (arg[i])
 	{
 		if (arg[i] > '9' || arg[i] < '0')
 			return (1);
@@ -51,7 +51,7 @@ int ft_isdigit(char *arg)
 	return (0);
 }
 
-void    ft_usleep(t_philo *philo, long time)
+void	ft_usleep(t_philo *philo, long time)
 {
 	long	beg;
 
@@ -63,24 +63,24 @@ void    ft_usleep(t_philo *philo, long time)
 	}
 }
 
-long    get_time(long start_time, char *condition)
+long	get_time(long start_time, char *condition)
 {
 	long			actual_time;
 	long			time;
 	struct timeval	tv;
-	
+
 	if (gettimeofday(&tv, NULL))
 		return (-1);
 	actual_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-    if (!ft_strncmp(condition, "ACTUAL", 6))
-        return (actual_time);
-    else if (!ft_strncmp(condition, "DIF", 6))
-    {
-        time = actual_time - start_time;
-        return (time);
-    }
-    else
-        return (-1);
+	if (!ft_strncmp(condition, "ACTUAL", 6))
+		return (actual_time);
+	else if (!ft_strncmp(condition, "DIF", 6))
+	{
+		time = actual_time - start_time;
+		return (time);
+	}
+	else
+		return (-1);
 }
 
 void	mutex_print(t_philo *philo, char *msg)

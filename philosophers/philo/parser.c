@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 22:13:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/06/10 09:30:23 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/06 14:10:11 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,32 +53,32 @@ static int	valid_args(char **args)
 	return (args_flag);
 }
 
-static int  valid_conditions(t_conditions *conditions)
+static int	valid_conditions(t_conditions *conditions)
 {
 	int	con_flag;
 
 	con_flag = 0;
-    if (conditions->n_philo == 0)
-    {
-        printf(R "This is not a good amount of philosophers\n" RE);
-        con_flag++;
-    }
-    if (conditions->t_die == 0)
-    {
-        printf(R "We all gotta die\n" RE);
-        con_flag++;
-    }
-    if (conditions->t_eat == 0)
-    {
-        printf(R "It's good to feed your brain, but either the stomach\n" RE);
-        con_flag++;
-    }
-    if (conditions->t_sleep == 0)
-    {
-        printf(R "404 - Sleep not found\n" RE);
-        con_flag++;
-    }
-    return (con_flag);
+	if (conditions->n_philo == 0)
+	{
+		printf(R "This is not a good amount of philosophers\n" RE);
+		con_flag++;
+	}
+	if (conditions->t_die == 0)
+	{
+		printf(R "We all gotta die\n" RE);
+		con_flag++;
+	}
+	if (conditions->t_eat == 0)
+	{
+		printf(R "It's good to feed your brain, but either the stomach\n" RE);
+		con_flag++;
+	}
+	if (conditions->t_sleep == 0)
+	{
+		printf(R "404 - Sleep not found\n" RE);
+		con_flag++;
+	}
+	return (con_flag);
 }
 
 int	parse_args(int argc, char **args, t_conditions *conditions)
