@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 18:03:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/06 14:41:09 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:35:21 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static void	coor_init(t_philo *philo)
 static int	end_program(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->check_mutex);
-	if (philo->table->someone_dead || philo->table->sati)
+	if (philo->table->someone_dead
+		|| philo->times_eaten >= philo->table->conditions.n_eats)
 	{
 		pthread_mutex_unlock(&philo->table->check_mutex);
 		return (1);
@@ -42,15 +43,27 @@ static int	to_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
 	if (end_program(philo))
+    {
+        pthread_mutex_unlock(philo->left_fork);
 		return (1);
+    }
 	mutex_print(philo, FORK_MSG);
 	pthread_mutex_lock(philo->right_fork);
 	if (end_program(philo))
-		return (1);
+    {
+        pthread_mutex_unlock(philo->right_fork);
+        pthread_mutex_unlock(philo->left_fork);
+        return (1);
+    }
 	mutex_print(philo, FORK_MSG);
 	if (end_program(philo))
-		return (1);
+    {
+        pthread_mutex_unlock(philo->right_fork);
+        pthread_mutex_unlock(philo->left_fork);
+        return (1);
+    }
 	mutex_print(philo, EAT_MSG);
+	return (0);
 }
 
 static void	philo_routine(t_philo *philo)
