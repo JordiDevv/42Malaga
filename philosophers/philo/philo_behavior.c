@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 18:03:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/06 18:35:21 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/08 19:35:43 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,19 @@ static int	end_program(t_philo *philo)
 static int	to_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
-	if (end_program(philo))
-    {
-        pthread_mutex_unlock(philo->left_fork);
-		return (1);
-    }
-	mutex_print(philo, FORK_MSG);
+    mutex_print(philo, FORK_MSG);
 	pthread_mutex_lock(philo->right_fork);
+    mutex_print(philo, FORK_MSG);
 	if (end_program(philo))
     {
-        pthread_mutex_unlock(philo->right_fork);
         pthread_mutex_unlock(philo->left_fork);
-        return (1);
-    }
-	mutex_print(philo, FORK_MSG);
-	if (end_program(philo))
-    {
         pthread_mutex_unlock(philo->right_fork);
-        pthread_mutex_unlock(philo->left_fork);
         return (1);
     }
 	mutex_print(philo, EAT_MSG);
+    ft_usleep(philo, philo->table->conditions.t_eat);
+    pthread_mutex_unlock(philo->left_fork);
+    pthread_mutex_unlock(philo->right_fork);
 	return (0);
 }
 
