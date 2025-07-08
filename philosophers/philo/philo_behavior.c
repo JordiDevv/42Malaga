@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 18:03:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/08 19:35:43 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/08 19:51:13 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ static int	to_eat(t_philo *philo)
         return (1);
     }
 	mutex_print(philo, EAT_MSG);
-    ft_usleep(philo, philo->table->conditions.t_eat);
-    pthread_mutex_unlock(philo->left_fork);
-    pthread_mutex_unlock(philo->right_fork);
 	return (0);
 }
 

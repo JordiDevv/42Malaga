@@ -22,6 +22,24 @@ $(NAME):$(OBJS) $(INCLUDE)
 sani_thread:$(OBJS) $(INCLUDE)
 	cc $(CFLAGS) $(SANI_THREAD) $(OBJS) -o $(C_NAME)
 
+test_1:
+	./philo 1 800 200 200
+
+test_2:
+	./philo 5 800 200 200
+
+test_3:
+	./philo 5 800 200 200 7
+
+test_4:
+	./philo 4 410 200 200
+
+test_5:
+	./philo 4 310 200 100
+
+test_6:
+	./philo 2 200 100 100
+
 %o:%c
 	gcc $(CFLAGS) -c $< -o $@ -pthread
 
