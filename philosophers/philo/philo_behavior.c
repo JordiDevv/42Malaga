@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 18:03:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/10 17:55:38 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/10 21:01:46 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,26 @@ static int	end_program(t_philo *philo)
 
 static int	to_eat(t_philo *philo)
 {	
-    pthread_mutex_lock(philo->left_fork);
-    mutex_print(philo, FORK_MSG);
-    pthread_mutex_lock(philo->right_fork);
-    mutex_print(philo, FORK_MSG);
+	if(philo->id % 2 != 0)
+	{
+		pthread_mutex_lock(philo->left_fork);
+		mutex_print(philo, FORK_MSG);
+		pthread_mutex_lock(philo->right_fork);
+		mutex_print(philo, FORK_MSG);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->right_fork);
+		mutex_print(philo, FORK_MSG);
+		pthread_mutex_lock(philo->left_fork);
+		mutex_print(philo, FORK_MSG);
+	}
 	if (end_program(philo))
     {
         pthread_mutex_unlock(philo->left_fork);
         pthread_mutex_unlock(philo->right_fork);
         return (1);
     }
-    pthread_mutex_unlock(philo->left_fork);
-    pthread_mutex_unlock(philo->right_fork);
 	mutex_print(philo, EAT_MSG);
 	return (0);
 }
@@ -63,13 +71,14 @@ static void	philo_routine(t_philo *philo)
 	{
 		if (to_eat(philo))
 			break ;
-        // pthread_mutex_unlock(philo->left_fork);
-        // pthread_mutex_unlock(philo->right_fork);
 		pthread_mutex_lock(&philo->table->check_mutex);
 		philo->times_eaten++;
 		philo->last_eating = get_time(0, "ACTUAL");
 		pthread_mutex_unlock(&philo->table->check_mutex);
 		ft_usleep(philo, philo->table->conditions.t_eat);
+		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(philo->right_fork);
+		ft_usleep(philo, 1);
 		if (end_program(philo))
 			break ;
 		mutex_print(philo, SLEEP_MSG);

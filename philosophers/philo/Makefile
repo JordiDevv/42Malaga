@@ -26,7 +26,7 @@ test_1:
 	./philo 1 800 200 200
 
 test_2:
-	TSAN_OPTIONS=second_deadlock_stack=1 ./philo 5 800 200 200
+	./philo 5 800 200 200
 
 test_3:
 	./philo 5 800 200 200 7
