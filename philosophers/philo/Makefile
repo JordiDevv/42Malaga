@@ -7,8 +7,8 @@ CYAN = \033[36m
 RESET = \033[0m
 
 CFLAGS = -Wall -Werror -Wextra
-SANI_THREAD = -fsanitize=thread
-LAST_KERNEL = setarch $(uname -m) -R $SHELL
+SANI_THREAD = -fsanitize=thread -g
+LAST_KERNEL = setarch $(uname -m) -R $$SHELL
 
 SRCS = init_data.c main.c parser.c str_utils.c philo_behavior.c checker_behavior.c utils.c close.c
 
@@ -26,7 +26,7 @@ test_1:
 	./philo 1 800 200 200
 
 test_2:
-	./philo 5 800 200 200
+	TSAN_OPTIONS=second_deadlock_stack=1 ./philo 5 800 200 200
 
 test_3:
 	./philo 5 800 200 200 7
