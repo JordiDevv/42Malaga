@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:51:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/06 14:48:14 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/11 14:14:55 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,14 @@ long	get_time(long start_time, char *condition)
 
 void	mutex_print(t_philo *philo, char *msg)
 {
+	pthread_mutex_lock(&philo->table->check_mutex);
+	if (philo->table->someone_dead
+		&& ft_strncmp(msg, DEATH_MSG, ft_strlen(msg)))
+	{
+		pthread_mutex_unlock(&philo->table->check_mutex);
+		return ;
+	}
+	pthread_mutex_unlock(&philo->table->check_mutex);
 	pthread_mutex_lock(&philo->table->print_mutex);
 	printf("%s", G);
 	printf(msg, get_time(philo->table->start_time, "DIF"), philo->id);

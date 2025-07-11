@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 18:03:34 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/07/10 21:01:46 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/07/11 14:15:37 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static int	end_program(t_philo *philo)
 }
 
 static int	to_eat(t_philo *philo)
-{	
-	if(philo->id % 2 != 0)
+{
+	if (philo->id % 2 != 0)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		mutex_print(philo, FORK_MSG);
@@ -56,11 +56,11 @@ static int	to_eat(t_philo *philo)
 		mutex_print(philo, FORK_MSG);
 	}
 	if (end_program(philo))
-    {
-        pthread_mutex_unlock(philo->left_fork);
-        pthread_mutex_unlock(philo->right_fork);
-        return (1);
-    }
+	{
+		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(philo->right_fork);
+		return (1);
+	}
 	mutex_print(philo, EAT_MSG);
 	return (0);
 }
@@ -99,8 +99,8 @@ void	*philo_life(void *arg)
 	pthread_mutex_lock(&philo->table->check_mutex);
 	if (philo->table->conditions.n_philo < 2)
 	{
-		mutex_print(philo, FORK_MSG);
 		pthread_mutex_unlock(&philo->table->check_mutex);
+		mutex_print(philo, FORK_MSG);
 		return (NULL);
 	}
 	pthread_mutex_unlock(&philo->table->check_mutex);

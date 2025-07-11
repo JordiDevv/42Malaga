@@ -17,7 +17,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME):$(OBJS) $(INCLUDE)
-	cc $(CFLAGS) $(OBJS) -o $(NAME)
+	cc $(CFLAGS) $(OBJS) -o $(NAME) -g
 
 sani_thread:$(OBJS) $(INCLUDE)
 	cc $(CFLAGS) $(SANI_THREAD) $(OBJS) -o $(C_NAME)
