@@ -1,12 +1,20 @@
 #include <iostream>
+#include <string.h>
+using namespace std;
+#define DEF_MSG "* LOUD AND UNBEARABLE FEEDBACK NOISE *"
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
-    if (argv)
-        argc = 1;
-    if (argc == 1)
+    string text = DEF_MSG;
+
+    if (argc == 1) cout.write(text.c_str(), text.length());
+
+    for (int i = 1; i < argc; i++)
     {
-        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-        return (0);
+        text = argv[i];
+        cout.write(text.c_str(), text.length());
     }
+
+    cout.put('\n');
+    return (0);
 }
