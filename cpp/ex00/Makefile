@@ -5,12 +5,12 @@ CFLAGS = -Wall -Werror -Wextra
 
 SRCS = megaphone.cpp
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME):$(OBJS)
-	cc $(CFLAGS) $(98STD) $(OBJS) -o $(NAME)
+	g++ $(CFLAGS) $(98STD) $(OBJS) -o $(NAME)
 
 test_1:
 	./megaphone "shhhhh... I think the students are asleep..."
