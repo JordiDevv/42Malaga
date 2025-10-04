@@ -1,13 +1,11 @@
 #include "Contact.hpp"
 #include <string>
-using namespace std;
 
-Contact::Contact(const string &fn, const string &ln, const string &nn, int pn, const string &ds)
+Contact::Contact(const std::string &fn, const std::string &ln, const std::string &nn, int pn, const std::string &ds)
         : first_name(fn), last_name(ln), nickname(nn), phone_number(pn), darkest_secret(ds) {}
 
-// int getIndex() const { return index; }
-// string getFirstName() const { return first_name; }
-// string getLastName() const { return last_name; }
-// string getNickname() const { return nickname; }
-// int getPhoneNumber() const { return phone_number; }
-// string getDarkestSecret() const { return darkest_secret; }
+std::string Contact::getFirstName() const { return first_name; }
+std::string Contact::getLastName() const { return last_name; }
+std::string Contact::getNickname() const { return nickname; }
+int Contact::getPhoneNumber() const { return phone_number; }
+std::string Contact::getDarkestSecret() const { return darkest_secret; }

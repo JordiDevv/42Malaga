@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string.h>
 #include <cctype>
-using namespace std;
 #define DEF_MSG "* LOUD AND UNBEARABLE FEEDBACK NOISE *"
 
 char *capitalize(char *str)
@@ -12,16 +11,16 @@ char *capitalize(char *str)
 
 int main(int argc, char **argv)
 {
-    string text = DEF_MSG;
+    std::string text = DEF_MSG;
 
-    if (argc == 1) cout.write(text.c_str(), text.length());
+    if (argc == 1) std::cout.write(text.c_str(), text.length());
 
     for (int i = 1; i < argc; i++)
     {
         text = capitalize(argv[i]);
-        cout.write(text.c_str(), text.length());
+        std::cout.write(text.c_str(), text.length());
     }
 
-    cout.put('\n');
+    std::cout.put('\n');
     return (0);
 }

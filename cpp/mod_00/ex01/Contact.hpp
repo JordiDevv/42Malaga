@@ -2,25 +2,24 @@
 #define CONTACT_HPP
 
 #include <string>
-using namespace std;
 
 class Contact
 {
     private:
-        string first_name;
-        string last_name;
-        string nickname;
+        std::string first_name;
+        std::string last_name;
+        std::string nickname;
         int phone_number;
-        string darkest_secret;
+        std::string darkest_secret;
 
     public:
-        Contact(const string& fn, const string& ln, const string& nn, int pn, const string& ds);
+        Contact(const std::string& fn, const std::string& ln, const std::string& nn, int pn, const std::string& ds);
 
-        string getFirstName() const;
-        string getLastName() const;
-        string getNickname() const;
+        std::string getFirstName() const;
+        std::string getLastName() const;
+        std::string getNickname() const;
         int getPhoneNumber() const;
-        string getDarkestSecret() const;
+        std::string getDarkestSecret() const;
 };
 
 #endif

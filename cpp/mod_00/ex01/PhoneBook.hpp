@@ -3,11 +3,11 @@
 
 #include <string>
 #include "Contact.hpp"
-using namespace std;
 
 class PhoneBook
 {
     private:
+        int current_i = 0;
         Contact contacts[8];
 
     public:
