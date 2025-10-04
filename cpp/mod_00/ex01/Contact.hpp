@@ -7,7 +7,6 @@ using namespace std;
 class Contact
 {
     private:
-        int index;
         string first_name;
         string last_name;
         string nickname;
@@ -15,9 +14,8 @@ class Contact
         string darkest_secret;
 
     public:
-        Contact(int i, const string& fn, const string& ln, const string& nn, int pn, const string& ds);
+        Contact(const string& fn, const string& ln, const string& nn, int pn, const string& ds);
 
-        int getIndex() const;
         string getFirstName() const;
         string getLastName() const;
         string getNickname() const;

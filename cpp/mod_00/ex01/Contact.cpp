@@ -2,8 +2,8 @@
 #include <string>
 using namespace std;
 
-Contact::Contact(int i, const string &fn, const string &ln, const string &nn, int pn, const string &ds)
-        : index(i), first_name(fn), last_name(ln), nickname(nn), phone_number(pn), darkest_secret(ds) {}
+Contact::Contact(const string &fn, const string &ln, const string &nn, int pn, const string &ds)
+        : first_name(fn), last_name(ln), nickname(nn), phone_number(pn), darkest_secret(ds) {}
 
 // int getIndex() const { return index; }
 // string getFirstName() const { return first_name; }
