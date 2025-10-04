@@ -12,6 +12,10 @@ class PhoneBook
 
     public:
         PhoneBook();
+        
+        int getCurrentIndex();
+        void increaseIndex();
+        void resetIndex();
 
         void ADD(Contact new_contact);
 };
