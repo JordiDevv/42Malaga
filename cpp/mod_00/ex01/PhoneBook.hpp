@@ -11,7 +11,7 @@ class PhoneBook
         Contact contacts[8];
 
     public:
-        PhoneBook(Contact contacts[8]);
+        PhoneBook();
 
         void ADD(Contact new_contact);
 };

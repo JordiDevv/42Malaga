@@ -13,7 +13,7 @@ class Contact
         std::string darkest_secret;
 
     public:
-        Contact(const std::string& fn, const std::string& ln, const std::string& nn, int pn, const std::string& ds);
+        Contact();
 
         std::string getFirstName() const;
         std::string getLastName() const;
