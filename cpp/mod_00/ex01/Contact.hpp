@@ -17,12 +17,12 @@ class Contact
     public:
         Contact(int i, const string& fn, const string& ln, const string& nn, int pn, const string& ds);
 
-        int getIndex() const { return index; }
-        string getFirstName() const { return first_name; }
-        string getLastName() const { return last_name; }
-        string getNickname() const { return nickname; }
-        int getPhoneNumber() const { return phone_number; }
-        string getDarkestSecret() const { return darkest_secret; }
+        int getIndex() const;
+        string getFirstName() const;
+        string getLastName() const;
+        string getNickname() const;
+        int getPhoneNumber() const;
+        string getDarkestSecret() const;
 };
 
 #endif
