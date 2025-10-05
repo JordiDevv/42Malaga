@@ -12,7 +12,11 @@ void PhoneBook::ADD(const std::string& fn, const std::string& ln, const std::str
 {
     int i = PhoneBook::getCurrentIndex();
 
-    //contacts[i].
+    contacts[i].setFirstName(fn);
+    contacts[i].setLastName(ln);
+    contacts[i].setNickname(nn);
+    contacts[i].setPhoneNumber(pn);
+    contacts[i].setDarkestSecret(ds);
 
     if (i < 7)
         PhoneBook::increaseIndex();
