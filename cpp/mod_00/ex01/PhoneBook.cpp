@@ -8,9 +8,9 @@ int PhoneBook::getCurrentIndex() { return (current_i); }
 void PhoneBook::increaseIndex() { current_i++; }
 void PhoneBook::resetIndex() { current_i = 0; }
 
-void PhoneBook::ADD(Contact new_contact)
+void PhoneBook::ADD(const std::string& fn, const std::string& ln, const std::string& nn, int pn, const std::string& ds)
 {
     int i = PhoneBook::getCurrentIndex();
-    contacts[i] = new_contact;
+    //contacts[i] = new_contact;
     PhoneBook::increaseIndex();
 }
