@@ -3,17 +3,23 @@
 #include "msgs.h"
 #include <iostream>
 
-void ft_add(PhoneBook &phonebook)
+static std::string prompt_fn()
 {
     std::string input;
-    int i = phonebook.getCurrentIndex();
 
     while (1)
     {
         std::cout.write(FN_MSG, FN_MSG_L);
         std::getline(std::cin, input);
         if (input != "")
-            break;
+            return (input);
     }
+}
+
+void ft_add(PhoneBook &phonebook)
+{
+    int i = phonebook.getCurrentIndex();
+
+    std::string fn = prompt_fn();
     std::cout.write(ADDED_MSG, ADDED_MSG_L);
 }
