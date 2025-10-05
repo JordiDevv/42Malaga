@@ -3,9 +3,9 @@ NAME = phonebook
 CFLAGS = -Wall -Werror -Wextra
 98STD = -std=c++98
 
-SRCS = main.cpp Contact.cpp PhoneBook.cpp
+SRCS = main.cpp Contact.cpp PhoneBook.cpp utils.cpp
 CL_HEADS = Contact.hpp PhoneBook.hpp
-HEADERS = msgs.h
+HEADERS = msgs.h utils.h
 
 OBJS = $(SRCS:.cpp=.o)
 INCLUDE = $(CL_HEADS) $(HEADERS)
