@@ -6,19 +6,18 @@
 int main()
 {
     PhoneBook phonebook;
-    std::string cmd;
+    std::string input;
 
     phonebook.resetIndex();
     std::cout.write(WELCOME_MSG, WELCOME_MSG_L);
 
     while (1)
     {
-        std::getline(std::cin, cmd);
-        if (cmd == "ADD")
-        {
-            std::cout.write("Funciona", 9);
-            break;
-        }
+        std::getline(std::cin, input);
+        if (input == "ADD") std::cout.write("Funciona\n", 10);
+        else if (input == "SEARCH") std::cout.write("Funciona\n", 10);
+        else if (input == "EXIT") break;
+        else std::cout.write(WELCOME_MSG, WELCOME_MSG_L);
     }
 
     return (0);
