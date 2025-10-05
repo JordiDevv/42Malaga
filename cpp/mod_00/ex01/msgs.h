@@ -1,5 +1,6 @@
-#define GREEN   "\033[1;32m"
-#define RESET   "\033[0m"
+#define GREEN "\033[1;32m"
+#define BLUE "\033[1;36m"
+#define RESET "\033[0m"
 
 #define WELCOME_MSG GREEN "WELCOME TO THE AMAZING TECHNOLOGY OF PHONEBOOK\n" RESET
 #define WELCOME_MSG_L 59

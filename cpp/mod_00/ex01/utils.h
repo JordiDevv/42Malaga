@@ -1,4 +1,4 @@
 #include "PhoneBook.hpp"
-#include "Contact.hpp"
 
 void ft_add(PhoneBook &phonebook);
+void display_column(std::string arg, bool last);
