@@ -17,7 +17,7 @@ class PhoneBook
         void increaseIndex();
         void resetIndex();
 
-        void ADD(const std::string& fn, const std::string& ln, const std::string& nn, int pn, const std::string& ds);
+        void ADD(const std::string& fn, const std::string& ln, const std::string& nn, const std::string& pn, const std::string& ds);
 };
 
 #endif
