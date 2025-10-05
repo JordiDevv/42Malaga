@@ -3,14 +3,17 @@ NAME = phonebook
 CFLAGS = -Wall -Werror -Wextra
 98STD = -std=c++98
 
-SRCS = 
+SRCS = main.cpp Contact.cpp PhoneBook.cpp
+CL_HEADS = Contact.hpp PhoneBook.hpp
+HEADERS = msgs.h
 
 OBJS = $(SRCS:.cpp=.o)
+INCLUDE = $(CL_HEADS) $(HEADERS)
 
 all: $(NAME)
 
 $(NAME):$(OBJS)
-	g++ $(CFLAGS) $(98STD) $(OBJS) -o $(NAME)
+	g++ $(CFLAGS) $(98STD) $(INCLUDE) $(OBJS) -o $(NAME)
 
 test_1:
 	
