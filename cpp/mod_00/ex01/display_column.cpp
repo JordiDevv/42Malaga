@@ -6,7 +6,7 @@ void display_column(std::string arg, bool last)
 {
     if (arg.length() <= 10)
     {
-        std::string spaces = std::string(" ", 10 - arg.length());
+        std::string spaces = std::string(10 - arg.length(), ' ');
         std::cout << BLUE << spaces << arg.c_str() << RESET;
     }
     else
