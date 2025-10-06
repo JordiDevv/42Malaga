@@ -31,6 +31,21 @@ static void display_row(const Contact& contact, const std::string& index)
     display_column(contact.getNickname(), true);
 }
 
+static int prompt_in(int n_contacts)
+{
+    int input;
+
+    while (1)
+    {
+        std::cout.write(ENTIND_MSG, ENTIND_MSG_L);
+
+        if (!std::cin >> input) continue;
+        if (input < 0 || input > n_contacts) continue;
+        
+        return (input);
+    }
+}
+
 void ft_search(PhoneBook& phonebook)
 {
     int n_contacts = phonebook.getN();
@@ -43,4 +58,7 @@ void ft_search(PhoneBook& phonebook)
 
         display_row(contact, index);
     }
+
+    int target_index = prompt_in(n_contacts);
+
 }
