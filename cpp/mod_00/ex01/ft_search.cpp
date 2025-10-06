@@ -33,16 +33,21 @@ static void display_row(const Contact& contact, const std::string& index)
 
 static int prompt_in(int n_contacts)
 {
-    int input;
+    std::string input;
+    int in;
 
     while (1)
     {
         std::cout.write(ENTIND_MSG, ENTIND_MSG_L);
+        std::getline(std::cin, input);
 
-        if (!(std::cin >> input)) continue;
-        if (input < 0 || input >= n_contacts) continue;
-
-        return (input);
+        try {
+            in = std::stoi(input);
+            if (in >= 0 && in < n_contacts)
+                return in;
+        } catch (...) {
+            continue;
+        }
     }
 }
 
