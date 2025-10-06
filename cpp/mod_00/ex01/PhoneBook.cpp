@@ -5,15 +5,16 @@
 
 PhoneBook::PhoneBook() {}
 
-int PhoneBook::getCurrentIndex() { return (current_i); }
+const int& PhoneBook::getCurrentIndex() const { return (current_i); }
 void PhoneBook::increaseIndex() { current_i++; }
 void PhoneBook::resetIndex() { current_i = 0; }
 
 void PhoneBook::initN() { n_contacts = 0; }
+int PhoneBook::getN() const { return (n_contacts); }
 
 void PhoneBook::ADD(const std::string& fn, const std::string& ln, const std::string& nn, const std::string& pn, const std::string& ds)
 {
-    int i = PhoneBook::getCurrentIndex();
+    const int i = PhoneBook::getCurrentIndex();
 
     contacts[i].setFirstName(fn);
     contacts[i].setLastName(ln);
@@ -28,6 +29,8 @@ void PhoneBook::ADD(const std::string& fn, const std::string& ln, const std::str
     
     if (n_contacts < 8) n_contacts++;
 }
+
+const Contact& PhoneBook::getContactByIndex(int index) const { return (contacts[index]); }
 
 void PhoneBook::SEARCH()
 {

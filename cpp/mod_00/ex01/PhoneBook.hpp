@@ -14,13 +14,15 @@ class PhoneBook
     public:
         PhoneBook();
         
-        int getCurrentIndex();
+        const int& getCurrentIndex() const;
         void increaseIndex();
         void resetIndex();
 
         void initN();
+        int getN() const;
 
         void ADD(const std::string& fn, const std::string& ln, const std::string& nn, const std::string& pn, const std::string& ds);
+        const Contact& getContactByIndex(int index) const;
         void SEARCH();
 };
 
