@@ -41,9 +41,18 @@ static int prompt_in(int n_contacts)
 
         if (!std::cin >> input) continue;
         if (input < 0 || input > n_contacts) continue;
-        
+
         return (input);
     }
+}
+
+static void display_full_contact(const Contact& contact)
+{
+    display_column(contact.getFirstName(), false);
+    display_column(contact.getLastName(), false);
+    display_column(contact.getNickname(), false);
+    display_column(contact.getPhoneNumber(), false);
+    display_column(contact.getDarkestSecret(), true);
 }
 
 void ft_search(PhoneBook& phonebook)
@@ -60,5 +69,6 @@ void ft_search(PhoneBook& phonebook)
     }
 
     int target_index = prompt_in(n_contacts);
-
+    const Contact& contact = phonebook.getContactByIndex(target_index);
+    display_full_contact(contact);
 }
