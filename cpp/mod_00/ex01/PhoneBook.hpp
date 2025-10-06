@@ -19,7 +19,7 @@ class PhoneBook
         void resetIndex();
 
         void initN();
-        int getN() const;
+        const int& getN() const;
 
         void ADD(const std::string& fn, const std::string& ln, const std::string& nn, const std::string& pn, const std::string& ds);
         const Contact& getContactByIndex(int index) const;

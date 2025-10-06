@@ -3,11 +3,11 @@
 
 Contact::Contact() {}
 
-std::string Contact::getFirstName() const { return first_name; }
-std::string Contact::getLastName() const { return last_name; }
-std::string Contact::getNickname() const { return nickname; }
-std::string Contact::getPhoneNumber() const { return phone_number; }
-std::string Contact::getDarkestSecret() const { return darkest_secret; }
+const std::string& Contact::getFirstName() const { return first_name; }
+const std::string& Contact::getLastName() const { return last_name; }
+const std::string& Contact::getNickname() const { return nickname; }
+const std::string& Contact::getPhoneNumber() const { return phone_number; }
+const std::string& Contact::getDarkestSecret() const { return darkest_secret; }
 
 void Contact::setFirstName(const std::string& fn) { first_name = fn; };
 void Contact::setLastName(const std::string& ln) { last_name = ln; };

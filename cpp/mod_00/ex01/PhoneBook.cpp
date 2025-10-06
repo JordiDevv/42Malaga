@@ -10,7 +10,7 @@ void PhoneBook::increaseIndex() { current_i++; }
 void PhoneBook::resetIndex() { current_i = 0; }
 
 void PhoneBook::initN() { n_contacts = 0; }
-int PhoneBook::getN() const { return (n_contacts); }
+const int& PhoneBook::getN() const { return (n_contacts); }
 
 void PhoneBook::ADD(const std::string& fn, const std::string& ln, const std::string& nn, const std::string& pn, const std::string& ds)
 {
