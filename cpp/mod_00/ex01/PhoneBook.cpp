@@ -31,16 +31,3 @@ void PhoneBook::ADD(const std::string& fn, const std::string& ln, const std::str
 }
 
 const Contact& PhoneBook::getContactByIndex(int index) const { return (contacts[index]); }
-
-void PhoneBook::SEARCH()
-{
-    std::string index;
-    for (int i = 0; i < n_contacts; i++)
-    {
-        index = i + '0';
-        display_column(index, false);
-        display_column(contacts[i].getFirstName(), false);
-        display_column(contacts[i].getLastName(), false);
-        display_column(contacts[i].getNickname(), true);
-    }
-}
