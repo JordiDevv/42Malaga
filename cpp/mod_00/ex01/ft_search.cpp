@@ -1,3 +1,4 @@
+#include "PhoneBook.hpp"
 #include <iostream>
 #include <string.h>
 #include "msgs.h"
@@ -20,4 +21,11 @@ void display_column(std::string arg, bool last)
         std::cout.put('|');
     else
         std::cout.put('\n');
+}
+
+
+void ft_search(PhoneBook& phonebook)
+{
+    phonebook.SEARCH();
+
 }

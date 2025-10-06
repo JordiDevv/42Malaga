@@ -19,7 +19,7 @@ int main()
         std::getline(std::cin, input);
 
         if (input == "ADD") ft_add(phonebook);
-        else if (input == "SEARCH") phonebook.SEARCH();
+        else if (input == "SEARCH") ft_search(phonebook);
         else if (input == "EXIT") break;
     }
 
