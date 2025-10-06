@@ -23,5 +23,6 @@ int main()
         else if (input == "EXIT") break;
     }
 
+    std::cout.write(EXIT_MSG, EXIT_MSG_L);
     return (0);
 }
