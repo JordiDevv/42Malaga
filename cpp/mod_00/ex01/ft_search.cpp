@@ -39,8 +39,8 @@ static int prompt_in(int n_contacts)
     {
         std::cout.write(ENTIND_MSG, ENTIND_MSG_L);
 
-        if (!std::cin >> input) continue;
-        if (input < 0 || input > n_contacts) continue;
+        if (!(std::cin >> input)) continue;
+        if (input < 0 || input >= n_contacts) continue;
 
         return (input);
     }
