@@ -1,7 +1,8 @@
 #include "PhoneBook.hpp"
-#include <iostream>
-#include <string.h>
 #include "msgs.h"
+#include <string.h>
+#include <iostream>
+#include <sstream>
 
 static void display_column(std::string arg, bool last)
 {
@@ -40,13 +41,14 @@ static int prompt_in(int n_contacts)
     {
         std::cout.write(ENTIND_MSG, ENTIND_MSG_L);
         std::getline(std::cin, input);
+        std::stringstream input_pars(input);
 
-        try {
-            in = std::stoi(input);
-            if (in >= 0 && in < n_contacts)
-                return in;
-        } catch (...) {
+        if (!(input_pars >> in))
             continue;
+        else
+        {
+            if (in >= 0 && in < n_contacts)
+                return (in);
         }
     }
 }
