@@ -65,6 +65,12 @@ static void display_full_contact(const Contact& contact)
 void ft_search(PhoneBook& phonebook)
 {
     int n_contacts = phonebook.getN();
+    if (!n_contacts)
+    {
+        std::cout.write(NOCONT_MSG, NOCONT_MSG_L);
+        return ;
+    }
+    
     std::string index;
 
     for (int i = 0; i < n_contacts; i++)

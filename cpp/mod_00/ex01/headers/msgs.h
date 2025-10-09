@@ -9,6 +9,10 @@
                             "ADD, SEARCH, EXIT\n" RESET
 #define CHS_MSG_L 70
 
+#define NOCONT_MSG GREEN "THERE'S NO CONTACTS FOR THE SEARCHING!\n" \
+                            "ADD SOME FRIENDS :)\n"
+#define NOCONT_MSG_L 71
+
 #define FN_MSG GREEN "PLEASE, ENTER THE FIRST NAME OF THE CONTACT:\n" RESET
 #define FN_MSG_L 57
 
