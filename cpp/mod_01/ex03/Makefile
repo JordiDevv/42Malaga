@@ -1,22 +1,20 @@
-NAME = moar_brainz
+NAME = unnecesary_violence
 
 CFLAGS = -Wall -Werror -Wextra
 98STD = -std=c++98
 
-SRCS = main.cpp classes/Zombie.cpp utils/newZombie.cpp utils/randomChump.cpp utils/zombieHorde.cpp
-CL_HEADS = -I./classes
-HEADERS = -I./headers
+SRCS = main.cpp classes/imps/Weapon.cpp classes/imps/HumanA.cpp classes/imps/HumanB.cpp
+DEFS = -I./classes/defs
 
 OBJS = $(SRCS:.cpp=.o)
-INCLUDE = $(CL_HEADS) $(HEADERS)
 
 all: $(NAME)
 
 $(NAME):$(OBJS)
-	g++ $(CFLAGS) $(98STD) $(INCLUDE) $(OBJS) -o $(NAME)
+	g++ $(CFLAGS) $(98STD) $(DEFS) $(OBJS) -o $(NAME)
 
 %.o: %.cpp
-	g++ $(CFLAGS) $(98STD) $(INCLUDE) -c $< -o $@
+	g++ $(CFLAGS) $(98STD) $(DEFS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
