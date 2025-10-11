@@ -1,9 +1,9 @@
-NAME = brainz
+NAME = moar_brainz
 
 CFLAGS = -Wall -Werror -Wextra
 98STD = -std=c++98
 
-SRCS = main.cpp classes/Zombie.cpp utils/newZombie.cpp utils/randomChump.cpp
+SRCS = main.cpp classes/Zombie.cpp utils/newZombie.cpp utils/randomChump.cpp utils/zombieHorde.cpp
 CL_HEADS = -I./classes
 HEADERS = -I./headers
 
