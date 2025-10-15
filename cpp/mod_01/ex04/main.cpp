@@ -56,4 +56,5 @@ int main(int argc, char **argv)
 
     replace_text(file, new_file, s1, s2);
     file.close();
+    new_file.close();
 }
