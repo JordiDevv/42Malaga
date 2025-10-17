@@ -5,8 +5,10 @@ CFLAGS = -Wall -Werror -Wextra
 
 SRCS = main.cpp Harl.cpp
 DEFS = -I./defs
+HEAD = -I./headers
 
 OBJS = $(SRCS:.cpp=.o)
+INC = $(DEFS) $(HEAD)
 
 all: $(NAME)
 
