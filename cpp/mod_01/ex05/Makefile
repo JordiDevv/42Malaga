@@ -1,10 +1,10 @@
-NAME = sed_is_for_loser
+NAME = harl_2.0
 
 CFLAGS = -Wall -Werror -Wextra
 98STD = -std=c++98
 
-SRCS = main.cpp
-INC = -I./headers
+SRCS = main.cpp Harl.cpp
+DEFS = -I./defs
 
 OBJS = $(SRCS:.cpp=.o)
 
