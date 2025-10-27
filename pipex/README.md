@@ -1,17 +1,19 @@
 # 🔗 Pipex
 
-## 🔍 Overview
-The **Pipex** project aims to help students understand and master fundamental C programming concepts, such as inter-process communication, the use of pipes, and standard input/output redirections. This project provides insight into how pipes and redirections work in Unix-based systems.
+## 🔍 Descripción general
 
-This was the first project I developed entirely from scratch without any external assistance, proving my exponential progress and learning when tackling projects and writing code.
+El proyecto **Pipex** busca ayudar a los estudiantes a comprender y dominar conceptos fundamentales de programación en C, como la comunicación entre procesos, el uso de tuberías y las redirecciones estándar de entrada/salida. Este proyecto proporciona información sobre el funcionamiento de las tuberías y las redirecciones en sistemas Unix.
 
-## ✨ Features
-- 🔄 Inter-process communication using pipes
-- 📡 Redirection of standard input and output
-- 🖥️ Understanding Unix system calls
-- 🛠️ Process handling and execution
+Este fue el primer proyecto que desarrollé completamente desde cero sin ayuda externa, lo que demuestra mi progreso y aprendizaje exponenciales al abordar proyectos y escribir código.
+
+## ✨ Características
+
+- 🔄 Comunicación entre procesos mediante tuberías
+- 📡 Redirección de entrada y salida estándar
+- 🖥️ Comprensión de las llamadas al sistema Unix
+- 🛠️ Gestión y ejecución de procesos
 
 ---
 
-**👨‍💻 Author:** Jorge Sanz  
+**👨‍💻 Autor:** Jorge Sanz  
 **🌍 GitHub:** [JordiDevv](https://github.com/JordiDevv)
