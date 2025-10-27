@@ -1,16 +1,18 @@
 # 🖥️ Printf
 
-## 🔍 Overview
-The **Printf** project aims to create a custom implementation of the `printf` function in C, allowing students to deepen their understanding of output formatting, variable argument management, and type conversion. This project is fundamental for better comprehension of string manipulation and formatted output in C.
+## 🔍 Descripción general
 
-## ✨ Features
-- ✅ Custom implementation of `printf`
-- 🔢 Handling of variable arguments (`stdarg.h`)
-- 🔄 Format specifier processing (`%d`, `%s`, `%c`, etc.)
-- 🔠 String manipulation and buffer management
-- 🛠️ Error handling and edge case management
+El proyecto **Printf** busca crear una implementación personalizada de la función `printf` en C, lo que permitirá a los estudiantes profundizar en su comprensión del formato de salida, la gestión de argumentos de variables y la conversión de tipos. Este proyecto es fundamental para una mejor comprensión de la manipulación de cadenas y la salida formateada en C.
+
+## ✨ Características
+
+- ✅ Implementación personalizada de `printf`
+- 🔢 Manejo de argumentos de variables (`stdarg.h`)
+- 🔄 Procesamiento de especificadores de formato (`%d`, `%s`, `%c`, etc.)
+- 🔠 Manipulación de cadenas y gestión de búfer
+- 🛠️ Manejo de errores y gestión de casos extremos
 
 ---
 
-**👨‍💻 Author:** Jorge Sanz  
+**👨‍💻 Autor:** Jorge Sanz  
 **🌍 GitHub:** [JordiDevv](https://github.com/JordiDevv)
