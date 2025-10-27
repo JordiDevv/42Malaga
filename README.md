@@ -24,12 +24,12 @@ M2:
 - pipex: Programa que simula el comportamiento de pipes y redirecciones de una terminal de bash.
 
 M3: 
-- minishell: (tiene su propia entrada aparte)
+- [minishell](https://github.com/JordiDevv/minishell): (proyecto en pareja en otro repo) recreación una pequeña shell de bash.
 - philosophers: Programa para resolver el problema de los filósofos comensales mediante POSIX threads.
 
 M4:
 - net_practice: Ejercicios prácticos sobre configuraciones de IP y máscaras de subred.
-- cub3D: (tiene su propia entrada aparte)
+- [cub3D](https://github.com/anatermay/cub3d): (proyecto en pareja en otro repo) Simulación 3D basado en un mapa 2D con sistema de raycasting.
 - Módulos de CPP (del 00 al 04): Ejercicios introductorios a los lenguajes orientados a objetos con C++.
 
 Bonus:
