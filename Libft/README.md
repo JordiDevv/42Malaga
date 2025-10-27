@@ -1,16 +1,22 @@
 # 📚 Libft
 
-## 🔍 Overview
-The main objective of the **Libft** project is to help students gain a deep understanding of how standard C functions work by implementing them from scratch. This practice strengthens the fundamentals of C programming and promotes a solid grasp of essential concepts such as memory manipulation, string handling, linked lists, and other core principles.
+## 🔍 Descripción general
 
-## ✨ Features
-- ✅ Implementation of standard C library functions
-- 🛠️ Memory management utilities
-- 🔤 String manipulation functions
-- 🔗 Linked list operations
-- 🏗️ Other essential algorithms and utilities
+El objetivo principal del proyecto Libft es que los estudiantes comprendan
+profundamente cómo funcionan las funciones estándar de C programándolas
+desde cero. Esta práctica ayuda a fortalecer las bases de la programación en C y
+promueve el entendimiento de la manipulación de memoria, manejo de cadenas,
+listas enlazadas y otros conceptos fundamentales.
+
+## ✨ Características
+
+- ✅ Implementación de funciones de la biblioteca estándar de C
+- 🛠️ Utilidades de gestión de memoria
+- 🔤 Funciones de manipulación de cadenas
+- 🔗 Operaciones con listas enlazadas
+- 🏗️ Otros algoritmos y utilidades esenciales
 
 ---
 
-**👨‍💻 Author:** Jorge Sanz  
+**👨‍💻 Autor:** Jorge Sanz  
 **🌍 GitHub:** [JordiDevv](https://github.com/JordiDevv)
