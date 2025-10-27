@@ -1,16 +1,18 @@
 # 📄 Get Next Line
 
-## 🔍 Overview
-The **Get Next Line** project aims to implement a function in C that reads a line from a file descriptor while handling multiple descriptors simultaneously and efficiently managing dynamic memory allocation. This project helps students understand concepts such as the use of static variables and file manipulation in C.
+## 🔍 Descripción general
 
-## ✨ Features
-- ✅ Reads a line from a file descriptor
-- 🔄 Handles multiple file descriptors simultaneously
-- 🛠️ Efficient dynamic memory allocation
-- 🔢 Uses static variables for buffer management
-- 📂 Works with standard input, files, and sockets
+El proyecto **Get Next Line** busca implementar una función en C que lea una línea de un descriptor de archivo, manejando múltiples descriptores simultáneamente y gestionando eficientemente la asignación dinámica de memoria. Este proyecto ayuda a los estudiantes a comprender conceptos como el uso de variables estáticas y la manipulación de archivos en C.
+
+## ✨ Características
+
+- ✅ Lee una línea de un descriptor de archivo
+- 🔄 Maneja múltiples descriptores de archivo simultáneamente
+- 🛠️ Asignación eficiente de memoria dinámica
+- 🔢 Utiliza variables estáticas para la gestión del búfer
+- 📂 Funciona con entrada estándar, archivos y sockets
 
 ---
 
-**👨‍💻 Author:** Jorge Sanz  
+**👨‍💻 Autor:** Jorge Sanz  
 **🌍 GitHub:** [JordiDevv](https://github.com/JordiDevv)
