@@ -35,6 +35,11 @@ int main(int argc, char **argv)
         std::cout << RED << "The number of arguments is not correct." << RESET << std::endl;
         return (1);
     }
+    if (!argv[2][0])
+    {
+        std::cout << RED << "One of the strings are empty." << RESET << std::endl;
+        return (1);
+    }
     
     std::string filename = argv[1];
     std::ifstream file(filename.c_str());
