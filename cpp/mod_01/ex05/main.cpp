@@ -8,9 +8,8 @@ int main()
 
     std::string input;
     Harl harl;
-    while (1)
+    while (std::getline(std::cin, input))
     {
-        std::getline(std::cin, input);
         if (input == "EXIT") break;
 
         harl.complain(input);
