@@ -3,12 +3,11 @@ NAME = harl_2.0
 CFLAGS = -Wall -Werror -Wextra
 98STD = -std=c++98
 
-SRCS = main.cpp Harl.cpp
+SRCS = main.cpp Fixed.cpp
 DEFS = -I./defs
-HEAD = -I./headers
 
 OBJS = $(SRCS:.cpp=.o)
-INC = $(DEFS) $(HEAD)
+INC = $(DEFS)
 
 all: $(NAME)
 
