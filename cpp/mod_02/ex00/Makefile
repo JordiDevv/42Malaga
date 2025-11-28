@@ -1,4 +1,4 @@
-NAME = harl_2.0
+NAME = a.out
 
 CFLAGS = -Wall -Werror -Wextra
 98STD = -std=c++98
