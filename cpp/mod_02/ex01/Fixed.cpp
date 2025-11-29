@@ -47,7 +47,7 @@ void Fixed::setRawBits(const int raw)
 
 //Getters with parsed values
 float Fixed::toFloat() const { return (float)value / (1 << fracBits); }
-int Fixed::toInt() const { return value << fracBits; }
+int Fixed::toInt() const { return value >> fracBits; }
 
 //Overload for "<<"
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
