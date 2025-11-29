@@ -1,6 +1,8 @@
 #ifndef FIXED_HPP
 #define FIXED_HPP
 
+#include <iostream>
+
 class Fixed
 {
     private:
@@ -20,6 +22,8 @@ class Fixed
 
         float toFloat() const;
         int toInt() const;
+    
+    friend std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
 };
 
 #endif
