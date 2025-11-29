@@ -22,6 +22,23 @@ class Fixed
 
         float toFloat() const;
         int toInt() const;
+
+        bool operator>(const Fixed& toCompare) const;
+        bool operator<(const Fixed& toCompare) const;
+        bool operator>=(const Fixed& toCompare) const;
+        bool operator<=(const Fixed& toCompare) const;
+        bool operator==(const Fixed& toCompare) const;
+        bool operator!=(const Fixed& toCompare) const;
+
+        void operator+(const Fixed& addend);
+        void operator-(const Fixed& subtrahend);
+        void operator*(const Fixed& multiplier);
+        void operator/(const Fixed& divisor);
+
+        Fixed& operator++();
+        Fixed& operator--();
+        Fixed& operator++(int);
+        Fixed& operator--(int);
     
     friend std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
 };
