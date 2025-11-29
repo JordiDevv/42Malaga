@@ -7,7 +7,7 @@ Fixed::Fixed() : value(0)
 { std::cout << "Default constructor called" << std::endl; }
 
 Fixed::Fixed(const Fixed& fixed) : value(fixed.value)
-{ std::cout << "Copy assignment operator called" << std::endl; }
+{ std::cout << "Copy constructor called" << std::endl; }
 
 Fixed& Fixed::operator=(const Fixed& fixed)
 {
@@ -47,6 +47,7 @@ void Fixed::setRawBits(const int raw)
 
 //Getters with parsed values
 float Fixed::toFloat() const { return (float)value / (1 << fracBits); }
+int Fixed::toInt() const { return value << fracBits; }
 
 //Overload for "<<"
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
