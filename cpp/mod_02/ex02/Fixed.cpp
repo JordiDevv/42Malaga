@@ -58,3 +58,37 @@ std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
 
 //Overload for comparisions operators
 bool Fixed::operator>(const Fixed& toCompare) const { return this->value > toCompare.value; }
+bool Fixed::operator<(const Fixed& toCompare) const { return this->value < toCompare.value; }
+bool Fixed::operator>=(const Fixed& toCompare) const { return this->value >= toCompare.value; }
+bool Fixed::operator<=(const Fixed& toCompare) const { return this->value <= toCompare.value; }
+bool Fixed::operator==(const Fixed& toCompare) const { return this->value == toCompare.value; }
+bool Fixed::operator!=(const Fixed& toCompare) const { return this->value != toCompare.value; }
+
+//Overload for arithmetic operators
+Fixed Fixed::operator+(const Fixed& addend) const
+{
+    Fixed result;
+    result.value = this->value + addend.value;
+    return result;
+}
+
+Fixed Fixed::operator-(const Fixed& subtrahend) const
+{
+    Fixed result;
+    result.value = this->value - subtrahend.value;
+    return result;
+}
+
+Fixed Fixed::operator*(const Fixed& multiplier) const
+{
+    Fixed result;
+    result.value = this->value * multiplier.value;
+    return result;
+}
+
+Fixed Fixed::operator/(const Fixed& divisor) const
+{
+    Fixed result;
+    result.value = this->value / divisor.value;
+    return result;
+}
