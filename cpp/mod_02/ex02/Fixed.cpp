@@ -55,3 +55,6 @@ std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
     os << fixed.toFloat();
     return os;
 }
+
+//Overload for comparisions operators
+bool Fixed::operator>(const Fixed& toCompare) const { return this->value > toCompare.value; }

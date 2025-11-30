@@ -30,10 +30,10 @@ class Fixed
         bool operator==(const Fixed& toCompare) const;
         bool operator!=(const Fixed& toCompare) const;
 
-        void operator+(const Fixed& addend);
-        void operator-(const Fixed& subtrahend);
-        void operator*(const Fixed& multiplier);
-        void operator/(const Fixed& divisor);
+        Fixed operator+(const Fixed& addend) const;
+        Fixed operator-(const Fixed& subtrahend) const;
+        Fixed operator*(const Fixed& multiplier) const;
+        Fixed operator/(const Fixed& divisor) const;
 
         Fixed& operator++();
         Fixed& operator--();
