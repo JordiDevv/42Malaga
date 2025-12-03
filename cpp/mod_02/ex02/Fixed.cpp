@@ -59,14 +59,14 @@ Fixed Fixed::operator-(const Fixed& subtrahend) const
 Fixed Fixed::operator*(const Fixed& multiplier) const
 {
     Fixed result;
-    result.value = this->value * multiplier.value;
+    result.value = (this->value * multiplier.value) >> fracBits;
     return result;
 }
 
 Fixed Fixed::operator/(const Fixed& divisor) const
 {
     Fixed result;
-    result.value = this->value / divisor.value;
+    result.value = (this->value << fracBits) / divisor.value;
     return result;
 }
 
