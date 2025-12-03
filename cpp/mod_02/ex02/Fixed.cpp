@@ -92,3 +92,31 @@ Fixed Fixed::operator/(const Fixed& divisor) const
     result.value = this->value / divisor.value;
     return result;
 }
+
+//Overload for increment and decrement operators
+
+Fixed& Fixed::operator++()
+{
+    value += 1;
+    return *this;
+}
+
+Fixed& Fixed::operator--()
+{
+    value -= 1;
+    return *this;
+}
+
+Fixed Fixed::operator++(int)
+{
+    Fixed old = *this;
+    value += 1;
+    return old;
+}
+
+Fixed Fixed::operator--(int)
+{
+    Fixed old = *this;
+    value -= 1;
+    return old;
+}

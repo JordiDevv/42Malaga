@@ -37,8 +37,8 @@ class Fixed
 
         Fixed& operator++();
         Fixed& operator--();
-        Fixed& operator++(int);
-        Fixed& operator--(int);
+        Fixed operator++(int);
+        Fixed operator--(int);
     
     friend std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
 };
