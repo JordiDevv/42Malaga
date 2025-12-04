@@ -3,7 +3,7 @@ NAME = a.out
 CFLAGS = -Wall -Werror -Wextra
 98STD = -std=c++98
 
-SRCS = main.cpp Fixed.cpp
+SRCS = main.cpp bsp.cpp imps/Fixed.cpp imps/Point.cpp
 DEFS = -I./defs
 
 OBJS = $(SRCS:.cpp=.o)
