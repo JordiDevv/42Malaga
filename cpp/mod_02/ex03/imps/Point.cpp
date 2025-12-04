@@ -28,5 +28,5 @@ Point::Point(const float x, const float y) : x(x), y(y) {}
   //                      Getters                         //
  // **************************************************** //
 
-Fixed Point::getX() { return x; };
-Fixed Point::getY() { return y; };
+const Fixed Point::getX() const { return x; };
+const Fixed Point::getY() const { return y; };
