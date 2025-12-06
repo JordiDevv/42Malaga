@@ -2,19 +2,15 @@
 #include "msgs.h"
 #include <iostream>
 
-int main()
+int main(int argc, char **argv)
 {
-    std::cout << GREEN << INT_MSG << RESET;
-
-    std::string input;
-    Harl harl;
-    while (std::getline(std::cin, input))
+    if (argc != 2)
     {
-        if (input == "EXIT") break;
-
-        harl.complain(input);
+        std::cout << "You can, and have, only introduce one complaining level" << std::endl;
+        return (0);
     }
 
-    std::cout << GREEN << BYE_MSG << RESET;
+    Harl harl;
+    harl.complain(argv[1]);
     return 0;
 }

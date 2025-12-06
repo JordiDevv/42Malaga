@@ -14,4 +14,6 @@
 #define BYE_MSG "THANKS FOR USING OUR HARL SYSTEM.\n" \
                     "BYE BYE!\n"
 
+#define NO_COM "[ Probably complaining about insignificant problems ]\n"
+
 #endif
