@@ -28,10 +28,7 @@ int Fixed::toInt() const { return value >> fracBits; }
 
 //Overload for "<<"
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
-{
-    os << fixed.toFloat();
-    return os;
-}
+{ return os << fixed.toFloat(); }
 
 //Overload for comparisions operators
 bool Fixed::operator>(const Fixed& toCompare) const { return this->value > toCompare.value; }
