@@ -4,10 +4,10 @@
 
 Harl::Harl() {}
 
-void Harl::debug(void) { std::cout << GREY << "[DEBUG] message." << RESET << std::endl; }
-void Harl::info(void) { std::cout << GREY << "[INFO] message." << RESET << std::endl; }
-void Harl::warning(void) { std::cout << GREY << "[WARNING] message." << RESET << std::endl; }
-void Harl::error(void) { std::cout << GREY << "[ERROR] message." << RESET << std::endl; }
+void Harl::debug(void) { std::cout << GREY << DEBUG_MSG << RESET << std::endl; }
+void Harl::info(void) { std::cout << GREY << INFO_MSG << RESET << std::endl; }
+void Harl::warning(void) { std::cout << GREY << WARN_MSG << RESET << std::endl; }
+void Harl::error(void) { std::cout << GREY << ERR_MSG << RESET << std::endl; }
 
 void Harl::complain(std::string level)
 {
