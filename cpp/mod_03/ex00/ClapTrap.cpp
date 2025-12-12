@@ -6,11 +6,11 @@
   //              Cannonical implementations              //
  // **************************************************** //
 
-    ClapTrap::ClapTrap() { std::cout << DEF_CALL << std::endl; }
+    ClapTrap::ClapTrap() { std::cout << BLUE << DEF_CALL << RESET << std::endl; }
 
     ClapTrap::ClapTrap(const ClapTrap& ref)
     : name(name), health(health), energy(energy), attackDamage(attackDamage)
-    { std::cout << this->name << CALL << std::endl; }
+    { std::cout << this->name << BLUE << CALL << RESET << std::endl; }
 
     ClapTrap& ClapTrap::operator=(const ClapTrap& ref)
     {
@@ -28,9 +28,9 @@
     ClapTrap::~ClapTrap()
     {
         if (this->name.size())
-            std::cout << BYE << this->name << std::endl;
+            std::cout << BLUE << BYE << this->name << RESET << std::endl;
         else
-            std::cout << DEF_BYE << std::endl;
+            std::cout << BLUE << DEF_BYE << RESET << std::endl;
     }
 
 
@@ -57,7 +57,7 @@
 
     void beRepaired(unsigned int amount)
     {
-        
+
     }
 
     //ClapTrap <name> attacks <target>, causing <damage> points of damage!
