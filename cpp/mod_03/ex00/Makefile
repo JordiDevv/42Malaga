@@ -5,9 +5,10 @@ CFLAGS = -Wall -Werror -Wextra
 
 SRCS = main.cpp ClapTrap.cpp
 DEFS = -I./defs
+HEADERS = -I./headers
 
 OBJS = $(SRCS:.cpp=.o)
-INC = $(DEFS)
+INC = $(DEFS) $(HEADERS)
 
 all: $(NAME)
 
