@@ -17,7 +17,7 @@
 #define BYE "Wave bye bye to "
 #define SCAV_BYE "Wave a derived bye bye to "
 
-#define NO_HE "You should be a necromancer to make this clap trap attack"
+#define NO_HE "You should be a necromancer to make it attack"
 #define NO_EN "Give it a break"
 
 #define INT_MSG "\nToday is another great day to be alive\n" \

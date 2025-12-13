@@ -45,6 +45,7 @@
             std::cout << BLUE << DEFSCAV_BYE << RESET << std::endl;
     }
 
+
    // **************************************************** //
   //        Constructors for parameterized values         //
  // **************************************************** //
@@ -56,3 +57,42 @@
         attackDamage = 20;
         std::cout << BLUE << this->name << SCAV_CALL << RESET << std::endl;
     }
+
+
+   // **************************************************** //
+  //             Overriden Combat functions               //
+ // **************************************************** //
+
+    void ScavTrap::attack(const std::string& target)
+    {
+        if (!canTakeAction()) return printState();
+
+        std::cout << PURP << "ScavTrap " << name << " attacks " << target << ", causing "
+            << attackDamage << " points of damage!" << RESET << std::endl;
+        energy--;
+    }
+
+    void ScavTrap::takeDamage(unsigned int amount)
+    {
+        std::cout << PURP << "ScavTrap " << name << " received " << amount
+            << " points of damage!" << RESET << std::endl;
+        health -= amount;
+    }
+
+    void ScavTrap::beRepaired(unsigned int amount)
+    {
+        if (!canTakeAction()) return printState();
+
+        std::cout << PURP << "ScavTrap " << name << " restore " << amount
+             << " points of life!" << RESET << std::endl;
+
+        health += amount;
+        energy--;
+    }
+
+
+   // **************************************************** //
+  //                Own Combat functions                  //
+ // **************************************************** //
+
+ 
