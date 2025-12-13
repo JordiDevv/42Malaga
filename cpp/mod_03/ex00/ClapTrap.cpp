@@ -45,19 +45,45 @@
   //                  Combat functions                    //
  // **************************************************** //
 
-    void attack(const std::string& target)
+    void ClapTrap::attack(const std::string& target)
     {
+        if (!canTakeAction()) return printState();
 
+        std::cout << RED << "ClapTrap" << name << "attacks" << target << ", causing"
+            << attackDamage << "points of damage!" << RESET << std::endl;
+        energy--;
     }
 
-    void takeDamage(unsigned int amount)
+    void ClapTrap::takeDamage(unsigned int amount)
     {
-
+        std::cout << RED << "ClapTrap" << name << "received " << amount
+            << " points of damage!" << RESET << std::endl;
+        health -= amount;
     }
 
-    void beRepaired(unsigned int amount)
+    void ClapTrap::beRepaired(unsigned int amount)
     {
+        if (!canTakeAction()) return printState();
 
+        std::cout << RED << "ClapTrap" << name << "restore " << amount
+             << "points of life!" << RESET << std::endl;
+
+        health += amount;
+        energy--;
     }
 
-    //ClapTrap <name> attacks <target>, causing <damage> points of damage!
+
+   // **************************************************** //
+  //                  State functions                     //
+ // **************************************************** //
+
+    bool ClapTrap::canTakeAction() { return health > 0 && energy > 0; }
+
+    void ClapTrap::printState()
+    {
+        if (this->health <= 0)
+            std::cout << YELLOW << NO_HE << RESET << std::endl;
+        else if (this->energy <= 0)
+            std::cout << YELLOW << NO_EN << RESET << std::endl;
+        return ;
+    }

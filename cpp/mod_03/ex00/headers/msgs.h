@@ -4,6 +4,7 @@
 #define BLUE "\033[1;36m"
 #define RED "\033[1;30m"
 #define GREEN "\033[1;32m"
+#define YELLOW "\033[1;29m"
 #define RESET "\033[0m"
 
 #define DEF_CALL "A ClapTrap with no name has been called to the battle"
@@ -11,5 +12,8 @@
 
 #define DEF_BYE "Wave bye bye to... Well, nevermind"
 #define BYE "Wave bye bye to "
+
+#define NO_HE "You should be a necromancer to make this clap trap attack"
+#define NO_EN "Give it a break"
 
 #endif
