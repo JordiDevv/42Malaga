@@ -9,9 +9,13 @@
 
 #define DEF_CALL "A ClapTrap with no name has been called to the battle"
 #define CALL " has been called to the battle"
+#define DEFSCAV_CALL "A ScavTrap with no name has been called to the battle"
+#define SCAV_CALL " ScavTrap has been called to the battle"
 
 #define DEF_BYE "Wave bye bye to... Well, nevermind"
+#define DEFSCAV_BYE "Wave bye bye to... Well, nevermind, but it was a ScavTrap"
 #define BYE "Wave bye bye to "
+#define SCAV_BYE "Wave a derived bye bye to "
 
 #define NO_HE "You should be a necromancer to make this clap trap attack"
 #define NO_EN "Give it a break"
