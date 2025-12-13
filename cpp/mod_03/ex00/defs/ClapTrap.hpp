@@ -7,9 +7,9 @@ class ClapTrap
 {
     private:
         std::string name;
-        int health = 10;
-        int energy = 10;
-        int attackDamage = 0;
+        int health;
+        int energy;
+        int attackDamage;
     
     public:
         ClapTrap();
@@ -25,6 +25,9 @@ class ClapTrap
 
         bool canTakeAction();
         void printState();
+
+        const std::string& getName() const;
+        const int& getAttackDamage() const;
 };
 
 #endif

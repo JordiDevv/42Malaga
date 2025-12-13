@@ -6,11 +6,12 @@
   //              Cannonical implementations              //
  // **************************************************** //
 
-    ClapTrap::ClapTrap() { std::cout << BLUE << DEF_CALL << RESET << std::endl; }
+    ClapTrap::ClapTrap() : health(10), energy(10), attackDamage(0)
+    { std::cout << BLUE << DEF_CALL << RESET << std::endl; }
 
     ClapTrap::ClapTrap(const ClapTrap& ref)
-    : name(name), health(health), energy(energy), attackDamage(attackDamage)
-    { std::cout << this->name << BLUE << CALL << RESET << std::endl; }
+    : name(ref.name), health(ref.health), energy(ref.energy), attackDamage(ref.attackDamage)
+    { std::cout << BLUE << this->name << CALL << RESET << std::endl; }
 
     ClapTrap& ClapTrap::operator=(const ClapTrap& ref)
     {
@@ -38,7 +39,9 @@
   //        Constructors for parameterized values         //
  // **************************************************** //
 
-    ClapTrap::ClapTrap(const std::string& name) : name(name) {}
+    ClapTrap::ClapTrap(const std::string& name)
+    : name(name), health(10), energy(10), attackDamage(0)
+    { std::cout << BLUE << this->name << CALL << RESET << std::endl; }
 
 
    // **************************************************** //
@@ -49,14 +52,14 @@
     {
         if (!canTakeAction()) return printState();
 
-        std::cout << RED << "ClapTrap" << name << "attacks" << target << ", causing"
-            << attackDamage << "points of damage!" << RESET << std::endl;
+        std::cout << PURP << "ClapTrap " << name << " attacks " << target << ", causing "
+            << attackDamage << " points of damage!" << RESET << std::endl;
         energy--;
     }
 
     void ClapTrap::takeDamage(unsigned int amount)
     {
-        std::cout << RED << "ClapTrap" << name << "received " << amount
+        std::cout << PURP << "ClapTrap " << name << " received " << amount
             << " points of damage!" << RESET << std::endl;
         health -= amount;
     }
@@ -65,8 +68,8 @@
     {
         if (!canTakeAction()) return printState();
 
-        std::cout << RED << "ClapTrap" << name << "restore " << amount
-             << "points of life!" << RESET << std::endl;
+        std::cout << PURP << "ClapTrap " << name << " restore " << amount
+             << " points of life!" << RESET << std::endl;
 
         health += amount;
         energy--;
@@ -87,3 +90,11 @@
             std::cout << YELLOW << NO_EN << RESET << std::endl;
         return ;
     }
+
+
+   // **************************************************** //
+  //                      Getters                         //
+ // **************************************************** //
+
+    const std::string& ClapTrap::getName() const { return name; }
+    const int& ClapTrap::getAttackDamage() const { return attackDamage; }
