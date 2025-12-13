@@ -9,13 +9,13 @@
 
 #define DEF_CALL "A ClapTrap with no name has been called to the battle"
 #define CALL " has been called to the battle"
-#define DEFSCAV_CALL "A ScavTrap with no name has been called to the battle"
-#define SCAV_CALL " ScavTrap has been called to the battle"
+#define DEFSCAV_CALL "A ClapTrap with no name has evolved into a ScavTrap"
+#define SCAV_CALL " has evolved into a ScavTrap"
 
 #define DEF_BYE "Wave bye bye to... Well, nevermind"
 #define DEFSCAV_BYE "Wave bye bye to... Well, nevermind, but it was a ScavTrap"
 #define BYE "Wave bye bye to "
-#define SCAV_BYE "Wave a derived bye bye to "
+#define SCAV_BYE " power is disappearing"
 
 #define NO_HE "You should be a necromancer to make it attack"
 #define NO_EN "Give it a break"
@@ -27,6 +27,7 @@
 #define PLOT_MSG "OMG, he restored all the damage he received\n" \
                     "Wait a moment... Who are you?\n"
 #define APO_MSG "\nNow there are a lot of them, and they are mimicking\n"
+#define EVO_MSG "\nAnd now they are evolving!\n"
 #define END_MSG "\nDio, come and save us all\n"
 
 #endif

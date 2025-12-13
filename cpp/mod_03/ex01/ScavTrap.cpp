@@ -15,7 +15,7 @@
         std::cout << BLUE << DEFSCAV_CALL << RESET << std::endl;
     }
 
-    ScavTrap::ScavTrap(const ScavTrap& ref)
+    ScavTrap::ScavTrap(const ScavTrap& ref) : ClapTrap(ref)
     {
         name = ref.name;
         health = ref.health;
@@ -40,7 +40,7 @@
     ScavTrap::~ScavTrap()
     {
         if (this->name.size())
-            std::cout << BLUE << SCAV_BYE << this->name << RESET << std::endl;
+            std::cout << BLUE << this->name << SCAV_BYE << RESET << std::endl;
         else
             std::cout << BLUE << DEFSCAV_BYE << RESET << std::endl;
     }
@@ -95,4 +95,6 @@
   //                Own Combat functions                  //
  // **************************************************** //
 
- 
+    void ScavTrap::guardGate()
+    { std::cout << PURP << (!name.empty() ? name : "Default ScavTrap")
+        << " is now in Gate keeper mode" << RESET << std::endl; }

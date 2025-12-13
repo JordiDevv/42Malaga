@@ -1,4 +1,5 @@
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 #include "msgs.h"
 #include <iostream>
 
@@ -33,7 +34,18 @@ int main()
     ClapTrap clapFour(clapRonnie);
     ClapTrap clapFive(clapJames);
     ClapTrap clapSix(clapRonnie);
+
+    std::cout << BLUE << EVO_MSG << RESET << std::endl;
+    ScavTrap scavOne;
+    ScavTrap scavTwo;
+    ScavTrap scavThree;
+    ScavTrap scavManolo("Manolo");
+    ScavTrap scavJoaquin("Joaquin");
+
+    scavJoaquin.attack("public stands");
+    scavManolo.attack("World Government");
     
     std::cout << BLUE << END_MSG << RESET << std::endl;
+    scavJoaquin.guardGate();
     return 0;
 }

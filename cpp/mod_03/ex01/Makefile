@@ -3,7 +3,7 @@ NAME = a.out
 CFLAGS = -Wall -Werror -Wextra
 98STD = -std=c++98
 
-SRCS = main.cpp ClapTrap.cpp
+SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp
 DEFS = -I./defs
 HEADERS = -I./headers
 
