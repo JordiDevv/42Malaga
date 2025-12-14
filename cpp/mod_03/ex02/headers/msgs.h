@@ -8,14 +8,18 @@
 #define RESET "\033[0m"
 
 #define DEF_CALL "A ClapTrap with no name has been called to the battle"
-#define CALL " has been called to the battle"
 #define DEFSCAV_CALL "A ClapTrap with no name has evolved into a ScavTrap"
+#define DEFFRAG_CALL "A ClapTrap with no name has evolved into a FragTrap"
+#define CALL " has been called to the battle"
 #define SCAV_CALL " has evolved into a ScavTrap"
+#define FRAG_CALL " has evolved into a FragTrap"
 
 #define DEF_BYE "Wave bye bye to... Well, nevermind"
 #define DEFSCAV_BYE "Wave bye bye to... Well, nevermind, but it was a ScavTrap"
+#define DEFFRAG_BYE "Wave bye bye to... Well, nevermind, but it was a FragTrap"
 #define BYE "Wave bye bye to "
-#define SCAV_BYE " power is disappearing"
+#define SCAV_BYE " power of Scav is disappearing"
+#define FRAG_BYE " power of Frag is disappearing"
 
 #define NO_HE "You should be a necromancer to make it attack"
 #define NO_EN "Give it a break"

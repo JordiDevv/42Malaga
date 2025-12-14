@@ -3,11 +3,11 @@ NAME = a.out
 CFLAGS = -Wall -Werror -Wextra
 98STD = -std=c++98
 
-IMPS = ClapTrap.cpp ScavTrap.cpp
+IMPS = ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 IMPS_DIR = classes/imps/
 SRCS = main.cpp $(addprefix $(IMPS_DIR),$(IMPS))
 
-DEFS = -I./defs
+DEFS = -I./classes/defs
 HEADERS = -I./headers
 
 OBJS = $(SRCS:.cpp=.o)

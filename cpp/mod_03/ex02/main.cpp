@@ -1,5 +1,6 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 #include "msgs.h"
 #include <iostream>
 
@@ -42,8 +43,16 @@ int main()
     ScavTrap scavManolo("Manolo");
     ScavTrap scavJoaquin("Joaquin");
 
+    FragTrap fragOne;
+    FragTrap fragTwo;
+    FragTrap fragThre;
+    FragTrap fragOzzy("Ozzy");
+    FragTrap fragMortadelo("Mortadelo");
+
     scavJoaquin.attack("public stands");
     scavManolo.attack("World Government");
+    fragOzzy.highFivesGuys();
+    fragMortadelo.beRepaired(-10);
     
     std::cout << BLUE << END_MSG << RESET << std::endl;
     scavJoaquin.guardGate();
