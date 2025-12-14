@@ -16,24 +16,11 @@
     }
 
     ScavTrap::ScavTrap(const ScavTrap& ref) : ClapTrap(ref)
-    {
-        name = ref.name;
-        health = ref.health;
-        energy = ref.energy;
-        attackDamage = ref.attackDamage;
-        std::cout << BLUE << this->name << SCAV_CALL << RESET << std::endl;
-    }
+    { std::cout << BLUE << this->name << SCAV_CALL << RESET << std::endl; }
 
     ScavTrap& ScavTrap::operator=(const ScavTrap& ref)
     {
-        if (this != &ref)
-        {
-            this->name = ref.name;
-            this->health = ref.health;
-            this->energy = ref.energy;
-            this->attackDamage = ref.attackDamage;
-        }
-
+        if (this != &ref) { ClapTrap::operator=(ref); }
         return *this;
     }
 

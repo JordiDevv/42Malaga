@@ -16,24 +16,11 @@
     }
 
     FragTrap::FragTrap(const FragTrap& ref) : ClapTrap(ref)
-    {
-        name = ref.name;
-        health = ref.health;
-        energy = ref.energy;
-        attackDamage = ref.attackDamage;
-        std::cout << BLUE << this->name << FRAG_CALL << RESET << std::endl;
-    }
+    { std::cout << BLUE << this->name << FRAG_CALL << RESET << std::endl; }
 
     FragTrap& FragTrap::operator=(const FragTrap& ref)
     {
-        if (this != &ref)
-        {
-            this->name = ref.name;
-            this->health = ref.health;
-            this->energy = ref.energy;
-            this->attackDamage = ref.attackDamage;
-        }
-
+        if (this != &ref) { ClapTrap::operator=(ref); }
         return *this;
     }
 
