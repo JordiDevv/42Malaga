@@ -17,4 +17,9 @@
 #define CAT_DES "A cat is not a cat anymore"
 #define CAT_SOUND "*This is the sound of a cat*"
 
+#define DOG_CON "Oh, it was a dog"
+#define DOG_COPY "A dog tries to replicate another dog"
+#define DOG_DES "A dog is not a dog anymore"
+#define DOG_SOUND "*This is the sound of a dog*"
+
 #endif
