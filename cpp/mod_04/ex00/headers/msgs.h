@@ -10,5 +10,11 @@
 #define ANI_CON "An animal has appear"
 #define ANI_COPY "An animal has segregated another exactly equal animal"
 #define ANI_DES "An animal has gone into the wild"
+#define ANI_SOUND "*The sound of an unidentified animal*"
+
+#define CAT_CON "Oh, it was a cat"
+#define CAT_COPY "A cat tries to replicate another cat"
+#define CAT_DES "A cat is not a cat anymore"
+#define CAT_SOUND "*This is the sound of a cat*"
 
 #endif

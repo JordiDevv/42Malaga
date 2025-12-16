@@ -12,7 +12,8 @@ class Cat : public Animal
         Cat& operator=(const Cat& ref);
         ~Cat();
     
-        void setType();
+        const std::string getType() const;
+
         void makeSound();
 };
 
