@@ -1,6 +1,8 @@
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 #include "msgs.h"
 #include <iostream>
 
@@ -45,6 +47,11 @@ int main()
     delete animalCopy;
     delete dogCopy;
     delete catCopy;
+
+    const WrongAnimal* wrongCat = new WrongCat();
+    std::cout << PURP << wrongCat->getType() << RESET << std::endl;
+    wrongCat->makeSound();
+    delete wrongCat;
 
     return 0;
 }
