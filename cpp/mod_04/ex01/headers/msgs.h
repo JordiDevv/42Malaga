@@ -31,4 +31,8 @@
 #define W_CAT_COPY "A wrong cat tries to replicate another wrong cat, but in a right way"
 #define W_CAT_DES "A wrong cat is not wrong anymore, not even a cat"
 
+#define BRAIN_CON "A brain has been set to this animal"
+#define BRAIN_COPY "Clone Wars has begun"
+#define BRAIN_DES "This animal created a TikTok account"
+
 #endif
