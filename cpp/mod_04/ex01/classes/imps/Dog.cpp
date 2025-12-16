@@ -16,11 +16,18 @@
   }
 
   Dog::Dog(const Dog& ref) : Animal(ref)
-  { std::cout << BLUE << DOG_COPY << RESET << std::endl; }
+  {
+    brain = new Brain(*ref.brain);
+    std::cout << BLUE << DOG_COPY << RESET << std::endl;
+  }
 
   Dog& Dog::operator=(const Dog& ref)
   {
-    if (this != &ref) Animal::operator=(ref);
+    if (this != &ref)
+    {
+      Animal::operator=(ref);
+      brain = new Brain(*ref.brain);
+    }
     return *this;
   }
 

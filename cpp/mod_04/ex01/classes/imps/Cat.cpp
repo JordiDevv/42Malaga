@@ -16,11 +16,18 @@
   }
 
   Cat::Cat(const Cat& ref) : Animal(ref)
-  { std::cout << BLUE << CAT_COPY << RESET << std::endl; }
+  {
+    brain = new Brain(*ref.brain);
+    std::cout << BLUE << CAT_COPY << RESET << std::endl;
+  }
 
   Cat& Cat::operator=(const Cat& ref)
   {
-    if (this != &ref) Animal::operator=(ref);
+    if (this != &ref)
+    {
+      Animal::operator=(ref);
+      brain = new Brain(*ref.brain);
+    }
     return *this;
   }
 
