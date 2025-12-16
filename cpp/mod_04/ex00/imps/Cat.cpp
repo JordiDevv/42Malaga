@@ -14,7 +14,7 @@
   }
 
   Cat::Cat(const Cat& ref) : Animal(ref)
-  { std::cout << BLUE << ANI_COPY << RESET << std::endl; }
+  { std::cout << BLUE << CAT_COPY << RESET << std::endl; }
 
   Cat& Cat::operator=(const Cat& ref)
   {
@@ -22,7 +22,7 @@
     return *this;
   }
 
-  Cat::~Cat() { std::cout << BLUE << ANI_DES << RESET << std::endl; }
+  Cat::~Cat() { std::cout << BLUE << CAT_DES << RESET << std::endl; }
 
 
   // **************************************************** //
