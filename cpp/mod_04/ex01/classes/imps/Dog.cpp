@@ -1,5 +1,6 @@
 #include "Animal.hpp"
 #include "Dog.hpp"
+#include "Brain.hpp"
 #include "msgs.h"
 #include "iostream"
 
@@ -10,6 +11,7 @@
   Dog::Dog()
   {
     type = "Dog";
+    brain = new Brain();
     std::cout << BLUE << DOG_CON << RESET << std::endl;
   }
 
@@ -22,7 +24,11 @@
     return *this;
   }
 
-  Dog::~Dog() { std::cout << BLUE << DOG_DES << RESET << std::endl; }
+  Dog::~Dog()
+  {
+    delete brain;
+    std::cout << BLUE << DOG_DES << RESET << std::endl;
+  }
 
 
   // **************************************************** //
