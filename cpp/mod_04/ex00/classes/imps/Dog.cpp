@@ -36,4 +36,4 @@
  //                 Routine functions                    //
 // **************************************************** //
 
-  void Dog::makeSound() { std::cout << BLUE << DOG_SOUND << RESET << std::endl; }
+  void Dog::makeSound() const { std::cout << BLUE << DOG_SOUND << RESET << std::endl; }

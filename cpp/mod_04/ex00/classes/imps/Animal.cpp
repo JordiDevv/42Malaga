@@ -1,5 +1,4 @@
 #include "Animal.hpp"
-#include "Cat.hpp"
 #include "msgs.h"
 #include "iostream"
 
@@ -7,33 +6,29 @@
  //              Cannonical implementations              //
 // **************************************************** //
 
-  Cat::Cat()
-  {
-    type = "Cat";
-    std::cout << BLUE << CAT_CON << RESET << std::endl;
-  }
+  Animal::Animal() { std::cout << BLUE << ANI_CON << RESET << std::endl; }
 
-  Cat::Cat(const Cat& ref) : Animal(ref)
-  { std::cout << BLUE << CAT_COPY << RESET << std::endl; }
+  Animal::Animal(const Animal& ref) : type(ref.type)
+  { std::cout << BLUE << ANI_COPY << RESET << std::endl; }
 
-  Cat& Cat::operator=(const Cat& ref)
+  Animal& Animal::operator=(const Animal& ref)
   {
-    if (this != &ref) Animal::operator=(ref);
+    if (this != &ref) this->type = ref.type;
     return *this;
   }
 
-  Cat::~Cat() { std::cout << BLUE << CAT_DES << RESET << std::endl; }
+  Animal::~Animal() { std::cout << BLUE << ANI_DES << RESET << std::endl; }
 
-
+  
   // **************************************************** //
- //                        Getter                        //
+ //                       Getter                         //
 // **************************************************** //
 
-  const std::string Cat::getType() const { return type; }
+  const std::string Animal::getType() const { return type; }
 
 
   // **************************************************** //
  //                 Routine functions                    //
 // **************************************************** //
 
-  void Cat::makeSound() { std::cout << BLUE << CAT_SOUND << RESET << std::endl; }
+  void Animal::makeSound() const { std::cout << BLUE << ANI_SOUND << RESET << std::endl; }
