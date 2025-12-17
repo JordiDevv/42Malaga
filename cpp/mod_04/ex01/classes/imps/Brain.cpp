@@ -22,3 +22,13 @@
   }
 
   Brain::~Brain() { std::cout << BLUE << BRAIN_DES << RESET << std::endl; }
+
+  // **************************************************** //
+ //                  Getters & Setters                   //
+// **************************************************** //
+
+  const std::string Brain::getIdea(const int& i) const
+  { return ideas[i]; }
+  
+  void Brain::setIdea(const int& i, const std::string& idea)
+  { ideas[i] = idea; }

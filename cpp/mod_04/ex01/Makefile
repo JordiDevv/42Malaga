@@ -3,7 +3,7 @@ NAME = a.out
 CFLAGS = -Wall -Werror -Wextra
 98STD = -std=c++98
 
-IMPS = Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
+IMPS = Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 IMPS_DIR = classes/imps/
 SRCS = main.cpp $(addprefix $(IMPS_DIR),$(IMPS))
 

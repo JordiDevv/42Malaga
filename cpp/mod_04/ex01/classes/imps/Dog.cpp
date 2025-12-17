@@ -26,6 +26,7 @@
     if (this != &ref)
     {
       Animal::operator=(ref);
+      delete brain;
       brain = new Brain(*ref.brain);
     }
     return *this;
@@ -39,10 +40,16 @@
 
 
   // **************************************************** //
- //                        Getter                        //
+ //                  Getters & Setters                   //
 // **************************************************** //
 
   const std::string Dog::getType() const { return type; }
+
+  const std::string Dog::getIdea(const int& i) const
+  { return brain->getIdea(i); }
+
+  void Dog::setIdea(const int& i, const std::string& idea)
+  { brain->setIdea(i, idea); }
 
 
   // **************************************************** //

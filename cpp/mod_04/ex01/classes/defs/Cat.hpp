@@ -18,6 +18,9 @@ class Cat : public Animal
     
         const std::string getType() const;
 
+        const std::string getIdea(const int& i) const;
+        void setIdea(const int& i, const std::string& idea);
+
         void makeSound() const;
 };
 

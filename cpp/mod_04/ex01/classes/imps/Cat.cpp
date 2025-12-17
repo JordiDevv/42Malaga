@@ -39,10 +39,16 @@
 
 
   // **************************************************** //
- //                        Getter                        //
+ //                  Getters & Setters                   //
 // **************************************************** //
 
   const std::string Cat::getType() const { return type; }
+
+  const std::string Cat::getIdea(const int& i) const
+  { return brain->getIdea(i); }
+
+  void Cat::setIdea(const int& i, const std::string& idea)
+  { brain->setIdea(i, idea); }
 
 
   // **************************************************** //

@@ -1,57 +1,50 @@
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "WrongAnimal.hpp"
-#include "WrongCat.hpp"
 #include "msgs.h"
 #include <iostream>
 
 int main()
 {
-    const Animal* animal = new Animal();
-    const Animal* dog = new Dog();
-    const Animal* cat = new Cat();
+    std::cout << "=== Polymorphism test ===" << std::endl;
+    const Animal* j = new Dog();
+    const Animal* i = new Cat();
 
-    std::cout << PURP << dog->getType() << RESET << std::endl;
-    std::cout << PURP << cat->getType() << RESET << std::endl;
+    delete j;
+    delete i;
 
-    cat->makeSound();
-    dog->makeSound();
-    animal->makeSound();
+    std::cout << "\n=== Array of Animals ===" << std::endl;
+    const Animal* animals[4];
 
-    delete animal;
-    delete dog;
-    delete cat;
+    for (int k = 0; k < 2; k++)
+        animals[k] = new Dog();
+    for (int k = 2; k < 4; k++)
+        animals[k] = new Cat();
 
-    const Animal* animal1 = new Animal();
-    const Dog* dog1 = new Dog();
-    const Cat* cat1 = new Cat();
+    for (int k = 0; k < 4; k++)
+        delete animals[k];
 
-    const Animal* animalCopy = new Animal(*animal1);
-    const Dog* dogCopy = new Dog(*dog1);
-    const Animal* catCopy = new Cat(*cat1);
+    std::cout << "\n=== Deep copy test ===" << std::endl;
+    Dog basic;
+    basic.setIdea(0, "I want food");
 
-    std::cout << PURP << dogCopy->getType() << RESET << std::endl;
-    std::cout << PURP << catCopy->getType() << RESET << std::endl;
+    Dog copy(basic);
+    copy.setIdea(0, "I want sleep");
 
-    catCopy->makeSound();
-    dogCopy->makeSound();
-    animalCopy->makeSound();
+    std::cout << "Basic idea: " << basic.getIdea(0) << std::endl;
+    std::cout << "Copy idea:  " << copy.getIdea(0) << std::endl;
 
-    Dog dog2 = *dogCopy;
-    std::cout << PURP << dog2.getType() << RESET << std::endl;
+    std::cout << "\n=== Assignment operator test ===" << std::endl;
+    Dog a;
+    Dog b;
 
-    delete animal1;
-    delete dog1;
-    delete cat1;
-    delete animalCopy;
-    delete dogCopy;
-    delete catCopy;
+    a.setIdea(0, "Idea A");
+    b = a;
 
-    const WrongAnimal* wrongCat = new WrongCat();
-    std::cout << PURP << wrongCat->getType() << RESET << std::endl;
-    wrongCat->makeSound();
-    delete wrongCat;
+    b.setIdea(0, "Idea B");
+
+    std::cout << "A idea: " << a.getIdea(0) << std::endl;
+    std::cout << "B idea: " << b.getIdea(0) << std::endl;
 
     return 0;
 }
