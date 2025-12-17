@@ -73,4 +73,5 @@
   //              Existentialist functions                //
  // **************************************************** //
 
-
+    void DiamondTrap::whoAmI()
+    { std::cout << BLUE << "I am " << name << " son of " << ClapTrap::name << RESET << std::endl; }

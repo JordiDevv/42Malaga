@@ -22,7 +22,7 @@ class DiamondTrap : public ScavTrap, public FragTrap
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
 
-        //void whoAmI();
+        void whoAmI();
 };
 
 #endif

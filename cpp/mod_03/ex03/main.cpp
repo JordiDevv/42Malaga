@@ -1,6 +1,7 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 #include "msgs.h"
 #include <iostream>
 
@@ -53,6 +54,9 @@ int main()
     scavManolo.attack("World Government");
     fragOzzy.highFivesGuys();
     fragMortadelo.beRepaired(-10);
+
+    DiamondTrap diaTrap("Diamond King");
+    diaTrap.whoAmI();
     
     std::cout << BLUE << END_MSG << RESET << std::endl;
     scavJoaquin.guardGate();
