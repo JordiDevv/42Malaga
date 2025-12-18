@@ -7,7 +7,7 @@
 class AMateria
 {
     protected:
-        std::string type;
+        const std::string type;
 
     public:
         AMateria();

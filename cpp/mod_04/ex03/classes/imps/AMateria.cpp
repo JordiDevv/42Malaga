@@ -10,7 +10,7 @@
 
     AMateria& AMateria::operator=(const AMateria& ref)
     {
-        if (this != &ref) this->type = ref.type;
+        (void)ref;
         return *this;
     }
 
@@ -21,7 +21,7 @@
  //               Parameterized Constructor              //
 // **************************************************** //
 
-    AMateria::AMateria(const std::string& type) { this->type = type; }
+    AMateria::AMateria(const std::string& type) : type(type) {}
 
 
   // **************************************************** //
