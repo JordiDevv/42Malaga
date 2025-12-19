@@ -41,9 +41,16 @@
 
 
   // **************************************************** //
- //                   Virtual Methods                    //
+ //                 Character Interface                  //
 // **************************************************** //
 
-    // AMateria* Cure::clone() const { return new Cure(); }
-    // void Cure::use(ICharacter& target)
-    // { std::cout << "* heals " << target.getName() << "’s wounds *" << std::endl; }
+    const std::string& Character::getName() const { return name; }
+
+    void Character::equip(AMateria* m)
+    { for (int i = 0; i < 4; i++) if (!inventory[i]) inventory[i] = m; }
+
+    void Character::unequip(int idx)
+    { if (inventory[idx]) inventory[idx] = nullptr; }
+
+    void Character::use(int idx, ICharacter& target)
+    { if (inventory[idx]) inventory[idx]->use(target); }
