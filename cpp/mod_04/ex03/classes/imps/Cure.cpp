@@ -1,6 +1,7 @@
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
 #include "Cure.hpp"
+#include <iostream>
 
   // **************************************************** //
  //              Cannonical implementations              //
@@ -23,4 +24,5 @@
 // **************************************************** //
 
     AMateria* Cure::clone() const { return new Cure(); }
-    
+    void Cure::use(ICharacter& target)
+    { std::cout << "* heals " << target.getName() << "’s wounds *" << std::endl; }
