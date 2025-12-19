@@ -1,6 +1,7 @@
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
 #include "Ice.hpp"
+#include <iostream>
 
   // **************************************************** //
  //              Cannonical implementations              //
@@ -22,4 +23,5 @@
  //                   Virtual Methods                    //
 // **************************************************** //
 
+    AMateria* Ice::clone() const { return new Ice(); }
     

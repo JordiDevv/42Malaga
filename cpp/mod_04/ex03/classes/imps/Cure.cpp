@@ -22,4 +22,5 @@
  //                   Virtual Methods                    //
 // **************************************************** //
 
+    AMateria* Cure::clone() const { return new Cure(); }
     
