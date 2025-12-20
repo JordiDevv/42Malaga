@@ -41,3 +41,14 @@
   // **************************************************** //
  //               MateriaSource Interface                //
 // **************************************************** //
+
+    void MateriaSource::learnMateria(AMateria* m)
+    { for (int i = 0; i < 4; i++) if (!materias[i]) materias[i] = m->clone(); }
+
+    AMateria* MateriaSource::createMateria(const std::string& type)
+    {
+        for (int i = 0; i < 4; i++)
+            if (materias[i]->getType() == type) return materias[i]->clone();
+        return NULL;
+    }
+    

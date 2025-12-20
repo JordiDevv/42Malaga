@@ -16,7 +16,7 @@ class MateriaSource : public IMateriaSource
         MateriaSource& operator=(const MateriaSource& ref);
         ~MateriaSource();
 
-        void learnMateria(AMateria*);
+        void learnMateria(AMateria* m);
         AMateria* createMateria(const std::string& type);
 };
 
