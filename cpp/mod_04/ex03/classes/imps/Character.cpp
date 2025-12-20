@@ -55,7 +55,16 @@
     const std::string& Character::getName() const { return name; }
 
     void Character::equip(AMateria* m)
-    { for (int i = 0; i < 4; i++) if (!inventory[i]) inventory[i] = m; }
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (!inventory[i])
+            {
+                inventory[i] = m;
+                break ;
+            }
+        }
+    }
 
     void Character::unequip(int idx)
     { if (inventory[idx]) inventory[idx] = NULL; }
