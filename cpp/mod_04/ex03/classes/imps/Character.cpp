@@ -7,7 +7,7 @@
  //              Cannonical implementations              //
 // **************************************************** //
 
-    Character::Character() { for (int i = 0; i < 4; i++) inventory[i] = nullptr; }
+    Character::Character() { for (int i = 0; i < 4; i++) inventory[i] = NULL; }
 
     Character::Character(const Character& ref) : name(ref.name)
     {
@@ -16,7 +16,7 @@
             if (ref.inventory[i])
                 this->inventory[i] = ref.inventory[i]->clone();
             else
-                this->inventory[i] = nullptr;
+                this->inventory[i] = NULL;
         }
     }
 
@@ -29,7 +29,7 @@
             for (int i = 0; i < 4; i++)
             {
                 delete this->inventory[i];
-                this->inventory[i] = nullptr;
+                this->inventory[i] = NULL;
                 if (ref.inventory[i])
                     this->inventory[i] = ref.inventory[i]->clone();
             }
@@ -50,7 +50,7 @@
     { for (int i = 0; i < 4; i++) if (!inventory[i]) inventory[i] = m; }
 
     void Character::unequip(int idx)
-    { if (inventory[idx]) inventory[idx] = nullptr; }
+    { if (inventory[idx]) inventory[idx] = NULL; }
 
     void Character::use(int idx, ICharacter& target)
     { if (inventory[idx]) inventory[idx]->use(target); }
