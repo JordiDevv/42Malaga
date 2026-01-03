@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-ROOT_PASS=$(cat $MYSQL_ROOT_PASSWORD_FILE)
-DB_USER_PASS=$(cat $MYSQL_DB_USER_PASS_FILE)
+ROOT_PASS=$(cat $WP_DB_ROOT_PASS)
+DB_USER_PASS=$(cat $WP_DB_USER_PASS)
 
 mysqld_safe --skip-networking & pid="$!"
 

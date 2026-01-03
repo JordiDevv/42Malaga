@@ -1,0 +1,34 @@
+services:
+  mariadb:
+    container_name: mariadb
+    build:
+      context: ./srcs/requirements/mariadb
+    image: inception-mariadb
+    restart: on-failure:3
+    env_file:
+      - .env
+    secrets:
+      - wp_db_root_pass
+      - wp_db_user_pass
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - inception
+
+secrets:
+  wp_db_root_pass:
+    file: ./secrets/wp_db_root_pass.txt
+  wp_db_user_pass:
+    file: ./secrets/wp_db_user_pass.txt
+
+volumes:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/jsanz-bo/data/mariadb
+
+networks:
+  inception:
+    driver: bridge
