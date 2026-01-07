@@ -27,7 +27,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/jsanz-bo/data/mariadb
+      device: /home/${USER}/data/mariadb
 
 networks:
   inception:
