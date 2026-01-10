@@ -23,5 +23,8 @@ fclean:
 	@printf "Stopping the server and deleting Docker volumes and built images...\n"
 	@$(COMPOSE) down -v --rmi all
 
+delete:
+	@printf "Deleting all data...\n"
+	@sudo rm -rf $(DATA_DIR)
+
 re: fclean all
-	@printf "Rebuilding all the infrastructure from zero...\n"
