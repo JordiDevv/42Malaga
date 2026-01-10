@@ -2,7 +2,7 @@ services:
   mariadb:
     container_name: mariadb
     build:
-      context: ./srcs/requirements/mariadb
+      context: ./requirements/mariadb
     image: inception-mariadb
     restart: on-failure:3
     env_file:
@@ -17,9 +17,9 @@ services:
 
 secrets:
   wp_db_root_pass:
-    file: ./secrets/wp_db_root_pass.txt
+    file: ../secrets/wp_db_root_pass.txt
   wp_db_user_pass:
-    file: ./secrets/wp_db_user_pass.txt
+    file: ../secrets/wp_db_user_pass.txt
 
 volumes:
   mariadb_data:

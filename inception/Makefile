@@ -1,16 +1,27 @@
 DATA_DIR = /home/$(USER)/data
+COMPOSE = docker compose -f srcs/docker-compose.yml --env-file srcs/.env
 
 all: volumes up
 
 volumes:
-	mkdir -p $(DATA_DIR)/mariadb
-	mkdir -p $(DATA_DIR)/wordpress
+	@printf "Building the volumes...\n"
+	@mkdir -p $(DATA_DIR)/mariadb $(DATA_DIR)/wordpress
 
 up:
-	docker compose up --build
+	@printf "Configurating and initializing the server...\n"
+	@$(COMPOSE) up --build
 
 down:
-	docker compose down
+	@printf "Stopping the server...\n"
+	@$(COMPOSE) down
 
 clean:
-	docker compose down -v
+	@printf "Stopping the server and deleting Docker volumes...\n"
+	@$(COMPOSE) down -v
+
+fclean:
+	@printf "Stopping the server and deleting Docker volumes and built images...\n"
+	@$(COMPOSE) down -v --rmi all
+
+re: fclean all
+	@printf "Rebuilding all the infrastructure from zero...\n"
