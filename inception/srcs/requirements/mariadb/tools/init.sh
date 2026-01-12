@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 # We ensure ownership for the mysql user and the temporary directory for mysql daemon
 chown -R mysql:mysql /var/lib/mysql
@@ -11,10 +10,11 @@ ROOT_PASS=$(cat $WP_DB_ROOT_PASS)
 DB_USER_PASS=$(cat $WP_DB_USER_PASS)
 
 # We check if MariaDB was initialized before
-if [ ! -d "/var/lib/mysql/mysql" ]; then
+if [ ! -f "/var/lib/mysql/.initialized" ]; then
 
 # ------------- INITIALIZE THE TEMPORARY SERVER AND WAIT FOR THE SOCKET --------------------
 
+    touch /var/lib/mysql/.initialized
     mariadb-install-db --user=mysql --datadir=/var/lib/mysql
 
     /usr/sbin/mariadbd --user=mysql --datadir=/var/lib/mysql --skip-networking &
@@ -26,7 +26,7 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
         sleep 1
         ((i++))
         if [ "$i" -gt 30 ]; then
-            echo "Error initializing the MariaDB server. Aborting...\n"
+            echo -e "Error initializing the MariaDB server. Aborting...\n"
             exit 1
         fi
     done

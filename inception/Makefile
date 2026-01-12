@@ -25,6 +25,7 @@ fclean:
 
 delete:
 	@printf "Deleting all data...\n"
-	@sudo rm -rf $(DATA_DIR)
+	@sudo rm -rf $(DATA_DIR)/mariadb
+	@sudo rm -rf $(DATA_DIR)/wordpress
 
 re: fclean all
