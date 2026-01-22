@@ -2,11 +2,12 @@
 FROM debian:bookworm
 
 # Update the package manager
-# Install OpenSSL
+# Install Nginx & OpenSSL
 # Clean cache
 RUN apt-get update && \
-    apt-get install -y openssl && \
-    apt-get clean
+    apt-get install -y nginx openssl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Create directoy for the certificates
 # Generate certificate and key, autosigned and passing the subject information for no interaction
