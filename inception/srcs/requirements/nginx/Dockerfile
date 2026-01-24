@@ -11,12 +11,12 @@ RUN apt-get update && \
 
 # Create directoy for the certificates
 # Generate certificate and key, autosigned and passing the subject information for no interaction
-RUN mkdir -p /etc/nginx/certs && \
+RUN mkdir -p /etc/nginx/ssl && \
     openssl req -x509 -nodes -days 365 \
         -subj "/C=ES/ST=Malaga/L=Malaga/O=42/OU=Inception/CN=jsanz-bo.42.fr" \
         -newkey rsa:2048 \
-        -keyout /etc/nginx/certs/nginx.key \
-        -out /etc/nginx/certs/nginx.crt
+        -keyout /etc/nginx/ssl/nginx.key \
+        -out /etc/nginx/ssl/nginx.crt
 
 # We copy the conf file into the container
 COPY conf/nginx.conf /etc/nginx/nginx.conf
