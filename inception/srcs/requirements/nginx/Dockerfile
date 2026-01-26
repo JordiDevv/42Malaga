@@ -22,4 +22,5 @@ RUN mkdir -p /etc/nginx/ssl && \
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 # We run the container with the nginx process in PID 1
-CMD [ "nginx", "-g", "daemon off;"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
+
