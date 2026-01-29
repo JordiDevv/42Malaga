@@ -32,6 +32,8 @@ services:
     restart: on-failure:3
     env_file:
       - .env
+    secrets:
+      - wp_db_user_pass
     depends_on:
       - mariadb
     volumes:
@@ -57,7 +59,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /var/www/html
+      device: /home/${USER}/data/wordpress
 
 networks:
   inception:

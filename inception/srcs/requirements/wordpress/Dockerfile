@@ -29,5 +29,9 @@ RUN curl -o /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
 # Give ownership to www-data user
 RUN chown -R www-data:www-data /var/www/html
 
-# Run php interpreter in PID 1
-CMD ["php-fpm8.2", "-F"]
+# We copy the init file into the container and give executing permissions
+COPY tools/init.sh /init.sh
+RUN chmod +x /init.sh
+
+# We initialize the container with the init file
+ENTRYPOINT [ "/init.sh" ]
