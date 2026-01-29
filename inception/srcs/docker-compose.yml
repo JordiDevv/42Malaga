@@ -14,7 +14,6 @@ services:
       - mariadb_data:/var/lib/mysql
     networks:
       - inception
-
   nginx:
     container_name: nginx
     build:
@@ -23,6 +22,20 @@ services:
     restart: on-failure:3
     ports:
       - "443:443"
+    networks:
+      - inception
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress
+    image: inception-wordpress
+    restart: on-failure:3
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    volumes:
+      - wp_data
     networks:
       - inception
 
@@ -39,6 +52,12 @@ volumes:
       type: none
       o: bind
       device: /home/${USER}/data/mariadb
+  wp_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /var/www/html
 
 networks:
   inception:
