@@ -22,6 +22,8 @@ services:
     restart: on-failure:3
     ports:
       - "443:443"
+    volumes:
+      - wp_data:/var/www/html
     networks:
       - inception
   wordpress:
@@ -37,7 +39,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - wp_data
+      - wp_data:/var/www/html
     networks:
       - inception
 
