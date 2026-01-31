@@ -18,8 +18,9 @@ RUN mkdir -p /etc/nginx/ssl && \
         -keyout /etc/nginx/ssl/nginx.key \
         -out /etc/nginx/ssl/nginx.crt
 
-# We copy the conf file into the container
+# We copy the conf files into the container
 COPY conf/nginx.conf /etc/nginx/nginx.conf
+COPY conf/wp_server.conf /etc/nginx/conf.d/wp_server.conf
 
 # We run the container with the nginx process in PID 1
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
