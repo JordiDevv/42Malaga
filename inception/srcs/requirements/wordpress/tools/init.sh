@@ -3,8 +3,14 @@
 # If any process returns a non-zero value, the script stops
 set -e
 
-# Read the password hidden in the secret file
+# Some vars for the content in secrets
+ROOT_PASS=$(cat $WP_DB_ROOT_PASS)
 DB_USER_PASS=$(cat $WP_DB_USER_PASS)
+
+# We wait 'til MariaDB is ready
+until mariadb -h mariadb -u root -p"$ROOT_PASS" -e "select 1;" &>/dev/null; do
+    sleep 1
+done
 
 # We check if Wordpress has been already configurated
 if [ ! -f /var/www/html/wp-config.php ]; then
