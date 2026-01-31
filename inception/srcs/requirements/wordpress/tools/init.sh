@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# If any process returns a value non-zero, the script stops
+# If any process returns a non-zero value, the script stops
 set -e
 
 # Read the password hidden in the secret file
@@ -11,7 +11,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 
 # ---------------------- SET THE CONFIG FILE FOR OUR WORDPRESS -----------------------------
 
-    echo "Configuring WordPress...\n"
+    echo "Configuring WordPress..."
 
     cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 
