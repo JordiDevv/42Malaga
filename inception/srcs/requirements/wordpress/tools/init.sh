@@ -39,9 +39,9 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     wp core install \
         --url="https://jsanz-bo.42.fr" \
         --title="Inception" \
-        --admin_user="${WP_ADMIN}" \
-        --admin_password="${WP_ADMIN_PASS}" \
-        --admin_email="${WP_ADMIN_EMAIL}" \
+        --admin_user="$WP_ADMIN" \
+        --admin_password="$WP_ADMIN_PASS" \
+        --admin_email="$WP_ADMIN_EMAIL" \
         --path=/var/www/html \
         --allow-root
 
@@ -50,9 +50,10 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 # ----------------------------- CREATE A REGULAR USER --------------------------------------
 
     wp user create \
-    ${WP_USER} ${WP_USER_EMAIL} \
-    --user_pass="${WP_USER_PASS}" \
+    "$WP_USER" "$WP_USER_EMAIL" \
+    --user_pass="$WP_USER_PASS" \
     --role=subscriber \
+    --path=/var/www/html \
     --allow-root
 
 # ------------------------------------------------------------------------------------------
