@@ -4,8 +4,8 @@
 set -e
 
 # Some vars for the content in secrets
-ROOT_PASS=$(cat $WP_DB_ROOT_PASS)
 DB_USER_PASS=$(cat $WP_DB_USER_PASS)
+WP_ADMIN_PASS=$(cat $WP_ADMIN_PASS)
 
 # We wait 'til MariaDB is ready
 until nc -z "$WP_DB_HOST" 3306; do
@@ -31,6 +31,20 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     echo " Configuration successful..."
 
 # -------------------------------------------------------------------------------------------
+
+# ------------------------------- INSTALL WORDPRESS -----------------------------------------
+
+    echo "Installing WordPress..."
+    wp core install \
+        --url="https://jsanz-bo.42.fr" \
+        --title="Inception" \
+        --admin_user="${WP_ADMIN}" \
+        --admin_password="${WP_ADMIN_PASS}" \
+        --admin_email="${WP_ADMIN_EMAIL}" \
+        --path=/var/www/html \
+        --allow-root
+
+# -------------------------------------------------------------------------------------
 
 fi
 

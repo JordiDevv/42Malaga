@@ -31,6 +31,13 @@ RUN curl -o /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
     tar -xzf /tmp/wordpress.tar.gz -C /usr/src && \
     rm /tmp/wordpress.tar.gz
 
+# Install WP-CLI
+# Give permissions
+# Move it to bin directory to be able to use it globally
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x wp-cli.phar && \
+    mv wp-cli.phar /usr/local/bin/wp
+
 # Give ownership to www-data user
 RUN chown -R www-data:www-data /var/www/html
 

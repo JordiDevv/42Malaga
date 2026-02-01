@@ -37,8 +37,8 @@ services:
     env_file:
       - .env
     secrets:
-      - wp_db_root_pass
       - wp_db_user_pass
+      - wp_admin_pass
     depends_on:
       - mariadb
     volumes:
@@ -51,6 +51,8 @@ secrets:
     file: ../secrets/wp_db_root_pass.txt
   wp_db_user_pass:
     file: ../secrets/wp_db_user_pass.txt
+  wp_admin_pass:
+    file: ../secrets/wp_admin_pass.txt
 
 volumes:
   mariadb_data:
