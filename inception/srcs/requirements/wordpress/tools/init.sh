@@ -29,7 +29,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     sed -i "s/password_here/${DB_USER_PASS}/" /var/www/html/wp-config.php
     sed -i "s/localhost/${WP_DB_HOST}/" /var/www/html/wp-config.php
 
-    echo " Configuration successful..."
+    echo "Configuration successful..."
 
 # ------------------------------------------------------------------------------------------
 
