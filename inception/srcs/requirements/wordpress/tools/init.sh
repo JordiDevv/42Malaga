@@ -28,9 +28,12 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     sed -i "s/password_here/${DB_USER_PASS}/" /var/www/html/wp-config.php
     sed -i "s/localhost/${WP_DB_HOST}/" /var/www/html/wp-config.php
 
+    echo " Configuration successful..."
+
 # -------------------------------------------------------------------------------------------
 
 fi
 
+echo "Running WordPress in PID 1..."
 # Run the php interpeter in PID 1
 exec php-fpm8.2 -F
