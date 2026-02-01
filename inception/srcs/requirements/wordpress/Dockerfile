@@ -20,10 +20,11 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir -p /var/www/html
 
 # Download last wordpress version
-# Unzip Wordpress into our Wordpress root directory (directly, by deleting wordpress/ subdirectory)
+# Unzip Wordpress into the src system user directory,
+#  for copying it later into our WordPress root directory
 # Remove the downloaded zip
 RUN curl -o /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
-    tar -xzf /tmp/wordpress.tar.gz -C /var/www/html --strip-components=1 && \
+    tar -xzf /tmp/wordpress.tar.gz -C /usr/src && \
     rm /tmp/wordpress.tar.gz
 
 # Give ownership to www-data user

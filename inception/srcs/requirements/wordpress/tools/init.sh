@@ -19,6 +19,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 
     echo "Configuring WordPress..."
 
+    cp -r /usr/src/wordpress/* /var/www/html/
     cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 
     sed -i "s/database_name_here/${WP_DB}/" /var/www/html/wp-config.php
