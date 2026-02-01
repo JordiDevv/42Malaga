@@ -6,6 +6,7 @@ set -e
 # Some vars for the content in secrets
 DB_USER_PASS=$(cat $WP_DB_USER_PASS)
 WP_ADMIN_PASS=$(cat $WP_ADMIN_PASS)
+WP_USER_PASS=$(cat $WP_USER_PASS)
 
 # We wait 'til MariaDB is ready
 until nc -z "$WP_DB_HOST" 3306; do
@@ -30,9 +31,9 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 
     echo " Configuration successful..."
 
-# -------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------
 
-# ------------------------------- INSTALL WORDPRESS -----------------------------------------
+# ------------------------------- INSTALL WORDPRESS ----------------------------------------
 
     echo "Installing WordPress..."
     wp core install \
@@ -44,7 +45,17 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --path=/var/www/html \
         --allow-root
 
-# -------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------
+
+# ----------------------------- CREATE A REGULAR USER --------------------------------------
+
+    wp user create \
+    ${WP_USER} ${WP_USER_EMAIL} \
+    --user_pass="${WP_USER_PASS}" \
+    --role=subscriber \
+    --allow-root
+
+# ------------------------------------------------------------------------------------------
 
 fi
 
