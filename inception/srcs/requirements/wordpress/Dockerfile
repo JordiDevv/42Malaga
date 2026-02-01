@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     php8.2-zip \
     curl \
     ca-certificates \
+    netcat-openbsd \
     && apt-get clean
 
 # Create root directory for Wordpress
