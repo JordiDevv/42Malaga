@@ -9,6 +9,7 @@ DB_USER_PASS=$(cat $WP_DB_USER_PASS)
 
 # We wait 'til MariaDB is ready
 until mariadb -h "$WP_DB_HOST" -u root -p"$ROOT_PASS" -e "select 1;" &>/dev/null; do
+    echo "Waiting MariaDB for being prepared..."
     sleep 1
 done
 
