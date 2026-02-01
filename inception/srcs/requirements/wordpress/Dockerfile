@@ -17,6 +17,9 @@ RUN apt-get update && apt-get install -y \
     netcat-openbsd \
     && apt-get clean
 
+# Configure PHP-FPM to listen on TCP port 9000 instead of Unix socket
+RUN sed -i 's|^listen =.*|listen = 0.0.0.0:9000|' /etc/php/8.2/fpm/pool.d/www.conf
+
 # Create root directory for Wordpress
 RUN mkdir -p /var/www/html
 
