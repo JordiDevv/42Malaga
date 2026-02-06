@@ -3,7 +3,7 @@ services:
     container_name: mariadb
     build:
       context: ./requirements/mariadb
-    image: inception-mariadb
+    image: mariadb
     restart: on-failure:3
     env_file:
       - .env
@@ -18,7 +18,7 @@ services:
     container_name: nginx
     build:
       context: ./requirements/nginx
-    image: inception-nginx
+    image: nginx
     restart: on-failure:3
     depends_on:
       - wordpress
@@ -32,7 +32,7 @@ services:
     container_name: wordpress
     build:
       context: ./requirements/wordpress
-    image: inception-wordpress
+    image: wordpress
     restart: on-failure:3
     env_file:
       - .env
