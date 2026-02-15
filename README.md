@@ -32,6 +32,11 @@ M4:
 - [cub3D](https://github.com/anatermay/cub3d): (proyecto en pareja en otro repo) Simulación 3D basado en un mapa 2D con sistema de raycasting.
 - Módulos de CPP (del 00 al 04): Ejercicios introductorios a los lenguajes orientados a objetos con C++.
 
+M5:
+- inception: Crear una infraestructura de servicios dockerizados con docker-compose.
+- Módulos de CPP (del 05 al 09): Ejercicios con nociones avanzadas de los lenguajes orientados a objetos con C++.
+- ft_irc: (proyecto en equipo en otro repo) Recreación de un servidor IRC.
+
 Bonus:
 - Un subdirectorio "Dash" con algunos retos que lanza la escuela eventualmente para resolver en ese momento en el campus.
 
