@@ -21,3 +21,10 @@
 
     Bureaucrat::Bureaucrat(const std::string& name, const int& grade)
     : name(name), grade(grade) {}
+
+  // **************************************************** //
+ //                      Getters                         //
+// **************************************************** //
+
+    const std::string& Bureaucrat::getName() const { return name; }
+    const int& Bureaucrat::getGrade() const { return grade; }
