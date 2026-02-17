@@ -3,6 +3,7 @@
 
 #include <string>
 #include <exception>
+#include <iostream>
 
 class Bureaucrat
 {

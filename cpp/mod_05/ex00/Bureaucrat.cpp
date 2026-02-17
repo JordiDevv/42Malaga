@@ -1,5 +1,7 @@
 #include "Bureaucrat.hpp"
+#include <string>
 #include <iostream>
+#include <exception>
 
   // **************************************************** //
  //              Cannonical implementations              //
@@ -47,6 +49,7 @@
         if (grade - 1 < 1) throw GradeTooHighException();
         grade--;
     }
+
     void Bureaucrat::decGrade()
     {
         if (grade + 1 > 150) throw GradeTooLowException();
