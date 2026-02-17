@@ -6,7 +6,8 @@
 int main()
 {
     Bureaucrat ann;
-    bool test1 = true;
+    bool test1 = false;
+    bool test2 = false;
 
     if (test1)
     {
@@ -14,6 +15,31 @@ int main()
         catch(const std::exception& e)
         { std::cerr << e.what() << std::endl; }
     }
+
+    std::cout << ann << std::endl;
+
+    Bureaucrat ann2(ann);
+
+    try { ann2.incGrade(); }
+    catch(const std::exception& e)
+    { std::cerr << e.what() << std::endl; }
+
+    if (test2)
+    {
+        for (int i = ann2.getGrade(); i > 0; i--)
+        {
+            try { ann2.incGrade(); }
+            catch(const std::exception& e)
+            { std::cerr << e.what() << std::endl; }
+        }
+    }
+
+    std::cout << ann2 << std::endl;
+
+    ann2 = ann;
+    std::cout << ann2 << std::endl;
+
+    
     
     return (0);
 }
