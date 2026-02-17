@@ -22,7 +22,12 @@
 // **************************************************** //
 
     Bureaucrat::Bureaucrat(const std::string& name, const int& grade)
-    : name(name), grade(grade) {}
+    : name(name)
+    {
+        if (grade < 1) throw GradeTooHighException();
+        if (grade > 150) throw GradeTooLowException();
+        this->grade = grade;
+    }
 
 
   // **************************************************** //
