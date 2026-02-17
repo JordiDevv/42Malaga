@@ -39,7 +39,9 @@ int main()
     ann2 = ann;
     std::cout << ann2 << std::endl;
 
-    
+    Bureaucrat alfonso("Alfonso", 1);
+    std::cout << alfonso << std::endl;
+    Bureaucrat mafalda("Mafalda", 0);
     
     return (0);
 }
