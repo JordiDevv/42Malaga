@@ -39,9 +39,19 @@ int main()
     ann2 = ann;
     std::cout << ann2 << std::endl;
 
-    Bureaucrat alfonso("Alfonso", 1);
-    std::cout << alfonso << std::endl;
-    Bureaucrat mafalda("Mafalda", 0);
+    Bureaucrat maybeAlfonso;
+    try
+    {
+        Bureaucrat alfonso("Alfonso", 1);
+        maybeAlfonso = alfonso;
+    }
+    catch(const std::exception& e)
+    { std::cerr << e.what() << std::endl; }
+    std::cout << maybeAlfonso << std::endl;
+
+    try { Bureaucrat mafalda("Mafalda", 0); }
+    catch(const std::exception& e)
+    { std::cerr << e.what() << std::endl; }
     
     return (0);
 }
