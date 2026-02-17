@@ -63,3 +63,15 @@
     const char* Bureaucrat::GradeTooLowException::what() const throw()
     { return "Bureaucrat grade too low"; }
 
+
+  // **************************************************** //
+ //             Overload for "<<" operator               //
+// **************************************************** //
+
+    std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat)
+    {
+        return os   << bureaucrat.getName()
+                    << ", bureaucrat grade "
+                    << bureaucrat.getGrade()
+                    << ".";
+    }
