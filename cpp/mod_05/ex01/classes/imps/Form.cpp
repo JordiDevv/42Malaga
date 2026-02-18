@@ -50,6 +50,18 @@
         return grade;
     }
 
+
+  // **************************************************** //
+ //                   Sign methods                       //
+// **************************************************** //
+
+    void Form::beSigned(const Bureaucrat& bureaucrat)
+    {
+        if (bureaucrat.getGrade() <= gradeToSign) isSigned = true;
+        else GradeTooLowException();
+    }
+
+
   // **************************************************** //
  //                 Exception classes                    //
 // **************************************************** //

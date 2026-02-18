@@ -29,7 +29,7 @@ class Form
 
         int validGrade(const int& grade);
 
-        void beSigned(const Bureaucrat& Bureaucrat);
+        void beSigned(const Bureaucrat& bureaucrat);
 
         class GradeTooHighException : public std::exception
         {
