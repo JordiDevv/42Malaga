@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <string>
 #include <iostream>
 #include <exception>
@@ -54,6 +55,16 @@
     {
         if (grade + 1 > 150) throw GradeTooLowException();
         grade++;
+    }
+
+
+  // **************************************************** //
+ //                   Sign methods                       //
+// **************************************************** //
+
+    void Bureaucrat::signForm(Form& form) const
+    {
+
     }
 
   // **************************************************** //
