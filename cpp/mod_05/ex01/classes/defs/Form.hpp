@@ -2,6 +2,8 @@
 #define FORM_HPP
 
 #include <string>
+#include <exception>
+#include <iostream>
 #include "Bureaucrat.hpp"
 
 class Form
