@@ -67,7 +67,7 @@
         try
         {
             form.beSigned(*this);
-            std::cout << "Yes" << std::endl;
+            std::cout << name << " signed " << form.getName() << std::endl;
         }
         catch(const Form::GradeTooLowException& e)
         { std::cerr << e.what() << std::endl; }
