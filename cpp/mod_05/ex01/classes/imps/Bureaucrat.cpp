@@ -64,7 +64,13 @@
 
     void Bureaucrat::signForm(Form& form) const
     {
-
+        try
+        {
+            form.beSigned(*this);
+            std::cout << "Yes" << std::endl;
+        }
+        catch(const Form::GradeTooLowException& e)
+        { std::cerr << e.what() << std::endl; }
     }
 
   // **************************************************** //
