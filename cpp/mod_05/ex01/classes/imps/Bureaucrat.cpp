@@ -70,7 +70,14 @@
             std::cout << name << " signed " << form.getName() << std::endl;
         }
         catch(const Form::GradeTooLowException& e)
-        { std::cerr << e.what() << std::endl; }
+        { 
+            std::cerr   << name
+                        << " couldn't sign "
+                        << form.getName()
+                        << " because "
+                        << e.what()
+                        << std::endl;
+        }
     }
 
   // **************************************************** //
