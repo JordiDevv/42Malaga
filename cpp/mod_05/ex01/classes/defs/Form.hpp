@@ -17,7 +17,7 @@ class Form
         Form& operator=(const Form& ref);
         ~Form();
 
-        Form(const std::string& name, const int& grade);
+        Form(const std::string& name, const int& gradeToSign, const int& gradeToExec);
 
         const std::string& getName() const;
         const bool& getIfSigned() const;
