@@ -54,7 +54,7 @@ int main()
     }
     else std::cerr << "Bureaucrat or form wasn't well initialized" << std::endl;
 
-    // Inc Severus Grade for a success signing
+    // INC SERVERUS GRADE FOR A SUCCESS SIGNING
     if (severus) severus->incGrade();
     if (formB33)
     {
@@ -62,6 +62,7 @@ int main()
         std::cout << *formB33 << std::endl;
     }
 
+    // FREE ALL THE USED POINTERS
     if (formB32) delete formB32;
     if (severus) delete severus;
     if (formB33) delete formB33;
