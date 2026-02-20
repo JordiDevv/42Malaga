@@ -19,7 +19,7 @@ class AForm
         AForm();
         AForm(const AForm& ref);
         AForm& operator=(const AForm& ref);
-        ~AForm();
+        virtual ~AForm();
 
         AForm(const std::string& name, const int& gradeToSign, const int& gradeToExec);
 
