@@ -53,13 +53,21 @@
 
 
   // **************************************************** //
- //                   Sign methods                       //
+ //                 Actions methods                      //
 // **************************************************** //
 
     void AForm::beSigned(const Bureaucrat& bureaucrat)
     {
         if (bureaucrat.getGrade() <= gradeToSign) isSigned = true;
         else throw GradeTooLowException();
+    }
+
+    void AForm::execute(const Bureaucrat& executor) const
+    {
+        if (!isSigned) throw AForm::FormNotSignedException();
+        if (executor.getGrade() > gradeToExec) throw AForm::GradeTooLowException();
+
+        executeBehaviour();
     }
 
 
@@ -72,6 +80,9 @@
 
     const char* AForm::GradeTooLowException::what() const throw()
     { return "Bureaucrat grade too low"; }
+
+    const char* AForm::FormNotSignedException::what() const throw()
+    { return "This form is not signed."; }
 
 
   // **************************************************** //
