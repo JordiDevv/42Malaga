@@ -31,3 +31,13 @@
 
     RobotomyRequestForm::RobotomyRequestForm(const std::string& target) 
     : AForm("RobotomyRequestForm", 72, 45), target(target) {}
+
+
+  // **************************************************** //
+ //                  Actions methods                     //
+// **************************************************** //
+
+    void RobotomyRequestForm::executeBehaviour() const
+    {
+
+    }

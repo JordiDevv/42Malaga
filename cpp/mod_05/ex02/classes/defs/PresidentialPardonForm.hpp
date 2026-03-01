@@ -9,6 +9,9 @@ class PresidentialPardonForm : public AForm
     private:
         std::string target;
 
+    protected:
+        virtual void executeBehaviour() const;
+
     public:
         PresidentialPardonForm();
         PresidentialPardonForm(const PresidentialPardonForm& ref);

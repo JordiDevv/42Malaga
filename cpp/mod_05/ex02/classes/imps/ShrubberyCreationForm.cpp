@@ -31,3 +31,13 @@
 
     ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) 
     : AForm("ShrubberyCreationForm", 145, 137), target(target) {}
+
+
+  // **************************************************** //
+ //                  Actions methods                     //
+// **************************************************** //
+
+    void ShrubberyCreationForm::executeBehaviour() const
+    {
+
+    }

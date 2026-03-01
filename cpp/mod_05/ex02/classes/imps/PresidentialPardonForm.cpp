@@ -31,3 +31,13 @@
 
     PresidentialPardonForm::PresidentialPardonForm(const std::string& target) 
     : AForm("PresidentialPardonForm", 25, 5), target(target) {}
+
+
+  // **************************************************** //
+ //                  Actions methods                     //
+// **************************************************** //
+
+    void PresidentialPardonForm::executeBehaviour() const
+    {
+
+    }

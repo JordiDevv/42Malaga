@@ -9,6 +9,9 @@ class RobotomyRequestForm : public AForm
     private:
         std::string target;
 
+    protected:
+        virtual void executeBehaviour() const;
+
     public:
         RobotomyRequestForm();
         RobotomyRequestForm(const RobotomyRequestForm& ref);
