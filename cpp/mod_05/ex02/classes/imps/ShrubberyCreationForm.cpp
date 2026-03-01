@@ -1,6 +1,7 @@
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include <string>
+#include <fstream>
 
   // **************************************************** //
  //              Cannonical implementations              //
@@ -39,5 +40,13 @@
 
     void ShrubberyCreationForm::executeBehaviour() const
     {
+        std::ofstream file(target + "_shrubbery");
 
+        if (!file.is_open()) throw std::ios_base::failure("Failed to create shrubbery file");
+
+        file    << "   1   " << std::endl
+                << "  111  " << std::endl
+                << " 11111 " << std::endl
+                << "   1   " << std::endl;
+        file.close();
     }

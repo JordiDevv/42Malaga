@@ -40,12 +40,7 @@
 
     void RobotomyRequestForm::executeBehaviour() const
     {
-        if (rand() % 2)
-        {
-            std::cout   << "*Some drilling noises* "
-                        << target
-                        << " has been robotomized."
-                        << std::endl;
-        }
-        else { std::cout << "Robotomy failed." << std::endl; }
+        std::cout << "*Some drilling noises*" << std::endl;
+        if (rand() % 2) std::cout << target << " has been robotomized." << std::endl;
+        else std::cout << "Robotomy failed." << std::endl;
     }
