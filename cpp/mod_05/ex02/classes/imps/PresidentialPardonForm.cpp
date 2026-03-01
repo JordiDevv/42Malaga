@@ -39,5 +39,5 @@
 
     void PresidentialPardonForm::executeBehaviour() const
     {
-
+        std::cout << target << "has been pardoned by Zaphod Beeblebrox." << std::endl;
     }
