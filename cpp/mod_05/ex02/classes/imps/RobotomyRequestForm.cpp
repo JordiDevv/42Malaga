@@ -23,3 +23,11 @@
     }
 
     RobotomyRequestForm::~RobotomyRequestForm() {}
+
+
+  // **************************************************** //
+ //              Parameterized constructors              //
+// **************************************************** //
+
+    RobotomyRequestForm::RobotomyRequestForm(const std::string& target) 
+    : AForm("RobotomyRequestForm", 72, 45), target(target) {}

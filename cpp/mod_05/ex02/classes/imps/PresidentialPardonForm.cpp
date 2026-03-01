@@ -7,7 +7,7 @@
 // **************************************************** //
 
     PresidentialPardonForm::PresidentialPardonForm()
-    : AForm("PresidentialPardonForm", 25, 5), target(target) {}
+    : AForm("PresidentialPardonForm", 25, 5), target("default") {}
 
     PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& ref)
     : AForm(ref), target(ref.target) {}
@@ -23,3 +23,11 @@
     }
 
     PresidentialPardonForm::~PresidentialPardonForm() {}
+
+
+  // **************************************************** //
+ //              Parameterized constructors              //
+// **************************************************** //
+
+    PresidentialPardonForm::PresidentialPardonForm(const std::string& target) 
+    : AForm("PresidentialPardonForm", 25, 5), target(target) {}
