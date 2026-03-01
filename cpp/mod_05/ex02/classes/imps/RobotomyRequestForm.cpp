@@ -1,6 +1,7 @@
 #include "AForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include <string>
+#include <cstdlib>
 
   // **************************************************** //
  //              Cannonical implementations              //
@@ -39,5 +40,12 @@
 
     void RobotomyRequestForm::executeBehaviour() const
     {
-
+        if (rand() % 2)
+        {
+            std::cout   << "*Some drilling noises* "
+                        << target
+                        << " has been robotomized."
+                        << std::endl;
+        }
+        else { std::cout << "Robotomy failed." << std::endl; }
     }
