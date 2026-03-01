@@ -59,7 +59,7 @@
 
 
   // **************************************************** //
- //                   Sign methods                       //
+ //                   Form methods                       //
 // **************************************************** //
 
     void Bureaucrat::signForm(AForm& form) const
@@ -73,6 +73,24 @@
         { 
             std::cerr   << name
                         << " couldn't sign "
+                        << form.getName()
+                        << " because "
+                        << e.what()
+                        << std::endl;
+        }
+    }
+
+    void Bureaucrat::executeForm(const AForm& form) const
+    {
+        try
+        {
+            form.execute(*this);
+            std::cout << name << " executed " << form.getName() << std::endl;
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr   << name
+                        << " couldn't execute "
                         << form.getName()
                         << " because "
                         << e.what()
