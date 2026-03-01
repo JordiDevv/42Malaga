@@ -3,7 +3,8 @@ NAME = bureaucrat
 CFLAGS = -Wall -Werror -Wextra
 STD = -std=c++98
 
-IMPS = Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp
+IMPS = 	Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp \
+		PresidentialPardonForm.cpp
 IMPS_DIR = classes/imps/
 SRCS = main.cpp $(addprefix $(IMPS_DIR),$(IMPS))
 

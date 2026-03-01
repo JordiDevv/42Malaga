@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include <string>
 #include <iostream>
 #include <exception>
@@ -62,14 +62,14 @@
  //                   Sign methods                       //
 // **************************************************** //
 
-    void Bureaucrat::signForm(Form& form) const
+    void Bureaucrat::signForm(AForm& form) const
     {
         try
         {
             form.beSigned(*this);
             std::cout << name << " signed " << form.getName() << std::endl;
         }
-        catch(const Form::GradeTooLowException& e)
+        catch(const AForm::GradeTooLowException& e)
         { 
             std::cerr   << name
                         << " couldn't sign "
