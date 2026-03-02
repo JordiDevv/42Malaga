@@ -17,7 +17,7 @@ int main()
     Bureaucrat pedro("Pedro", 10);
     Bureaucrat arnold("Arnold", 1);
 
-    ShrubberyCreationForm shu(".");
+    ShrubberyCreationForm shu("my_awesome");
     RobotomyRequestForm robo("Pepe");
     PresidentialPardonForm pre("Oriol Junqueras");
 
