@@ -32,6 +32,18 @@
     {
         const std::string forms[3] =
         { "shrubbery creation", "robotomy request", "presidential pardon"};
-        FormsFactory formCreationFuncs[3] =
+        FormsFactory formsCreators[3] =
         { createShrubberyCreation, createRobotomyRequest, createPresidentialPardon };
+
+        for (int i = 0; i < 3; i++)
+        {
+            if (name == forms[i])
+            {
+                AForm *newForm = formsCreators[i](target);
+                std::cout << "Intern has created " << newForm->getName() << std::endl;
+                return newForm;
+            }
+        }
+
+        std::cerr << "That's not one of our forms" << std::endl;
     }
