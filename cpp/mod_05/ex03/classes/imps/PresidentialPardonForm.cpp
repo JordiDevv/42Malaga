@@ -1,0 +1,41 @@
+#include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include <string>
+
+  // **************************************************** //
+ //              Cannonical implementations              //
+// **************************************************** //
+
+    PresidentialPardonForm::PresidentialPardonForm()
+    : AForm("PresidentialPardonForm", 25, 5), target("default") {}
+
+    PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& ref)
+    : AForm(ref), target(ref.target) {}
+
+    PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& ref)
+    {
+        if (this != &ref)
+        {
+            AForm::operator=(ref);
+            this->target = ref.target;
+        }
+        return *this;
+    }
+
+    PresidentialPardonForm::~PresidentialPardonForm() {}
+
+
+  // **************************************************** //
+ //              Parameterized constructors              //
+// **************************************************** //
+
+    PresidentialPardonForm::PresidentialPardonForm(const std::string& target) 
+    : AForm("PresidentialPardonForm", 25, 5), target(target) {}
+
+
+  // **************************************************** //
+ //                  Actions methods                     //
+// **************************************************** //
+
+    void PresidentialPardonForm::executeBehaviour() const
+    { std::cout << target << " has been pardoned by Zaphod Beeblebrox." << std::endl; }
