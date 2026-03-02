@@ -4,6 +4,8 @@
 #include "AForm.hpp"
 #include <string>
 
+typedef AForm *(*FormsFactory)(const std::string &target);
+
 class Intern
 {
     public:
