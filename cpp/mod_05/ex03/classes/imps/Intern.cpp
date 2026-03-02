@@ -10,8 +10,8 @@
 // **************************************************** //
 
     Intern::Intern() {}
-    Intern::Intern(const Intern& ref) {}
-    Intern& Intern::operator=(const Intern& ref) {}
+    Intern::Intern(const Intern& ref) { (void)ref; }
+    Intern& Intern::operator=(const Intern& ref) { (void)ref; return *this; }
     Intern::~Intern() {}
 
 
@@ -46,4 +46,5 @@
         }
 
         std::cerr << "That's not one of our forms" << std::endl;
+        return NULL;
     }

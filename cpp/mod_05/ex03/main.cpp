@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "Intern.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -10,34 +11,25 @@
 int main()
 {
     srand(time(0));
-    
-    Bureaucrat pepe("Pepe", 150);
-    Bureaucrat paco("Paco", 140);
-    Bureaucrat pipo("Pipo", 50);
-    Bureaucrat pedro("Pedro", 10);
-    Bureaucrat arnold("Arnold", 1);
 
-    ShrubberyCreationForm shu("my_awesome");
-    RobotomyRequestForm robo("Pepe");
-    PresidentialPardonForm pre("Oriol Junqueras");
+    Intern intern;
+    AForm* shu;
+    AForm* robo;
+    AForm* presi;
+    Bureaucrat ronnie("Ronnie Radke", 1);
 
-    pepe.signForm(shu);
-    paco.signForm(shu);
-    pepe.executeForm(shu);
-    paco.executeForm(shu);
-    pipo.executeForm(shu);
+    shu = intern.makeForm("shrubbery creation", "coconut");
+    robo = intern.makeForm("robotomy request", "Pedro Sánchez");
+    presi = intern.makeForm("fake form", "Jim Carrey");
+    presi = intern.makeForm("presidential pardon", "Puigdemont");
 
-    paco.signForm(robo);
-    pipo.signForm(robo);
-    paco.executeForm(robo);
-    pipo.executeForm(robo);
-    pedro.executeForm(robo);
+    ronnie.executeForm(*shu);
+    ronnie.executeForm(*robo);
+    ronnie.executeForm(*presi);
 
-    pipo.signForm(pre);
-    pedro.signForm(pre);
-    pipo.executeForm(pre);
-    pedro.executeForm(pre);
-    arnold.executeForm(pre);
+    delete shu;
+    delete robo;
+    delete presi;
 
     return 0;
 }
