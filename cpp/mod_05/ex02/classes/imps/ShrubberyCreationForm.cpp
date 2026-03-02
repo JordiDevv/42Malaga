@@ -40,7 +40,8 @@
 
     void ShrubberyCreationForm::executeBehaviour() const
     {
-        std::ofstream file(target + "_shrubbery");
+        std::string filename = target + "_shrubbery";
+        std::ofstream file(filename.c_str());
 
         if (!file.is_open()) throw std::ios_base::failure("Failed to create shrubbery file");
 
