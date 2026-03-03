@@ -14,6 +14,7 @@
 			if (isdigit(literal.c_str()[0])) return "int";
 			return "char";
 		}
+		return "impossible";
 	}
 
 	void ScalarConverter::convert(const std::string& literal)
