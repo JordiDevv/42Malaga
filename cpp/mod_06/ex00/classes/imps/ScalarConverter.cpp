@@ -2,6 +2,7 @@
 #include <string>
 #include <cctype>
 #include <iostream>
+#include <cstdlib>
 
   // **************************************************** //
  //                      Printers                        //
@@ -25,7 +26,8 @@
 
 	void intFlow(const std::string& literal)
 	{
-		std::cout << literal << std::endl;
+		int n = atoi(literal.c_str());
+		charPrinter(n);
 	}
 
 	void charFlow(const std::string& literal)
