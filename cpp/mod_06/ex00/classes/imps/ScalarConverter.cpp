@@ -4,6 +4,38 @@
 #include <iostream>
 
   // **************************************************** //
+ //                      Printers                        //
+// **************************************************** //
+
+	void charPrinter(const int& c)
+	{
+		std::cout << "char: ";
+
+		if (c < 0 || c > 127) std::cout << "impossible";
+		else if (!isprint(c)) std::cout << "Non displayable";
+		else std::cout << (char)c;
+
+		std::cout << std::endl;
+	}
+
+
+  // **************************************************** //
+ //                       Flows                          //
+// **************************************************** //
+
+	void intFlow(const std::string& literal)
+	{
+		std::cout << literal << std::endl;
+	}
+
+	void charFlow(const std::string& literal)
+	{
+		int c = literal[0];
+		charPrinter(c);
+	}
+
+
+  // **************************************************** //
  //                  Converter method                    //
 // **************************************************** //
 
@@ -14,17 +46,7 @@
 			if (isdigit(literal.c_str()[0])) return "int";
 			return "char";
 		}
-		return "impossible";
-	}
-
-	void intFlow(const std::string& literal)
-	{
-		std::cout << literal << std::endl;
-	}
-
-	void charFlow(const std::string& literal)
-	{
-		std::cout << literal << std::endl;
+		return "Please, type any literal: char, int, float, or double";
 	}
 
 	void ScalarConverter::convert(const std::string& literal)
