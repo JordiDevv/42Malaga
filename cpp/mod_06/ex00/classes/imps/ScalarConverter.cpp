@@ -55,6 +55,7 @@
 			if (isdigit(literal.c_str()[0])) return "int";
 			return "char";
 		}
+		if (atoi(literal.c_str())) return "int";
 		return "Please, type any literal: char, int, float, or double";
 	}
 
