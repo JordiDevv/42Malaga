@@ -19,6 +19,11 @@
 		std::cout << std::endl;
 	}
 
+	void intPrinter(const int& n)
+	{
+		std::cout << "int: " << n << std::endl;
+	}
+
 
   // **************************************************** //
  //                       Flows                          //
@@ -28,12 +33,14 @@
 	{
 		int n = atoi(literal.c_str());
 		charPrinter(n);
+		intPrinter(n);
 	}
 
 	void charFlow(const std::string& literal)
 	{
 		int c = literal[0];
 		charPrinter(c);
+		intPrinter(c);
 	}
 
 
@@ -53,8 +60,8 @@
 
 	void ScalarConverter::convert(const std::string& literal)
 	{
-		std::string types[2] = { "int", "char" };
-		ConverterFlows converterFlows[2] = { intFlow, charFlow };
+		std::string types[2] = { "char", "int" };
+		ConverterFlows converterFlows[2] = { charFlow, intFlow };
 
 		std::string type;
 		type = parser(literal);
