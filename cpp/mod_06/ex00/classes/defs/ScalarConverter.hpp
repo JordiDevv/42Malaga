@@ -3,6 +3,8 @@
 
 #include <string>
 
+typedef void (*ConverterFlows)(const std::string &literal);
+
 class ScalarConverter
 {
     private:
