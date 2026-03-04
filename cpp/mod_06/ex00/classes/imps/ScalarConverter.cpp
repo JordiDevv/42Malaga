@@ -45,19 +45,30 @@
 
 
   // **************************************************** //
- //                  Converter method                    //
+ //                       Parser                         //
 // **************************************************** //
+
+	bool isChar(const std::string& literal)
+	{ return (literal.length() == 1 && !isdigit(literal[0])); }
+
+	bool isInt(const std::string& literal)
+	{
+		char* end;
+		strtol(literal.c_str(), &end, 10);
+		return (*end == 0);
+	}
 
 	std::string parser(const std::string& literal)
 	{
-		if (literal.length() == 1)
-		{
-			if (isdigit(literal.c_str()[0])) return "int";
-			return "char";
-		}
-		if (atoi(literal.c_str())) return "int";
+		if (isChar(literal)) return "char";
+		if (isInt(literal)) return "int";
+
 		return "Please, type any literal: char, int, float, or double";
 	}
+
+  // **************************************************** //
+ //                  Converter method                    //
+// **************************************************** //
 
 	void ScalarConverter::convert(const std::string& literal)
 	{
