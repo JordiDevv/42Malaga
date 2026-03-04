@@ -3,6 +3,8 @@
 #include <cctype>
 #include <iostream>
 #include <cstdlib>
+#include <cerrno>
+#include <climits>
 
   // **************************************************** //
  //                      Printers                        //
@@ -53,9 +55,11 @@
 
 	bool isInt(const std::string& literal)
 	{
+		errno = 0;
 		char* end;
-		strtol(literal.c_str(), &end, 10);
-		return (*end == 0);
+
+		long value = strtol(literal.c_str(), &end, 10);
+		return (*end == 0 && errno != ERANGE && value < INT_MAX && value > INT_MIN);
 	}
 
 	std::string parser(const std::string& literal)
