@@ -53,21 +53,48 @@
 	bool isChar(const std::string& literal)
 	{ return (literal.length() == 1 && !isdigit(literal[0])); }
 
-	bool isInt(const std::string& literal)
+	bool inRange(const std::string& literal)
 	{
 		errno = 0;
 		char* end;
 
 		long value = strtol(literal.c_str(), &end, 10);
-		return (*end == 0 && errno != ERANGE && value < INT_MAX && value > INT_MIN);
+		return (errno != ERANGE && value < INT_MAX && value > INT_MIN);
+	}
+
+	std::string isValid(const std::string& literal)
+	{
+		int invalidDot = 1;
+
+		for (int i = 0; i < literal.length(); i++)
+		{
+			if (!isdigit(literal[i]))
+			{
+				if (i + 1 == literal.length())
+				{
+					if (literal[i] == 'f' && !invalidDot) return "float";
+					else return "Not valid";
+				}
+				if (literal[i] == '.') invalidDot--;
+				if (invalidDot || literal[i] != '.') return "Not valid";
+			}
+		}
+
+		return invalidDot ? "int" : "double";
 	}
 
 	std::string parser(const std::string& literal)
 	{
-		if (isChar(literal)) return "char";
-		if (isInt(literal)) return "int";
+		std::string type;
 
-		return "Please, type any literal: char, int, float, or double";
+		if (isChar(literal)) type = "char";
+		else
+		{
+			type = isValid(literal);
+			if (type != "Not valid")
+				if (!inRange(literal)) type = "Not valid";
+		}
+		return type;
 	}
 
   // **************************************************** //
