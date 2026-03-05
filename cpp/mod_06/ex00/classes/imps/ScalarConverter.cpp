@@ -75,10 +75,11 @@
 
 	std::string isValid(const std::string& literal)
 	{
-		if (!isdigit(literal[0])) return "Not valid";
+		if (!isdigit(literal[0]) && literal[0] != '+' && literal[0] != '-')
+			return "Not valid";
 		int invalidDot = 1;
 
-		for (unsigned int i = 0; i < literal.length(); i++)
+		for (unsigned int i = 1; i < literal.length(); i++)
 		{
 			if (!isdigit(literal[i]))
 			{
