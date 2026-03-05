@@ -64,6 +64,7 @@
 
 	std::string isValid(const std::string& literal)
 	{
+		if (!isdigit(literal[0])) return "Not valid";
 		int invalidDot = 1;
 
 		for (unsigned int i = 0; i < literal.length(); i++)
@@ -72,7 +73,8 @@
 			{
 				if (i + 1 == literal.length())
 				{
-					if (literal[i] == 'f' && !invalidDot) return "float";
+					if (literal[i] == 'f' && !invalidDot && isdigit(literal[i - 1]))
+						return "float";
 					else return "Not valid";
 				}
 				if (literal[i] == '.') invalidDot--;
