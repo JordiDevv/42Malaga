@@ -27,6 +27,11 @@
 		std::cout << "int: " << n << std::endl;
 	}
 
+	void floatPrinter(const float& f)
+	{
+		std::cout << "float: " << f << std::endl;
+	}
+
 
   // **************************************************** //
  //                       Flows                          //
@@ -37,6 +42,7 @@
 		int n = atoi(literal.c_str());
 		charPrinter(n);
 		intPrinter(n);
+		std::cout << "float: " << n << ".0f" << std::endl;
 	}
 
 	void charFlow(const std::string& literal)
@@ -44,6 +50,7 @@
 		int c = literal[0];
 		charPrinter(c);
 		intPrinter(c);
+		std::cout << "float: " << c << ".0f" << std::endl;
 	}
 
 
