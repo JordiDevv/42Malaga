@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <cerrno>
 #include <climits>
+#include <cfloat>
 
   // **************************************************** //
  //                      Printers                        //
@@ -53,13 +54,23 @@
 	bool isChar(const std::string& literal)
 	{ return (literal.length() == 1 && !isdigit(literal[0])); }
 
-	bool inRange(const std::string& literal)
+	bool inRange(const std::string& literal, const std::string& type)
 	{
 		errno = 0;
 		char* end;
 
-		long value = strtol(literal.c_str(), &end, 10);
-		return (errno != ERANGE && value < INT_MAX && value > INT_MIN);
+		if (type == "int")
+		{
+			long value = strtol(literal.c_str(), &end, 10);
+			return (errno != ERANGE && value <= INT_MAX && value >= INT_MIN);
+		}
+		if (type == "float")
+		{
+			float value = strtof(literal.c_str(), &end);
+			return (errno != ERANGE && value <= FLT_MAX && value >= -FLT_MAX);
+		}
+		double value = strtod(literal.c_str(), &end);
+		return (errno != ERANGE && value <= DBL_MAX && value >= -DBL_MAX);
 	}
 
 	std::string isValid(const std::string& literal)
@@ -94,7 +105,7 @@
 		{
 			type = isValid(literal);
 			if (type != "Not valid")
-				if (!inRange(literal)) type = "Not valid";
+				if (!inRange(literal, type)) type = "Not valid";
 		}
 		return type;
 	}
