@@ -3,7 +3,7 @@
 
 #include <string>
 
-typedef void (*ConverterFlows)(const std::string &literal);
+typedef void (*ConverterFlows)(const std::string& literal, const std::string& type);
 
 class ScalarConverter
 {

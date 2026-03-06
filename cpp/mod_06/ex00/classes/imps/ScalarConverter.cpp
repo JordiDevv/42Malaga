@@ -37,7 +37,15 @@
  //                       Flows                          //
 // **************************************************** //
 
-	void intFlow(const std::string& literal)
+	void charFlow(const std::string& literal, const std::string& type)
+	{
+		int c = literal[0];
+		charPrinter(c);
+		intPrinter(c);
+		std::cout << "float: " << c << ".0f" << std::endl;
+	}
+
+	void intFlow(const std::string& literal, const std::string& type)
 	{
 		int n = atoi(literal.c_str());
 		charPrinter(n);
@@ -45,12 +53,14 @@
 		std::cout << "float: " << n << ".0f" << std::endl;
 	}
 
-	void charFlow(const std::string& literal)
+	void floatFlow(const std::string& literal, const std::string& type)
 	{
-		int c = literal[0];
-		charPrinter(c);
-		intPrinter(c);
-		std::cout << "float: " << c << ".0f" << std::endl;
+		char *end;
+		float f = strtof(literal.c_str(), &end);
+
+		charPrinter(f);
+		intPrinter(f);
+
 	}
 
 
@@ -124,17 +134,17 @@
 
 	void ScalarConverter::convert(const std::string& literal)
 	{
-		std::string types[2] = { "char", "int" };
-		ConverterFlows converterFlows[2] = { charFlow, intFlow };
+		std::string types[3] = { "char", "int", "float" };
+		ConverterFlows converterFlows[3] = { charFlow, intFlow, floatFlow };
 
 		std::string type;
 		type = parser(literal);
 
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			if (type == types[i])
 			{
-				converterFlows[i](literal);
+				converterFlows[i](literal, type);
 				return ;
 			}
 		}
