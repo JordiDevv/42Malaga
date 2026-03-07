@@ -6,6 +6,7 @@
 #include <cerrno>
 #include <climits>
 #include <cfloat>
+#include <iomanip>
 
   // **************************************************** //
  //                      Printers                        //
@@ -29,7 +30,7 @@
 
 	void floatPrinter(const float& f)
 	{
-		std::cout << "float: " << f << std::endl;
+		std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
 	}
 
 
@@ -37,30 +38,31 @@
  //                       Flows                          //
 // **************************************************** //
 
-	void charFlow(const std::string& literal, const std::string& type)
+	void charFlow(char* c, int* n, float* f)
 	{
-		int c = literal[0];
-		charPrinter(c);
-		intPrinter(c);
-		std::cout << "float: " << c << ".0f" << std::endl;
+		charPrinter(*c);
+		*n = static_cast<int>(*c);
+		intPrinter(*n);
+		*f = static_cast<float>(*c);
+		floatPrinter(*f);
 	}
 
-	void intFlow(const std::string& literal, const std::string& type)
+	void intFlow(char* c, int* n, float* f)
 	{
-		int n = atoi(literal.c_str());
-		charPrinter(n);
-		intPrinter(n);
-		std::cout << "float: " << n << ".0f" << std::endl;
+		*c = static_cast<char>(*n);
+		charPrinter(*c);
+		intPrinter(*n);
+		*f = static_cast<float>(*n);
+		floatPrinter(*f);
 	}
 
-	void floatFlow(const std::string& literal, const std::string& type)
+	void floatFlow(char* c, int* n, float* f)
 	{
-		char *end;
-		float f = strtof(literal.c_str(), &end);
-
-		charPrinter(f);
-		intPrinter(f);
-
+		*c = static_cast<char>(*f);
+		charPrinter(*c);
+		*n = static_cast<float>(*f);
+		intPrinter(*n);
+		floatPrinter(*f);
 	}
 
 
@@ -140,11 +142,20 @@
 		std::string type;
 		type = parser(literal);
 
+		char *end;
+		char c;
+		int n;
+		float f;
+
+		if (type == "char") c = literal[0];
+		else if (type == "int") n = atoi(literal.c_str());
+		else if (type == "float") f = strtof(literal.c_str(), &end);
+
 		for (int i = 0; i < 3; i++)
 		{
 			if (type == types[i])
 			{
-				converterFlows[i](literal, type);
+				converterFlows[i](&c, &n, &f);
 				return ;
 			}
 		}
