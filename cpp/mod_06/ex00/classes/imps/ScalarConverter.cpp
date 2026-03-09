@@ -12,25 +12,33 @@
  //                      Printers                        //
 // **************************************************** //
 
-	void charPrinter(const int& c)
+	void charPrinter(char c, bool possible)
 	{
 		std::cout << "char: ";
 
-		if (c < 0 || c > 127) std::cout << "impossible";
+		if (!possible) std::cout << "impossible";
 		else if (!isprint(c)) std::cout << "Non displayable";
-		else std::cout << (char)c;
+		else std::cout << c;
 
 		std::cout << std::endl;
 	}
 
-	void intPrinter(const int& n)
+	void intPrinter(int n, bool possible)
 	{
-		std::cout << "int: " << n << std::endl;
+		std::cout << "int: ";
+
+		if (!possible) std::cout << "impossible";
+		else std::cout << n;
+
+		std::cout << std::endl;
 	}
 
-	void floatPrinter(const float& f)
+	void floatPrinter(float f, bool possible)
 	{
-		std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+		std::cout << "float: ";
+
+		if (possible)
+			std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
 	}
 
 
@@ -40,29 +48,38 @@
 
 	void charFlow(char* c, int* n, float* f)
 	{
-		charPrinter(*c);
+		charPrinter(*c, true);
+
 		*n = static_cast<int>(*c);
-		intPrinter(*n);
+		intPrinter(*n, true);
+
 		*f = static_cast<float>(*c);
-		floatPrinter(*f);
+		floatPrinter(*f, true);
 	}
 
 	void intFlow(char* c, int* n, float* f)
 	{
 		*c = static_cast<char>(*n);
-		charPrinter(*c);
-		intPrinter(*n);
+		if (*n < 0 || *n > 127) charPrinter(*c, false);
+		else charPrinter(*c, true);
+		
+		intPrinter(*n, true);
+
 		*f = static_cast<float>(*n);
-		floatPrinter(*f);
+		floatPrinter(*f, true);
 	}
 
 	void floatFlow(char* c, int* n, float* f)
 	{
 		*c = static_cast<char>(*f);
-		charPrinter(*c);
+		if (*f < 0 || *f > 127) charPrinter(*c, false);
+		else charPrinter(*c, true);
+
 		*n = static_cast<float>(*f);
-		intPrinter(*n);
-		floatPrinter(*f);
+		if (*f > INT_MAX || *f < -INT_MAX) intPrinter(*n, false);
+		else intPrinter(*n, true);
+
+		floatPrinter(*f, true);
 	}
 
 
