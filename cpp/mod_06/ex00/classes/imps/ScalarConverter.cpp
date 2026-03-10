@@ -171,6 +171,16 @@
 		return invalidDot ? "int" : "double";
 	}
 
+	bool isPseudo(const std::string& literal)
+	{
+		const std::string pseudoLiterals [6] =
+		{ "inf", "-inf", "inff", "-inff", "nan", "-nan"};
+
+		for (int i = 0; i < 6; i++)
+			if (literal == pseudoLiterals[i]) return true;
+		return false;
+	}
+
 	std::string parser(const std::string& literal)
 	{
 		std::string type;
@@ -196,26 +206,33 @@
 		ConverterFlows converterFlows[4] = { charFlow, intFlow, floatFlow, doubleFlow };
 
 		std::string type;
-		type = parser(literal);
-
-		char *end;
-		char c;
-		int n;
-		float f;
-		double d;
-
-		if (type == "char") c = literal[0];
-		else if (type == "int") n = atoi(literal.c_str());
-		else if (type == "float") f = strtof(literal.c_str(), &end);
-		else if (type == "double") d = strtod(literal.c_str(), &end);
-
-		for (int i = 0; i < 4; i++)
+		if (isPseudo(literal))
 		{
-			if (type == types[i])
-			{
-				converterFlows[i](&c, &n, &f, &d);
-				return ;
-			}
+			type = literal;
 		}
-		std::cout << type << std::endl;
+		else
+		{
+			type = parser(literal);
+
+			char *end;
+			char c;
+			int n;
+			float f;
+			double d;
+
+			if (type == "char") c = literal[0];
+			else if (type == "int") n = atoi(literal.c_str());
+			else if (type == "float") f = strtof(literal.c_str(), &end);
+			else if (type == "double") d = strtod(literal.c_str(), &end);
+
+			for (int i = 0; i < 4; i++)
+			{
+				if (type == types[i])
+				{
+					converterFlows[i](&c, &n, &f, &d);
+					return ;
+				}
+			}
+			std::cout << type << std::endl;
+		}
 	}
