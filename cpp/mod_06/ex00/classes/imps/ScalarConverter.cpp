@@ -67,66 +67,66 @@
  //                       Flows                          //
 // **************************************************** //
 
-	void charFlow(char* c, int* n, float* f, double* d)
+	void charFlow(char c, int n, float f, double d)
 	{
-		charPrinter(*c, true);
+		charPrinter(c, true);
 
-		*n = static_cast<int>(*c);
-		intPrinter(*n, true);
+		n = static_cast<int>(c);
+		intPrinter(n, true);
 
-		*f = static_cast<float>(*c);
-		floatPrinter(*f, true);
+		f = static_cast<float>(c);
+		floatPrinter(f, true);
 
-		*d = static_cast<double>(*c);
-		doublePrinter(*d, true);
+		d = static_cast<double>(c);
+		doublePrinter(d, true);
 	}
 
-	void intFlow(char* c, int* n, float* f, double* d)
+	void intFlow(char c, int n, float f, double d)
 	{
-		*c = static_cast<char>(*n);
-		if (*n < 0 || *n > 127) charPrinter(*c, false);
-		else charPrinter(*c, true);
+		c = static_cast<char>(n);
+		if (n < 0 || n > 127) charPrinter(c, false);
+		else charPrinter(c, true);
 		
-		intPrinter(*n, true);
+		intPrinter(n, true);
 
-		*f = static_cast<float>(*n);
-		floatPrinter(*f, true);
+		f = static_cast<float>(n);
+		floatPrinter(f, true);
 
-		*d = static_cast<float>(*n);
-		doublePrinter(*d, true);
+		d = static_cast<float>(n);
+		doublePrinter(d, true);
 	}
 
-	void floatFlow(char* c, int* n, float* f, double* d)
+	void floatFlow(char c, int n, float f, double d)
 	{
-		*c = static_cast<char>(*f);
-		if (*f < 0 || *f > 127) charPrinter(*c, false);
-		else charPrinter(*c, true);
+		c = static_cast<char>(f);
+		if (f < 0 || f > 127) charPrinter(c, false);
+		else charPrinter(c, true);
 
-		*n = static_cast<int>(*f);
-		if (*f > INT_MAX || *f < INT_MIN) intPrinter(*n, false);
-		else intPrinter(*n, true);
+		n = static_cast<int>(f);
+		if (f > INT_MAX || f < INT_MIN) intPrinter(n, false);
+		else intPrinter(n, true);
 
-		floatPrinter(*f, true);
+		floatPrinter(f, true);
 
-		*d = static_cast<double>(*f);
-		doublePrinter(*d, true);
+		d = static_cast<double>(f);
+		doublePrinter(d, true);
 	}
 
-	void doubleFlow(char* c, int* n, float* f, double* d)
+	void doubleFlow(char c, int n, float f, double d)
 	{
-		*c = static_cast<char>(*d);
-		if (*d < 0 || *d > 127) charPrinter(*c, false);
-		else charPrinter(*c, true);
+		c = static_cast<char>(d);
+		if (d < 0 || d > 127) charPrinter(c, false);
+		else charPrinter(c, true);
 
-		*n = static_cast<float>(*d);
-		if (*d > INT_MAX || *d < INT_MIN) intPrinter(*n, false);
-		else intPrinter(*n, true);
+		n = static_cast<float>(d);
+		if (d > INT_MAX || d < INT_MIN) intPrinter(n, false);
+		else intPrinter(n, true);
 
-		*f = static_cast<double>(*d);
-		if (*d > FLT_MAX || *d < -FLT_MAX) floatPrinter(*f, false);
-		else floatPrinter(*f, true);
+		f = static_cast<double>(d);
+		if (d > FLT_MAX || d < -FLT_MAX) floatPrinter(f, false);
+		else floatPrinter(f, true);
 		
-		doublePrinter(*d, true);
+		doublePrinter(d, true);
 	}
 
 
@@ -241,7 +241,7 @@
 			{
 				if (type == types[i])
 				{
-					converterFlows[i](&c, &n, &f, &d);
+					converterFlows[i](c, n, f, d);
 					return ;
 				}
 			}
