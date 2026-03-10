@@ -53,6 +53,15 @@
 		std::cout << std::endl;
 	}
 
+	void pseudoPrinter(std::string pseudo)
+	{
+		if (pseudo == "nanf" || pseudo == "inff" || pseudo == "-inff")
+			pseudo.erase(pseudo.end() - 1);
+
+		std::cout << "float: " << pseudo << "f" << std::endl;
+		std::cout << "double: " << pseudo << std::endl;
+	}
+
 
   // **************************************************** //
  //                       Flows                          //
@@ -174,7 +183,7 @@
 	bool isPseudo(const std::string& literal)
 	{
 		const std::string pseudoLiterals [6] =
-		{ "inf", "-inf", "inff", "-inff", "nan", "-nan"};
+		{ "inf", "-inf", "inff", "-inff", "nan", "nanf"};
 
 		for (int i = 0; i < 6; i++)
 			if (literal == pseudoLiterals[i]) return true;
@@ -209,6 +218,9 @@
 		if (isPseudo(literal))
 		{
 			type = literal;
+			charPrinter(0, false);
+			intPrinter(0, false);
+			pseudoPrinter(literal);
 		}
 		else
 		{
