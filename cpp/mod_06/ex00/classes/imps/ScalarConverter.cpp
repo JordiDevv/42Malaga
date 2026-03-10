@@ -77,7 +77,7 @@
 		*f = static_cast<float>(*c);
 		floatPrinter(*f, true);
 
-		*d = static_cast<float>(*c);
+		*d = static_cast<double>(*c);
 		doublePrinter(*d, true);
 	}
 
@@ -102,13 +102,13 @@
 		if (*f < 0 || *f > 127) charPrinter(*c, false);
 		else charPrinter(*c, true);
 
-		*n = static_cast<float>(*f);
-		if (*f > INT_MAX || *f < -INT_MAX) intPrinter(*n, false);
+		*n = static_cast<int>(*f);
+		if (*f > INT_MAX || *f < INT_MIN) intPrinter(*n, false);
 		else intPrinter(*n, true);
 
 		floatPrinter(*f, true);
 
-		*d = static_cast<float>(*f);
+		*d = static_cast<double>(*f);
 		doublePrinter(*d, true);
 	}
 
@@ -119,12 +119,12 @@
 		else charPrinter(*c, true);
 
 		*n = static_cast<float>(*d);
-		if (*d > INT_MAX || *d < -INT_MAX) intPrinter(*n, false);
+		if (*d > INT_MAX || *d < INT_MIN) intPrinter(*n, false);
 		else intPrinter(*n, true);
 
 		*f = static_cast<double>(*d);
-		if (*d > FLT_MAX || *d < -FLT_MAX) 
-		floatPrinter(*f, true);
+		if (*d > FLT_MAX || *d < -FLT_MAX) floatPrinter(*f, false);
+		else floatPrinter(*f, true);
 		
 		doublePrinter(*d, true);
 	}
