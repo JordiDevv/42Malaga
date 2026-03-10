@@ -37,8 +37,20 @@
 	{
 		std::cout << "float: ";
 
-		if (possible)
-			std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+		if (!possible) std::cout << "impossible";
+		else std::cout << std::fixed << std::setprecision(1) << f << "f";
+
+		std::cout << std::endl;
+	}
+
+	void doublePrinter(double d, bool possible)
+	{
+		std::cout << "double: ";
+
+		if (!possible) std::cout << "impossible";
+		else std::cout << std::fixed << std::setprecision(1) << d;
+
+		std::cout << std::endl;
 	}
 
 
@@ -46,7 +58,7 @@
  //                       Flows                          //
 // **************************************************** //
 
-	void charFlow(char* c, int* n, float* f)
+	void charFlow(char* c, int* n, float* f, double* d)
 	{
 		charPrinter(*c, true);
 
@@ -55,9 +67,12 @@
 
 		*f = static_cast<float>(*c);
 		floatPrinter(*f, true);
+
+		*d = static_cast<float>(*c);
+		doublePrinter(*d, true);
 	}
 
-	void intFlow(char* c, int* n, float* f)
+	void intFlow(char* c, int* n, float* f, double* d)
 	{
 		*c = static_cast<char>(*n);
 		if (*n < 0 || *n > 127) charPrinter(*c, false);
@@ -67,9 +82,12 @@
 
 		*f = static_cast<float>(*n);
 		floatPrinter(*f, true);
+
+		*d = static_cast<float>(*n);
+		doublePrinter(*d, true);
 	}
 
-	void floatFlow(char* c, int* n, float* f)
+	void floatFlow(char* c, int* n, float* f, double* d)
 	{
 		*c = static_cast<char>(*f);
 		if (*f < 0 || *f > 127) charPrinter(*c, false);
@@ -80,6 +98,26 @@
 		else intPrinter(*n, true);
 
 		floatPrinter(*f, true);
+
+		*d = static_cast<float>(*f);
+		doublePrinter(*d, true);
+	}
+
+	void doubleFlow(char* c, int* n, float* f, double* d)
+	{
+		*c = static_cast<char>(*d);
+		if (*d < 0 || *d > 127) charPrinter(*c, false);
+		else charPrinter(*c, true);
+
+		*n = static_cast<float>(*d);
+		if (*d > INT_MAX || *d < -INT_MAX) intPrinter(*n, false);
+		else intPrinter(*n, true);
+
+		*f = static_cast<double>(*d);
+		if (*d > FLT_MAX || *d < -FLT_MAX) 
+		floatPrinter(*f, true);
+		
+		doublePrinter(*d, true);
 	}
 
 
@@ -147,14 +185,15 @@
 		return type;
 	}
 
+
   // **************************************************** //
  //                  Converter method                    //
 // **************************************************** //
 
 	void ScalarConverter::convert(const std::string& literal)
 	{
-		std::string types[3] = { "char", "int", "float" };
-		ConverterFlows converterFlows[3] = { charFlow, intFlow, floatFlow };
+		std::string types[4] = { "char", "int", "float", "double" };
+		ConverterFlows converterFlows[4] = { charFlow, intFlow, floatFlow, doubleFlow };
 
 		std::string type;
 		type = parser(literal);
@@ -163,16 +202,18 @@
 		char c;
 		int n;
 		float f;
+		double d;
 
 		if (type == "char") c = literal[0];
 		else if (type == "int") n = atoi(literal.c_str());
 		else if (type == "float") f = strtof(literal.c_str(), &end);
+		else if (type == "double") d = strtod(literal.c_str(), &end);
 
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			if (type == types[i])
 			{
-				converterFlows[i](&c, &n, &f);
+				converterFlows[i](&c, &n, &f, &d);
 				return ;
 			}
 		}

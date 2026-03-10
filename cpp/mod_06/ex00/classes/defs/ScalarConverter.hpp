@@ -3,7 +3,7 @@
 
 #include <string>
 
-typedef void (*ConverterFlows)(char* c, int* n, float* f);
+typedef void (*ConverterFlows)(char* c, int* n, float* f, double* d);
 
 class ScalarConverter
 {
