@@ -2,7 +2,7 @@
 #define SERIALIZER_HPP
 
 #include "DataStruct.hpp"
-#include <cstdint>
+#include <stdint.h>
 
 class Serializer
 {

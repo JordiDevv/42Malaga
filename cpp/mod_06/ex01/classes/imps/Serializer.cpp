@@ -1,6 +1,6 @@
 #include "Serializer.hpp"
 #include "DataStruct.hpp"
-#include <cstdint>
+#include <stdint.h>
 
   // **************************************************** //
  //                 Serialize methods                    //
