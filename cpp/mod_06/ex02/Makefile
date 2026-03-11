@@ -3,7 +3,7 @@ NAME = type_identifier
 CFLAGS = -Wall -Werror -Wextra
 STD = -std=c++98
 
-IMPS = Base.cpp, A.cpp, B.cpp, C.cpp
+IMPS = functions.cpp
 IMPS_DIR = classes/imps/
 SRCS = main.cpp $(addprefix $(IMPS_DIR),$(IMPS))
 
