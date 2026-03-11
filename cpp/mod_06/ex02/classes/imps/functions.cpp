@@ -25,7 +25,7 @@ void identify(Base& p)
     try
     {
         (void)dynamic_cast<A&>(p);
-        std::cout << "A\n";
+        std::cout << "A" << std::endl;
         return;
     }
     catch (...) {}
@@ -33,7 +33,7 @@ void identify(Base& p)
     try
     {
         (void)dynamic_cast<B&>(p);
-        std::cout << "B\n";
+        std::cout << "B" << std::endl;
         return;
     }
     catch (...) {}
@@ -41,7 +41,7 @@ void identify(Base& p)
     try
     {
         (void)dynamic_cast<C&>(p);
-        std::cout << "C\n";
+        std::cout << "C" << std::endl;
         return;
     }
     catch (...) {}
