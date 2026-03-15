@@ -2,6 +2,7 @@
 #define ARRAY_HPP
 
 #include <cstdlib>
+#include <exception>
 
 template <typename T>
 class Array
@@ -20,6 +21,12 @@ class Array
 
         T& operator[](size_t index);
         size_t size() const;
+
+        class OutOfBoundsException : public std::exception
+        {
+            public:
+                const char* what() const throw();
+        };
 };
 
 #include "Array.tpp"

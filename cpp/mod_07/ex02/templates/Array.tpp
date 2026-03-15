@@ -1,5 +1,6 @@
 #include "Array.hpp"
 #include <cstdlib>
+#include <exception>
 
   // **************************************************** //
  //              Cannonical implementations              //
@@ -52,3 +53,12 @@
 
     template<typename T>
     size_t Array<T>::size() const { return _size; }
+
+
+  // **************************************************** //
+ //                  Exception Class                     //
+// **************************************************** //
+
+    template<typename T>
+    const char* Array<T>::OutOfBoundsException::what() const throw()
+    { return "Trying to access invalid memory"; }
