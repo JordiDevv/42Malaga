@@ -18,7 +18,7 @@ class Array
 
         Array(size_t n);
 
-        T& operator[](size_t index)
+        T& operator[](size_t index);
         size_t size() const;
 };
 
