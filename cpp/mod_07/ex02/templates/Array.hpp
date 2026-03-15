@@ -7,8 +7,8 @@ template <typename T>
 class Array
 {
     private:
-        T* element;
-        size_t size;
+        T* _element;
+        size_t _size;
 
     public:
         Array();
@@ -16,7 +16,7 @@ class Array
         Array& operator=(const Array& ref);
         ~Array();
 
-        Array(unsigned int n);
+        Array(size_t n);
 
         T& operator[](size_t index)
         size_t size() const;
