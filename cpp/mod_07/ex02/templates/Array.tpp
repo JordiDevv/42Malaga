@@ -49,7 +49,11 @@
 // **************************************************** //
 
     template<typename T>
-    T& Array<T>::operator[](size_t index) { return _element[index]; }
+    T& Array<T>::operator[](size_t index)
+    {
+        if (index >= _size) throw OutOfBoundsException();
+        return _element[index];
+    }
 
     template<typename T>
     size_t Array<T>::size() const { return _size; }
