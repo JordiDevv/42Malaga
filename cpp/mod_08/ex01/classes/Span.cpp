@@ -17,7 +17,7 @@
 
 
   // **************************************************** //
- //              Parametirized constructors              //
+ //              Parameterized constructors              //
 // **************************************************** //
 
     Span::Span(unsigned int capacity) : _capacity(capacity) {}
