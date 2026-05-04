@@ -29,6 +29,14 @@
 
     void Span::addNumber(int n)
     {
-        if (_container.size() >= _capacity) return ; // throw exception
+        if (_container.size() >= _capacity) throw CapacityExceededException();
         _container.push_back(n);
     }
+
+
+  // **************************************************** //
+ //                 Exception classes                    //
+// **************************************************** //
+
+    const char* Span::CapacityExceededException::what() const throw()
+    { return "Span is full"; }

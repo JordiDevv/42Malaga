@@ -17,6 +17,12 @@ class Span
         Span(unsigned int capacity);
 
         void addNumber(int n);
+
+        class CapacityExceededException : public std::exception
+        {
+            public:
+                const char* what() const throw();
+        };
 };
 
 #endif
