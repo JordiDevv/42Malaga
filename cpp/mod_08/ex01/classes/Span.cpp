@@ -21,3 +21,14 @@
 // **************************************************** //
 
     Span::Span(unsigned int capacity) : _capacity(capacity) {}
+
+
+  // **************************************************** //
+ //                 Member functions                     //
+// **************************************************** //
+
+    void Span::addNumber(int n)
+    {
+        if (_container.size() >= _capacity) return ; // throw exception
+        _container.push_back(n);
+    }
