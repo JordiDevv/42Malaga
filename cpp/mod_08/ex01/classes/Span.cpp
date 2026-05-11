@@ -1,4 +1,5 @@
 #include "Span.hpp"
+#include <cstddef>
 
   // **************************************************** //
  //              Cannonical implementations              //
@@ -36,11 +37,22 @@
     int Span::shortestSpan()
     {
         if (_container.size() < 2) throw NotEnoughNumbersException();
+        return 0;
     }
 
     int Span::longestSpan()
     {
         if (_container.size() < 2) throw NotEnoughNumbersException();
+        
+        int smallest= _container[0];
+        int biggest = _container[0];
+        for (size_t i = 1; i < _container.size(); i++)
+        {
+            if (_container[i] < smallest) smallest = _container[i];
+            if (_container[i] > biggest) biggest = _container[i];
+        }
+
+        return biggest - smallest;
     }
 
 
@@ -49,7 +61,7 @@
 // **************************************************** //
 
     const char* Span::CapacityExceededException::what() const throw()
-    { return "Span is full\n"; }
+    { return "Span is full"; }
 
     const char* Span::NotEnoughNumbersException::what() const throw()
-    { return "There are less than two numbers\n"; }
+    { return "There are less than two numbers"; }
