@@ -33,10 +33,23 @@
         _container.push_back(n);
     }
 
+    int Span::shortestSpan()
+    {
+        if (_container.size() < 2) throw NotEnoughNumbersException();
+    }
+
+    int Span::longestSpan()
+    {
+        if (_container.size() < 2) throw NotEnoughNumbersException();
+    }
+
 
   // **************************************************** //
  //                 Exception classes                    //
 // **************************************************** //
 
     const char* Span::CapacityExceededException::what() const throw()
-    { return "Span is full"; }
+    { return "Span is full\n"; }
+
+    const char* Span::NotEnoughNumbersException::what() const throw()
+    { return "There are less than two numbers\n"; }

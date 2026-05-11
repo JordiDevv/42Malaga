@@ -18,7 +18,15 @@ class Span
 
         void addNumber(int n);
 
+        int shortestSpan();
+        int longestSpan();
+
         class CapacityExceededException : public std::exception
+        {
+            public:
+                const char* what() const throw();
+        };
+        class NotEnoughNumbersException : public std::exception
         {
             public:
                 const char* what() const throw();
