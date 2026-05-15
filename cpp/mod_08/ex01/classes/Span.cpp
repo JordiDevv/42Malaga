@@ -39,11 +39,11 @@
         if (_container.size() < 2) throw NotEnoughNumbersException();
 
         int smaller = _container[0] < _container[1] ? _container[0] : _container[1];
-        int bigger = _container[1] > _container[1] ? _container[0] : _container[1];
+        int bigger = _container[1] > _container[0] ? _container[1] : _container[0];
         for (size_t i = 2; i < _container.size(); i++)
         {
             if (_container[i] < bigger && _container[i] >= smaller) bigger = _container[i];
-            if (_container[i] > smaller && _container[i] <= bigger) smaller = _container[i];
+            else if (_container[i] > smaller && _container[i] <= bigger) smaller = _container[i];
         }
 
         return bigger - smaller;
@@ -62,15 +62,6 @@
         }
 
         return biggest - smallest;
-    }
-
-    template <typename Iterator>
-    void Span::addRange(Iterator begin, Iterator end)
-    {
-        if (_container.size() + std::distance(begin, end) > _capacity)
-            throw CapacityExceededException();
-
-        _container.insert(_container.end(), begin, end);
     }
 
   // **************************************************** //

@@ -41,4 +41,6 @@ class Span
         };
 };
 
+#include "Span.tpp"
+
 #endif
