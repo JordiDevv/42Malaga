@@ -1,5 +1,6 @@
 #include "Span.hpp"
 #include <cstddef>
+#include <algorithm>
 
   // **************************************************** //
  //              Cannonical implementations              //
@@ -38,15 +39,17 @@
     {
         if (_container.size() < 2) throw NotEnoughNumbersException();
 
-        int smaller = _container[0] < _container[1] ? _container[0] : _container[1];
-        int bigger = _container[1] > _container[0] ? _container[1] : _container[0];
-        for (size_t i = 2; i < _container.size(); i++)
+        std::vector<int> tmp(_container);
+        std::sort(tmp.begin(), tmp.end());
+
+        int minDiff = tmp[1] - tmp[0];
+        for (size_t i = 1; i < tmp.size() - 1; i++)
         {
-            if (_container[i] < bigger && _container[i] >= smaller) bigger = _container[i];
-            else if (_container[i] > smaller && _container[i] <= bigger) smaller = _container[i];
+            int tmpDiff = tmp[i + 1] - tmp[i];
+            if (tmpDiff < minDiff) minDiff = tmpDiff;
         }
 
-        return bigger - smaller;
+        return minDiff;
     }
 
     int Span::longestSpan()
