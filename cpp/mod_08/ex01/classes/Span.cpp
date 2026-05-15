@@ -55,6 +55,14 @@
         return biggest - smallest;
     }
 
+    template <typename Iterator>
+    void Span::addRange(Iterator begin, Iterator end)
+    {
+        if (_container.size() + std::distance(begin, end) > _capacity)
+            throw CapacityExceededException();
+
+        _container.insert(_container.end(), begin, end);
+    }
 
   // **************************************************** //
  //                 Exception classes                    //
@@ -65,3 +73,6 @@
 
     const char* Span::NotEnoughNumbersException::what() const throw()
     { return "There are less than two numbers"; }
+
+    const char* Span::NotEnoughSpaceException::what() const throw()
+    { return "Not enough space"; }

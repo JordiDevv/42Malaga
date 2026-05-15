@@ -21,12 +21,20 @@ class Span
         int shortestSpan();
         int longestSpan();
 
+        template <typename Iterator>
+        void addRange(Iterator begin, Iterator end);
+
         class CapacityExceededException : public std::exception
         {
             public:
                 const char* what() const throw();
         };
         class NotEnoughNumbersException : public std::exception
+        {
+            public:
+                const char* what() const throw();
+        };
+        class NotEnoughSpaceException : public std::exception
         {
             public:
                 const char* what() const throw();
