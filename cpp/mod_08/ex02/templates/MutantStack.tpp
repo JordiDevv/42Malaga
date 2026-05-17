@@ -29,16 +29,16 @@
 
     template<typename T, typename Container>
     typename MutantStack<T, Container>::iterator MutantStack<T, Container>::begin()
-    { return c.begin(); }
+    { return this->c.begin(); }
 
     template<typename T, typename Container>
     typename MutantStack<T, Container>::iterator MutantStack<T, Container>::end()
-    { return c.end(); }
+    { return this->c.end(); }
 
     template<typename T, typename Container>
     typename MutantStack<T, Container>::const_iterator MutantStack<T, Container>::begin() const
-    { return c.begin(); }
+    { return this->c.begin(); }
 
     template<typename T, typename Container>
     typename MutantStack<T, Container>::const_iterator MutantStack<T, Container>::end() const
-    { return c.end(); }
+    { return this->c.end(); }
