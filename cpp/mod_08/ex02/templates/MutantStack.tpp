@@ -21,3 +21,24 @@
 
     template<typename T, typename Container>
     MutantStack<T, Container>::~MutantStack() {}
+
+
+  // **************************************************** //
+ //                     Iterators                        //
+// **************************************************** //
+
+    template<typename T, typename Container>
+    typename MutantStack<T, Container>::iterator MutantStack<T, Container>::begin()
+    { return c.begin(); }
+
+    template<typename T, typename Container>
+    typename MutantStack<T, Container>::iterator MutantStack<T, Container>::end()
+    { return c.end(); }
+
+    template<typename T, typename Container>
+    typename MutantStack<T, Container>::const_iterator MutantStack<T, Container>::begin() const
+    { return c.begin(); }
+
+    template<typename T, typename Container>
+    typename MutantStack<T, Container>::const_iterator MutantStack<T, Container>::end() const
+    { return c.end(); }
