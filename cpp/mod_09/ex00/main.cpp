@@ -34,8 +34,11 @@ bool validArgs(int argc, char** argv)
 int main(int argc, char** argv)
 {
     if (!validArgs(argc, argv)) return 1;
-    
-    std::ofstream outputData(argv[1]);
+    std::string outputName(argv[1]);
+
+    std::ofstream outputFile(outputName.c_str());
+    std::ofstream meta(".output_name");
+    meta << outputName;
     std::ifstream data("data.csv");
 
     std::string line;
@@ -44,7 +47,7 @@ int main(int argc, char** argv)
         // procesar linea
     }
 
-    outputData.close();
+    outputFile.close();
     data.close();
     return 0;
 }
