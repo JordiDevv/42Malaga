@@ -1,3 +1,4 @@
+#include "BitcoinExchange.hpp"
 #include <fstream>
 #include <iostream>
 
@@ -5,14 +6,14 @@ bool validArgs(int argc, char** argv)
 {
     if (argc != 2)
     {
-        std::cerr << "You need to introduce only the output data file as an argument" << std::endl;
+        std::cerr << ERR_NARGS << std::endl;
         return false;
     }
 
     std::string outputFile(argv[1]);
     if (outputFile == "data.csv")
     {
-        std::cerr << "The input data shouldn't be the output file" << std::endl;
+        std::cerr << ERR_INASOUT << std::endl;
         return false;
     }
 
@@ -23,7 +24,7 @@ bool validArgs(int argc, char** argv)
     {
         if (outputFile == srcData[i])
         {
-            std::cerr << "Don't you dare" << std::endl;
+            std::cerr << ERR_SRCASOUT << std::endl;
             return false;
         }
     }
