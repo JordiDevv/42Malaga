@@ -19,7 +19,8 @@ class BitcoinExchange
         int _day;
         float _value;
 
-        int parseYear(size_t& i, const std::string& line);
+        int parseDateComp(size_t& i, const std::string& line);
+        bool isValidDay(int month, int day);
         bool errBadInput(const std::string& line);
 
     public:
