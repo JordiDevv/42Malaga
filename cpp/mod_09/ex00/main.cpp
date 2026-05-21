@@ -43,9 +43,11 @@ int main(int argc, char** argv)
     std::ifstream data("data.csv");
 
     std::string line;
+    std::getline(data, line);
     while (std::getline(data, line))
     {
-        // procesar linea
+        BitcoinExchange btc;
+        if (!btc.parseLine(line)) continue ;
     }
 
     outputFile.close();

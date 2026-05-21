@@ -9,9 +9,21 @@
 #define ERR_NOPOSN "Error: not a positive number"
 #define ERR_TOOLARGEN "Error: too large number"
 
-namespace BitcoinExchange
+#include <string>
+
+class BitcoinExchange
 {
-    
+    private:
+        int _year;
+        int _month;
+        int _day;
+        float _value;
+
+        int parseYear(size_t& i, const std::string& line);
+        bool errBadInput(const std::string& line);
+
+    public:
+        bool parseLine(const std::string& line);
 };
 
 #endif
