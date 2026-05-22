@@ -12,6 +12,7 @@
     {
         std::string rawComp;
         while (i < line.size() && line[i] != '-' && line[i] != ',') rawComp.push_back(line[i++]);
+        i++;
         if (rawComp.empty()) return 0;
 
         char* end;
@@ -50,15 +51,12 @@
 
         _year = parseDateComp(i, line);
         if (_year < 2009 || _year > 2025) return errBadInput(line);
-        i++;
 
         _month = parseDateComp(i, line);
         if (_month < 1 || _month > 12) return errBadInput(line);
-        i++;
 
         _day = parseDateComp(i, line);
         if (!isValidDay()) return errBadInput(line);
-        i++;
 
         return true;
     }
