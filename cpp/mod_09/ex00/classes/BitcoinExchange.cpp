@@ -13,12 +13,25 @@
         std::string rawComp;
         while (i < line.size() && line[i] != '-' && line[i] != ',') rawComp.push_back(line[i++]);
         i++;
-        if (rawComp.empty()) return 0;
+        if (rawComp.empty()) return -1;
 
         char* end;
         long n = strtol(rawComp.c_str(), &end, 10);
 
-        if (*end != '\0' || errno == ERANGE) return 0;
+        if (*end != '\0' || errno == ERANGE) return -1;
+        return n;
+    }
+
+    float BitcoinExchange::parseValue(size_t& i, const std::string& line)
+    {
+        std::string rawValue;
+        while (i < line.size()) rawValue.push_back(line[i++]);
+        if (rawValue.empty()) return -1;
+
+        char* end;
+        long n = strtol(rawValue.c_str(), &end, 10);
+
+        if (*end != '\0' || errno == ERANGE) return -1;
         return n;
     }
 
@@ -57,6 +70,9 @@
 
         _day = parseDateComp(i, line);
         if (!isValidDay()) return errBadInput(line);
+
+        _value = parseValue(i, line);
+        if (_value < 0 || _value > 1000) return errBadInput(line);
 
         return true;
     }

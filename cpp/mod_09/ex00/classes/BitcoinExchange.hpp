@@ -20,6 +20,7 @@ class BitcoinExchange
         float _value;
 
         int parseDateComp(size_t& i, const std::string& line);
+        float parseValue(size_t& i, const std::string& line);
         bool isValidDay();
         bool errBadInput(const std::string& line);
 
