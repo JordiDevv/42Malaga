@@ -11,7 +11,7 @@
     int BitcoinExchange::parseDateComp(size_t& i, const std::string& line)
     {
         std::string rawComp;
-        while (i < line.size() && line[i] != '-') rawComp.push_back(line[i++]);
+        while (i < line.size() && line[i] != '-' && line[i] != ',') rawComp.push_back(line[i++]);
         if (rawComp.empty()) return 0;
 
         char* end;
@@ -21,11 +21,11 @@
         return n;
     }
 
-    bool BitcoinExchange::isValidDay(int month, int day)
+    bool BitcoinExchange::isValidDay()
     {
-        if (day > 31) return false;
-        if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) return false;
-        if (month == 2 && day > 29) return false;
+        if (_day > 31) return false;
+        if ((_month == 4 || _month == 6 || _month == 9 || _month == 11) && _day > 30) return false;
+        if (_month == 2 && _day > 29) return false;
         return true;
     }
 
@@ -47,20 +47,18 @@
     bool BitcoinExchange::parseLine(const std::string& line)
     {
         size_t i = 0;
-        while (i < line.size())
-        {
-            _year = parseDateComp(i, line);
-            if (_year < 2009 || _year > 2025) return errBadInput(line);
-            i++;
 
-            _month = parseDateComp(i, line);
-            if (_month < 1 || _month > 12) return errBadInput(line);
-            i++;
+        _year = parseDateComp(i, line);
+        if (_year < 2009 || _year > 2025) return errBadInput(line);
+        i++;
 
-            _day = parseDateComp(i, line);
-            if (!isValidDay(_month, _day)) return errBadInput(line);
-            i++;
-        }
+        _month = parseDateComp(i, line);
+        if (_month < 1 || _month > 12) return errBadInput(line);
+        i++;
+
+        _day = parseDateComp(i, line);
+        if (!isValidDay()) return errBadInput(line);
+        i++;
 
         return true;
     }
