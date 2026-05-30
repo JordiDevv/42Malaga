@@ -48,17 +48,8 @@ int main(int argc, char** argv)
     meta << inputname;
 
     BitcoinExchange btc;
-    // loadData
-    std::ifstream data("data.csv");
-
-    std::string line;
-    std::getline(inputFile, line);
-    while (std::getline(inputFile, line))
-    {
-        if (!btc.parseLine(line)) continue ;
-    }
+    if (!btc.loadCsv("data.csv")) return 1;
 
     inputFile.close();
-    data.close();
     return 0;
 }

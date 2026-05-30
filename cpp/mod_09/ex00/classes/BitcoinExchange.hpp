@@ -6,6 +6,7 @@
 #define ERR_INASOUT "Error: the database shouldn't be the input file"
 #define ERR_SRCASOUT "Don't you dare"
 
+#define ERR_BADCSV "Error: The csv database has a bad format"
 #define ERR_BADINPUTLINE "Error: bad input => "
 #define ERR_NOPOSN "Error: not a positive number"
 #define ERR_TOOLARGEN "Error: too large number"
@@ -23,13 +24,21 @@ class BitcoinExchange
 
         std::map<std::string, int> data;
 
+        bool parseCsvLine(std::string line);
+
+        bool isValidDate(std::string date);
         int parseDateComp(size_t& i, const std::string& line);
-        float parseValue(size_t& i, const std::string& line);
-        bool isValidDay();
+        bool isValidDay(int day, int month);
+        bool isValidEx(std::string ex);
+
+        //float parseValue(size_t& i, const std::string& line);
+
+        bool errBadCsv(std::ifstream& data);
         bool errBadInput(const std::string& line);
 
     public:
-        bool parseLine(const std::string& line);
+        //bool parseLine(const std::string& line);
+        bool loadCsv(const std::string& dataName);
 };
 
 #endif
