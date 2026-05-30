@@ -47,6 +47,7 @@ int main(int argc, char** argv)
     std::ofstream meta(".input_name");
     meta << inputname;
 
+    BitcoinExchange btc;
     // loadData
     std::ifstream data("data.csv");
 
@@ -54,7 +55,6 @@ int main(int argc, char** argv)
     std::getline(inputFile, line);
     while (std::getline(inputFile, line))
     {
-        BitcoinExchange btc;
         if (!btc.parseLine(line)) continue ;
     }
 
