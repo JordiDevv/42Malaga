@@ -2,6 +2,7 @@
 #define BITCOINEXCHANGE_HPP
 
 #define ERR_NARGS "Error: you need to introduce only the output data file as an argument"
+#define ERR_NINPUT "Error: input file couldn't be open"
 #define ERR_INASOUT "Error: the input data shouldn't be the output file"
 #define ERR_SRCASOUT "Don't you dare"
 
@@ -10,6 +11,7 @@
 #define ERR_TOOLARGEN "Error: too large number"
 
 #include <string>
+#include <map>
 
 class BitcoinExchange
 {
@@ -18,6 +20,8 @@ class BitcoinExchange
         int _month;
         int _day;
         float _value;
+
+        std::map<std::string, int> data;
 
         int parseDateComp(size_t& i, const std::string& line);
         float parseValue(size_t& i, const std::string& line);

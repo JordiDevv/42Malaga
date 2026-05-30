@@ -36,12 +36,12 @@ fclean: clean delete
 	@rm -f $(NAME)
 
 delete:
-	@echo "$(YELLOW)Deleting output file...$(NC)"
-	@if [ ! -f .output_name ]; then \
-		echo "$(RED)There was no output file$(NC)"; \
+	@echo "$(YELLOW)Deleting input file...$(NC)"
+	@if [ ! -f .input_name ]; then \
+		echo "$(RED)There was no input file$(NC)"; \
 	else \
-		rm -f `cat .output_name`; \
-		rm -f .output_name; \
+		rm -f `cat .input_name`; \
+		rm -f .input_name; \
 	fi
 
 re: fclean all
