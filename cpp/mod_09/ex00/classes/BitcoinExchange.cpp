@@ -58,18 +58,18 @@
         return true;
     }
 
-    // float BitcoinExchange::parseValue(size_t& i, const std::string& line)
-    // {
-    //     std::string rawValue;
-    //     while (i < line.size()) rawValue.push_back(line[i++]);
-    //     if (rawValue.empty()) return -1;
+    bool BitcoinExchange::isValidValue(const std::string& rawValue)
+    {
+        if (rawValue.empty()) return false;
 
-    //     char* end;
-    //     long n = strtol(rawValue.c_str(), &end, 10);
+        char* end;
+        float value = strtof(rawValue.c_str(), &end);
 
-    //     if (*end != '\0' || errno == ERANGE) return -1;
-    //     return n;
-    // }
+        if (*end != '\0' || errno == ERANGE) return false;
+        if (value < 0 || value > 1000) return false;
+
+        return true;
+    }
 
 
   // **************************************************** //
@@ -94,24 +94,27 @@
  //                      Parser                          //
 // **************************************************** //
 
-    // bool BitcoinExchange::parseLine(const std::string& line)
-    // {
-    //     size_t i = 0;
+    bool BitcoinExchange::isValidInputLine(const std::string& line)
+    {
+        if (!isValidDate(line)) return false;
 
-    //     _year = parseDateComp(i, line);
-    //     if (_year < 2000 || _year > 2025) return errBadInput(line);
+        size_t posDel = line.find('|');
+        if (!isValidValue(line.substr(posDel))) return false;
 
-    //     _month = parseDateComp(i, line);
-    //     if (_month < 1 || _month > 12) return errBadInput(line);
+        return true;
+    }
 
-    //     _day = parseDateComp(i, line);
-    //     if (!isValidDay()) return errBadInput(line);
+    std::pair<std::string, float> BitcoinExchange::parseInputLine(const std::string& line)
+    {
+        size_t posDel = line.find('|');
 
-    //     _value = parseValue(i, line);
-    //     if (_value < 0 || _value > 1000) return errBadInput(line);
+        std::string date = line.substr(0, posDel - 1);
 
-    //     return true;
-    // }
+        std::string rawValue = line.substr(posDel + 1);
+        float value = strtof(rawValue.c_str(), NULL);
+
+        return std::make_pair(date, value);
+    }
 
     bool BitcoinExchange::parseCsvLine(const std::string& line)
     {
@@ -143,5 +146,11 @@
         while (std::getline(data, line))
             if (!parseCsvLine(line)) return errBadCsv(data);
         data.close();
+        return true;
+    }
+
+    bool BitcoinExchange::processLine(const std::string& line)
+    {
+        if (!isValidInputLine(line)) return errBadInput(line);
         return true;
     }
