@@ -50,6 +50,11 @@ int main(int argc, char** argv)
     BitcoinExchange btc;
     if (!btc.loadCsv("data.csv")) return 1;
 
+    std::string line;
+    std::getline(inputFile, line);
+    while (std::getline(inputFile, line))
+        btc.processLine(line);
+
     inputFile.close();
     return 0;
 }

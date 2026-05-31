@@ -39,6 +39,7 @@ class BitcoinExchange
     public:
         //bool parseLine(const std::string& line);
         bool loadCsv(const std::string& dataName);
+        void processLine(const std::string& line);
 };
 
 #endif
