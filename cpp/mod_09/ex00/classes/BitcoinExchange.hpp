@@ -22,14 +22,14 @@ class BitcoinExchange
         int _day;
         float _value;
 
-        std::map<std::string, int> data;
+        std::map<std::string, float> _data;
 
-        bool parseCsvLine(std::string line);
+        bool parseCsvLine(const std::string& line);
 
-        bool isValidDate(std::string date);
+        bool isValidDate(const std::string& date);
         int parseDateComp(size_t& i, const std::string& line);
         bool isValidDay(int day, int month);
-        bool isValidEx(std::string ex);
+        bool isValidEx(const std::string& ex);
 
         //float parseValue(size_t& i, const std::string& line);
 

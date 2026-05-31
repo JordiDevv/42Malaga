@@ -9,7 +9,7 @@
  //                   Parser utils                       //
 // **************************************************** //
 
-    bool BitcoinExchange::isValidDate(std::string date)
+    bool BitcoinExchange::isValidDate(const std::string& date)
     {
         size_t i = 0;
 
@@ -25,10 +25,10 @@
         return true;
     }
 
-    int BitcoinExchange::parseDateComp(size_t& i, const std::string& line)
+    int BitcoinExchange::parseDateComp(size_t& i, const std::string& date)
     {
         std::string rawComp;
-        while (i < line.size() && line[i] != '-') rawComp.push_back(line[i++]);
+        while (i < date.size() && date[i] != '-') rawComp.push_back(date[i++]);
         i++;
         if (rawComp.empty()) return -1;
 
@@ -47,9 +47,9 @@
         return true;
     }
 
-    bool BitcoinExchange::isValidEx(std::string ex)
+    bool BitcoinExchange::isValidEx(const std::string& ex)
     {
-        if (ex.empty()) return -1;
+        if (ex.empty()) return false;
 
         char* end;
         strtof(ex.c_str(), &end);
@@ -113,17 +113,18 @@
     //     return true;
     // }
 
-    bool BitcoinExchange::parseCsvLine(std::string line)
+    bool BitcoinExchange::parseCsvLine(const std::string& line)
     {
         size_t del = line.find(',');
 
         std::string date = line.substr(0, del);
         if (!isValidDate(date)) return false;
 
-        std::string ex = line.substr(del + 1);
-        if (!isValidEx(ex)) return false;
+        std::string rawEx = line.substr(del + 1);
+        if (!isValidEx(rawEx)) return false;
+        float ex = strtof(rawEx.c_str(), NULL);
 
-        // insert to the map
+        _data.insert(std::make_pair(date, ex));
 
         return true;
     }
