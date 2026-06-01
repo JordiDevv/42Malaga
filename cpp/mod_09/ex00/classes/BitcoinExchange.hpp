@@ -6,10 +6,11 @@
 #define ERR_INASOUT "Error: the database shouldn't be the input file"
 #define ERR_SRCASOUT "Don't you dare"
 
-#define ERR_BADCSV "Error: The csv database has a bad format"
+#define ERR_BADCSV "Error: the csv database has a bad format"
 #define ERR_BADINPUTLINE "Error: bad input => "
 #define ERR_NOPOSN "Error: not a positive number"
 #define ERR_TOOLARGEN "Error: too large number"
+#define ERR_NORECORD "Error: there were no records of Bitcoin in the caveman era => "
 
 #include <string>
 #include <map>
@@ -31,6 +32,7 @@ class BitcoinExchange
         bool errBadInput(const std::string& line);
         bool errNoPosN();
         bool errTooLargeN();
+        bool errNoRecord(const std::string& line);
 
         // Parser
         bool parseCsvLine(const std::string& line);

@@ -14,7 +14,7 @@
         size_t i = 0;
 
         int year = parseDateComp(i, date);
-        if (year < 2000 || year > 2025 || date[i++] != '-') return false;
+        if (year < 0 || year > 2025 || date[i++] != '-') return false;
 
         int month = parseDateComp(i, date);
         if (month < 1 || month > 12 || date[i++] != '-') return false;
@@ -102,6 +102,12 @@
         return false;
     }
 
+    bool BitcoinExchange::errNoRecord(const std::string& line)
+    {
+        std::cerr << ERR_NORECORD << line << std::endl;
+        return false;
+    }
+
 
   // **************************************************** //
  //                      Parser                          //
@@ -155,4 +161,18 @@
     void BitcoinExchange::processLine(const std::string& line)
     {
         if (!isValidInputLine(line)) return ;
+
+        std::pair<std::string, float> parsedLine = parseInputLine(line);
+        std::map<std::string, float>::iterator dataEntrance = _data.lower_bound(parsedLine.first);
+
+        if (dataEntrance == _data.end())
+            dataEntrance--;
+        else if (dataEntrance->first != parsedLine.first)
+        {
+            if (dataEntrance == _data.begin()) errNoRecord(line);
+            else --dataEntrance;
+        }
+
+        std::cout << parsedLine.first << " | " << parsedLine.second << std::endl;
+        std::cout << dataEntrance->first << " | " << dataEntrance->second << std::endl;
     }
