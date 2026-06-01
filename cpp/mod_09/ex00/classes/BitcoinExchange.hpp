@@ -17,31 +17,29 @@
 class BitcoinExchange
 {
     private:
-        int _year;
-        int _month;
-        int _day;
-        float _value;
-
         std::map<std::string, float> _data;
 
+        // Validation
+        bool isValidDate(const std::string& date, char del);
+        int parseDateComp(size_t& i, const std::string& line);
+        bool isValidDay(int day, int month);
+        float parseValue(const std::string& value);
+        bool isValidInputLine(const std::string& line);
+
+        // Error handlers
+        bool errBadCsv(std::ifstream& data);
+        bool errBadInput(const std::string& line);
+        bool errNoPosN();
+        bool errTooLargeN();
+
+        // Parser
         bool parseCsvLine(const std::string& line);
         std::pair<std::string, float> parseInputLine(const std::string& line);
 
-        bool isValidDate(const std::string& date);
-        int parseDateComp(size_t& i, const std::string& line);
-        bool isValidDay(int day, int month);
-        bool isValidEx(const std::string& ex);
-
-        bool isValidInputLine(const std::string& line);
-
-        bool isValidValue(const std::string& value);
-
-        bool errBadCsv(std::ifstream& data);
-        bool errBadInput(const std::string& line);
-
     public:
+        // Public processors
         bool loadCsv(const std::string& dataName);
-        bool processLine(const std::string& line);
+        void processLine(const std::string& line);
 };
 
 #endif
