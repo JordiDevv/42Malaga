@@ -42,6 +42,13 @@ class BitcoinExchange
         float getExchange(const std::string& refDate);
 
     public:
+        // Cannonical implementations
+        BitcoinExchange();
+        BitcoinExchange(const BitcoinExchange& ref);
+        BitcoinExchange& operator=(const BitcoinExchange& ref);
+        ~BitcoinExchange();
+
+
         // Public processors
         bool loadCsv(const std::string& dataName);
         void processLine(const std::string& line);

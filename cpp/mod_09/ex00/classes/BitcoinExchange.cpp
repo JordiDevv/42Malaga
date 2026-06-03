@@ -9,6 +9,16 @@
  //              Cannonical implementations              //
 // **************************************************** //
 
+    BitcoinExchange::BitcoinExchange() {}
+    BitcoinExchange::BitcoinExchange(const BitcoinExchange& ref) : _data(ref._data) {}
+
+    BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& ref)
+    {
+        if (this != &ref) _data = ref._data;
+        return *this;
+    }
+
+    BitcoinExchange::~BitcoinExchange() {}
 
 
   // **************************************************** //
