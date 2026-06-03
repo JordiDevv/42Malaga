@@ -6,6 +6,12 @@
 #include <fstream>
 
   // **************************************************** //
+ //              Cannonical implementations              //
+// **************************************************** //
+
+
+
+  // **************************************************** //
  //                     Validation                       //
 // **************************************************** //
 
@@ -186,5 +192,6 @@
         float exValue = getExchange(parsedLine.first);
         if (exValue < 0) return ;
 
-        std::cout << exValue << std::endl;
+        std::cout << parsedLine.first << " => " << parsedLine.second
+                    << " = " << parsedLine.second * exValue << std::endl;
     }
