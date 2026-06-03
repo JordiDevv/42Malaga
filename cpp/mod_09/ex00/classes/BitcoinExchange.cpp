@@ -102,10 +102,10 @@
         return false;
     }
 
-    bool BitcoinExchange::errNoRecord(const std::string& line)
+    float BitcoinExchange::errNoRecord()
     {
-        std::cerr << ERR_NORECORD << line << std::endl;
-        return false;
+        std::cerr << ERR_NORECORD << std::endl;
+        return -1;
     }
 
 
@@ -143,6 +143,24 @@
 
 
   // **************************************************** //
+ //                       Utils                          //
+// **************************************************** //
+
+    float BitcoinExchange::getExchange(std::pair<std::string, float> parsedLine)
+    {
+        std::map<std::string, float>::iterator dataEntrance = _data.lower_bound(parsedLine.first);
+
+        if (dataEntrance == _data.end())
+            dataEntrance--;
+        else if (dataEntrance->first != parsedLine.first)
+        {
+            if (dataEntrance == _data.begin()) return errNoRecord();
+            else --dataEntrance;
+        }
+    }
+
+
+  // **************************************************** //
  //                  Public processors                   //
 // **************************************************** //
 
@@ -161,18 +179,8 @@
     void BitcoinExchange::processLine(const std::string& line)
     {
         if (!isValidInputLine(line)) return ;
-
         std::pair<std::string, float> parsedLine = parseInputLine(line);
-        std::map<std::string, float>::iterator dataEntrance = _data.lower_bound(parsedLine.first);
 
-        if (dataEntrance == _data.end())
-            dataEntrance--;
-        else if (dataEntrance->first != parsedLine.first)
-        {
-            if (dataEntrance == _data.begin()) errNoRecord(line);
-            else --dataEntrance;
-        }
-
-        std::cout << parsedLine.first << " | " << parsedLine.second << std::endl;
-        std::cout << dataEntrance->first << " | " << dataEntrance->second << std::endl;
+        float exValue = getExchange(parsedLine);
+        if (exValue < 0) return ;
     }

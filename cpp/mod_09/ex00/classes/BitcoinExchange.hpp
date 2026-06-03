@@ -10,7 +10,7 @@
 #define ERR_BADINPUTLINE "Error: bad input => "
 #define ERR_NOPOSN "Error: not a positive number"
 #define ERR_TOOLARGEN "Error: too large number"
-#define ERR_NORECORD "Error: there were no records of Bitcoin in the caveman era => "
+#define ERR_NORECORD "Error: there were no records of Bitcoin in the caveman era"
 
 #include <string>
 #include <map>
@@ -32,11 +32,14 @@ class BitcoinExchange
         bool errBadInput(const std::string& line);
         bool errNoPosN();
         bool errTooLargeN();
-        bool errNoRecord(const std::string& line);
+        float errNoRecord();
 
         // Parser
         bool parseCsvLine(const std::string& line);
         std::pair<std::string, float> parseInputLine(const std::string& line);
+
+        // Utils
+        float getExchange(std::pair<std::string, float> parsedLine);
 
     public:
         // Public processors
