@@ -17,6 +17,7 @@ RED=\033[0;31m
 NC=\033[0m
 
 INPUT_FILE = input.txt
+DATA_URL = https://cdn.intra.42.fr/document/document/45418/cpp_09.tgz
 
 all: $(NAME)
 
@@ -59,6 +60,15 @@ input:
 	@echo "2012-01-11 | 1" >> $(INPUT_FILE)
 	@echo "2012-01-11 | 2147483648" >> $(INPUT_FILE)
 	@echo $(INPUT_FILE) > .input_name
+
+getDataFile:
+	@echo "$(BLUE)Downloading tar for the data file...$(NC)"
+	@curl -L -o cpp_09.tgz $(DATA_URL)
+	@echo "$(BLUE)Decompressing tar...$(NC)"
+	@tar -xzf cpp_09.tgz
+	@mv cpp_09/data.csv .
+	@rm -rf cpp_09/
+	@rm cpp_09.tgz
 
 re: fclean all
 
