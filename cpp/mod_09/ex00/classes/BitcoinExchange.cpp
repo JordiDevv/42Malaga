@@ -146,17 +146,19 @@
  //                       Utils                          //
 // **************************************************** //
 
-    float BitcoinExchange::getExchange(std::pair<std::string, float> parsedLine)
+    float BitcoinExchange::getExchange(const std::string& refDate)
     {
-        std::map<std::string, float>::iterator dataEntrance = _data.lower_bound(parsedLine.first);
+        std::map<std::string, float>::iterator dataEntrance = _data.lower_bound(refDate);
 
         if (dataEntrance == _data.end())
             dataEntrance--;
-        else if (dataEntrance->first != parsedLine.first)
+        else if (dataEntrance->first != refDate)
         {
             if (dataEntrance == _data.begin()) return errNoRecord();
             else --dataEntrance;
         }
+
+        return dataEntrance->second;
     }
 
 
@@ -181,6 +183,8 @@
         if (!isValidInputLine(line)) return ;
         std::pair<std::string, float> parsedLine = parseInputLine(line);
 
-        float exValue = getExchange(parsedLine);
+        float exValue = getExchange(parsedLine.first);
         if (exValue < 0) return ;
+
+        std::cout << exValue << std::endl;
     }

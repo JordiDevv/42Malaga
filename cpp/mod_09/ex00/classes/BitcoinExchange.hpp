@@ -39,7 +39,7 @@ class BitcoinExchange
         std::pair<std::string, float> parseInputLine(const std::string& line);
 
         // Utils
-        float getExchange(std::pair<std::string, float> parsedLine);
+        float getExchange(const std::string& refDate);
 
     public:
         // Public processors
