@@ -52,12 +52,6 @@
             else if (isOperator(line[i])) op++;
             else if (isspace(line[i])) continue;
             else return false;
-
-            // if (line[i + 1])
-            // {
-            //     if (line[i + 1] != ' ') return false;
-            //     else i++;
-            // }
             
             if (n - op < 1) return false;
         }
