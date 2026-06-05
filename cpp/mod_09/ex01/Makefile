@@ -1,3 +1,5 @@
+# DEFINITIONS
+
 NAME = RPN
 
 CFLAGS = -Wall -Werror -Wextra
@@ -15,6 +17,8 @@ BLUE=\033[0;34m
 YELLOW=\033[0;33m
 RED=\033[0;31m
 NC=\033[0m
+
+# BASIC RULES
 
 all: $(NAME)
 
@@ -36,5 +40,72 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+# BASIC TESTS
+
+basic_tests: test1 test2 test3 test4
+
+test1: $(NAME)
+	@echo
+	@echo "===== Test 1 ====="
+	./RPN "8 9 * 9 - 9 - 9 - 4 - 1 +"
+	@echo
+
+test2: $(NAME)
+	@echo "===== Test 2 ====="
+	./RPN "7 7 * 7 -"
+	@echo
+
+test3: $(NAME)
+	@echo "===== Test 3 ====="
+	./RPN "1 2 * 2 / 2 * 2 4 - +"
+	@echo
+
+test4: $(NAME)
+	@echo "===== Test 4 ====="
+	-./RPN "(1 + 1)"
+	@echo
+
+# ADVANCED TESTS
+
+advanced_tests: test5 test6 test7 test8 test9 test10 test11
+
+test5: $(NAME)
+	@echo
+	@echo "===== Test 5 ====="
+	-./RPN "1 + 1"
+	@echo
+
+test6: $(NAME)
+	@echo "===== Test 6 ====="
+	-./RPN "1 1 1 +"
+	@echo
+
+test7: $(NAME)
+	@echo "===== Test 7 ====="
+	-./RPN "1 2 3 + *"
+	@echo
+
+test8: $(NAME)
+	@echo "===== Test 8 ====="
+	-./RPN "2 2 * * 2"
+	@echo
+
+test9: $(NAME)
+	@echo "===== Test 9 ====="
+	-./RPN "22 *"
+	@echo
+
+test10: $(NAME)
+	@echo "===== Test 10 ====="
+	-./RPN " 2 2 *"
+	@echo
+
+test11: $(NAME)
+	@echo "===== Test 11 ====="
+	-./RPN "2 2 + "
+	@echo
+
+# RESERVED WORDS
 
 .PHONY: all clean fclean re
