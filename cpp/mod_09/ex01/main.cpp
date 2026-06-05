@@ -25,11 +25,14 @@ bool validInput(int argc, char** argv)
         if (isdigit(argv[1][i])) n++;
         else if (isOperator(argv[1][i])) op++;
         else return false;
+
         if (argv[1][i + 1])
         {
             if (argv[1][i + 1] != ' ') return false;
             else i++;
         }
+        
+        if (n - op < 1) return false;
     }
 
     return n - op == 1 ? true : false;
