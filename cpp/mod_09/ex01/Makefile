@@ -68,7 +68,7 @@ test4: $(NAME)
 
 # ADVANCED TESTS
 
-advanced_tests: test5 test6 test7 test8 test9 test10 test11
+advanced_tests: test5 test6 test7 test8 test9 test10 test11 test12 test13 test14
 
 test5: $(NAME)
 	@echo
@@ -104,6 +104,21 @@ test10: $(NAME)
 test11: $(NAME)
 	@echo "===== Test 11 ====="
 	-./RPN "2 2 + "
+	@echo
+
+test12: $(NAME)
+	@echo "===== Test 12 ====="
+	-./RPN "   2 2 +"
+	@echo
+
+test13: $(NAME)
+	@echo "===== Test 13 ====="
+	-./RPN "2 2 +    "
+	@echo
+
+test14: $(NAME)
+	@echo "===== Test 14 ====="
+	-./RPN "   2   2     +     "
 	@echo
 
 # RESERVED WORDS
