@@ -18,6 +18,7 @@ class RPN
         ~RPN();
 
         bool validLine(const std::string& line);
+        void processLine(const std::string& line);
 };
 
 #endif
