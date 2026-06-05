@@ -12,6 +12,7 @@ class RPN
         bool isOperator(char c);
         void pushOperand(int n);
         void applyOperator(char op);
+        int getTop();
 
     public:
         RPN();
@@ -20,7 +21,7 @@ class RPN
         ~RPN();
 
         bool validLine(const std::string& line);
-        void processLine(const std::string& line);
+        int processLine(const std::string& line);
 };
 
 #endif

@@ -12,7 +12,8 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    rpn.processLine(argv[1]);
+    int res = rpn.processLine(argv[1]);
+    std::cout << res << std::endl;
 
     return 0;
 }

@@ -63,6 +63,8 @@
         }
     }
 
+    int RPN::getTop() { return _stack.top(); }
+
 
   // **************************************************** //
  //                    Public API                        //
@@ -90,7 +92,7 @@
         return n - op == 1 ? true : false;
     }
 
-    void RPN::processLine(const std::string& line)
+    int RPN::processLine(const std::string& line)
     {
         for (size_t i = 0; i < line.size(); i++)
         {
@@ -98,4 +100,6 @@
             else if (isdigit(line[i])) pushOperand(atoi(&line[i]));
             else applyOperator(line[i]);
         }
+
+        return getTop();
     }
