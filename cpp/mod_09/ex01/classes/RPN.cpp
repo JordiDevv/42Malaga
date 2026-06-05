@@ -39,7 +39,28 @@
 
     void RPN::applyOperator(char op)
     {
-        
+        int b = _stack.top();
+        _stack.pop();
+        int a = _stack.top();
+        _stack.pop();
+
+        switch (op)
+        {
+            case '+':
+                _stack.push(a + b);
+                break ;
+            case '-':
+                _stack.push(a - b);
+                break ;
+            case '*':
+                _stack.push(a * b);
+                break ;
+            case '/':
+                _stack.push(a / b);
+                break ;
+            default:
+                break ;
+        }
     }
 
 
