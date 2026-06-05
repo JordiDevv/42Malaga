@@ -1,4 +1,5 @@
 #include "RPN.hpp"
+#include <cstdlib>
 
   // **************************************************** //
  //              Cannonical implementations              //
@@ -17,7 +18,7 @@
 
 
   // **************************************************** //
- //                  Operators utils                     //
+ //                       Utils                          //
 // **************************************************** //
 
     bool RPN::isOperator(char c)
@@ -32,6 +33,13 @@
             default:
                 return false;
         }
+    }
+
+    void RPN::pushOperand(int n) { _stack.push(n); }
+
+    void RPN::applyOperator(char op)
+    {
+        
     }
 
 
@@ -63,5 +71,10 @@
 
     void RPN::processLine(const std::string& line)
     {
-        
+        for (size_t i = 0; i < line.size(); i++)
+        {
+            if (isspace(line[i])) continue;
+            else if (isdigit(line[i])) pushOperand(atoi(&line[i]));
+            else applyOperator(line[i]);
+        }
     }

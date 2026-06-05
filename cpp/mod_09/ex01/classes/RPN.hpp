@@ -10,6 +10,8 @@ class RPN
         std::stack<int> _stack;
     
         bool isOperator(char c);
+        void pushOperand(int n);
+        void applyOperator(char op);
 
     public:
         RPN();
