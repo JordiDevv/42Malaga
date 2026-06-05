@@ -43,9 +43,7 @@
     {
         size_t n = 0;
         size_t op = 0;
-        size_t i = 0;
-
-        while (i < line.size() && isspace(line[i])) i++;
+    
         for (size_t i = 0; i < line.size(); i++)
         {
             if (isdigit(line[i])) n++;
@@ -53,8 +51,17 @@
             else if (isspace(line[i])) continue;
             else return false;
             
+            if ((isdigit(line[i]) || isOperator(line[i]))
+                && i + 1 < line.size() && line[i + 1] != ' ')
+                return false;
+
             if (n - op < 1) return false;
         }
 
         return n - op == 1 ? true : false;
+    }
+
+    void RPN::processLine(const std::string& line)
+    {
+        
     }
