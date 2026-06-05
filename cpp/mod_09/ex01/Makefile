@@ -31,7 +31,7 @@ clean:
 	@echo "$(YELLOW)Deleting objects...$(NC)"
 	@rm -f $(OBJS)
 
-fclean: clean delete
+fclean: clean
 	@echo "$(YELLOW)Deleting program...$(NC)"
 	@rm -f $(NAME)
 
