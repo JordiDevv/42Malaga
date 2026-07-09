@@ -1,11 +1,14 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+#include <vector>
+
 class PmergeMe
 {
     private:
-        bool validateInput();
+        bool validateInput(std::vector<int>& input, const char** rawInput);
 
+        bool isInteger();
         bool isPositive();
         bool isDuplicated();
 
@@ -15,7 +18,7 @@ class PmergeMe
         PmergeMe& operator=(const PmergeMe& ref);
         ~PmergeMe();
 
-        bool processVector();
+        bool processVector(const char **rawInput);
 };
 
 #endif
