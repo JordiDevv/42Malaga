@@ -2,11 +2,13 @@
 #define PMERGEME_HPP
 
 #include <vector>
+#include <deque>
 
 class PmergeMe
 {
     private:
-        bool validateInput(std::vector<int>& input, char** rawInput);
+        bool validateInputForVector(std::vector<int>& input, char** rawInput);
+        bool validateInputForDeque(std::deque<int>& input, char** rawInput);
 
         bool isPositiveInteger(long n);
 
@@ -17,6 +19,7 @@ class PmergeMe
         ~PmergeMe();
 
         bool processVector(char **rawInput);
+        bool processDeque(char **rawInput);
 };
 
 #endif
