@@ -1,14 +1,20 @@
 #include "PmergeMe.hpp"
+#include <cstdlib>
+#include <cerrno>
+#include <climits>
 
   // **************************************************** //
  //              Cannonical implementations              //
 // **************************************************** //
 
     PmergeMe::PmergeMe() {}
-    PmergeMe::PmergeMe(const PmergeMe& ref) {}
+    PmergeMe::PmergeMe(const PmergeMe& ref) { (void)ref; }
 
     PmergeMe& PmergeMe::operator=(const PmergeMe& ref)
-    { if (this != &ref) return *this; }
+    {
+        (void)ref;
+        return *this;
+    }
 
     PmergeMe::~PmergeMe() {}
 
@@ -17,11 +23,12 @@
  //                      Executors                       //
 // **************************************************** //
 
-    bool PmergeMe::processVector(const char **rawInput)
+    bool PmergeMe::processVector(char **rawInput)
     {
         std::vector<int> input;
 
         if (!validateInput(input, rawInput)) return false;
+        return true;
     }
 
 
@@ -29,27 +36,24 @@
  //                       Parser                         //
 // **************************************************** //
 
-    bool PmergeMe::validateInput(std::vector<int>& input, const char** rawInput)
+    bool PmergeMe::validateInput(std::vector<int>& input, char** rawInput)
     {
+        char* end;
+
         for (int i = 1; rawInput[i]; i++)
         {
-            return true;
+            errno = 0;
+
+            long n = strtol(rawInput[i], &end, 10);
+
+            if (*end || errno == ERANGE || !isPositiveInteger(n))
+                return false;
+
+            input.push_back((int)n);
         }
 
         return true;
     }
 
-    bool PmergeMe::isInteger()
-    {
-        return true;
-    }
-
-    bool PmergeMe::isPositive()
-    {
-        return true;
-    }
-
-    bool PmergeMe::isDuplicated()
-    {
-        return true;
-    }
+    bool PmergeMe::isPositiveInteger(long n)
+    { return n > 0 && n < INT_MAX; }

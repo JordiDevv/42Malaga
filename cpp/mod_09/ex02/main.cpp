@@ -11,6 +11,7 @@ int main(int argc, char **argv)
     }
 
     PmergeMe pmergeMe;
+    if (!pmergeMe.processVector(argv)) std::cerr << "Error" << std::endl;
 
     return 0;
 }

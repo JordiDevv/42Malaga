@@ -6,11 +6,9 @@
 class PmergeMe
 {
     private:
-        bool validateInput(std::vector<int>& input, const char** rawInput);
+        bool validateInput(std::vector<int>& input, char** rawInput);
 
-        bool isInteger();
-        bool isPositive();
-        bool isDuplicated();
+        bool isPositiveInteger(long n);
 
     public:
         PmergeMe();
@@ -18,7 +16,7 @@ class PmergeMe
         PmergeMe& operator=(const PmergeMe& ref);
         ~PmergeMe();
 
-        bool processVector(const char **rawInput);
+        bool processVector(char **rawInput);
 };
 
 #endif
