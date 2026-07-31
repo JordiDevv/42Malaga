@@ -3,6 +3,7 @@
 #include <cerrno>
 #include <climits>
 #include <iostream>
+#include <algorithm>
 
   // **************************************************** //
  //              Cannonical implementations              //
@@ -27,16 +28,22 @@
     bool PmergeMe::processVector(char **rawInput)
     {
         if (!validateInput(_vector, rawInput)) return false;
+
         printContainerData(_vector, false);
+        std::sort(_vector.begin(), _vector.end());
         printContainerData(_vector, true);
+
         return true;
     }
 
     bool PmergeMe::processDeque(char **rawInput)
     {
         if (!validateInput(_deque, rawInput)) return false;
+
         printContainerData(_deque, false);
+        std::sort(_deque.begin(), _deque.end());
         printContainerData(_deque, true);
+
         return true;
     }
 
