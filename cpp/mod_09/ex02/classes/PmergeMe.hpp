@@ -7,11 +7,11 @@
 class PmergeMe
 {
     private:
-        std::vector<int> _vectorInput;
-        std::deque<int> _dequeInput;
+        std::vector<int> _vector;
+        std::deque<int> _deque;
 
-        bool validateInputForVector(char** rawInput);
-        bool validateInputForDeque(char** rawInput);
+        template <typename C>
+        bool validateInput(C& container, char** rawInput);
 
         bool isPositiveInteger(long n);
 
