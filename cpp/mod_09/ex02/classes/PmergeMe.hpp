@@ -15,6 +15,9 @@ class PmergeMe
 
         bool isPositiveInteger(long n);
 
+        template <typename C>
+        void printContainerData(C& container, bool isSort);
+
     public:
         PmergeMe();
         PmergeMe(const PmergeMe& ref);

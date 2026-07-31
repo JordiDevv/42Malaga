@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cerrno>
 #include <climits>
+#include <iostream>
 
   // **************************************************** //
  //              Cannonical implementations              //
@@ -26,12 +27,16 @@
     bool PmergeMe::processVector(char **rawInput)
     {
         if (!validateInput(_vector, rawInput)) return false;
+        printContainerData(_vector, false);
+        printContainerData(_vector, true);
         return true;
     }
 
     bool PmergeMe::processDeque(char **rawInput)
     {
         if (!validateInput(_deque, rawInput)) return false;
+        printContainerData(_deque, false);
+        printContainerData(_deque, true);
         return true;
     }
 
@@ -62,3 +67,20 @@
 
     bool PmergeMe::isPositiveInteger(long n)
     { return n > 0 && n < INT_MAX; }
+
+
+      // **************************************************** //
+     //                      Printers                        //
+    // **************************************************** //
+
+    template <typename C>
+    void PmergeMe::printContainerData(C& container, bool isSort)
+    {
+        std::cout << (!isSort ? "Before:" : "After:");
+
+        typename C::const_iterator it;
+        for (it = container.begin(); it != container.end(); ++it)
+        { std::cout << " " << *it; }
+
+        std::cout << std::endl;
+    }
