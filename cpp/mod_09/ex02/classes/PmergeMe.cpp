@@ -30,8 +30,14 @@
         if (!validateInput(_vector, rawInput)) return false;
 
         printContainerData(_vector, false);
+
+        clock_t startTime = clock();
         std::sort(_vector.begin(), _vector.end());
+        clock_t endTime = clock();
+
         printContainerData(_vector, true);
+
+        printElapsedTime(startTime, endTime, _vector);
 
         return true;
     }
@@ -41,8 +47,14 @@
         if (!validateInput(_deque, rawInput)) return false;
 
         printContainerData(_deque, false);
+    
+        clock_t startTime = clock();
         std::sort(_deque.begin(), _deque.end());
+        clock_t endTime = clock();
+
         printContainerData(_deque, true);
+
+        printElapsedTime(startTime, endTime, _deque);
 
         return true;
     }
@@ -91,3 +103,28 @@
 
         std::cout << std::endl;
     }
+
+    template <typename C>
+    void PmergeMe::printElapsedTime
+    (clock_t startTime, clock_t endTime, C& container)
+    {
+        clock_t elapsedTicks = endTime - startTime;
+        double elapsedTime = static_cast<double>(elapsedTicks) * 1000000.0 / CLOCKS_PER_SEC;
+
+        std::cout   << "Time to process a range of "
+                    << container.size()
+                    << " elements with std::"
+                    << containerName(container)
+                    << " : " 
+                    << elapsedTime
+                    << " us"
+                    << std::endl;
+    }
+
+    template <typename T, typename Alloc>
+    const char* PmergeMe::containerName(const std::vector<T, Alloc>&)
+    { return "vector"; }
+
+    template <typename T, typename Alloc>
+    const char* PmergeMe::containerName(const std::deque<T, Alloc>&)
+    { return "deque"; }

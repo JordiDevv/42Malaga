@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <deque>
+#include <ctime>
 
 class PmergeMe
 {
@@ -17,6 +18,13 @@ class PmergeMe
 
         template <typename C>
         void printContainerData(C& container, bool isSort);
+        template <typename C>
+        void printElapsedTime(clock_t startTime, clock_t endTime, C& container);
+
+        template <typename T, typename Alloc>
+        const char* containerName(const std::vector<T, Alloc>&);
+        template <typename T, typename Alloc>
+        const char* containerName(const std::deque<T, Alloc>&);
 
     public:
         PmergeMe();
