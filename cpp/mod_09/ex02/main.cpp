@@ -17,8 +17,12 @@ int main(int argc, char **argv)
         return 1;
     }
 
+    pmergeMe.printData();
+
     pmergeMe.processVector();
     pmergeMe.processDeque();
+
+    pmergeMe.printData();
 
     return 0;
 }

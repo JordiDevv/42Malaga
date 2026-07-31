@@ -9,12 +9,20 @@
  //              Cannonical implementations              //
 // **************************************************** //
 
-    PmergeMe::PmergeMe() {}
-    PmergeMe::PmergeMe(const PmergeMe& ref) { (void)ref; }
+    PmergeMe::PmergeMe() : _vectorSort(false), _dequeSort(false), _isSort(false) {}
+
+    PmergeMe::PmergeMe(const PmergeMe& ref)
+    : _vectorSort(ref._vectorSort), _dequeSort(ref._dequeSort), _isSort(ref._isSort) {}
 
     PmergeMe& PmergeMe::operator=(const PmergeMe& ref)
     {
-        (void)ref;
+        if (this != &ref)
+        {
+            _vectorSort = ref._vectorSort;
+            _dequeSort = ref._dequeSort;
+            _isSort = ref._isSort;
+        }
+
         return *this;
     }
 
@@ -27,13 +35,9 @@
 
     bool PmergeMe::processVector()
     {
-        printContainerData(_vector, false);
-
         clock_t startTime = clock();
         std::sort(_vector.begin(), _vector.end());
         clock_t endTime = clock();
-
-        printContainerData(_vector, true);
 
         printElapsedTime(startTime, endTime, _vector);
 
@@ -42,13 +46,9 @@
 
     bool PmergeMe::processDeque()
     {
-        printContainerData(_deque, false);
-    
         clock_t startTime = clock();
         std::sort(_deque.begin(), _deque.end());
         clock_t endTime = clock();
-
-        printContainerData(_deque, true);
 
         printElapsedTime(startTime, endTime, _deque);
 
@@ -88,13 +88,12 @@
      //                      Printers                        //
     // **************************************************** //
 
-    template <typename C>
-    void PmergeMe::printContainerData(C& container, bool isSort)
+    void PmergeMe::printData()
     {
-        std::cout << (!isSort ? "Before:" : "After:");
+        std::cout << (!_isSort ? "Before:" : "After:");
 
-        typename C::const_iterator it;
-        for (it = container.begin(); it != container.end(); ++it)
+        std::vector<int>::const_iterator it;
+        for (it = _vector.begin(); it != _vector.end(); ++it)
         { std::cout << " " << *it; }
 
         std::cout << std::endl;

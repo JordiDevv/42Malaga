@@ -8,13 +8,16 @@
 class PmergeMe
 {
     private:
-        std::vector<int> _vector;
-        std::deque<int> _deque;
+        std::vector<int>    _vector;
+        bool                _vectorSort;
+
+        std::deque<int>     _deque;
+        bool                _dequeSort;
+
+        bool                _isSort;
 
         bool isPositiveInteger(long n);
 
-        template <typename C>
-        void printContainerData(C& container, bool isSort);
         template <typename C>
         void printElapsedTime(clock_t startTime, clock_t endTime, C& container);
 
@@ -33,6 +36,8 @@ class PmergeMe
 
         bool processVector();
         bool processDeque();
+
+        void printData();
 };
 
 #endif
