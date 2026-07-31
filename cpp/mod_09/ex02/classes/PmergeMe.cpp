@@ -25,10 +25,8 @@
  //                      Executors                       //
 // **************************************************** //
 
-    bool PmergeMe::processVector(char **rawInput)
+    bool PmergeMe::processVector()
     {
-        if (!validateInput(_vector, rawInput)) return false;
-
         printContainerData(_vector, false);
 
         clock_t startTime = clock();
@@ -42,10 +40,8 @@
         return true;
     }
 
-    bool PmergeMe::processDeque(char **rawInput)
+    bool PmergeMe::processDeque()
     {
-        if (!validateInput(_deque, rawInput)) return false;
-
         printContainerData(_deque, false);
     
         clock_t startTime = clock();
@@ -64,8 +60,7 @@
  //                       Parser                         //
 // **************************************************** //
 
-    template<typename C>
-    bool PmergeMe::validateInput(C& container, char** rawInput)
+    bool PmergeMe::validateInput(char** rawInput)
     {
         char* end;
 
@@ -78,7 +73,8 @@
             if (*end || errno == ERANGE || !isPositiveInteger(n))
                 return false;
 
-            container.push_back((int)n);
+            _vector.push_back((int)n);
+            _deque.push_back((int)n);
         }
 
         return true;

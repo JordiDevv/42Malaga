@@ -6,22 +6,19 @@ int main(int argc, char **argv)
     if (argc < 3)
     {
         std::cerr << "Error" << std::endl;
-        return 0;
+        return 1;
     }
 
     PmergeMe pmergeMe;
 
-    if (!pmergeMe.processVector(argv))
+    if (!pmergeMe.validateInput(argv))
     {
         std::cerr << "Error" << std::endl;
-        return 0;
+        return 1;
     }
 
-    if (!pmergeMe.processDeque(argv))
-    {
-        std::cerr << "Error" << std::endl;
-        return 0;
-    }
+    pmergeMe.processVector();
+    pmergeMe.processDeque();
 
     return 0;
 }
