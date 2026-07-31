@@ -3,7 +3,6 @@
 
 int main(int argc, char **argv)
 {
-    argv = argv;
     if (argc < 3)
     {
         std::cerr << "Error" << std::endl;

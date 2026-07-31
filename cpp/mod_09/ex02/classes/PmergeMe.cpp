@@ -25,17 +25,13 @@
 
     bool PmergeMe::processVector(char **rawInput)
     {
-        std::vector<int> input;
-
-        if (!validateInputForVector(input, rawInput)) return false;
+        if (!validateInputForVector(rawInput)) return false;
         return true;
     }
 
     bool PmergeMe::processDeque(char **rawInput)
     {
-        std::deque<int> input;
-
-        if (!validateInputForDeque(input, rawInput)) return false;
+        if (!validateInputForDeque(rawInput)) return false;
         return true;
     }
 
@@ -43,7 +39,7 @@
  //                       Parser                         //
 // **************************************************** //
 
-    bool PmergeMe::validateInputForVector(std::vector<int>& input, char** rawInput)
+    bool PmergeMe::validateInputForVector(char** rawInput)
     {
         char* end;
 
@@ -56,13 +52,13 @@
             if (*end || errno == ERANGE || !isPositiveInteger(n))
                 return false;
 
-            input.push_back((int)n);
+            _vectorInput.push_back((int)n);
         }
 
         return true;
     }
 
-    bool PmergeMe::validateInputForDeque(std::deque<int>& input, char** rawInput)
+    bool PmergeMe::validateInputForDeque(char** rawInput)
     {
         char* end;
 
@@ -75,7 +71,7 @@
             if (*end || errno == ERANGE || !isPositiveInteger(n))
                 return false;
 
-            input.push_back((int)n);
+            _dequeInput.push_back((int)n);
         }
 
         return true;
