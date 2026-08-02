@@ -71,21 +71,29 @@
         std::cout << std::endl;
     }
 
-    template <typename C>
-    void PmergeMe::printElapsedTime
-    (clock_t startTime, clock_t endTime, C& container)
+    void PmergeMe::printElapsedTime()
     {
-        clock_t elapsedTicks = endTime - startTime;
-        double elapsedTime = static_cast<double>(elapsedTicks) * 1000000.0 / CLOCKS_PER_SEC;
+        if (!_vectorSort && !_dequeSort) throw NoContainerSort();
 
-        std::cout   << "Time to process a range of "
-                    << container.size()
-                    << " elements with std::"
-                    << containerName(container)
-                    << " : " 
-                    << elapsedTime
-                    << " us"
-                    << std::endl;
+        if (_vectorSort)
+        {
+            std::cout   << "Time to process a range of "
+                        << _vector.size()
+                        << " elements with std::vector : "
+                        << _timeForVector
+                        << " us"
+                        << std::endl;
+        }
+
+        if (_dequeSort)
+        {
+            std::cout   << "Time to process a range of "
+                        << _deque.size()
+                        << " elements with std::deque : "
+                        << _timeForDeque
+                        << " us"
+                        << std::endl;
+        }
     }
 
 
@@ -99,7 +107,9 @@
         std::sort(_vector.begin(), _vector.end());
         clock_t endTime = clock();
 
-        printElapsedTime(startTime, endTime, _vector);
+        _timeForVector  = calcElapsedTime(startTime, endTime);
+        _vectorSort     = true;
+        _isSort         = _vectorSort && _dequeSort;
 
         return true;
     }
@@ -110,7 +120,9 @@
         std::sort(_deque.begin(), _deque.end());
         clock_t endTime = clock();
 
-        printElapsedTime(startTime, endTime, _deque);
+        _timeForDeque   = calcElapsedTime(startTime, endTime);
+        _dequeSort      = true;
+        _isSort         = _vectorSort && _dequeSort;
 
         return true;
     }
@@ -127,6 +139,9 @@
     bool PmergeMe::haveSameContent(const C1& a, const C2& b)
     { return a.size() == b.size() && std::equal(a.begin(), a.end(), b.begin()); }
 
+    double PmergeMe::calcElapsedTime(clock_t startTime, clock_t endTime)
+    { return static_cast<double>(endTime - startTime) * 1000000.0 / CLOCKS_PER_SEC; }
+
     template <typename T, typename Alloc>
     const char* PmergeMe::containerName(const std::vector<T, Alloc>&)
     { return "vector"; }
@@ -142,3 +157,6 @@
 
     const char* PmergeMe::NotSameContent::what() const throw()
     { return "Have been an error comparing both containers content"; }
+
+    const char* PmergeMe::NoContainerSort::what() const throw()
+    { return "None of the containers have been sort yet"; }

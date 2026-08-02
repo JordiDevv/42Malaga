@@ -11,10 +11,12 @@ class PmergeMe
     // ********************* _vector ********************** //
         std::vector<int>    _vector;
         bool                _vectorSort;
+        double              _timeForVector;
 
     // ********************* _deque *********************** //
         std::deque<int>     _deque;
         bool                _dequeSort;
+        double              _timeForDeque;
 
     // ********************** State *********************** //
         bool                _isSort;
@@ -25,6 +27,8 @@ class PmergeMe
 
         template <typename C1, typename C2>
         bool haveSameContent(const C1& a, const C2& b);
+
+        double calcElapsedTime(clock_t startTime, clock_t endTime);
 
         template <typename T, typename Alloc>
         const char* containerName(const std::vector<T, Alloc>&);
@@ -43,16 +47,20 @@ class PmergeMe
         
     // ******************** Printers ********************** //
         void printData();
-
-        template <typename C>
-        void printElapsedTime(clock_t startTime, clock_t endTime, C& container);
+        void printElapsedTime();
 
     // ******************** Executors ********************* //
         bool processVector();
         bool processDeque();
 
-    // ***************** Exception class ****************** //
+    // **************** Exception clases ***************** //
         class NotSameContent : public std::exception
+        {
+            public:
+                const char* what() const throw();
+        };
+
+        class NoContainerSort : public std::exception
         {
             public:
                 const char* what() const throw();

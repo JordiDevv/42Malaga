@@ -24,7 +24,10 @@ int main(int argc, char **argv)
     pmergeMe.processDeque();
 
     try { pmergeMe.printData(); }
-    catch(PmergeMe::NotSameContent& e) { return error(e.what()); }
+    catch (PmergeMe::NotSameContent& e) { return error(e.what()); }
+
+    try { pmergeMe.printElapsedTime(); }
+    catch (PmergeMe::NoContainerSort& e) { std::cerr << e.what() << std::endl; }
 
     return 0;
 }
