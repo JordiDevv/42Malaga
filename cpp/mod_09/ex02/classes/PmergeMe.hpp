@@ -18,23 +18,17 @@ class PmergeMe
         bool                _dequeSort;
         double              _timeForDeque;
 
-    // ********************** State *********************** //
-        bool                _isSort;
-
 
     // ****************** Private utils ******************* //
         int error(const char* what = NULL);
         bool isPositiveInteger(long n);
+        bool isSort();
 
         template <typename C1, typename C2>
         bool haveSameContent(const C1& a, const C2& b);
 
         double calcElapsedTime(clock_t startTime, clock_t endTime);
 
-        template <typename T, typename Alloc>
-        const char* containerName(const std::vector<T, Alloc>&);
-        template <typename T, typename Alloc>
-        const char* containerName(const std::deque<T, Alloc>&);
 
     public:
     // ************ Cannonical implementations ************ //

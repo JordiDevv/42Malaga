@@ -9,10 +9,10 @@
  //              Cannonical implementations              //
 // **************************************************** //
 
-    PmergeMe::PmergeMe() : _vectorSort(false), _dequeSort(false), _isSort(false) {}
+    PmergeMe::PmergeMe() : _vectorSort(false), _dequeSort(false) {}
 
     PmergeMe::PmergeMe(const PmergeMe& ref)
-    : _vectorSort(ref._vectorSort), _dequeSort(ref._dequeSort), _isSort(ref._isSort) {}
+    : _vectorSort(ref._vectorSort), _dequeSort(ref._dequeSort) {}
 
     PmergeMe& PmergeMe::operator=(const PmergeMe& ref)
     {
@@ -20,7 +20,6 @@
         {
             _vectorSort = ref._vectorSort;
             _dequeSort = ref._dequeSort;
-            _isSort = ref._isSort;
         }
 
         return *this;
@@ -64,7 +63,7 @@
     {
         if (!haveSameContent(_vector, _deque)) throw NotSameContent();
 
-        std::cout << (!_isSort ? "Before:" : "After:");
+        std::cout << (!isSort() ? "Before:" : "After:");
 
         std::vector<int>::const_iterator it;
         for (it = _vector.begin(); it != _vector.end(); ++it)
@@ -111,7 +110,6 @@
 
         _timeForVector  = calcElapsedTime(startTime, endTime);
         _vectorSort     = true;
-        _isSort         = _vectorSort && _dequeSort;
 
         return true;
     }
@@ -124,7 +122,6 @@
 
         _timeForDeque   = calcElapsedTime(startTime, endTime);
         _dequeSort      = true;
-        _isSort         = _vectorSort && _dequeSort;
 
         return true;
     }
@@ -134,7 +131,7 @@
         if (!validateInput(argc, argv)) return error();
 
         try { printData(); }
-        catch(...) { return error(); }
+        catch (NotSameContent& e) { return error(e.what()); }
         
         processVector();
         processDeque();
@@ -161,6 +158,8 @@
         return 1;
     }
 
+    bool PmergeMe::isSort() { return _vectorSort && _dequeSort; }
+
     bool PmergeMe::isPositiveInteger(long n)
     { return n > 0 && n < INT_MAX; }
 
@@ -170,14 +169,6 @@
 
     double PmergeMe::calcElapsedTime(clock_t startTime, clock_t endTime)
     { return static_cast<double>(endTime - startTime) * 1000000.0 / CLOCKS_PER_SEC; }
-
-    template <typename T, typename Alloc>
-    const char* PmergeMe::containerName(const std::vector<T, Alloc>&)
-    { return "vector"; }
-
-    template <typename T, typename Alloc>
-    const char* PmergeMe::containerName(const std::deque<T, Alloc>&)
-    { return "deque"; }
 
 
   // **************************************************** //
