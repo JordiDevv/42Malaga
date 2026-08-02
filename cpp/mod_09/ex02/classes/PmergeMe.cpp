@@ -33,8 +33,10 @@
  //                       Parser                         //
 // **************************************************** //
 
-    bool PmergeMe::validateInput(char** rawInput)
+    bool PmergeMe::validateInput(int len, char** rawInput)
     {
+        if (len < 3) return false;
+
         char* end;
 
         for (int i = 1; rawInput[i]; i++)
@@ -127,10 +129,37 @@
         return true;
     }
 
+    int PmergeMe::run(int argc, char** argv)
+    {
+        if (!validateInput(argc, argv)) return error();
+
+        try { printData(); }
+        catch(...) { return error(); }
+        
+        processVector();
+        processDeque();
+
+        try { printData(); }
+        catch (NotSameContent& e) { return error(e.what()); }
+
+        try { printElapsedTime(); }
+        catch (NoContainerSort& e) { std::cerr << e.what() << std::endl; }
+
+        return 0;
+    }
+
     
   // **************************************************** //
  //                   Private utils                      //
 // **************************************************** //
+
+    int PmergeMe::error(const char* what)
+    {
+        std::cerr << "Error";
+        if (what) std::cerr << ": " << what;
+        std::cerr << std::endl;
+        return 1;
+    }
 
     bool PmergeMe::isPositiveInteger(long n)
     { return n > 0 && n < INT_MAX; }

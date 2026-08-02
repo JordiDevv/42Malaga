@@ -23,6 +23,7 @@ class PmergeMe
 
 
     // ****************** Private utils ******************* //
+        int error(const char* what = NULL);
         bool isPositiveInteger(long n);
 
         template <typename C1, typename C2>
@@ -43,15 +44,16 @@ class PmergeMe
         ~PmergeMe();
 
     // ********************* Parser *********************** //
-        bool validateInput(char** rawInput);
+        bool validateInput(int len, char** rawInput);
         
     // ******************** Printers ********************** //
         void printData();
         void printElapsedTime();
 
     // ******************** Executors ********************* //
-        bool processVector();
-        bool processDeque();
+        bool    processVector();
+        bool    processDeque();
+        int     run(int argc, char** argv);
 
     // **************** Exception clases ***************** //
         class NotSameContent : public std::exception
