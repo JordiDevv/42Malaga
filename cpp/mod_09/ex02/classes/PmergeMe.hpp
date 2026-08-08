@@ -49,6 +49,10 @@ class PmergeMe
         bool    processDeque();
         int     run(int argc, char** argv);
 
+    // ****************** Ford-Johnson ******************** //
+        template <typename Container>
+        void fordJohnson(Container& input);
+
     // **************** Exception clases ***************** //
         class NotSameContent : public std::exception
         {
