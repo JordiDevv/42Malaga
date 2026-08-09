@@ -5,6 +5,26 @@
 #include <deque>
 #include <ctime>
 
+  // **************************************************** //
+ //              Template pairs containers               //
+// **************************************************** //
+
+template <typename T>
+struct PairContainer;
+
+template <>
+struct PairContainer< std::vector<int> >
+{ typedef std::vector<int,int> type; };
+
+template <>
+struct PairContainer< std::deque<int> >
+{ typedef std::deque<int,int> type; };
+
+
+  // **************************************************** //
+ //                     Main class                       //
+// **************************************************** //
+
 class PmergeMe
 {
     private:

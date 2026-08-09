@@ -153,7 +153,15 @@
     template <typename Container>
     void PmergeMe::fordJohnson(Container& input)
     {
-        // ...
+        typedef typename PairContainer<Container>::type PairList;
+        struct Data
+        {
+            PairList    pairs;
+            int         straggler;
+        };
+
+        Data data;
+        data.straggler = 0;
     }
 
     
