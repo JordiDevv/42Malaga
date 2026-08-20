@@ -158,11 +158,26 @@
         FordJohnsonData<Container> data;
         initData(input, data);
 
+        // DEBUG
+        std::cout << "SORT BY PAIR:" << std::endl << std::endl;
         for (size_t i = 0; i < data.pairs.size(); i++)
-        {
-            std::cout << data.pairs[i].minor << " " << data.pairs[i].major << std::endl;
+        { 
+            std::cout   << data.pairIndex[i] << ": "
+                        << data.pairs[i].minor << " " << data.pairs[i].major
+                        << std::endl;
         }
-        if (data.hasStraggler) std::cout << data.straggler << std::endl;
+        if (data.hasStraggler) std::cout << " " << data.straggler << std::endl;
+        std::cout << std::endl;
+        // DEBUG
+
+        data.pairIndex = sortIndexByPair(data.pairIndex, data);
+
+        // DEBUG
+        std::cout << "INDEX SORT:" << std::endl << std::endl;
+        for (size_t i = 0; i < data.pairIndex.size(); i++)
+        { std::cout << data.pairIndex[i] << " "; }
+        std::cout << std::endl << std::endl;
+        // DEBUG
     }
 
     template <typename Container>
@@ -188,11 +203,11 @@
             }
         }
 
-        for (i = 0; i < input.size(); i++) data.index.push_back(i);
+        for (i = 0; i < data.pairs.size(); i++) data.pairIndex.push_back(i);
     }
 
     template <typename Container>
-    Container PmergeMe::fordJohnsonPairs(
+    Container PmergeMe::sortIndexByPair(
         const Container& index, const FordJohnsonData<Container>& data)
     {
         if (index.size() <= 1) return index;
@@ -202,22 +217,22 @@
 
         for (size_t i = 0; i + 1 < index.size(); i += 2)
         {
-            if (data.pairs[i].major > data.pairs[i + 1].major)
+            size_t leftPairIndex = index[i];
+            size_t rightPairIndex = index[i + 1];
+
+            if (data.pairs[leftPairIndex].major > data.pairs[rightPairIndex].major)
             {
-                winners.push_back(i);
-                losers.push_back(i + 1);
+                winners.push_back(leftPairIndex);
+                losers.push_back(rightPairIndex);
             }
             else
             {
-                winners.push_back(i + 1);
-                losers.push_back(i);
+                winners.push_back(rightPairIndex);
+                losers.push_back(leftPairIndex);
             }
         }
 
-        winners = fordJohnsonPairs(winners, pairs);
-
-        // 3. Reinsertar losers
-        // ...
+        winners = sortIndexByPair(winners, data);
         
         return winners;
     }
