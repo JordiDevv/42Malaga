@@ -105,6 +105,7 @@
     bool PmergeMe::processVector()
     {
         clock_t startTime = clock();
+        fordJohnson(_vector);
         std::sort(_vector.begin(), _vector.end());
         clock_t endTime = clock();
 
@@ -117,6 +118,7 @@
     bool PmergeMe::processDeque()
     {
         clock_t startTime = clock();
+        fordJohnson(_deque);
         std::sort(_deque.begin(), _deque.end());
         clock_t endTime = clock();
 
@@ -153,15 +155,72 @@
     template <typename Container>
     void PmergeMe::fordJohnson(Container& input)
     {
-        typedef typename PairContainer<Container>::type PairList;
-        struct Data
-        {
-            PairList    pairs;
-            int         straggler;
-        };
+        FordJohnsonData<Container> data;
+        initData(input, data);
 
-        Data data;
-        data.straggler = 0;
+        for (size_t i = 0; i < data.pairs.size(); i++)
+        {
+            std::cout << data.pairs[i].minor << " " << data.pairs[i].major << std::endl;
+        }
+        if (data.hasStraggler) std::cout << data.straggler << std::endl;
+    }
+
+    template <typename Container>
+    void PmergeMe::initData(Container& input, FordJohnsonData<Container>& data)
+    {
+        data.straggler      = 0;
+        data.hasStraggler   = false;
+
+        size_t i;
+        for (i = 0; i < input.size(); i += 2)
+        {
+            if (i == input.size() - 1) 
+            {
+                data.straggler = input[i];
+                data.hasStraggler = true;
+            }
+            else
+            {
+                Pair pair;
+                pair.minor = input[i] < input[i + 1] ? input[i] : input[i + 1];
+                pair.major = input[i] >= input[i + 1] ? input[i] : input[i + 1];
+                data.pairs.push_back(pair);
+            }
+        }
+
+        for (i = 0; i < input.size(); i++) data.index.push_back(i);
+    }
+
+    template <typename Container>
+    Container PmergeMe::fordJohnsonPairs(
+        const Container& index, const FordJohnsonData<Container>& data)
+    {
+        if (index.size() <= 1) return index;
+
+        Container winners;
+        Container losers;
+
+        for (size_t i = 0; i + 1 < index.size(); i += 2)
+        {
+            if (data.pairs[i].major > data.pairs[i + 1].major)
+            {
+                winners.push_back(i);
+                losers.push_back(i + 1);
+            }
+            else
+            {
+                winners.push_back(i + 1);
+                losers.push_back(i);
+            }
+        }
+
+        // 2. MAGIA RECURSIVA
+        winners = fordJohnsonPairs(winners, pairs);
+
+        // 3. Reinsertar losers
+        // ...
+        
+        return winners;
     }
 
     

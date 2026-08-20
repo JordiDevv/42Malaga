@@ -11,14 +11,37 @@
 
 template <typename T>
 struct PairContainer;
+struct Pair;
 
 template <>
 struct PairContainer< std::vector<int> >
-{ typedef std::vector<int,int> type; };
+{ typedef std::vector<Pair> type; };
 
 template <>
 struct PairContainer< std::deque<int> >
-{ typedef std::deque<int,int> type; };
+{ typedef std::deque<Pair> type; };
+
+
+  // **************************************************** //
+ //              Ford-Johnson data structs               //
+// **************************************************** //
+
+struct Pair
+{
+    int minor;
+    int major;
+};
+
+template <typename Container>
+struct FordJohnsonData
+{
+    typedef typename PairContainer<Container>::type PairList;
+
+    PairList    pairs;
+    int         straggler;
+    bool        hasStraggler;
+    Container   index;
+};
 
 
   // **************************************************** //
@@ -48,6 +71,14 @@ class PmergeMe
         bool haveSameContent(const C1& a, const C2& b);
 
         double calcElapsedTime(clock_t startTime, clock_t endTime);
+
+    // *************** Ford-Johnson helpers *************** //
+        template <typename Container>
+        void initData(Container& input, FordJohnsonData<Container>& data);
+
+        template <typename Container>
+        Container fordJohnsonPairs(
+            const Container& indices, const FordJohnsonData<Container>& data);
 
 
     public:
