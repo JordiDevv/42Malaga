@@ -214,7 +214,6 @@
             }
         }
 
-        // 2. MAGIA RECURSIVA
         winners = fordJohnsonPairs(winners, pairs);
 
         // 3. Reinsertar losers
