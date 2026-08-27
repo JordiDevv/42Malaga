@@ -207,34 +207,60 @@
     }
 
     template <typename Container>
-    Container PmergeMe::sortIndexByPair(
-        const Container& index, const FordJohnsonData<Container>& data)
+    Container PmergeMe::sortIndexByPair(const Container& index, const FordJohnsonData<Container>& data)
     {
         if (index.size() <= 1) return index;
 
         Container winners;
         Container losers;
 
+        bool    hasStraggler = index.size() % 2 != 0;
+        size_t  last = index.size() - 1;
+
         for (size_t i = 0; i + 1 < index.size(); i += 2)
         {
-            size_t leftPairIndex = index[i];
-            size_t rightPairIndex = index[i + 1];
+            size_t left  = index[i];
+            size_t right = index[i + 1];
 
-            if (data.pairs[leftPairIndex].major > data.pairs[rightPairIndex].major)
+            if (data.pairs[left].major < data.pairs[right].major)
             {
-                winners.push_back(leftPairIndex);
-                losers.push_back(rightPairIndex);
+                winners.push_back(right);
+                losers.push_back(left);
             }
             else
             {
-                winners.push_back(rightPairIndex);
-                losers.push_back(leftPairIndex);
+                winners.push_back(left);
+                losers.push_back(right);
             }
         }
 
-        winners = sortIndexByPair(winners, data);
-        
-        return winners;
+        Container result = sortIndexByPair(winners, data);
+
+        for (size_t i = 0; i < losers.size(); ++i)
+        {
+            size_t loser = losers[i];
+
+            typename Container::iterator pos = result.begin();
+
+            while (pos != result.end() && data.pairs[*pos].major < data.pairs[loser].major)
+            { ++pos; }
+
+            result.insert(pos, loser);
+        }
+
+        if (hasStraggler)
+        {
+            size_t straggler = index[last];
+
+            typename Container::iterator pos = result.begin();
+
+            while (pos != result.end() && data.pairs[*pos].major < data.pairs[straggler].major)
+            { ++pos; }
+
+            result.insert(pos, straggler);
+        }
+
+        return result;
     }
 
     
