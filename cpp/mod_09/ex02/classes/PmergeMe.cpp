@@ -284,7 +284,33 @@
         return mainChain;
     }
 
-    
+    template <typename Container>
+    void PmergeMe::jacobsthalInsertion(Container& mainChain, const FordJohnsonData<Container>& data)
+    {
+        size_t prev         = 1;
+        size_t jacobsthal   = 1;
+
+        while (true)
+        {
+            while (jacobsthal > data.pairIndex.size()) { --jacobsthal; }
+            if (jacobsthal <= prev) break;
+
+            // insertion
+
+            size_t current = jacobsthal;
+            while (current > prev)
+            {
+                // insertion
+                --current;
+            }
+
+            size_t nextPrev = jacobsthal;
+            jacobsthal      += prev * 2;
+            prev            = nextPrev;
+        }
+    }
+
+
   // **************************************************** //
  //                   Private utils                      //
 // **************************************************** //

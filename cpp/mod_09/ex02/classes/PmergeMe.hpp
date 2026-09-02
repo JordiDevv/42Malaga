@@ -84,6 +84,9 @@ class PmergeMe
         template <typename Container>
         Container initMainChain(const FordJohnsonData<Container>& data);
 
+        template <typename Container>
+        void PmergeMe::jacobsthalInsertion(Container& mainChain, const FordJohnsonData<Container>& data);
+
 
     public:
     // ************ Cannonical implementations ************ //
