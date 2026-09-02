@@ -288,19 +288,19 @@
     void PmergeMe::jacobsthalInsertion(Container& mainChain, const FordJohnsonData<Container>& data)
     {
         size_t prev         = 1;
-        size_t jacobsthal   = 1;
+        size_t jacobsthal   = 3;
+
+        // initial insertion for prev
 
         while (true)
         {
-            while (jacobsthal > data.pairIndex.size()) { --jacobsthal; }
+            while (jacobsthal >= data.pairIndex.size()) { --jacobsthal; }
             if (jacobsthal <= prev) break;
-
-            // insertion
 
             size_t current = jacobsthal;
             while (current > prev)
             {
-                // insertion
+                // insertion for current
                 --current;
             }
 
