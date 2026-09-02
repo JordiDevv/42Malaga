@@ -276,6 +276,8 @@
     {
         Container mainChain;
 
+        mainChain.push_back(data.pairs[data.pairIndex[0]].minor);
+
         for (size_t i = 0; i < data.pairIndex.size(); i++)
         { mainChain.push_back(data.pairs[data.pairIndex[i]].major); }
 
