@@ -41,7 +41,6 @@ struct FordJohnsonData
     int         straggler;
     bool        hasStraggler;
     Container   mainChain;
-    Container   pairIndex;
 };
 
 
@@ -78,14 +77,14 @@ class PmergeMe
         void initData(Container& input, FordJohnsonData<Container>& data);
 
         template <typename Container>
-        Container sortIndexByPair(
-            const Container& indices, const FordJohnsonData<Container>& data);
+        typename PairContainer<Container>::type
+        sortPairsByMajor(const typename PairContainer<Container>::type& pairs);
 
         template <typename Container>
         Container initMainChain(const FordJohnsonData<Container>& data);
 
         template <typename Container>
-        void PmergeMe::jacobsthalInsertion(Container& mainChain, const FordJohnsonData<Container>& data);
+        void jacobsthalInsertion(Container& mainChain, const FordJohnsonData<Container>& data);
 
 
     public:

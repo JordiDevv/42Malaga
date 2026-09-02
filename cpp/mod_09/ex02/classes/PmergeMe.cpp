@@ -170,14 +170,20 @@
         std::cout << std::endl;
         // DEBUG
 
-        data.pairIndex = sortIndexByPair(data.pairIndex, data);
+        //data.pairIndex = sortIndexByPair(data.pairIndex, data);
+        data.pairs = sortPairsByMajor<Container>(data.pairs);
         data.mainChain = initMainChain(data);
 
         // DEBUG
-        std::cout << "INDEX SORT:" << std::endl << std::endl;
-        for (size_t i = 0; i < data.pairIndex.size(); i++)
-        { std::cout << data.pairIndex[i] << " "; }
-        std::cout << std::endl << std::endl;
+        std::cout << "SORT BY INDEX:" << std::endl << std::endl;
+        for (size_t i = 0; i < data.pairs.size(); i++)
+        { 
+            std::cout   << data.pairIndex[i] << ": "
+                        << data.pairs[i].minor << " " << data.pairs[i].major
+                        << std::endl;
+        }
+        if (data.hasStraggler) std::cout << " " << data.straggler << std::endl;
+        std::cout << std::endl;
         // DEBUG
 
         // DEBUG
@@ -215,22 +221,23 @@
     }
 
     template <typename Container>
-    Container PmergeMe::sortIndexByPair(const Container& index, const FordJohnsonData<Container>& data)
+    typename PairContainer<Container>::type
+    PmergeMe::sortPairsByMajor(const typename PairContainer<Container>::type& pairs)
     {
-        if (index.size() <= 1) return index;
+        if (pairs.size() <= 1) return pairs;
 
-        Container winners;
-        Container losers;
+        typename PairContainer<Container>::type winners;
+        typename PairContainer<Container>::type losers;
 
-        bool    hasStraggler = index.size() % 2 != 0;
-        size_t  last = index.size() - 1;
+        bool hasStraggler = pairs.size() % 2 != 0;
+        size_t last = pairs.size() - 1;
 
-        for (size_t i = 0; i + 1 < index.size(); i += 2)
+        for (size_t i = 0; i + 1 < pairs.size(); i += 2)
         {
-            size_t left  = index[i];
-            size_t right = index[i + 1];
+            const Pair& left    = pairs[i];
+            const Pair& right   = pairs[i + 1];
 
-            if (data.pairs[left].major < data.pairs[right].major)
+            if (left.major < right.major)
             {
                 winners.push_back(right);
                 losers.push_back(left);
@@ -242,15 +249,16 @@
             }
         }
 
-        Container result = sortIndexByPair(winners, data);
+        typename PairContainer<Container>::type result =
+            sortPairsByMajor<Container>(winners);
 
         for (size_t i = 0; i < losers.size(); ++i)
         {
-            size_t loser = losers[i];
+            const Pair& loser = losers[i];
 
-            typename Container::iterator pos = result.begin();
+            typename PairContainer<Container>::type::iterator pos = result.begin();
 
-            while (pos != result.end() && data.pairs[*pos].major < data.pairs[loser].major)
+            while (pos != result.end() && pos->major < loser.major)
             { ++pos; }
 
             result.insert(pos, loser);
@@ -258,11 +266,11 @@
 
         if (hasStraggler)
         {
-            size_t straggler = index[last];
+            const Pair& straggler = pairs[last];
 
-            typename Container::iterator pos = result.begin();
+            typename PairContainer<Container>::type::iterator pos = result.begin();
 
-            while (pos != result.end() && data.pairs[*pos].major < data.pairs[straggler].major)
+            while (pos != result.end() && pos->major < straggler.major)
             { ++pos; }
 
             result.insert(pos, straggler);
@@ -276,10 +284,10 @@
     {
         Container mainChain;
 
-        mainChain.push_back(data.pairs[data.pairIndex[0]].minor);
+        mainChain.push_back(data.pairs[0].minor);
 
-        for (size_t i = 0; i < data.pairIndex.size(); i++)
-        { mainChain.push_back(data.pairs[data.pairIndex[i]].major); }
+        for (size_t i = 0; i < data.pairs.size(); i++)
+        { mainChain.push_back(data.pairs[i].major); }
 
         return mainChain;
     }
