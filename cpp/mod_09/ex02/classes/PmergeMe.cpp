@@ -292,12 +292,13 @@
 
         // initial insertion for prev
 
-        while (true)
+        while (prev < data.pairIndex.size())
         {
-            while (jacobsthal >= data.pairIndex.size()) { --jacobsthal; }
-            if (jacobsthal <= prev) break;
-
             size_t current = jacobsthal;
+
+            if (current >= data.pairIndex.size())
+                current = data.pairIndex.size() - 1;
+
             while (current > prev)
             {
                 // insertion for current
