@@ -40,6 +40,7 @@ struct FordJohnsonData
     PairList    pairs;
     int         straggler;
     bool        hasStraggler;
+    Container   mainChain;
     Container   pairIndex;
 };
 
@@ -79,6 +80,9 @@ class PmergeMe
         template <typename Container>
         Container sortIndexByPair(
             const Container& indices, const FordJohnsonData<Container>& data);
+
+        template <typename Container>
+        Container initMainChain(const FordJohnsonData<Container>& data);
 
 
     public:

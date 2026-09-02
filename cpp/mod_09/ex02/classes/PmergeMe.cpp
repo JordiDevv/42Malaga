@@ -171,11 +171,19 @@
         // DEBUG
 
         data.pairIndex = sortIndexByPair(data.pairIndex, data);
+        data.mainChain = initMainChain(data);
 
         // DEBUG
         std::cout << "INDEX SORT:" << std::endl << std::endl;
         for (size_t i = 0; i < data.pairIndex.size(); i++)
         { std::cout << data.pairIndex[i] << " "; }
+        std::cout << std::endl << std::endl;
+        // DEBUG
+
+        // DEBUG
+        std::cout << "MAINCHAIN FIRST INIT:" << std::endl << std::endl;
+        for (size_t i = 0; i < data.mainChain.size(); i++)
+        { std::cout << data.mainChain[i] << " "; }
         std::cout << std::endl << std::endl;
         // DEBUG
     }
@@ -261,6 +269,17 @@
         }
 
         return result;
+    }
+
+    template <typename Container>
+    Container PmergeMe::initMainChain(const FordJohnsonData<Container>& data)
+    {
+        Container mainChain;
+
+        for (size_t i = 0; i < data.pairIndex.size(); i++)
+        { mainChain.push_back(data.pairs[data.pairIndex[i]].major); }
+
+        return mainChain;
     }
 
     
