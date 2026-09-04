@@ -85,7 +85,10 @@ class PmergeMe
         void initMainChain(FordJohnsonData<Container>& data);
 
         template <typename Container>
-        void jacobsthalInsertion(Container& mainChain, const FordJohnsonData<Container>& data);
+        void jacobsthalInsertion(FordJohnsonData<Container>& data);
+
+        template <typename Container>
+        void insertMinor(Container& mainChain, FordJohnsonData<Container>& data, size_t current);
 
 
     public:

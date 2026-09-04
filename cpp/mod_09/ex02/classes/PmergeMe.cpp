@@ -157,40 +157,9 @@
     {
         FordJohnsonData<Container> data;
         initData(input, data);
-
-        // DEBUG
-        std::cout << "SORT BY PAIR:" << std::endl << std::endl;
-        for (size_t i = 0; i < data.pairs.size(); i++)
-        { 
-            std::cout   << data.pairIndex[i] << ": "
-                        << data.pairs[i].minor << " " << data.pairs[i].major
-                        << std::endl;
-        }
-        if (data.hasStraggler) std::cout << " " << data.straggler << std::endl;
-        std::cout << std::endl;
-        // DEBUG
-
         data.pairs = sortPairsByMajor<Container>(data.pairs);
         initMainChain(data);
-
-        // DEBUG
-        std::cout << "SORT BY INDEX:" << std::endl << std::endl;
-        for (size_t i = 0; i < data.pairs.size(); i++)
-        { 
-            std::cout   << data.pairIndex[i] << ": "
-                        << data.pairs[i].minor << " " << data.pairs[i].major
-                        << std::endl;
-        }
-        if (data.hasStraggler) std::cout << " " << data.straggler << std::endl;
-        std::cout << std::endl;
-        // DEBUG
-
-        // DEBUG
-        std::cout << "MAINCHAIN FIRST INIT:" << std::endl << std::endl;
-        for (size_t i = 0; i < data.mainChain.size(); i++)
-        { std::cout << data.mainChain[i] << " "; }
-        std::cout << std::endl << std::endl;
-        // DEBUG
+        jacobsthalInsertion(data);
     }
 
     template <typename Container>
@@ -217,7 +186,7 @@
             }
         }
 
-        for (i = 0; i < data.pairs.size(); i++) data.pairIndex.push_back(i);
+        for (i = 0; i < data.pairs.size(); i++) data.pairs[i].majorIndex = i;
     }
 
     template <typename Container>
@@ -292,12 +261,12 @@
     }
 
     template <typename Container>
-    void PmergeMe::jacobsthalInsertion(Container& mainChain, const FordJohnsonData<Container>& data)
+    void PmergeMe::jacobsthalInsertion(FordJohnsonData<Container>& data)
     {
         size_t prev         = 1;
         size_t jacobsthal   = 3;
 
-        // initial insertion for prev
+        insertMinor(data.mainChain, data, prev);
 
         while (prev < data.pairs.size())
         {
@@ -308,7 +277,7 @@
 
             while (current > prev)
             {
-                // insertion for current
+                insertMinor(data.mainChain, data, current);
                 --current;
             }
 
@@ -319,29 +288,24 @@
     }
 
     template <typename Container>
-    void insertMinor(Container& mainChain, int minor, const FordJohnsonData<Container>& data, size_t current)
+    void PmergeMe::insertMinor(Container& mainChain, FordJohnsonData<Container>& data, size_t current)
     {
-        size_t target   = 0;
-        size_t lower    = minor > data.pairs[current / 2].major ? current / 2 : 0;
-        size_t upper    = lower == 0 ? current : current / 2;
-        size_t middle   = lower + (upper - lower) / 2;
+        Pair pair       = data.pairs[current];
+        size_t low      = 0;
+        size_t upper    = pair.majorIndex;
 
-        while (upper - lower > 1 && target != middle)
+        while (low < upper)
         {
-            if (minor > data.pairs[middle].major) lower = middle;
-            else if (minor < data.pairs[middle].major) upper = middle;
-            else target = middle;
+            size_t middle = low + (upper - low) / 2;
 
-            if (upper - lower == 1)
-                target = minor > data.pairs[lower].major ? upper : lower;
-            middle = lower + (upper - lower) / 2;
+            if (mainChain[middle] < pair.minor) low = middle + 1;
+            else upper = middle;
         }
 
-        size_t insertIndex = minor > data.pairs[target].minor ?
-            data.pairs[target].majorIndex : data.pairs[target].majorIndex - 1;
-        mainChain.insert(mainChain.begin() + insertIndex, minor);
+        size_t insertIndex = low;
+        mainChain.insert(mainChain.begin() + insertIndex, pair.minor);
 
-        for (size_t i = target; i < data.pairs.size(); i++)
+        for (size_t i = insertIndex; i < data.pairs.size(); ++i)
         { data.pairs[i].majorIndex++; }
     }
 
