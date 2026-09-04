@@ -170,9 +170,8 @@
         std::cout << std::endl;
         // DEBUG
 
-        //data.pairIndex = sortIndexByPair(data.pairIndex, data);
         data.pairs = sortPairsByMajor<Container>(data.pairs);
-        data.mainChain = initMainChain(data);
+        initMainChain(data);
 
         // DEBUG
         std::cout << "SORT BY INDEX:" << std::endl << std::endl;
@@ -211,8 +210,9 @@
             else
             {
                 Pair pair;
-                pair.minor = input[i] < input[i + 1] ? input[i] : input[i + 1];
-                pair.major = input[i] >= input[i + 1] ? input[i] : input[i + 1];
+                pair.minor      = input[i] < input[i + 1] ? input[i] : input[i + 1];
+                pair.major      = input[i] >= input[i + 1] ? input[i] : input[i + 1];
+                pair.majorIndex = i;
                 data.pairs.push_back(pair);
             }
         }
@@ -280,16 +280,15 @@
     }
 
     template <typename Container>
-    Container PmergeMe::initMainChain(const FordJohnsonData<Container>& data)
+    void PmergeMe::initMainChain(FordJohnsonData<Container>& data)
     {
-        Container mainChain;
-
-        mainChain.push_back(data.pairs[0].minor);
+        data.mainChain.push_back(data.pairs[0].minor);
 
         for (size_t i = 0; i < data.pairs.size(); i++)
-        { mainChain.push_back(data.pairs[i].major); }
-
-        return mainChain;
+        {
+            data.mainChain.push_back(data.pairs[i].major);
+            data.pairs[i].majorIndex = i + 1;
+        }
     }
 
     template <typename Container>
@@ -300,12 +299,12 @@
 
         // initial insertion for prev
 
-        while (prev < data.pairIndex.size())
+        while (prev < data.pairs.size())
         {
             size_t current = jacobsthal;
 
-            if (current >= data.pairIndex.size())
-                current = data.pairIndex.size() - 1;
+            if (current >= data.pairs.size())
+                current = data.pairs.size() - 1;
 
             while (current > prev)
             {
@@ -317,6 +316,31 @@
             jacobsthal      += prev * 2;
             prev            = nextPrev;
         }
+    }
+
+    template <typename Container>
+    void insertMinor(Container& mainChain, const Pair& pair, const FordJohnsonData<Container>& data, size_t current)
+    {
+        size_t target   = 0;
+        size_t lower    = pair.minor > data.pairs[current / 2].major ? current / 2 : 0;
+        size_t upper    = lower == 0 ? current : current / 2;
+        size_t middle   = (upper - lower) / 2;
+
+        // We still have to analyze the bound cases. An easy solution may be an initial checkout with these
+
+        while (target != upper && target != middle)
+        {
+            if (pair.minor > data.pairs[middle].major) lower = middle;
+            else if (pair.minor < data.pairs[middle].major) upper = middle;
+            else target = middle;
+
+            if (upper - lower == 1) target = upper; // Sometimes has to be lower. Review this
+            middle = (upper - lower) / 2;
+        }
+
+        // Here we should have the target to check if it's bigger or smaller than the target minor
+        // Then we should insert it taking the pair majorIndex as reference into the mainChain
+        // Later, we have to update the majorIndex of upper pairs
     }
 
 

@@ -28,8 +28,9 @@ struct PairContainer< std::deque<int> >
 
 struct Pair
 {
-    int minor;
-    int major;
+    int     minor;
+    int     major;
+    size_t  majorIndex;
 };
 
 template <typename Container>
@@ -81,7 +82,7 @@ class PmergeMe
         sortPairsByMajor(const typename PairContainer<Container>::type& pairs);
 
         template <typename Container>
-        Container initMainChain(const FordJohnsonData<Container>& data);
+        void initMainChain(FordJohnsonData<Container>& data);
 
         template <typename Container>
         void jacobsthalInsertion(Container& mainChain, const FordJohnsonData<Container>& data);
