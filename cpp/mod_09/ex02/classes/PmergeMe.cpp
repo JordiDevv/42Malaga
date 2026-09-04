@@ -319,29 +319,30 @@
     }
 
     template <typename Container>
-    void insertMinor(Container& mainChain, const Pair& pair, const FordJohnsonData<Container>& data, size_t current)
+    void insertMinor(Container& mainChain, int minor, const FordJohnsonData<Container>& data, size_t current)
     {
-        size_t target   = 0; // If we initialize lower at 0 the loop never starts.
-        size_t lower    = pair.minor > data.pairs[current / 2].major ? current / 2 : 0;
+        size_t target   = 0;
+        size_t lower    = minor > data.pairs[current / 2].major ? current / 2 : 0;
         size_t upper    = lower == 0 ? current : current / 2;
-        size_t middle   = (upper - lower) / 2;
+        size_t middle   = lower + (upper - lower) / 2;
 
-        // We still have to analyze the bound cases. An easy solution may be an initial checkout with these
-
-        while (target != upper && target != middle && target != lower)
+        while (upper - lower > 1 && target != middle)
         {
-            if (pair.minor > data.pairs[middle].major) lower = middle;
-            else if (pair.minor < data.pairs[middle].major) upper = middle;
+            if (minor > data.pairs[middle].major) lower = middle;
+            else if (minor < data.pairs[middle].major) upper = middle;
             else target = middle;
 
             if (upper - lower == 1)
-                target = pair.minor > data.pairs[lower].major ? upper : lower;
-            middle = (upper - lower) / 2;
+                target = minor > data.pairs[lower].major ? upper : lower;
+            middle = lower + (upper - lower) / 2;
         }
 
-        // Here we should have the target to check if it's bigger or smaller than the target minor
-        // Then we should insert it taking the pair majorIndex as reference into the mainChain
-        // Later, we have to update the majorIndex of upper pairs
+        size_t insertIndex = minor > data.pairs[target].minor ?
+            data.pairs[target].majorIndex : data.pairs[target].majorIndex - 1;
+        mainChain.insert(mainChain.begin() + insertIndex, minor);
+
+        for (size_t i = target; i < data.pairs.size(); i++)
+        { data.pairs[i].majorIndex++; }
     }
 
 
