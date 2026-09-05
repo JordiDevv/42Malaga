@@ -158,6 +158,11 @@
         data.pairs = sortPairsByMajor<Container>(data.pairs);
         initMainChain(data);
         if (data.pairs.size() > 1) jacobsthalInsertion(data);
+        // We're missing the straggler
+        // Also we have to rewrite the print function
+        //  because it worked with the container and now we got the result on mainChain
+        // Check if we can modify the int limit from "< INT_MAX" to "<= INT_MAX"
+        // Again... Check if the second part of the recursive function is cannonical
     }
 
     template <typename Container>
