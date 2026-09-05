@@ -40,6 +40,17 @@ fclean: clean
 
 re: fclean all
 
+# TEST
+
+easy_bro:
+	./PmergeMe $(shell shuf -i 1-100 -n 10)
+
+something_reasonable_to_check:
+	./PmergeMe $(shell shuf -i 1-10000 -n 100)
+
+Ford_and_Johnson_proud:
+	./PmergeMe $(shell shuf -i 1-100000 -n 3000)
+
 # RESERVED WORDS
 
 .PHONY: all clean fclean re

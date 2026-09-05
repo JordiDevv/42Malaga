@@ -106,7 +106,6 @@
     {
         clock_t startTime = clock();
         fordJohnson(_vector);
-        std::sort(_vector.begin(), _vector.end());
         clock_t endTime = clock();
 
         _timeForVector  = calcElapsedTime(startTime, endTime);
@@ -119,7 +118,6 @@
     {
         clock_t startTime = clock();
         fordJohnson(_deque);
-        std::sort(_deque.begin(), _deque.end());
         clock_t endTime = clock();
 
         _timeForDeque   = calcElapsedTime(startTime, endTime);
