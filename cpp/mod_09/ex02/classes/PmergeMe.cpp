@@ -158,7 +158,7 @@
         data.pairs = sortPairsByMajor<Container>(data.pairs);
         initMainChain(data);
         if (data.pairs.size() > 1) jacobsthalInsertion(data);
-        // We're missing the straggler
+        if (data.hasStraggler) binaryInsertion(data.mainChain, data.straggler, data.mainChain.size());
         // Also we have to rewrite the print function
         //  because it worked with the container and now we got the result on mainChain
         // Check if we can modify the int limit from "< INT_MAX" to "<= INT_MAX"
@@ -270,7 +270,9 @@
         size_t prev         = 1;
         size_t jacobsthal   = 3;
 
-        insertMinor(data.mainChain, data, prev);
+        size_t insertIndex = binaryInsertion(
+            data.mainChain, data.pairs[prev].minor,data.pairs[prev].majorIndex);
+        updateMajorIndex(data, insertIndex);
 
         while (prev < data.pairs.size())
         {
@@ -281,7 +283,9 @@
 
             while (current > prev)
             {
-                insertMinor(data.mainChain, data, current);
+                size_t insertIndex = binaryInsertion(
+                    data.mainChain, data.pairs[current].minor,data.pairs[current].majorIndex);
+                updateMajorIndex(data, insertIndex);
                 --current;
             }
 
@@ -292,27 +296,39 @@
     }
 
     template <typename Container>
-    void PmergeMe::insertMinor(Container& mainChain, FordJohnsonData<Container>& data, size_t current)
+    size_t PmergeMe::binaryInsertion(Container& target, int element, size_t upper)
     {
-        Pair pair       = data.pairs[current];
-        size_t low      = 0;
-        size_t upper    = pair.majorIndex;
+        size_t insertIndex = binarySearch(target, element, upper);
+        target.insert(target.begin() + insertIndex, element);
+
+        return insertIndex;
+    }
+
+    template <typename Container>
+    size_t PmergeMe::binarySearch(const Container& target, int element, size_t upper)
+    {
+        size_t low = 0;
 
         while (low < upper)
         {
             size_t middle = low + (upper - low) / 2;
 
-            if (mainChain[middle] < pair.minor) low = middle + 1;
+            if (target[middle] < element) low = middle + 1;
             else upper = middle;
         }
 
-        size_t insertIndex = low;
-        mainChain.insert(mainChain.begin() + insertIndex, pair.minor);
-
-        for (size_t i = insertIndex; i < data.pairs.size(); ++i)
-        { data.pairs[i].majorIndex++; }
+        return low;
     }
 
+    template <typename Container>
+    void PmergeMe::updateMajorIndex(FordJohnsonData<Container>& data, size_t insertIndex)
+    {
+        for (size_t i = 0; i < data.pairs.size(); ++i)
+        {
+            if (data.pairs[i].majorIndex >= insertIndex)
+                ++data.pairs[i].majorIndex;
+        }
+    }
 
   // **************************************************** //
  //                   Private utils                      //

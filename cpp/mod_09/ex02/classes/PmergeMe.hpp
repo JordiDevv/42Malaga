@@ -87,8 +87,15 @@ class PmergeMe
         template <typename Container>
         void jacobsthalInsertion(FordJohnsonData<Container>& data);
 
+    // **************** Jacobsthal helpers **************** //
         template <typename Container>
-        void insertMinor(Container& mainChain, FordJohnsonData<Container>& data, size_t current);
+        size_t binaryInsertion(Container& target, int element, size_t upper);
+
+        template <typename Container>
+        size_t binarySearch(const Container& target, int element, size_t upper);
+        
+        template <typename Container>
+        void updateMajorIndex(FordJohnsonData<Container>& data, size_t insertIndex);
 
 
     public:
