@@ -157,7 +157,7 @@
         initData(input, data);
         data.pairs = sortPairsByMajor<Container>(data.pairs);
         initMainChain(data);
-        jacobsthalInsertion(data);
+        if (data.pairs.size() > 1) jacobsthalInsertion(data);
     }
 
     template <typename Container>
