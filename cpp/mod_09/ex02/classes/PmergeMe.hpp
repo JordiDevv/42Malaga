@@ -64,14 +64,14 @@ class PmergeMe
 
 
     // ****************** Private utils ******************* //
-        int error(const char* what = NULL);
-        bool isPositiveInteger(long n);
-        bool isSort();
+        int     error(const char* what = NULL);
+        bool    isPositiveInteger(long n);
+        bool    isSort();
 
         template <typename C1, typename C2>
         bool haveSameContent(const C1& a, const C2& b);
 
-        double calcElapsedTime(clock_t startTime, clock_t endTime);
+        double  calcElapsedTime(clock_t startTime, clock_t endTime);
 
     // *************** Ford-Johnson helpers *************** //
         template <typename Container>
@@ -109,17 +109,19 @@ class PmergeMe
         bool validateInput(int len, char** rawInput);
         
     // ******************** Printers ********************** //
-        void printData();
+        template <typename C1, typename C2>
+        void printData(const C1& a, const C2& b);
+        //void printMainChain(const std::vector<int>& vectorChain, const std::deque<int>& dequeChain);
         void printElapsedTime();
 
     // ******************** Executors ********************* //
-        bool    processVector();
-        bool    processDeque();
-        int     run(int argc, char** argv);
+        std::vector<int>    processVector();
+        std::deque<int>     processDeque();
+        int                 run(int argc, char** argv);
 
     // ****************** Ford-Johnson ******************** //
         template <typename Container>
-        void fordJohnson(Container& input);
+        Container fordJohnson(Container& input);
 
     // **************** Exception clases ***************** //
         class NotSameContent : public std::exception

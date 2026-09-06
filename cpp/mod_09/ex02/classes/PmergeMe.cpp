@@ -59,14 +59,15 @@
  //                      Printers                        //
 // **************************************************** //
 
-    void PmergeMe::printData()
+    template <typename C1, typename C2>
+    void PmergeMe::printData(const C1& a, const C2& b)
     {
-        if (!haveSameContent(_vector, _deque)) throw NotSameContent();
+        if (!haveSameContent(a, b)) throw NotSameContent();
 
         std::cout << (!isSort() ? "Before:" : "After:");
 
         std::vector<int>::const_iterator it;
-        for (it = _vector.begin(); it != _vector.end(); ++it)
+        for (it = a.begin(); it != a.end(); ++it)
         { std::cout << " " << *it; }
 
         std::cout << std::endl;
@@ -102,41 +103,41 @@
  //                      Executors                       //
 // **************************************************** //
 
-    bool PmergeMe::processVector()
+    std::vector<int> PmergeMe::processVector()
     {
         clock_t startTime = clock();
-        fordJohnson(_vector);
+        std::vector<int> mainChain = fordJohnson(_vector);
         clock_t endTime = clock();
 
         _timeForVector  = calcElapsedTime(startTime, endTime);
         _vectorSort     = true;
 
-        return true;
+        return mainChain;
     }
 
-    bool PmergeMe::processDeque()
+    std::deque<int> PmergeMe::processDeque()
     {
         clock_t startTime = clock();
-        fordJohnson(_deque);
+        std::deque<int> mainChain = fordJohnson(_deque);
         clock_t endTime = clock();
 
         _timeForDeque   = calcElapsedTime(startTime, endTime);
         _dequeSort      = true;
 
-        return true;
+        return mainChain;
     }
 
     int PmergeMe::run(int argc, char** argv)
     {
         if (!validateInput(argc, argv)) return error();
 
-        try { printData(); }
+        try { printData(_vector, _deque); }
         catch (NotSameContent& e) { return error(e.what()); }
         
-        processVector();
-        processDeque();
+        std::vector<int>    vectorChain = processVector();
+        std::deque<int>     dequeChain  = processDeque();
 
-        try { printData(); }
+        try { printData(vectorChain, dequeChain); }
         catch (NotSameContent& e) { return error(e.what()); }
 
         try { printElapsedTime(); }
@@ -151,7 +152,7 @@
 // **************************************************** //
 
     template <typename Container>
-    void PmergeMe::fordJohnson(Container& input)
+    Container PmergeMe::fordJohnson(Container& input)
     {
         FordJohnsonData<Container> data;
         initData(input, data);
@@ -159,11 +160,10 @@
         initMainChain(data);
         if (data.pairs.size() > 1) jacobsthalInsertion(data);
         if (data.hasStraggler) binaryInsertion(data.mainChain, data.straggler, data.mainChain.size());
-        // Also we have to rewrite the print function
-        //  because it worked with the container and now we got the result on mainChain
         // Check if we can modify the int limit from "< INT_MAX" to "<= INT_MAX"
         // Again... Check if the second part of the recursive function is cannonical
         // The example with the time in the subject
+        return data.mainChain;
     }
 
     template <typename Container>
