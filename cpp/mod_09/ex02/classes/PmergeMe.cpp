@@ -5,6 +5,7 @@
 #include <iostream>
 #include <algorithm>
 
+
   // **************************************************** //
  //              Cannonical implementations              //
 // **************************************************** //
@@ -105,6 +106,8 @@
 
     std::vector<int> PmergeMe::processVector()
     {
+        _comparissions = 0;
+
         clock_t startTime = clock();
         std::vector<int> mainChain = fordJohnson(_vector);
         clock_t endTime = clock();
@@ -117,6 +120,8 @@
 
     std::deque<int> PmergeMe::processDeque()
     {
+        _comparissions = 0;
+
         clock_t startTime = clock();
         std::deque<int> mainChain = fordJohnson(_deque);
         clock_t endTime = clock();
@@ -156,12 +161,12 @@
     {
         FordJohnsonData<Container> data;
         initData(input, data);
-        data.pairs = sortPairsByMajor<Container>(data.pairs);
+        data.pairs = sortPairsByMajor<Container>(data.pairs, data.pendLosers);
+        jacobsthalForLosers<Container>(data.pairs, data.pendLosers);
         initMainChain(data);
         if (data.pairs.size() > 1) jacobsthalInsertion(data);
         if (data.hasStraggler) binaryInsertion(data.mainChain, data.straggler, data.mainChain.size());
         // Check if we can modify the int limit from "< INT_MAX" to "<= INT_MAX"
-        // Again... Check if the second part of the recursive function is cannonical
         // The example with the time in the subject
         return data.mainChain;
     }
@@ -182,9 +187,18 @@
             }
             else
             {
+                ++_comparissions;
                 Pair pair;
-                pair.minor      = input[i] < input[i + 1] ? input[i] : input[i + 1];
-                pair.major      = input[i] >= input[i + 1] ? input[i] : input[i + 1];
+                if (input[i] < input[i + 1])
+                {
+                    pair.minor = input[i];
+                    pair.major = input[i + 1];
+                }
+                else
+                {
+                    pair.minor = input[i + 1];
+                    pair.major = input[i];
+                }
                 pair.majorIndex = i;
                 data.pairs.push_back(pair);
             }
@@ -195,61 +209,91 @@
 
     template <typename Container>
     typename PairContainer<Container>::type
-    PmergeMe::sortPairsByMajor(const typename PairContainer<Container>::type& pairs)
+    PmergeMe::sortPairsByMajor(const typename PairContainer<Container>::type& pairs,
+        typename PairContainer<Container>::type& pendLosers)
     {
         if (pairs.size() <= 1) return pairs;
 
         typename PairContainer<Container>::type winners;
-        typename PairContainer<Container>::type losers;
 
         bool hasStraggler = pairs.size() % 2 != 0;
         size_t last = pairs.size() - 1;
 
         for (size_t i = 0; i + 1 < pairs.size(); i += 2)
         {
+            ++_comparissions;
             const Pair& left    = pairs[i];
             const Pair& right   = pairs[i + 1];
 
             if (left.major < right.major)
             {
                 winners.push_back(right);
-                losers.push_back(left);
+                pendLosers.push_back(left);
             }
             else
             {
                 winners.push_back(left);
-                losers.push_back(right);
+                pendLosers.push_back(right);
             }
         }
 
         typename PairContainer<Container>::type result =
-            sortPairsByMajor<Container>(winners);
+            sortPairsByMajor<Container>(winners, pendLosers);
 
-        for (size_t i = 0; i < losers.size(); ++i)
-        {
-            const Pair& loser = losers[i];
-
-            typename PairContainer<Container>::type::iterator pos = result.begin();
-
-            while (pos != result.end() && pos->major < loser.major)
-            { ++pos; }
-
-            result.insert(pos, loser);
-        }
-
-        if (hasStraggler)
-        {
-            const Pair& straggler = pairs[last];
-
-            typename PairContainer<Container>::type::iterator pos = result.begin();
-
-            while (pos != result.end() && pos->major < straggler.major)
-            { ++pos; }
-
-            result.insert(pos, straggler);
-        }
+        if (hasStraggler) pendLosers.push_back(pairs[last]);
 
         return result;
+    }
+
+    template <typename Container>
+    void PmergeMe::jacobsthalForLosers(typename PairContainer<Container>::type& pairs,
+        const typename PairContainer<Container>::type& pendLosers)
+    {
+        size_t prev         = 1;
+        size_t jacobsthal   = 3;
+
+        size_t upper        = pairs.size();
+        size_t low          = 0;
+
+        while (low < upper)
+        {
+            size_t middle = low + (upper - low) / 2;
+
+            ++_comparissions;
+            if (pairs[middle].major < pendLosers[0].major) low = middle + 1;
+            else upper = middle;
+        }
+
+        pairs.insert(pairs.begin() + low, pendLosers[0]);
+
+        while (prev < pairs.size())
+        {
+            size_t current = jacobsthal;
+
+            if (current >= pendLosers.size())
+                current = pendLosers.size() - 1;
+
+            while (current > prev)
+            {
+                upper   = pairs.size();
+                low     = 0;
+
+                while (low < upper)
+                {
+                    size_t middle = low + (upper - low) / 2;
+
+                    ++_comparissions;
+                    if (pairs[middle].major < pendLosers[current].major) low = middle + 1;
+                    else upper = middle;
+                }
+                pairs.insert(pairs.begin() + low, pendLosers[current]);
+                --current;
+            }
+
+            size_t nextPrev = jacobsthal;
+            jacobsthal      += prev * 2;
+            prev            = nextPrev;
+        }
     }
 
     template <typename Container>
@@ -313,6 +357,7 @@
         {
             size_t middle = low + (upper - low) / 2;
 
+            ++_comparissions;
             if (target[middle] < element) low = middle + 1;
             else upper = middle;
         }

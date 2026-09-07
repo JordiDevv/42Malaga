@@ -41,6 +41,7 @@ struct FordJohnsonData
     PairList    pairs;
     int         straggler;
     bool        hasStraggler;
+    PairList    pendLosers;
     Container   mainChain;
 };
 
@@ -52,6 +53,7 @@ struct FordJohnsonData
 class PmergeMe
 {
     private:
+        int                 _comparissions;
     // ********************* _vector ********************** //
         std::vector<int>    _vector;
         bool                _vectorSort;
@@ -79,7 +81,12 @@ class PmergeMe
 
         template <typename Container>
         typename PairContainer<Container>::type
-        sortPairsByMajor(const typename PairContainer<Container>::type& pairs);
+        sortPairsByMajor(const typename PairContainer<Container>::type& pairs,
+            typename PairContainer<Container>::type& pendLosers);
+
+        template <typename Container>
+        void jacobsthalForLosers(typename PairContainer<Container>::type& pairs,
+            const typename PairContainer<Container>::type& pendLosers);
 
         template <typename Container>
         void initMainChain(FordJohnsonData<Container>& data);
