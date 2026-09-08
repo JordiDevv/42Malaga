@@ -161,9 +161,7 @@
     {
         FordJohnsonData<Container> data;
         initData(input, data);
-        std::cout << "pairs: " << data.pairs.size() << std::endl;
         data.pairs = sortPairsByMajor<Container>(data.pairs);
-        std::cout << "pairs after sort: " << data.pairs.size() << std::endl;
         initMainChain(data);
         if (data.pairs.size() > 1) jacobsthalInsertion(data);
         if (data.hasStraggler) binaryInsertion(data.mainChain, data.straggler, data.mainChain.size());
@@ -292,7 +290,7 @@
             if (current >= pendLosers.size())
                 current = pendLosers.size() - 1;
 
-            while (current > prev)
+            while (current >= prev)
             {
                 upper   = pairs.size();
                 low     = 0;
@@ -333,10 +331,6 @@
         size_t prev         = 1;
         size_t jacobsthal   = 3;
 
-        size_t insertIndex = binaryInsertion(
-            data.mainChain, data.pairs[prev].minor,data.pairs[prev].majorIndex);
-        updateMajorIndex(data, insertIndex);
-
         while (prev < data.pairs.size())
         {
             size_t current = jacobsthal - 1;
@@ -344,7 +338,7 @@
             if (current >= data.pairs.size())
                 current = data.pairs.size() - 1;
 
-            while (current > prev)
+            while (current >= prev)
             {
                 size_t insertIndex = binaryInsertion(
                     data.mainChain, data.pairs[current].minor,data.pairs[current].majorIndex);

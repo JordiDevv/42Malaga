@@ -48,6 +48,9 @@ easy_bro:
 something_reasonable_to_check:
 	./PmergeMe $(shell shuf -i 1-10000 -n 100)
 
+an_odd_one:
+	./PmergeMe $(shell shuf -i 1-10000 -n 97)
+
 Ford_and_Johnson_proud:
 	./PmergeMe $(shell shuf -i 1-100000 -n 3000)
 
