@@ -81,8 +81,7 @@ class PmergeMe
 
         template <typename Container>
         typename PairContainer<Container>::type
-        sortPairsByMajor(const typename PairContainer<Container>::type& pairs,
-            typename PairContainer<Container>::type& pendLosers);
+        sortPairsByMajor(const typename PairContainer<Container>::type& pairs);
 
         template <typename Container>
         void jacobsthalForLosers(typename PairContainer<Container>::type& pairs,
@@ -118,7 +117,6 @@ class PmergeMe
     // ******************** Printers ********************** //
         template <typename C1, typename C2>
         void printData(const C1& a, const C2& b);
-        //void printMainChain(const std::vector<int>& vectorChain, const std::deque<int>& dequeChain);
         void printElapsedTime();
 
     // ******************** Executors ********************* //

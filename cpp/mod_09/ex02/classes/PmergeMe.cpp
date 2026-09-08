@@ -161,13 +161,14 @@
     {
         FordJohnsonData<Container> data;
         initData(input, data);
-        data.pairs = sortPairsByMajor<Container>(data.pairs, data.pendLosers);
-        jacobsthalForLosers<Container>(data.pairs, data.pendLosers);
+        std::cout << "pairs: " << data.pairs.size() << std::endl;
+        data.pairs = sortPairsByMajor<Container>(data.pairs);
+        std::cout << "pairs after sort: " << data.pairs.size() << std::endl;
         initMainChain(data);
         if (data.pairs.size() > 1) jacobsthalInsertion(data);
         if (data.hasStraggler) binaryInsertion(data.mainChain, data.straggler, data.mainChain.size());
-        // Check if we can modify the int limit from "< INT_MAX" to "<= INT_MAX"
         // The example with the time in the subject
+        // We lose some pairs in the sortPairs...
         return data.mainChain;
     }
 
@@ -209,38 +210,56 @@
 
     template <typename Container>
     typename PairContainer<Container>::type
-    PmergeMe::sortPairsByMajor(const typename PairContainer<Container>::type& pairs,
-        typename PairContainer<Container>::type& pendLosers)
+    PmergeMe::sortPairsByMajor(const typename PairContainer<Container>::type& pairs)
     {
         if (pairs.size() <= 1) return pairs;
 
         typename PairContainer<Container>::type winners;
+        typename PairContainer<Container>::type losers;
 
-        bool hasStraggler = pairs.size() % 2 != 0;
-        size_t last = pairs.size() - 1;
+        bool hasStraggler   = pairs.size() % 2 != 0;
+        size_t last         = pairs.size() - 1;
 
         for (size_t i = 0; i + 1 < pairs.size(); i += 2)
         {
-            ++_comparissions;
             const Pair& left    = pairs[i];
             const Pair& right   = pairs[i + 1];
-
+            
+            ++_comparissions;
             if (left.major < right.major)
             {
                 winners.push_back(right);
-                pendLosers.push_back(left);
+                losers.push_back(left);
             }
             else
             {
                 winners.push_back(left);
-                pendLosers.push_back(right);
+                losers.push_back(right);
             }
         }
 
         typename PairContainer<Container>::type result =
-            sortPairsByMajor<Container>(winners, pendLosers);
+            sortPairsByMajor<Container>(winners);
 
-        if (hasStraggler) pendLosers.push_back(pairs[last]);
+        jacobsthalForLosers<Container>(result, losers);
+
+        if (hasStraggler)
+        {
+            size_t low              = 0;
+            size_t upper            = result.size();
+            const Pair& straggler   = pairs[last];
+
+            while (low < upper)
+            {
+                size_t middle = low + (upper - low) / 2;
+
+                ++_comparissions;
+                if (result[middle].major < straggler.major) low = middle + 1;
+                else upper = middle;
+            }
+
+            result.insert(result.begin() + low, straggler);
+        }
 
         return result;
     }
@@ -266,9 +285,9 @@
 
         pairs.insert(pairs.begin() + low, pendLosers[0]);
 
-        while (prev < pairs.size())
+        while (prev < pendLosers.size())
         {
-            size_t current = jacobsthal;
+            size_t current = jacobsthal - 1;
 
             if (current >= pendLosers.size())
                 current = pendLosers.size() - 1;
@@ -320,7 +339,7 @@
 
         while (prev < data.pairs.size())
         {
-            size_t current = jacobsthal;
+            size_t current = jacobsthal - 1;
 
             if (current >= data.pairs.size())
                 current = data.pairs.size() - 1;
@@ -390,7 +409,7 @@
     bool PmergeMe::isSort() { return _vectorSort && _dequeSort; }
 
     bool PmergeMe::isPositiveInteger(long n)
-    { return n > 0 && n < INT_MAX; }
+    { return n > 0 && n <= INT_MAX; }
 
     template <typename C1, typename C2>
     bool PmergeMe::haveSameContent(const C1& a, const C2& b)
