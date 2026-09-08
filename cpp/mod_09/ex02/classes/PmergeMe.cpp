@@ -115,6 +115,8 @@
         _timeForVector  = calcElapsedTime(startTime, endTime);
         _vectorSort     = true;
 
+        std::cout << _comparissions << std::endl;
+
         return mainChain;
     }
 
@@ -128,6 +130,8 @@
 
         _timeForDeque   = calcElapsedTime(startTime, endTime);
         _dequeSort      = true;
+
+        std::cout << _comparissions << std::endl;
 
         return mainChain;
     }
@@ -166,7 +170,7 @@
         if (data.pairs.size() > 1) jacobsthalInsertion(data);
         if (data.hasStraggler) binaryInsertion(data.mainChain, data.straggler, data.mainChain.size());
         // The example with the time in the subject
-        // We lose some pairs in the sortPairs...
+        // We're analyzing the whole flow with small inputs to finnish the optimal comparissions
         return data.mainChain;
     }
 

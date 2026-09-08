@@ -42,6 +42,9 @@ re: fclean all
 
 # TEST
 
+seven:
+	./PmergeMe $(shell shuf -i 1-100 -n 7)
+
 easy_bro:
 	./PmergeMe $(shell shuf -i 1-100 -n 10)
 
