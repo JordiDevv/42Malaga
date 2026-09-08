@@ -41,7 +41,6 @@ struct FordJohnsonData
     PairList    pairs;
     int         straggler;
     bool        hasStraggler;
-    PairList    pendLosers;
     Container   mainChain;
 };
 
