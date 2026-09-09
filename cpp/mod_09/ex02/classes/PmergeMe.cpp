@@ -165,10 +165,15 @@
     {
         FordJohnsonData<Container> data;
         initData(input, data);
+        std::cout << _comparissions << std::endl; // DEBUG
         data.pairs = sortPairsByMajor<Container>(data.pairs);
+        std::cout << _comparissions << std::endl; // DEBUG
         initMainChain(data);
-        if (data.pairs.size() > 1) jacobsthalInsertion(data);
+        std::cout << _comparissions << std::endl; // DEBUG
         if (data.hasStraggler) binaryInsertion(data.mainChain, data.straggler, data.mainChain.size());
+        std::cout << _comparissions << std::endl; // DEBUG
+        if (data.pairs.size() > 1) jacobsthalInsertion(data);
+        std::cout << _comparissions << std::endl; // DEBUG
         // The example with the time in the subject
         // We're analyzing the whole flow with small inputs to finnish the optimal comparissions
         return data.mainChain;
@@ -243,7 +248,10 @@
         typename PairContainer<Container>::type result =
             sortPairsByMajor<Container>(winners);
 
-        jacobsthalForLosers<Container>(result, losers);
+        if (result.size() > 1)
+            jacobsthalForLosers<Container>(result, losers);
+        else
+            result.insert(result.begin(), losers[0]);
 
         if (hasStraggler)
         {
