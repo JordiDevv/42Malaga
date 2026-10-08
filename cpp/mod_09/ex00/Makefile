@@ -17,7 +17,7 @@ RED=\033[0;31m
 NC=\033[0m
 
 INPUT_FILE = input.txt
-DATA_URL = https://cdn.intra.42.fr/document/document/45418/cpp_09.tgz
+DATA_URL = https://cdn.intra.42.fr/document/document/52344/cpp_09.tgz
 
 all: $(NAME)
 

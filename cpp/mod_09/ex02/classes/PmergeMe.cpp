@@ -167,8 +167,8 @@
         initData(input, data);
         data.pairs = sortPairsByMajor<Container>(data.pairs);
         initMainChain(data);
-        if (data.hasStraggler) binaryInsertion(data.mainChain, data.straggler, data.mainChain.size());
         if (data.pairs.size() > 1) jacobsthalInsertion(data);
+        if (data.hasStraggler) binaryInsertion(data.mainChain, data.straggler, data.mainChain.size());
         return data.mainChain;
     }
 
