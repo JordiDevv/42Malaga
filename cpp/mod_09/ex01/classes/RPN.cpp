@@ -1,5 +1,6 @@
 #include "RPN.hpp"
 #include <cstdlib>
+#include <climits>
 
   // **************************************************** //
  //              Cannonical implementations              //
@@ -37,30 +38,37 @@
 
     void RPN::pushOperand(int n) { _stack.push(n); }
 
-    void RPN::applyOperator(char op)
+    bool RPN::applyOperator(char op)
     {
         int b = _stack.top();
         _stack.pop();
         int a = _stack.top();
         _stack.pop();
 
+        long result;
         switch (op)
         {
             case '+':
-                _stack.push(a + b);
+                result = (long)a + b;
                 break ;
             case '-':
-                _stack.push(a - b);
+                result = (long)a - b;
                 break ;
             case '*':
-                _stack.push(a * b);
+                result = (long)a * b;
                 break ;
             case '/':
-                _stack.push(a / b);
+                if (b == 0) return false;
+                result = (long)a / b;
                 break ;
             default:
-                break ;
+                return false;
         }
+        
+        if (result > INT_MAX || result < INT_MIN) return false;
+
+        _stack.push((int)result);
+        return true;
     }
 
     int RPN::getTop() { return _stack.top(); }
@@ -92,14 +100,14 @@
         return n - op == 1 ? true : false;
     }
 
-    int RPN::processLine(const std::string& line)
+    bool RPN::processLine(const std::string& line)
     {
         for (size_t i = 0; i < line.size(); i++)
         {
             if (isspace(line[i])) continue;
             else if (isdigit(line[i])) pushOperand(atoi(&line[i]));
-            else applyOperator(line[i]);
+            else if (!applyOperator(line[i])) return false;
         }
 
-        return getTop();
+        return true;
     }

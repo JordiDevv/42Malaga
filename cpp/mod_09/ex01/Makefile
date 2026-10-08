@@ -120,6 +120,22 @@ test14: $(NAME)
 	-./RPN "   2   2     +     "
 	@echo
 
+# MAXIME WAS HERE
+
+maxime: test15 test16
+
+test15: $(NAME)
+	@echo
+	@echo "===== Test 15 ====="
+	-./RPN "2 0 /"
+	@echo
+
+test16: $(NAME)
+	@echo
+	@echo "===== Test 16 ====="
+	-./RPN "9 9 * 9 * 9 * 9 * 9 * 9 * 9 * 9 * 9 *"
+	@echo
+
 # RESERVED WORDS
 
 .PHONY: all clean fclean re
